@@ -1,8 +1,7 @@
 import { MetadataRoute } from 'next';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  // Thay thế URL bằng domain thật của bạn sau khi go live
-  const baseUrl = 'https://GASO.vercel.app';
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://gasnhaminh.com';
 
   return [
     {
