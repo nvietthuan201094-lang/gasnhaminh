@@ -87,6 +87,21 @@ function HeroSection({ tabs, activeCategory, setActiveCategory, selectedProduct,
         cylinderAction: selectedOption
       });
       if (res.success) {
+        if (typeof window !== "undefined") {
+          (window as any).dataLayer = (window as any).dataLayer || [];
+          (window as any).dataLayer.push({
+            event: "purchase",
+            ecommerce: {
+              value: Number(displayPrice.replace(/\D/g, "")),
+              currency: "VND",
+              items: [{
+                item_name: product.name,
+                item_category: category.label,
+                quantity: 1
+              }]
+            }
+          });
+        }
         onOrderSuccess();
       } else {
         alert(res.message || "Đã có lỗi xảy ra khi đặt hàng.");
