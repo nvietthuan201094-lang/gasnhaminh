@@ -3,8 +3,8 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 
-const HOTLINE = "1900 6789";
-const HOTLINE_TEL = "tel:19006789";
+const HOTLINE = "0888 113 831";
+const HOTLINE_TEL = "tel:0888113831";
 
 function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
