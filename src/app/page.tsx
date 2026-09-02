@@ -88,11 +88,12 @@ function HeroSection({ tabs, activeCategory, setActiveCategory, selectedProduct,
       });
       if (res.success) {
         if (typeof window !== "undefined") {
+          const val = Number(displayPrice.replace(/\D/g, ""));
           (window as any).dataLayer = (window as any).dataLayer || [];
           (window as any).dataLayer.push({
             event: "purchase",
             ecommerce: {
-              value: Number(displayPrice.replace(/\D/g, "")),
+              value: val,
               currency: "VND",
               items: [{
                 item_name: product.name,
@@ -101,6 +102,17 @@ function HeroSection({ tabs, activeCategory, setActiveCategory, selectedProduct,
               }]
             }
           });
+          if (typeof (window as any).gtag === "function") {
+            (window as any).gtag("event", "purchase", {
+              value: val,
+              currency: "VND",
+              items: [{
+                item_name: product.name,
+                item_category: category.label,
+                quantity: 1
+              }]
+            });
+          }
         }
         onOrderSuccess();
       } else {
@@ -633,7 +645,6 @@ function Footer() {
           <div>
             <h4 className="font-bold text-white mb-3">Liên hệ</h4>
             <div className="space-y-2 text-sm text-white/60">
-              <div>📍 123 Đường Nguyễn Văn Linh, Q.7, TP.HCM</div>
               <div>☎️ Hotline 24/7: <a href={HOTLINE_TEL} className="text-[#FF5722] font-bold">{HOTLINE}</a></div>
               <div>🕐 Hoạt động: 24/7 kể cả Lễ Tết</div>
             </div>

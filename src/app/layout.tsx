@@ -79,18 +79,20 @@ export default async function RootLayout({
       <head>
         {GA_MEASUREMENT_ID && (
           <>
-            <Script
+            <script
+              async
               src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
-              strategy="afterInteractive"
             />
-            <Script id="google-analytics" strategy="afterInteractive">
-              {`
-                window.dataLayer = window.dataLayer || [];
-                function gtag(){dataLayer.push(arguments);}
-                gtag('js', new Date());
-                gtag('config', '${GA_MEASUREMENT_ID}');
-              `}
-            </Script>
+            <script
+              dangerouslySetInnerHTML={{
+                __html: `
+                  window.dataLayer = window.dataLayer || [];
+                  function gtag(){dataLayer.push(arguments);}
+                  gtag('js', new Date());
+                  gtag('config', '${GA_MEASUREMENT_ID}');
+                `,
+              }}
+            />
           </>
         )}
         <script
@@ -104,7 +106,6 @@ export default async function RootLayout({
               "telephone": "0888 113 831",
               "address": {
                 "@type": "PostalAddress",
-                "streetAddress": "123 Đường ABC",
                 "addressLocality": "TP HCM",
                 "addressCountry": "VN"
               },
