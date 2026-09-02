@@ -5,6 +5,31 @@ import Link from "next/link";
 
 const HOTLINE = "0888 113 831";
 const HOTLINE_TEL = "tel:0888113831";
+const ZALO_URL = "https://zalo.me/0888113831";
+
+// ─── GTM & BE Tracking Helper ──────────────────────────────────────────────────────────────
+function pushGtmEvent(eventName: string, params: Record<string, unknown> = {}) {
+  if (typeof window === "undefined") return;
+  (window as any).dataLayer = (window as any).dataLayer || [];
+  (window as any).dataLayer.push({ event: eventName, ...params });
+
+  // Bắn thông báo tương tác ngầm về Odoo BE (khi khách bấm Gọi Hotline hoặc Zalo)
+  if (eventName === "click_call" || eventName === "click_zalo") {
+    try {
+      const API_URL = process.env.NEXT_PUBLIC_API_URL || "https://crm.posplus.vn";
+      fetch(`${API_URL}/api/v1/tracking/interaction`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          event: eventName,
+          domain: window.location.hostname,
+          ...params,
+        }),
+        keepalive: true,
+      }).catch(() => {});
+    } catch (_) {}
+  }
+}
 
 function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -21,14 +46,14 @@ function Header() {
             <a key={href} href={href} className="text-[#111928] font-semibold text-sm hover:text-[#E02424] transition-colors">{label}</a>
           ))}
         </nav>
-        <a href={HOTLINE_TEL} className="flex items-center gap-2 bg-[#E02424] hover:bg-[#B91C1C] text-white font-bold px-5 py-2.5 rounded-lg transition-colors text-sm">
+        <a href={HOTLINE_TEL} onClick={() => pushGtmEvent("click_call", { phone: HOTLINE })} className="flex items-center gap-2 bg-[#E02424] hover:bg-[#B91C1C] text-white font-bold px-5 py-2.5 rounded-lg transition-colors text-sm">
           <PhoneIcon /> Gọi ngay: {HOTLINE}
         </a>
       </div>
       {/* Mobile */}
       <div className="flex md:hidden items-center justify-between px-4 h-14">
         <span className="text-[#E02424] font-black text-lg">🔥 GAS NHÀ MÌNH</span>
-        <a href={HOTLINE_TEL} className="bg-[#FF5722] text-white rounded-full p-2.5">
+        <a href={HOTLINE_TEL} onClick={() => pushGtmEvent("click_call", { phone: HOTLINE })} className="bg-[#FF5722] text-white rounded-full p-2.5">
           <PhoneIcon size={18} />
         </a>
       </div>
@@ -39,12 +64,22 @@ function Header() {
 function MobileStickyBar({ onOrderClick }: { onOrderClick: () => void }) {
   return (
     <div className="fixed bottom-0 left-0 right-0 z-50 flex md:hidden h-16 shadow-[0_-2px_10px_rgba(0,0,0,0.15)]">
-      <a href={HOTLINE_TEL} className="flex-1 flex items-center justify-center gap-2 bg-white border-t-2 border-[#E02424] text-[#E02424] font-bold text-sm">
+      <a
+        href={HOTLINE_TEL}
+        onClick={() => pushGtmEvent("click_call", { phone: HOTLINE })}
+        className="flex-1 flex items-center justify-center gap-2 bg-white border-t-2 border-[#E02424] text-[#E02424] font-bold text-sm"
+      >
         <PhoneIcon size={16} /> GỌI HOTLINE
       </a>
-      <button onClick={onOrderClick} className="flex-1 flex items-center justify-center gap-2 bg-[#FF5722] text-white font-bold text-sm">
-        ⚡ ĐẶT GAS NHÀ MÌNH
-      </button>
+      <a
+        href={ZALO_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+        onClick={() => pushGtmEvent("click_zalo", { phone: HOTLINE })}
+        className="flex-1 flex items-center justify-center gap-2 bg-[#FF5722] text-white font-bold text-sm"
+      >
+        💬 ZALO
+      </a>
     </div>
   );
 }
@@ -87,32 +122,26 @@ function HeroSection({ tabs, activeCategory, setActiveCategory, selectedProduct,
         cylinderAction: selectedOption
       });
       if (res.success) {
+        const val = Number(displayPrice.replace(/\D/g, "")) || 0;
+        const transactionId = (res as any).orderName || res.orderId || `LP-${Date.now()}`;
+
         if (typeof window !== "undefined") {
-          const val = Number(displayPrice.replace(/\D/g, ""));
           (window as any).dataLayer = (window as any).dataLayer || [];
+          (window as any).dataLayer.push({ ecommerce: null });
           (window as any).dataLayer.push({
             event: "purchase",
             ecommerce: {
+              transaction_id: transactionId,
               value: val,
               currency: "VND",
               items: [{
                 item_name: product.name,
                 item_category: category.label,
-                quantity: 1
+                quantity: 1,
+                price: val,
               }]
             }
           });
-          if (typeof (window as any).gtag === "function") {
-            (window as any).gtag("event", "purchase", {
-              value: val,
-              currency: "VND",
-              items: [{
-                item_name: product.name,
-                item_category: category.label,
-                quantity: 1
-              }]
-            });
-          }
         }
         onOrderSuccess();
       } else {
