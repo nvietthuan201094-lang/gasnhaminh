@@ -20,6 +20,7 @@ interface DistrictLandingViewProps {
 }
 
 export default function DistrictLandingView({ district }: DistrictLandingViewProps) {
+  const [productsList, setProductsList] = useState<SeoProductItem[]>(SEO_PRODUCTS);
   const [selectedProduct, setSelectedProduct] = useState<SeoProductItem>(SEO_PRODUCTS[0]);
   const [activeCategoryFilter, setActiveCategoryFilter] = useState<string>("all");
   const [actionType, setActionType] = useState<"exchange" | "new">("exchange");
@@ -30,13 +31,39 @@ export default function DistrictLandingView({ district }: DistrictLandingViewPro
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [orderSuccess, setOrderSuccess] = useState<string | null>(null);
 
+  React.useEffect(() => {
+    import("@/lib/api").then(m => m.fetchProducts()).then(apiData => {
+      if (apiData && apiData.length > 0) {
+        setProductsList(prev => prev.map(p => {
+          const matched = apiData.find((item: any) => 
+            item.slug === p.slug || 
+            item.name.toLowerCase().trim() === p.name.toLowerCase().trim()
+          );
+          if (matched && matched.price > 0) {
+            return {
+              ...p,
+              price: new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(matched.price).replace(/\s/g, ''),
+              priceVal: matched.price,
+              newPrice: matched.deposit_price 
+                ? new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(matched.price + matched.deposit_price).replace(/\s/g, '')
+                : p.newPrice,
+              newPriceVal: matched.deposit_price ? (matched.price + matched.deposit_price) : p.newPriceVal,
+              image: matched.image || p.image,
+            };
+          }
+          return p;
+        }));
+      }
+    }).catch(console.error);
+  }, []);
+
   const neighboringDistricts = DISTRICTS_DATA.filter((d) =>
     district.neighboringSlugs.includes(d.slug)
   );
 
   const filteredProducts = activeCategoryFilter === "all"
-    ? SEO_PRODUCTS
-    : SEO_PRODUCTS.filter((p) => p.category === activeCategoryFilter);
+    ? productsList
+    : productsList.filter((p) => p.category === activeCategoryFilter);
 
   async function handleOrderSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -250,14 +277,14 @@ export default function DistrictLandingView({ district }: DistrictLandingViewPro
                       <select
                         value={selectedProduct.id}
                         onChange={(e) => {
-                          const found = SEO_PRODUCTS.find((p) => p.id === e.target.value);
+                          const found = productsList.find((p) => p.id === e.target.value);
                           if (found) setSelectedProduct(found);
                         }}
                         className="w-full text-xs font-semibold bg-neutral-50 border border-neutral-300 rounded-xl px-3 py-2.5 focus:outline-none focus:border-red-500 text-neutral-800"
                       >
-                        {SEO_PRODUCTS.map((p) => (
+                        {productsList.map((p) => (
                           <option key={p.id} value={p.id}>
-                            {p.name} — {p.price} ({p.valveType})
+                            {p.name} — {actionType === "exchange" ? p.price : (p.newPrice || p.price)} ({p.valveType})
                           </option>
                         ))}
                       </select>
@@ -291,6 +318,21 @@ export default function DistrictLandingView({ district }: DistrictLandingViewPro
                       >
                         📦 Mua trọn bộ (Chưa có vỏ)
                       </button>
+                    </div>
+
+                    {/* Price summary badge */}
+                    <div className="p-3 bg-red-50/70 border border-red-200 rounded-xl flex items-center justify-between">
+                      <div>
+                        <span className="text-[10px] text-neutral-500 uppercase font-bold block">
+                          {actionType === "exchange" ? "Giá đổi bình gas:" : "Giá mua mới trọn bộ:"}
+                        </span>
+                        <span className="text-lg font-black text-red-600">
+                          {actionType === "exchange" ? selectedProduct.price : (selectedProduct.newPrice || selectedProduct.price)}
+                        </span>
+                      </div>
+                      <span className="text-[11px] font-semibold text-neutral-600 bg-white border border-neutral-200 px-2.5 py-1 rounded-lg">
+                        {actionType === "exchange" ? "🔄 Đã có vỏ bình" : "📦 Đã tính cọc vỏ"}
+                      </span>
                     </div>
 
                     {/* Customer Inputs */}
@@ -391,14 +433,24 @@ export default function DistrictLandingView({ district }: DistrictLandingViewPro
           </div>
 
           {/* Product Cards Grid */}
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
             {filteredProducts.map((prod) => (
               <div
                 key={prod.id}
-                className="bg-white rounded-2xl border border-neutral-200 hover:border-red-500 shadow-sm hover:shadow-md transition-all p-5 flex flex-col justify-between"
+                className="bg-white rounded-2xl border border-neutral-200 hover:border-red-500 shadow-sm hover:shadow-md transition-all p-4 flex flex-col justify-between"
               >
                 <div>
-                  <div className="flex items-center justify-between gap-1 mb-2">
+                  {prod.image && (
+                    <div className="bg-gradient-to-br from-red-50 to-neutral-50 aspect-square w-full rounded-xl flex items-center justify-center overflow-hidden mb-3">
+                      <img
+                        src={prod.image}
+                        alt={prod.name}
+                        className="w-full h-full object-contain p-2 hover:scale-105 transition-transform duration-300"
+                        loading="lazy"
+                      />
+                    </div>
+                  )}
+                  <div className="flex items-center justify-between gap-1 mb-1.5">
                     <span className="inline-block text-[10px] font-bold text-amber-800 bg-amber-100 px-2 py-0.5 rounded-full">
                       {prod.tag}
                     </span>
@@ -412,8 +464,16 @@ export default function DistrictLandingView({ district }: DistrictLandingViewPro
                   <div className="text-[11px] text-neutral-400 mb-2">
                     {prod.brand} • {prod.valveType}
                   </div>
-                  <div className="text-xl font-black text-red-600 mb-2">{prod.price}</div>
-                  <p className="text-[11px] text-neutral-600 leading-relaxed mb-4">{prod.desc}</p>
+                  <div className="mb-2">
+                    <div className="text-[10px] text-neutral-400 font-semibold uppercase">Đổi gas</div>
+                    <div className="text-xl font-black text-red-600 leading-tight">{prod.price}</div>
+                    {prod.newPrice && (
+                      <div className="text-[11px] text-neutral-500 mt-0.5">
+                        Mua mới: <strong className="text-neutral-700 font-semibold">{prod.newPrice}</strong>
+                      </div>
+                    )}
+                  </div>
+                  <p className="text-[11px] text-neutral-500 leading-relaxed mb-3 line-clamp-2">{prod.desc}</p>
                 </div>
                 <div className="space-y-1.5">
                   <button

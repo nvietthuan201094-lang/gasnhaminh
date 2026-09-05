@@ -8,6 +8,9 @@ export interface SeoProductItem {
   valveType: string;
   price: string;
   priceVal: number;
+  newPrice?: string;
+  newPriceVal?: number;
+  image?: string;
   tag: string;
   desc: string;
 }
@@ -18,13 +21,13 @@ export interface DistrictInfo {
   name: string;             // e.g. "Quận 7"
   fullName: string;         // e.g. "Quận 7, TP. Hồ Chí Minh"
   slaMinutes: string;       // e.g. "15 - 20"
-  hubName: string;          // e.g. "Kho Gas Phú Mỹ Hưng - Gas Nhà Mình"
+  hubName: string;          // e.g. "Kho Gas Phú Mỹ Hưng - Quận 7"
   hotline: string;
   popularWards: string[];   // Các phường / tuyến đường nổi bật (bao gồm phường mới và cũ)
   newWards?: string[];      // Các phường mới sáp nhập chính thức (theo Nghị quyết UBTVQH)
   neighboringSlugs: string[]; // Các quận lân cận để xây dựng Internal Linking SEO
   description: string;
-  isInnerCity?: boolean;    // Đánh dấu quận nội thành TP.HCM
+  isInnerCity?: boolean;    // Đánh dấu quận nội thành TP.HCM (không tính huyện ngoại thành)
 }
 
 export const BRAND_NAME = "GAS NHÀ MÌNH";
@@ -34,18 +37,19 @@ export const HOTLINE_TEL = "tel:0888113831";
 export const ZALO_URL = "https://zalo.me/0888113831";
 
 /**
- * Danh mục 10 sản phẩm Gas chuẩn hóa phục vụ SEO & Đặt hàng:
- * Khớp 100% danh mục từ khóa sản phẩm yêu cầu (Ảnh 2):
- * 1. Gas bò 45 kg
- * 2. Gas Tuấn Khang vàng 12kg
- * 3. Gas V-Gas xám 12kg
- * 4. Gas Petrolimex đứng 12kg
- * 5. Gas Petrolimex shell 12kg
- * 6. Gas V-Gas đỏ 12 kg
- * 7. Gas V-Gas-PE 12kg
- * 8. Gas V-Gas-Shell 12kg
- * 9. Gas V-Gas vàng 12kg
- * 10. Gas V-Gas xanh đen 12kg
+ * Danh mục sản phẩm Gas chuẩn hóa phục vụ SEO & Đặt hàng:
+ * Khớp 100% dữ liệu thực tế từ CRM POSPlus & từ khóa sản phẩm yêu cầu:
+ * 1. Gas V-Gas xám 12kg
+ * 2. Gas V-Gas đỏ 12 kg
+ * 3. Gas V-Gas vàng 12kg
+ * 4. Gas V-Gas xanh đen 12kg
+ * 5. Gas V-Gas-PE 12kg
+ * 6. Gas V-Gas-Shell 12kg
+ * 7. Gas Petrolimex đứng 12kg
+ * 8. Gas Petrolimex shell 12kg
+ * 9. Gas Tuấn Khang vàng 12kg
+ * 10. Gas Tuấn Khang xanh 12kg
+ * 11. Gas bò 45 kg
  */
 export const SEO_PRODUCTS: SeoProductItem[] = [
   {
@@ -56,8 +60,11 @@ export const SEO_PRODUCTS: SeoProductItem[] = [
     category: "v-gas",
     weight: "12kg",
     valveType: "Van Đứng Tiêu Chuẩn (Ren Ngoài)",
-    price: "420.000đ",
-    priceVal: 420000,
+    price: "485.000đ",
+    priceVal: 485000,
+    newPrice: "735.000đ",
+    newPriceVal: 735000,
+    image: "https://crm.posplus.vn/api/v1/public_image/product.template/168/image_1024",
     tag: "Bán chạy nhất 🔥",
     desc: "Bình V-Gas xám 12kg ngọn lửa xanh tiết kiệm, vỏ bình chuẩn PCCC, cân đối chứng tại nhà khi giao.",
   },
@@ -69,8 +76,11 @@ export const SEO_PRODUCTS: SeoProductItem[] = [
     category: "v-gas",
     weight: "12kg",
     valveType: "Van Đứng Tiêu Chuẩn (Ren Ngoài)",
-    price: "430.000đ",
-    priceVal: 430000,
+    price: "485.000đ",
+    priceVal: 485000,
+    newPrice: "735.000đ",
+    newPriceVal: 735000,
+    image: "https://crm.posplus.vn/api/v1/public_image/product.template/172/image_1024",
     tag: "Chính hãng 100%",
     desc: "Bình V-Gas đỏ 12kg chịu áp lực cao, vỏ bình sơn tĩnh điện chống rỉ sét, bảo hiểm cháy nổ 10 tỷ.",
   },
@@ -82,8 +92,11 @@ export const SEO_PRODUCTS: SeoProductItem[] = [
     category: "v-gas",
     weight: "12kg",
     valveType: "Van Đứng Tiêu Chuẩn (Ren Ngoài)",
-    price: "430.000đ",
-    priceVal: 430000,
+    price: "485.000đ",
+    priceVal: 485000,
+    newPrice: "735.000đ",
+    newPriceVal: 735000,
+    image: "https://crm.posplus.vn/api/v1/public_image/product.template/174/image_1024",
     tag: "Khuyên dùng",
     desc: "Bình V-Gas vàng 12kg nước gas tinh khiết, nhiệt lượng cao, không đen đáy nồi, an toàn tuyệt đối.",
   },
@@ -95,8 +108,11 @@ export const SEO_PRODUCTS: SeoProductItem[] = [
     category: "v-gas",
     weight: "12kg",
     valveType: "Van Đứng Tiêu Chuẩn (Ren Ngoài)",
-    price: "430.000đ",
-    priceVal: 430000,
+    price: "485.000đ",
+    priceVal: 485000,
+    newPrice: "735.000đ",
+    newPriceVal: 735000,
+    image: "https://crm.posplus.vn/api/v1/public_image/product.template/173/image_1024",
     tag: "Thiết kế hiện đại",
     desc: "Bình V-Gas xanh đen 12kg công nghệ chiết nạp tự động khép kín, tem niêm phong chống giả nghiêm ngặt.",
   },
@@ -108,8 +124,11 @@ export const SEO_PRODUCTS: SeoProductItem[] = [
     category: "v-gas",
     weight: "12kg",
     valveType: "Van Đứng Tiêu Chuẩn (Ren Ngoài)",
-    price: "445.000đ",
-    priceVal: 445000,
+    price: "485.000đ",
+    priceVal: 485000,
+    newPrice: "735.000đ",
+    newPriceVal: 735000,
+    image: "https://crm.posplus.vn/api/v1/public_image/product.template/178/image_1024",
     tag: "Công nghệ mới 🛡️",
     desc: "Bình V-Gas bọc nhựa PE cách điện, chống va đập, siêu an toàn cho căn hộ chung cư và gia đình hiện đại.",
   },
@@ -121,8 +140,11 @@ export const SEO_PRODUCTS: SeoProductItem[] = [
     category: "v-gas",
     weight: "12kg",
     valveType: "Van Chụp Shell (Ngắt tự động)",
-    price: "440.000đ",
-    priceVal: 440000,
+    price: "485.000đ",
+    priceVal: 485000,
+    newPrice: "735.000đ",
+    newPriceVal: 735000,
+    image: "https://crm.posplus.vn/api/v1/public_image/product.template/177/image_1024",
     tag: "Van chụp Shell 🛡️",
     desc: "Bình V-Gas van chụp Shell 12kg cơ chế tự khóa khi có sự cố, tháo lắp cực kỳ tiện lợi và an toàn.",
   },
@@ -134,8 +156,11 @@ export const SEO_PRODUCTS: SeoProductItem[] = [
     category: "petrolimex-tuankhang",
     weight: "12kg",
     valveType: "Van Đứng Ren Ngoài",
-    price: "460.000đ",
-    priceVal: 460000,
+    price: "485.000đ",
+    priceVal: 485000,
+    newPrice: "735.000đ",
+    newPriceVal: 735000,
+    image: "https://crm.posplus.vn/api/v1/public_image/product.template/175/image_1024",
     tag: "Thương hiệu quốc gia 🇻🇳",
     desc: "Bình gas Petrolimex đứng 12kg chính hãng Tập đoàn Dầu khí, màng co chống giả và tem tích hợp QR Code.",
   },
@@ -147,8 +172,11 @@ export const SEO_PRODUCTS: SeoProductItem[] = [
     category: "petrolimex-tuankhang",
     weight: "12kg",
     valveType: "Van Chụp Shell",
-    price: "465.000đ",
-    priceVal: 465000,
+    price: "485.000đ",
+    priceVal: 485000,
+    newPrice: "735.000đ",
+    newPriceVal: 735000,
+    image: "https://crm.posplus.vn/api/v1/public_image/product.template/176/image_1024",
     tag: "Petrolimex Van Chụp",
     desc: "Bình Petrolimex van chụp Shell 12kg cao cấp, kiểm định nghiêm ngặt theo tiêu chuẩn quốc tế.",
   },
@@ -160,10 +188,29 @@ export const SEO_PRODUCTS: SeoProductItem[] = [
     category: "petrolimex-tuankhang",
     weight: "12kg",
     valveType: "Van Đứng Tiêu Chuẩn",
-    price: "425.000đ",
-    priceVal: 425000,
+    price: "465.000đ",
+    priceVal: 465000,
+    newPrice: "715.000đ",
+    newPriceVal: 715000,
+    image: "https://crm.posplus.vn/api/v1/public_image/product.template/169/image_1024",
     tag: "Giá tốt tiết kiệm",
     desc: "Bình gas Tuấn Khang vàng 12kg chất lượng ổn định, lửa xanh mạnh, lựa chọn kinh tế cho mọi gia đình.",
+  },
+  {
+    id: "gas-tuan-khang-xanh-12kg",
+    slug: "gas-tuan-khang-xanh-12kg",
+    name: "Gas Tuấn Khang xanh 12kg",
+    brand: "Tuấn Khang Gas",
+    category: "petrolimex-tuankhang",
+    weight: "12kg",
+    valveType: "Van Đứng Tiêu Chuẩn",
+    price: "465.000đ",
+    priceVal: 465000,
+    newPrice: "715.000đ",
+    newPriceVal: 715000,
+    image: "https://crm.posplus.vn/api/v1/public_image/product.template/171/image_1024",
+    tag: "Chất lượng cao",
+    desc: "Bình gas Tuấn Khang xanh 12kg chính hãng, van khóa an toàn, ngọn lửa xanh đều nhiệt lượng cao.",
   },
   {
     id: "gas-bo-45kg",
@@ -173,8 +220,11 @@ export const SEO_PRODUCTS: SeoProductItem[] = [
     category: "cong-nghiep",
     weight: "45kg",
     valveType: "Van Công Nghiệp POL / Reca",
-    price: "Liên hệ giá sỉ",
-    priceVal: 1350000,
+    price: "1.730.000đ",
+    priceVal: 1730000,
+    newPrice: "2.730.000đ",
+    newPriceVal: 2730000,
+    image: "https://crm.posplus.vn/api/v1/public_image/product.template/170/image_1024",
     tag: "Quán ăn - Nhà hàng 🏭",
     desc: "Bình gas bò 45kg chuyên dụng cho nhà hàng, quán ăn, xưởng chế biến. Giao xe tải tận nơi, xuất VAT đầy đủ.",
   },
