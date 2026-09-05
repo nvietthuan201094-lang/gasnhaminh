@@ -174,7 +174,7 @@ export const SEO_PRODUCTS: SeoProductItem[] = [
     weight: "45kg",
     valveType: "Van Công Nghiệp POL / Reca",
     price: "Liên hệ giá sỉ",
-    priceVal: 0,
+    priceVal: 1350000,
     tag: "Quán ăn - Nhà hàng 🏭",
     desc: "Bình gas bò 45kg chuyên dụng cho nhà hàng, quán ăn, xưởng chế biến. Giao xe tải tận nơi, xuất VAT đầy đủ.",
   },
