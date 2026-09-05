@@ -57,6 +57,7 @@ export async function createOrder(payload: OrderPayload): Promise<OrderResponse>
     return {
       success: json.status === 'success',
       orderId: json.order_id?.toString() || '',
+      orderName: json.order_name || json.order_id?.toString() || '',
       message: json.message
     };
   } catch (error) {

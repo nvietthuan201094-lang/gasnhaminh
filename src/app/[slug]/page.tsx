@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
-import { notFound } from 'next/navigation';
+import { notFound, redirect } from 'next/navigation';
 import { getProductBySlug } from '@/lib/api';
+import { getDistrictBySlug, BRAND_NAME } from '@/lib/districts';
 import ClientCheckoutWrapper from './ClientCheckoutWrapper';
 
 interface ProductPageProps {
@@ -11,6 +12,14 @@ interface ProductPageProps {
 
 export async function generateMetadata({ params }: ProductPageProps): Promise<Metadata> {
   const { slug } = await params;
+
+  const district = getDistrictBySlug(slug);
+  if (district) {
+    return {
+      title: `Giao Gas ${district.name} | ${BRAND_NAME}`,
+    };
+  }
+
   const product = await getProductBySlug(slug);
   
   if (!product) {
@@ -20,10 +29,10 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
   }
 
   return {
-    title: `${product.name} | GAS NHÀ MÌNH | Đại lý Gas`,
+    title: `${product.name} | ${BRAND_NAME} | Đại lý Gas`,
     description: product.description || `Mua ${product.name} chính hãng, giá tốt, giao hàng tận nơi nhanh chóng trong 30 phút.`,
     openGraph: {
-      title: `${product.name} | GAS NHÀ MÌNH`,
+      title: `${product.name} | ${BRAND_NAME}`,
       description: product.description || `Mua ${product.name} chính hãng, giá tốt, giao hàng nhanh.`,
       type: 'website',
     }
@@ -32,6 +41,13 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
 
 export default async function ProductPage({ params }: ProductPageProps) {
   const { slug } = await params;
+
+  // Nếu slug là đường dẫn quận (ví dụ /giao-gas-quan-7 hoặc /quan-7), chuyển hướng 308/301 sang /giao-gas/quan-7 chuẩn SEO
+  const district = getDistrictBySlug(slug);
+  if (district) {
+    redirect(`/giao-gas/${district.slug}`);
+  }
+
   const product = await getProductBySlug(slug);
 
   if (!product) {

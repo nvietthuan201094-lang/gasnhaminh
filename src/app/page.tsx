@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { DISTRICTS_DATA } from "@/lib/districts";
 
 const HOTLINE = "0888 113 831";
 const HOTLINE_TEL = "tel:0888113831";
@@ -294,38 +295,40 @@ export type TabItem = { label: string; products: ProductItem[] };
 
 const DEFAULT_PRICING_TABS: TabItem[] = [
   {
-    label: "Gas Dân Dụng",
+    label: "Gas Dân Dụng 12kg",
     products: [
-      { id: 1, slug: "binh-gas-xam-12kg", name: "Bình Gas Xám 12kg", tag: "Bán chạy nhất", tagColor: "bg-[#FF5722]", exchangePrice: "360.000đ", newPrice: "660.000đ", img: BASE + "gas-gia-dinh-6965_220x352.jpg" },
-      { id: 2, slug: "binh-gas-do-12kg", name: "Bình Gas Đỏ 12kg", tag: "Gia đình dùng nhiều", tagColor: "bg-[#0E9F6E]", exchangePrice: "380.000đ", newPrice: "680.000đ", img: BASE + "220x245x2/tai-xuong-(30)-58.jpg" },
-      { id: 3, slug: "petrolimex-12kg", name: "Petrolimex 12kg", tag: "An toàn tuyệt đối", tagColor: "bg-[#1A56DB]", exchangePrice: "420.000đ", newPrice: "720.000đ", img: BASE + "220x245x2/gasviet-1-7016-300x480-667.png" },
-      { id: 4, slug: "saigon-petro-12kg", name: "Saigon Petro 12kg", tag: "Gas Dầu Khí", tagColor: "bg-[#F59E0B]", exchangePrice: "370.000đ", newPrice: "670.000đ", img: BASE + "220x245x2/images-(24)-9485.jpg" },
+      { id: 1, slug: "gas-v-gas-xam-12kg", name: "Gas V-Gas xám 12kg", tag: "Bán chạy nhất", tagColor: "bg-[#FF5722]", exchangePrice: "420.000đ", newPrice: "660.000đ", img: BASE + "gas-gia-dinh-6965_220x352.jpg" },
+      { id: 2, slug: "gas-v-gas-do-12kg", name: "Gas V-Gas đỏ 12 kg", tag: "Chính hãng", tagColor: "bg-[#0E9F6E]", exchangePrice: "430.000đ", newPrice: "680.000đ", img: BASE + "220x245x2/tai-xuong-(30)-58.jpg" },
+      { id: 3, slug: "gas-petrolimex-dung-12kg", name: "Gas Petrolimex đứng 12kg", tag: "An toàn tuyệt đối", tagColor: "bg-[#1A56DB]", exchangePrice: "460.000đ", newPrice: "720.000đ", img: BASE + "220x245x2/gasviet-1-7016-300x480-667.png" },
+      { id: 4, slug: "gas-petrolimex-shell-12kg", name: "Gas Petrolimex shell 12kg", tag: "Van Chụp Shell", tagColor: "bg-[#E02424]", exchangePrice: "465.000đ", newPrice: "725.000đ", img: BASE + "220x245x2/gasviet-1-7016-300x480-667.png" },
+      { id: 5, slug: "gas-v-gas-pe-12kg", name: "Gas V-Gas-PE 12kg", tag: "Bọc nhựa PE", tagColor: "bg-[#7C3AED]", exchangePrice: "445.000đ", newPrice: "700.000đ", img: BASE + "220x245x2/tai-xuong-(30)-58.jpg" },
+      { id: 6, slug: "gas-v-gas-shell-12kg", name: "Gas V-Gas-Shell 12kg", tag: "Van Chụp Shell", tagColor: "bg-[#E02424]", exchangePrice: "440.000đ", newPrice: "690.000đ", img: BASE + "220x245x2/gasviet-1-7016-300x480-667.png" },
+      { id: 7, slug: "gas-v-gas-vang-12kg", name: "Gas V-Gas vàng 12kg", tag: "Lửa xanh bền", tagColor: "bg-[#F59E0B]", exchangePrice: "430.000đ", newPrice: "680.000đ", img: BASE + "220x245x2/images-(24)-9485.jpg" },
+      { id: 8, slug: "gas-tuan-khang-vang-12kg", name: "Gas Tuấn Khang vàng 12kg", tag: "Tiết kiệm", tagColor: "bg-[#10B981]", exchangePrice: "425.000đ", newPrice: "670.000đ", img: BASE + "220x245x2/images-(24)-9485.jpg" },
     ],
   },
   {
     label: "Gas Công Nghiệp",
     products: [
-      { id: 5, slug: "binh-gas-45kg-saigon-petro", name: "Bình Gas 45kg (Saigon Petro)", tag: "Nhà hàng, Quán ăn", tagColor: "bg-[#6B7280]", exchangePrice: "Liên hệ báo giá", newPrice: null, img: BASE + "220x245x2/tai-xuong-(56)-6350.jpg" },
-      { id: 6, slug: "binh-gas-45kg-dau-khi", name: "Bình Gas 45kg (Gas Dầu Khí)", tag: "Công nghiệp", tagColor: "bg-[#7C3AED]", exchangePrice: "Liên hệ báo giá", newPrice: null, img: BASE + "220x245x2/tai-xuong-3820.jpg" },
-      { id: 7, slug: "elf-gas-45kg", name: "Elf Gas 39–50kg", tag: "Bếp công nghiệp", tagColor: "bg-[#0E9F6E]", exchangePrice: "Liên hệ báo giá", newPrice: null, img: BASE + "220x245x2/tai-xuong-(57)-5222.jpg" },
-      { id: 8, slug: "petrolimex-48kg", name: "Petrolimex 48kg", tag: "Nhà máy, Xưởng", tagColor: "bg-[#1A56DB]", exchangePrice: "Liên hệ báo giá", newPrice: null, img: BASE + "220x245x2/images-(32)-9513.jpg" },
+      { id: 9, slug: "gas-bo-45kg", name: "Gas bò 45 kg", tag: "Nhà hàng, Quán ăn", tagColor: "bg-[#DC2626]", exchangePrice: "Liên hệ giá sỉ", newPrice: null, img: BASE + "220x245x2/tai-xuong-(56)-6350.jpg" },
+      { id: 10, slug: "binh-gas-45kg-saigon-petro", name: "Bình Gas 45kg (Saigon Petro)", tag: "Bếp công nghiệp", tagColor: "bg-[#6B7280]", exchangePrice: "Liên hệ báo giá", newPrice: null, img: BASE + "220x245x2/tai-xuong-(56)-6350.jpg" },
+      { id: 11, slug: "binh-gas-45kg-dau-khi", name: "Bình Gas 45kg (Gas Dầu Khí)", tag: "Công nghiệp", tagColor: "bg-[#7C3AED]", exchangePrice: "Liên hệ báo giá", newPrice: null, img: BASE + "220x245x2/tai-xuong-3820.jpg" },
+      { id: 12, slug: "petrolimex-48kg", name: "Petrolimex 48kg", tag: "Nhà máy, Xưởng", tagColor: "bg-[#1A56DB]", exchangePrice: "Liên hệ báo giá", newPrice: null, img: BASE + "220x245x2/images-(32)-9513.jpg" },
     ],
   },
   {
     label: "Bộ Bình Gas",
     products: [
-      { id: 9, slug: "bo-binh-xam-12kg", name: "Bộ Bình Xám + Van + Dây Gas", tag: "Đầy đủ phụ kiện", tagColor: "bg-[#FF5722]", exchangePrice: "660.000đ", newPrice: null, img: BASE + "220x245x2/gasviet-1-7016-300x480-667.png" },
-      { id: 10, slug: "bo-binh-do-12kg", name: "Bộ Bình Đỏ + Van Tự Ngắt + Dây", tag: "An toàn cao", tagColor: "bg-[#E02424]", exchangePrice: "680.000đ", newPrice: null, img: BASE + "220x245x2/tai-xuong-(30)-58.jpg" },
-      { id: 11, slug: "bo-binh-petrolimex-12kg", name: "Bộ Bình Petrolimex + Van + Dây", tag: "Chính hãng", tagColor: "bg-[#1A56DB]", exchangePrice: "720.000đ", newPrice: null, img: BASE + "220x245x2/gasviet-1-7016-300x480-667.png" },
-      { id: 12, slug: "bo-binh-elf-gas", name: "Bộ Bình Elf Gas + Van Namlux", tag: "Tiết kiệm", tagColor: "bg-[#0E9F6E]", exchangePrice: "750.000đ", newPrice: null, img: BASE + "220x245x2/tai-xuong-(57)-5222.jpg" },
+      { id: 13, slug: "bo-binh-xam-12kg", name: "Bộ Bình Xám + Van + Dây Gas", tag: "Đầy đủ phụ kiện", tagColor: "bg-[#FF5722]", exchangePrice: "660.000đ", newPrice: null, img: BASE + "220x245x2/gasviet-1-7016-300x480-667.png" },
+      { id: 14, slug: "bo-binh-do-12kg", name: "Bộ Bình Đỏ + Van Tự Ngắt + Dây", tag: "An toàn cao", tagColor: "bg-[#E02424]", exchangePrice: "680.000đ", newPrice: null, img: BASE + "220x245x2/tai-xuong-(30)-58.jpg" },
+      { id: 15, slug: "bo-binh-petrolimex-12kg", name: "Bộ Bình Petrolimex + Van + Dây", tag: "Chính hãng", tagColor: "bg-[#1A56DB]", exchangePrice: "720.000đ", newPrice: null, img: BASE + "220x245x2/gasviet-1-7016-300x480-667.png" },
     ],
   },
   {
     label: "Bộ Bình Gas Bếp Gas",
     products: [
-      { id: 13, slug: "bo-binh-xam-bep-don", name: "Bình Xám + Bếp Gas Đơn Mặt Kính", tag: "Combo tiết kiệm", tagColor: "bg-[#FF5722]", exchangePrice: "1.200.000đ", newPrice: null, img: BASE + "220x245x2/gasviet-1-7016-300x480-667.png" },
-      { id: 14, slug: "bo-binh-do-bep-don", name: "Bình Đỏ + Bếp Gas + Van + Dây", tag: "Trọn gói", tagColor: "bg-[#0E9F6E]", exchangePrice: "1.450.000đ", newPrice: null, img: BASE + "220x245x2/tai-xuong-(30)-58.jpg" },
-      { id: 15, slug: "bo-binh-petrovietnam-bep-don", name: "Bình Petrovietnam + Bếp Đơn", tag: "Quán ăn nhỏ", tagColor: "bg-[#6B7280]", exchangePrice: "1.650.000đ", newPrice: null, img: BASE + "220x245x2/gasviet-1-7016-300x480-667.png" },
+      { id: 16, slug: "bo-binh-xam-bep-don", name: "Bình Xám + Bếp Gas Đơn Mặt Kính", tag: "Combo tiết kiệm", tagColor: "bg-[#FF5722]", exchangePrice: "1.200.000đ", newPrice: null, img: BASE + "220x245x2/gasviet-1-7016-300x480-667.png" },
+      { id: 17, slug: "bo-binh-do-bep-don", name: "Bình Đỏ + Bếp Gas + Van + Dây", tag: "Trọn gói", tagColor: "bg-[#0E9F6E]", exchangePrice: "1.450.000đ", newPrice: null, img: BASE + "220x245x2/tai-xuong-(30)-58.jpg" },
     ],
   },
 ];
@@ -622,12 +625,6 @@ function TrustSection() {
 }
 
 function ServiceAreaSection() {
-  const districts = [
-    "Quận 1", "Quận 3", "Quận 5", "Quận 7", "Quận 10", "Quận 11",
-    "Gò Vấp", "Bình Thạnh", "Tân Bình", "Tân Phú", "Phú Nhuận",
-    "Thủ Đức", "Bình Dương", "Hóc Môn",
-  ];
-
   return (
     <section id="khu-vuc" className="py-16 md:py-20 bg-white">
       <div className="max-w-[1440px] mx-auto px-4 md:px-8 lg:px-20">
@@ -637,12 +634,17 @@ function ServiceAreaSection() {
         </div>
         <div className="grid md:grid-cols-2 gap-8 items-start">
           <div>
-            <p className="text-[#6B7280] mb-5 text-sm">Giao nhanh trong <strong className="text-[#E02424]">15–20 phút</strong> tại các khu vực:</p>
+            <p className="text-[#6B7280] mb-5 text-sm">Giao nhanh trong <strong className="text-[#E02424]">15–20 phút</strong> tại các khu vực (bấm để xem chi tiết trạm giao):</p>
             <div className="flex flex-wrap gap-2">
-              {districts.map((d) => (
-                <span key={d} className="flex items-center gap-1.5 bg-[#F9FAFB] border border-[#E5E7EB] rounded-lg px-3 py-2 text-sm font-semibold text-[#111928]">
-                  <span className="w-2 h-2 rounded-full bg-[#0E9F6E] inline-block"></span>{d}
-                </span>
+              {DISTRICTS_DATA.map((d) => (
+                <Link
+                  key={d.slug}
+                  href={`/giao-gas/${d.slug}`}
+                  title={`Giao gas ${d.name} siêu tốc 15 phút`}
+                  className="flex items-center gap-1.5 bg-[#F9FAFB] border border-[#E5E7EB] hover:border-[#E02424] hover:bg-red-50/60 hover:text-[#E02424] transition-all rounded-lg px-3 py-2 text-sm font-semibold text-[#111928]"
+                >
+                  <span className="w-2 h-2 rounded-full bg-[#0E9F6E] inline-block"></span>{d.name}
+                </Link>
               ))}
             </div>
             <div className="mt-6 p-4 bg-[#FFF3CD] rounded-xl border border-[#FCD34D]">

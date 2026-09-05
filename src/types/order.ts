@@ -23,5 +23,6 @@ export interface OrderPayload {
 export interface OrderResponse {
   success: boolean;
   orderId?: string;
+  orderName?: string;
   message?: string;
 }
