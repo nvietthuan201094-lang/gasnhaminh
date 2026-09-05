@@ -383,25 +383,34 @@ function usePricingTabs() {
 
 function ProductCard({ p, onSelect }: { p: ProductItem; onSelect: () => void }) {
   return (
-    <div className="bg-white rounded-2xl border border-[#E5E7EB] overflow-hidden shadow-sm hover:shadow-xl transition-shadow group">
-      <div className="bg-gradient-to-br from-[#fff5f5] to-[#f9fafb] h-44 flex items-center justify-center overflow-hidden">
-        <img src={p.img} alt={p.name} className="h-full w-full object-contain p-3 group-hover:scale-105 transition-transform duration-300" />
-      </div>
-      <div className="p-5">
-        <span className={`text-[10px] font-bold uppercase tracking-wider text-white px-2.5 py-1 rounded-full ${p.tagColor}`}>{p.tag}</span>
-        <h3 className="font-black text-[#111928] mt-3 mb-3 text-base leading-snug">{p.name}</h3>
-        <div className="mb-1">
-          <span className="text-[10px] text-[#6B7280] uppercase font-semibold">{p.newPrice ? "Đổi gas" : "Giá"}</span>
-          <div className="text-2xl font-black text-[#E02424]">{p.exchangePrice}</div>
+    <div className="bg-white rounded-2xl border border-[#E5E7EB] overflow-hidden shadow-sm hover:shadow-xl transition-shadow group flex flex-col justify-between h-full">
+      <div>
+        <div className="bg-gradient-to-br from-[#fff5f5] to-[#f9fafb] aspect-square w-full flex items-center justify-center overflow-hidden relative">
+          <img
+            src={p.img}
+            alt={p.name}
+            className="w-full h-full object-contain p-4 group-hover:scale-105 transition-transform duration-300"
+            loading="lazy"
+          />
         </div>
-        {p.newPrice && (
-          <div className="mb-2">
-            <span className="text-[10px] text-[#6B7280] uppercase font-semibold">Mua mới</span>
-            <div className="text-sm font-semibold text-[#6B7280]">{p.newPrice}</div>
+        <div className="p-5 pb-0">
+          <span className={`text-[10px] font-bold uppercase tracking-wider text-white px-2.5 py-1 rounded-full ${p.tagColor}`}>{p.tag}</span>
+          <h3 className="font-black text-[#111928] mt-3 mb-3 text-base leading-snug">{p.name}</h3>
+          <div className="mb-1">
+            <span className="text-[10px] text-[#6B7280] uppercase font-semibold">{p.newPrice ? "Đổi gas" : "Giá"}</span>
+            <div className="text-2xl font-black text-[#E02424]">{p.exchangePrice}</div>
           </div>
-        )}
+          {p.newPrice && (
+            <div className="mb-2">
+              <span className="text-[10px] text-[#6B7280] uppercase font-semibold">Mua mới</span>
+              <div className="text-sm font-semibold text-[#6B7280]">{p.newPrice}</div>
+            </div>
+          )}
+        </div>
+      </div>
+      <div className="p-5 pt-3">
         <button onClick={onSelect}
-          className="mt-3 w-full py-2.5 rounded-lg border-2 border-[#E02424] text-[#E02424] font-bold text-sm hover:bg-[#E02424] hover:text-white transition-all">
+          className="w-full py-2.5 rounded-lg border-2 border-[#E02424] text-[#E02424] font-bold text-sm hover:bg-[#E02424] hover:text-white transition-all">
           {p.exchangePrice.includes("Liên hệ") ? "Nhận báo giá ngay" : "Chọn loại này"}
         </button>
       </div>
