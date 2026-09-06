@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { DISTRICTS_DATA } from "@/lib/districts";
+import { trackGoogleAdsPurchase } from "@/lib/tracking";
 
 const HOTLINE = "0888 113 831";
 const HOTLINE_TEL = "tel:0888113831";
@@ -126,24 +127,22 @@ function HeroSection({ tabs, activeCategory, setActiveCategory, selectedProduct,
         const val = Number(displayPrice.replace(/\D/g, "")) || 0;
         const transactionId = (res as any).orderName || res.orderId || `LP-${Date.now()}`;
 
-        if (typeof window !== "undefined") {
-          (window as any).dataLayer = (window as any).dataLayer || [];
-          (window as any).dataLayer.push({ ecommerce: null });
-          (window as any).dataLayer.push({
-            event: "purchase",
-            ecommerce: {
-              transaction_id: transactionId,
-              value: val,
-              currency: "VND",
-              items: [{
-                item_name: product.name,
-                item_category: category.label,
-                quantity: 1,
-                price: val,
-              }]
-            }
-          });
-        }
+        // Fire Google Ads Conversion (AW-18424275416/efNKCO--rewcENjDsNFE) & GA4 Purchase strictly after backend confirmation
+        trackGoogleAdsPurchase({
+          transactionId,
+          value: val,
+          currency: "VND",
+          items: [
+            {
+              id: product.id,
+              name: product.name,
+              category: category.label,
+              price: val,
+              quantity: 1,
+            },
+          ],
+        });
+
         onOrderSuccess();
       } else {
         alert(res.message || "Đã có lỗi xảy ra khi đặt hàng.");

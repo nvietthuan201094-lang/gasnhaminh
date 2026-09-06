@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { createOrder } from '@/lib/api';
+import { trackGoogleAdsPurchase } from '@/lib/tracking';
 import { Product } from '@/types/order';
 
 interface CheckoutFormProps {
@@ -43,6 +44,22 @@ export const CheckoutForm: React.FC<CheckoutFormProps> = ({ product, quantity })
 
       if (response.success) {
         setSuccessMessage(`Đặt hàng thành công! Mã đơn: ${response.orderId}`);
+
+        // Fire Google Ads Conversion & GA4 Ecommerce strictly after backend confirmation
+        trackGoogleAdsPurchase({
+          transactionId: response.orderId || String(Date.now()),
+          value: (product.price || 0) * quantity,
+          currency: 'VND',
+          items: [
+            {
+              id: product.id,
+              name: product.name,
+              price: product.price,
+              quantity,
+            },
+          ],
+        });
+
         setFormData({ customerName: '', customerPhone: '', customerAddress: '', note: '', referralCode: '' });
       } else {
         setErrorMessage(response.message || 'Có lỗi xảy ra khi đặt hàng.');

@@ -14,6 +14,7 @@ import {
   SeoProductItem,
 } from "@/lib/districts";
 import { createOrder } from "@/lib/api";
+import { trackGoogleAdsPurchase } from "@/lib/tracking";
 
 interface DistrictLandingViewProps {
   district: DistrictInfo;
@@ -86,6 +87,25 @@ export default function DistrictLandingView({ district }: DistrictLandingViewPro
       });
 
       if (res.success) {
+        const orderId = res.orderName || res.orderId || `DISTRICT-${Date.now()}`;
+        const finalPrice = (actionType === "new" ? selectedProduct.newPriceVal : selectedProduct.priceVal) || selectedProduct.priceVal || 0;
+
+        // Fire Google Ads Conversion & GA4 Ecommerce Purchase strictly after backend confirmation
+        trackGoogleAdsPurchase({
+          transactionId: orderId,
+          value: finalPrice,
+          currency: "VND",
+          items: [
+            {
+              id: selectedProduct.id,
+              name: selectedProduct.name,
+              category: selectedProduct.category,
+              price: finalPrice,
+              quantity: 1,
+            },
+          ],
+        });
+
         setOrderSuccess(res.orderName || res.orderId || "Thành công");
       } else {
         alert(res.message || "Không thể gửi đơn hàng, vui lòng gọi Hotline trực tiếp.");
