@@ -159,8 +159,10 @@ function HeroSection({ tabs, activeCategory, setActiveCategory, selectedProduct,
             ⚡ Giao gas trong 15–20 phút tại TP.HCM
           </div>
           <h1 className="text-3xl md:text-4xl lg:text-5xl font-black text-[#111928] leading-tight mb-4">
-            GAS NHÀ MÌNH – Nền tảng đặt gas <span className="text-[#E02424]">gần bạn</span><br />
-            Hết gas, gọi Nhà Mình
+            Giao Gas Tận Nhà Siêu Tốc 15 Phút – <span className="text-[#E02424]">Gas Nhà Mình</span>
+            <span className="block text-xl md:text-2xl lg:text-3xl text-gray-700 font-bold mt-2">
+              Đại lý đổi bình gas chính hãng, an toàn tại TP.HCM
+            </span>
           </h1>
           <p className="text-[#6B7280] text-base md:text-lg mb-6 leading-relaxed">
             Bình gas chính hãng 100%, đủ ký, có bảo hiểm an toàn. Miễn phí kiểm tra dây van và vệ sinh bếp.
@@ -673,6 +675,51 @@ function ServiceAreaSection() {
   );
 }
 
+function FaqSection() {
+  const faqs = [
+    {
+      q: "Thời gian giao gas tại TP.HCM mất bao lâu?",
+      a: "Nhờ mạng lưới trạm phân phối rộng khắp các quận huyện, thời gian giao gas trung bình từ 15–20 phút kể từ lúc tiếp nhận đơn hàng hoặc cuộc gọi hotline."
+    },
+    {
+      q: "Gas Nhà Mình cung cấp những loại bình gas nào?",
+      a: "Chúng tôi cung cấp đầy đủ bình gas chính hãng 100%: V-Gas (xám, đỏ, vàng, PE, Shell), Petrolimex (van đứng, van chụp shell), Tuấn Khang 12kg và bình gas bò 45kg chuyên dụng cho quán ăn, nhà hàng."
+    },
+    {
+      q: "Tôi có được cân đối chứng kiểm tra trọng lượng bình gas không?",
+      a: "Hoàn toàn được! 100% nhân viên giao gas đều mang theo cân điện tử đối chứng. Khách hàng kiểm tra đủ 12kg ruột gas thực tế mới thanh toán tiền."
+    },
+    {
+      q: "Đổi bình gas có được bảo hành và bảo hiểm an toàn không?",
+      a: "Tất cả bình gas do Gas Nhà Mình cung cấp đều có bảo hiểm trách nhiệm cháy nổ lên đến 10 tỷ đồng. Kỹ thuật viên kiểm tra rò rỉ khí gas bằng máy chuyên dụng và vệ sinh bếp miễn phí."
+    }
+  ];
+
+  return (
+    <section id="faq" className="py-16 md:py-20 bg-[#F9FAFB]">
+      <div className="max-w-[1000px] mx-auto px-4 md:px-8">
+        <div className="text-center mb-12">
+          <span className="text-xs font-bold uppercase tracking-widest text-[#E02424] mb-2 block">Hỏi đáp thường gặp</span>
+          <h2 className="text-3xl md:text-4xl font-black text-[#111928]">Câu Hỏi Về Dịch Vụ Giao Gas & Đổi Gas</h2>
+        </div>
+        <div className="space-y-4">
+          {faqs.map((faq, idx) => (
+            <div key={idx} className="bg-white rounded-2xl p-6 border border-[#E5E7EB] shadow-sm hover:border-[#E02424] transition-all">
+              <h3 className="text-lg font-bold text-[#111928] mb-2 flex items-start gap-3">
+                <span className="w-6 h-6 rounded-full bg-[#FEE2E2] text-[#E02424] text-sm flex items-center justify-center flex-shrink-0 mt-0.5">?</span>
+                {faq.q}
+              </h3>
+              <p className="text-[#6B7280] text-sm md:text-base leading-relaxed pl-9">
+                {faq.a}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function Footer() {
   return (
     <footer className="bg-[#0D1117] text-white py-12 pb-20 md:pb-12">
@@ -699,7 +746,7 @@ function Footer() {
           </div>
         </div>
         <div className="border-t border-white/10 pt-6 text-center text-xs text-white/40">
-          © 2024 GAS NHÀ MÌNH. Đã đăng ký bảo hộ thương hiệu. Cam kết chất lượng – Minh bạch giá cả.
+          © {new Date().getFullYear()} GAS NHÀ MÌNH. Đã đăng ký bảo hộ thương hiệu. Cam kết chất lượng – Minh bạch giá cả.
         </div>
       </div>
     </footer>
@@ -766,6 +813,7 @@ export default function App() {
       <ProcessSection />
       <TrustSection />
       <ServiceAreaSection />
+      <FaqSection />
       <Footer />
       <MobileStickyBar onOrderClick={scrollToForm} />
       {showSuccess && <SuccessModal onClose={() => setShowSuccess(false)} />}

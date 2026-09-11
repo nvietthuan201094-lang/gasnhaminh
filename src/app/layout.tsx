@@ -157,23 +157,73 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",
-              "@type": "LocalBusiness",
-              "name": "GAS NHÀ MÌNH",
-              "image": "https://gaso.vn/logo-goodgas.png",
-              "telephone": "0888 113 831",
-              "address": {
-                "@type": "PostalAddress",
-                "addressLocality": "TP HCM",
-                "addressCountry": "VN"
-              },
-              "openingHoursSpecification": {
-                "@type": "OpeningHoursSpecification",
-                "dayOfWeek": [
-                  "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
-                ],
-                "opens": "00:00",
-                "closes": "23:59"
-              }
+              "@graph": [
+                {
+                  "@type": "LocalBusiness",
+                  "@id": "https://gasnhaminh.com/#business",
+                  "name": "GAS NHÀ MÌNH",
+                  "url": "https://gasnhaminh.com",
+                  "image": "https://images.unsplash.com/photo-1736960894843-bc9afe9b22c9?w=1200&h=630&fit=crop&auto=format",
+                  "telephone": "0888 113 831",
+                  "priceRange": "$$",
+                  "description": "Dịch vụ giao gas tận nhà siêu tốc 15–20 phút tại TP.HCM. Đổi bình gas chính hãng 12kg, 45kg. Cân đối chứng tại nhà, an toàn tuyệt đối.",
+                  "address": {
+                    "@type": "PostalAddress",
+                    "addressLocality": "TP HCM",
+                    "addressCountry": "VN"
+                  },
+                  "areaServed": {
+                    "@type": "City",
+                    "name": "Thành phố Hồ Chí Minh"
+                  },
+                  "openingHoursSpecification": {
+                    "@type": "OpeningHoursSpecification",
+                    "dayOfWeek": [
+                      "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
+                    ],
+                    "opens": "00:00",
+                    "closes": "23:59"
+                  }
+                },
+                {
+                  "@type": "FAQPage",
+                  "@id": "https://gasnhaminh.com/#faq",
+                  "mainEntity": [
+                    {
+                      "@type": "Question",
+                      "name": "Thời gian giao gas của Gas Nhà Mình mất bao lâu?",
+                      "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Thời gian giao gas trung bình từ 15–20 phút tại tất cả các quận huyện TP.HCM nhờ hệ thống trạm kho phân phối trực ban phủ khắp các khu vực."
+                      }
+                    },
+                    {
+                      "@type": "Question",
+                      "name": "Gas Nhà Mình cung cấp những loại bình gas nào?",
+                      "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Gas Nhà Mình phân phối đầy đủ các dòng bình gas gia đình 12kg (V-Gas xám, đỏ, vàng, PE, Petrolimex van đứng, Petrolimex van chụp shell, Tuấn Khang) và bình gas bò công nghiệp 45kg chuyên dụng cho quán ăn, nhà hàng."
+                      }
+                    },
+                    {
+                      "@type": "Question",
+                      "name": "Tôi có được cân đối chứng kiểm tra trọng lượng bình gas không?",
+                      "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "100% đơn hàng đều được kỹ thuật viên mang theo cân điện tử kiểm tra đủ 12kg gas thực, thay gioăng van và kiểm tra rò rỉ khí gas an toàn miễn phí trước khi quý khách thanh toán."
+                      }
+                    },
+                    {
+                      "@type": "Question",
+                      "name": "Bình gas tại Gas Nhà Mình có bảo hiểm không?",
+                      "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Tất cả bình gas tại Gas Nhà Mình đều là hàng chính hãng 100%, có tem niêm phong màng co chống giả và được bảo hiểm trách nhiệm cháy nổ lên đến 10 tỷ đồng."
+                      }
+                    }
+                  ]
+                }
+              ]
             })
           }}
         />

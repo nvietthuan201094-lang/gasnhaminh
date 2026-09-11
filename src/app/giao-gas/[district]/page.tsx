@@ -35,7 +35,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const title = `Giao Gas, Đặt Gas, Gọi Gas ${district.name} Siêu Tốc ${district.slaMinutes} Phút | ${BRAND_NAME}`;
   const description = `Đại lý Gas Nhà Mình tại ${district.fullName}. Đặt gas online, gọi đổi gas giao tận nhà trong ${district.slaMinutes} phút. Đầy đủ bình V-Gas xám/đỏ/vàng/PE/Shell, Petrolimex đứng/shell, Tuấn Khang vàng 12kg và gas bò 45kg. Cân đối chứng tại nhà. Hotline: ${district.hotline}.`;
 
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.gasnhaminh.com';
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://gasnhaminh.com';
   const canonicalUrl = `${siteUrl}/giao-gas/${district.slug}`;
 
   return {
@@ -72,7 +72,7 @@ export default async function DistrictPage({ params }: PageProps) {
     notFound();
   }
 
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.gasnhaminh.com';
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://gasnhaminh.com';
   const pageUrl = `${siteUrl}/giao-gas/${district.slug}`;
 
   // Structured Data Schema JSON-LD

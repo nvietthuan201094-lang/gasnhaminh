@@ -12,11 +12,16 @@ interface ProductPageProps {
 
 export async function generateMetadata({ params }: ProductPageProps): Promise<Metadata> {
   const { slug } = await params;
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://gasnhaminh.com';
 
   const district = getDistrictBySlug(slug);
   if (district) {
     return {
-      title: `Giao Gas ${district.name} | ${BRAND_NAME}`,
+      metadataBase: new URL(siteUrl),
+      title: `Giao Gas ${district.name} Siêu Tốc 15 Phút | ${BRAND_NAME}`,
+      alternates: {
+        canonical: `${siteUrl}/giao-gas/${district.slug}`,
+      },
     };
   }
 
@@ -24,16 +29,23 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
   
   if (!product) {
     return {
-      title: 'Sản phẩm không tồn tại | Đại lý Gas',
+      title: `Sản phẩm không tồn tại | ${BRAND_NAME}`,
     };
   }
 
+  const canonicalUrl = `${siteUrl}/${slug}`;
+
   return {
-    title: `${product.name} | ${BRAND_NAME} | Đại lý Gas`,
-    description: product.description || `Mua ${product.name} chính hãng, giá tốt, giao hàng tận nơi nhanh chóng trong 30 phút.`,
+    metadataBase: new URL(siteUrl),
+    title: `${product.name} Chính Hãng | Giao Gas Siêu Tốc TP.HCM – ${BRAND_NAME}`,
+    description: product.description || `Mua ${product.name} chính hãng, giá tốt, giao hàng tận nơi nhanh chóng trong 15–20 phút tại TP.HCM. Hotline: 0888 113 831.`,
+    alternates: {
+      canonical: canonicalUrl,
+    },
     openGraph: {
-      title: `${product.name} | ${BRAND_NAME}`,
-      description: product.description || `Mua ${product.name} chính hãng, giá tốt, giao hàng nhanh.`,
+      title: `${product.name} Chính Hãng | ${BRAND_NAME}`,
+      description: product.description || `Mua ${product.name} chính hãng, giá tốt, giao hàng nhanh 15–20 phút.`,
+      url: canonicalUrl,
       type: 'website',
     }
   };
