@@ -33,6 +33,7 @@ export async function createOrder(payload: OrderPayload): Promise<OrderResponse>
       customer_phone: payload.customerPhone,
       address: payload.customerAddress,
       notes: payload.note || '',
+      source_domain: typeof window !== 'undefined' ? window.location.hostname : 'gasnhaminh.com',
       lines: [
         {
           product_slug: payload.slug || `product-${payload.productId}`,
