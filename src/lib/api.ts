@@ -32,6 +32,7 @@ export async function createOrder(payload: OrderPayload): Promise<OrderResponse>
       customer_name: payload.customerName || 'Khách hàng Landing Page',
       customer_phone: payload.customerPhone,
       address: payload.customerAddress,
+      district_code: payload.districtCode || '',
       notes: payload.note || '',
       source_domain: typeof window !== 'undefined' ? window.location.hostname : 'gasnhaminh.com',
       lines: [

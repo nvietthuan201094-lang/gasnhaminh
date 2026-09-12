@@ -82,6 +82,7 @@ export default function DistrictLandingView({ district }: DistrictLandingViewPro
         customerName: name,
         customerPhone: phone,
         customerAddress: address,
+        districtCode: district.slug,
         note: `[Khu vực: ${district.name}] [Sản phẩm: ${selectedProduct.name}] ${note} (${actionType === "exchange" ? "Đổi bình" : "Mua trọn bộ cả vỏ"})`,
         cylinderAction: actionType,
       });

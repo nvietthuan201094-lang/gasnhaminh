@@ -175,6 +175,7 @@ export default async function DistrictPage({ params }: PageProps) {
               price: productPrice,
               priceCurrency: 'VND',
               priceValidUntil: '2026-12-31',
+              validFrom: '2024-01-01',
               itemCondition: 'https://schema.org/NewCondition',
               availability: 'https://schema.org/InStock',
               seller: {

@@ -15,6 +15,7 @@ export interface OrderPayload {
   customerName: string;
   customerPhone: string;
   customerAddress: string;
+  districtCode?: string;
   note?: string;
   cylinderAction?: 'exchange' | 'new';
   referralCode?: string;
