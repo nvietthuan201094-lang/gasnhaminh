@@ -9,28 +9,11 @@ const HOTLINE = "0888 113 831";
 const HOTLINE_TEL = "tel:0888113831";
 const ZALO_URL = "https://zalo.me/0888113831";
 
-// ─── GTM & BE Tracking Helper ──────────────────────────────────────────────────────────────
+// ─── GTM Tracking Helper ──────────────────────────────────────────────────────────────
 function pushGtmEvent(eventName: string, params: Record<string, unknown> = {}) {
   if (typeof window === "undefined") return;
   (window as any).dataLayer = (window as any).dataLayer || [];
   (window as any).dataLayer.push({ event: eventName, ...params });
-
-  // Bắn thông báo tương tác ngầm về Odoo BE (khi khách bấm Gọi Hotline hoặc Zalo)
-  if (eventName === "click_call" || eventName === "click_zalo") {
-    try {
-      const API_URL = process.env.NEXT_PUBLIC_API_URL || "https://crm.posplus.vn";
-      fetch(`${API_URL}/api/v1/tracking/interaction`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          event: eventName,
-          domain: window.location.hostname,
-          ...params,
-        }),
-        keepalive: true,
-      }).catch(() => {});
-    } catch (_) {}
-  }
 }
 
 function Header() {

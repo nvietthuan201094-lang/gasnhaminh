@@ -26,6 +26,44 @@ export async function getProductBySlug(slug: string): Promise<Product | null> {
   }
 }
 
+function getTrackingData(): Record<string, string> {
+  if (typeof window === 'undefined') return {};
+  try {
+    const searchParams = new URLSearchParams(window.location.search);
+    const tracking: Record<string, string> = {};
+    ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content', 'gclid', 'fbclid', 'fbc', 'fbp'].forEach((param) => {
+      const val = searchParams.get(param);
+      if (val) tracking[param] = val;
+    });
+
+    const getCookie = (name: string) => {
+      const value = `; ${document.cookie}`;
+      const parts = value.split(`; ${name}=`);
+      if (parts.length === 2) return parts.pop()?.split(';').shift();
+      return null;
+    };
+
+    const gaCookie = getCookie('_ga');
+    if (gaCookie) {
+      const parts = gaCookie.split('.');
+      tracking['ga_client_id'] = parts.length >= 4 ? `${parts[2]}.${parts[3]}` : gaCookie;
+    }
+    const fbcCookie = getCookie('_fbc');
+    if (fbcCookie) tracking['fbc'] = fbcCookie;
+    const gclCookie = getCookie('_gcl_aw');
+    if (gclCookie) tracking['gclid'] = gclCookie;
+
+    const saved = localStorage.getItem('gas_tracking_data');
+    let merged = saved ? { ...JSON.parse(saved), ...tracking } : tracking;
+    if (Object.keys(merged).length > 0) {
+      localStorage.setItem('gas_tracking_data', JSON.stringify(merged));
+    }
+    return merged;
+  } catch (e) {
+    return {};
+  }
+}
+
 export async function createOrder(payload: OrderPayload): Promise<OrderResponse> {
   try {
     const orderData = {
@@ -42,7 +80,8 @@ export async function createOrder(payload: OrderPayload): Promise<OrderResponse>
           cylinder_action: payload.cylinderAction || 'exchange'
         }
       ],
-      referral_code: payload.referralCode || ''
+      referral_code: payload.referralCode || '',
+      tracking: getTrackingData()
     };
 
     const res = await fetch(`${API_BASE_URL}/api/v1/orders`, {
