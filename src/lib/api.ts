@@ -31,10 +31,14 @@ function getTrackingData(): Record<string, string> {
   try {
     const searchParams = new URLSearchParams(window.location.search);
     const tracking: Record<string, string> = {};
-    ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content', 'gclid', 'fbclid', 'fbc', 'fbp'].forEach((param) => {
+    ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content', 'gclid', 'fbclid', 'fbc', 'fbp', 'ttclid'].forEach((param) => {
       const val = searchParams.get(param);
       if (val) tracking[param] = val;
     });
+
+    if (document.referrer) {
+      tracking['referrer'] = document.referrer;
+    }
 
     const getCookie = (name: string) => {
       const value = `; ${document.cookie}`;
@@ -52,6 +56,57 @@ function getTrackingData(): Record<string, string> {
     if (fbcCookie) tracking['fbc'] = fbcCookie;
     const gclCookie = getCookie('_gcl_aw');
     if (gclCookie) tracking['gclid'] = gclCookie;
+
+    // Tự động phân tích nguồn và kênh chuẩn Marketing nếu chưa có UTM rõ ràng
+    if (!tracking['utm_source']) {
+      if (tracking['gclid']) {
+        tracking['utm_source'] = 'google';
+        tracking['utm_medium'] = 'cpc';
+        tracking['utm_campaign'] = tracking['utm_campaign'] || 'Chiến dịch Google Ads';
+      } else if (tracking['fbclid'] || tracking['fbc']) {
+        tracking['utm_source'] = 'facebook';
+        tracking['utm_medium'] = 'cpc';
+        tracking['utm_campaign'] = tracking['utm_campaign'] || 'Chiến dịch Facebook Ads';
+      } else if (tracking['ttclid']) {
+        tracking['utm_source'] = 'tiktok';
+        tracking['utm_medium'] = 'cpc';
+        tracking['utm_campaign'] = tracking['utm_campaign'] || 'Chiến dịch TikTok Ads';
+      } else if (document.referrer) {
+        const ref = document.referrer.toLowerCase();
+        if (ref.includes('google.com') || ref.includes('google.com.vn')) {
+          tracking['utm_source'] = 'google';
+          tracking['utm_medium'] = 'organic';
+          tracking['utm_campaign'] = 'SEO Tự Nhiên (Google)';
+        } else if (ref.includes('coccoc.com')) {
+          tracking['utm_source'] = 'coccoc';
+          tracking['utm_medium'] = 'organic';
+          tracking['utm_campaign'] = 'SEO Tự Nhiên (Cốc Cốc)';
+        } else if (ref.includes('bing.com')) {
+          tracking['utm_source'] = 'bing';
+          tracking['utm_medium'] = 'organic';
+          tracking['utm_campaign'] = 'SEO Tự Nhiên (Bing)';
+        } else if (ref.includes('facebook.com') || ref.includes('fb.com')) {
+          tracking['utm_source'] = 'facebook';
+          tracking['utm_medium'] = 'social';
+          tracking['utm_campaign'] = 'Mạng xã hội (Facebook)';
+        } else if (ref.includes('zalo.me')) {
+          tracking['utm_source'] = 'zalo';
+          tracking['utm_medium'] = 'social';
+          tracking['utm_campaign'] = 'Mạng xã hội (Zalo)';
+        } else if (!ref.includes(window.location.hostname)) {
+          try {
+            const host = new URL(document.referrer).hostname;
+            tracking['utm_source'] = host;
+            tracking['utm_medium'] = 'referral';
+            tracking['utm_campaign'] = 'Web giới thiệu';
+          } catch (_) {}
+        }
+      } else {
+        tracking['utm_source'] = 'direct';
+        tracking['utm_medium'] = 'direct';
+        tracking['utm_campaign'] = 'Truy cập trực tiếp';
+      }
+    }
 
     const saved = localStorage.getItem('gas_tracking_data');
     let merged = saved ? { ...JSON.parse(saved), ...tracking } : tracking;
