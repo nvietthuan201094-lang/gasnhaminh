@@ -13,7 +13,7 @@ import {
   SEO_PRODUCTS,
   SeoProductItem,
 } from "@/lib/districts";
-import { createOrder } from "@/lib/api";
+import { createOrder, trackInteractionApi } from "@/lib/api";
 import { trackGoogleAdsPurchase } from "@/lib/tracking";
 
 interface DistrictLandingViewProps {
@@ -148,12 +148,26 @@ export default function DistrictLandingView({ district }: DistrictLandingViewPro
               href={ZALO_URL}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() => {
+                trackInteractionApi('click_zalo', {
+                  district: district.name,
+                  phone: HOTLINE_DISPLAY,
+                  notes: `Khách bấm Chat Zalo từ header trang ${district.name}`,
+                });
+              }}
               className="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-red-50 text-red-700 font-bold text-sm hover:bg-red-100 transition-colors"
             >
               💬 Nhắn Zalo
             </a>
             <a
               href={HOTLINE_TEL}
+              onClick={() => {
+                trackInteractionApi('click_call', {
+                  district: district.name,
+                  phone: HOTLINE_DISPLAY,
+                  notes: `Khách bấm Gọi Hotline từ header trang ${district.name}`,
+                });
+              }}
               className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-red-600 hover:bg-red-700 text-white font-black text-sm shadow-md transition-colors"
             >
               📞 Gọi: {HOTLINE_DISPLAY}
@@ -606,6 +620,38 @@ export default function DistrictLandingView({ district }: DistrictLandingViewPro
           </p>
         </div>
       </footer>
+
+      {/* Mobile Sticky Bar */}
+      <div className="fixed bottom-0 left-0 right-0 z-50 flex sm:hidden h-14 bg-white border-t border-neutral-200 shadow-[0_-2px_10px_rgba(0,0,0,0.12)]">
+        <a
+          href={HOTLINE_TEL}
+          onClick={() => {
+            trackInteractionApi('click_call', {
+              district: district.name,
+              phone: HOTLINE_DISPLAY,
+              notes: `Khách bấm Gọi Hotline từ thanh di động tại ${district.name}`,
+            });
+          }}
+          className="flex-1 flex items-center justify-center gap-2 text-red-600 font-bold text-xs border-r border-neutral-200"
+        >
+          📞 GỌI HOTLINE
+        </a>
+        <a
+          href={ZALO_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={() => {
+            trackInteractionApi('click_zalo', {
+              district: district.name,
+              phone: HOTLINE_DISPLAY,
+              notes: `Khách bấm Chat Zalo từ thanh di động tại ${district.name}`,
+            });
+          }}
+          className="flex-1 flex items-center justify-center gap-2 bg-[#FF5722] text-white font-bold text-xs"
+        >
+          💬 NHẮN ZALO
+        </a>
+      </div>
     </div>
   );
 }

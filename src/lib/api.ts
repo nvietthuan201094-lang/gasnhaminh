@@ -161,3 +161,51 @@ export async function createOrder(payload: OrderPayload): Promise<OrderResponse>
     return { success: false, message: 'Đã có lỗi xảy ra khi đặt hàng. Vui lòng thử lại.' };
   }
 }
+
+/**
+ * Gửi tín hiệu tương tác (Khách bấm Gọi Hotline hoặc Chat Zalo) về Server CRM Odoo
+ * để kích hoạt thông báo đẩy FCM tức thì tới điện thoại nhân viên.
+ */
+export async function trackInteractionApi(
+  event: 'click_zalo' | 'click_call',
+  extra?: {
+    district?: string;
+    phone?: string;
+    customerPhone?: string;
+    customerName?: string;
+    notes?: string;
+  }
+): Promise<void> {
+  if (typeof window === 'undefined') return;
+  try {
+    const domain = window.location.hostname || 'gasnhaminh.com';
+    const tracking = getTrackingData();
+    const payload = {
+      event,
+      domain,
+      phone: extra?.phone || '0888 113 831',
+      district: extra?.district || '',
+      customer_phone: extra?.customerPhone || '',
+      customer_name: extra?.customerName || '',
+      notes: extra?.notes || '',
+      url: window.location.href,
+      tracking,
+    };
+
+    const endpoint = `${API_BASE_URL}/api/v1/tracking/interaction`;
+    if (typeof navigator !== 'undefined' && navigator.sendBeacon) {
+      const blob = new Blob([JSON.stringify(payload)], { type: 'application/json' });
+      navigator.sendBeacon(endpoint, blob);
+    } else {
+      fetch(endpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+        keepalive: true,
+      }).catch(() => {});
+    }
+  } catch (err) {
+    console.error('[API] Error tracking interaction:', err);
+  }
+}
+

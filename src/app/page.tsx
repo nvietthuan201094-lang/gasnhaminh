@@ -4,16 +4,25 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { DISTRICTS_DATA } from "@/lib/districts";
 import { trackGoogleAdsPurchase } from "@/lib/tracking";
+import { trackInteractionApi } from "@/lib/api";
 
 const HOTLINE = "0888 113 831";
 const HOTLINE_TEL = "tel:0888113831";
 const ZALO_URL = "https://zalo.me/0888113831";
 
-// ─── GTM Tracking Helper ──────────────────────────────────────────────────────────────
+// ─── GTM & CRM Interaction Tracking Helper ──────────────────────────────────────────
 function pushGtmEvent(eventName: string, params: Record<string, unknown> = {}) {
   if (typeof window === "undefined") return;
   (window as any).dataLayer = (window as any).dataLayer || [];
   (window as any).dataLayer.push({ event: eventName, ...params });
+
+  // Gửi tín hiệu tương tác về Odoo CRM để phát thông báo chuông FCM tới điện thoại nhân viên
+  if (eventName === "click_zalo" || eventName === "click_call") {
+    trackInteractionApi(eventName as "click_zalo" | "click_call", {
+      phone: HOTLINE,
+      notes: eventName === "click_zalo" ? "Khách bấm Chat Zalo từ trang chủ" : "Khách bấm Gọi Hotline từ trang chủ",
+    });
+  }
 }
 
 function Header() {
