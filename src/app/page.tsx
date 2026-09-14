@@ -40,16 +40,42 @@ function Header() {
             <a key={href} href={href} className="text-[#111928] font-semibold text-sm hover:text-[#E02424] transition-colors">{label}</a>
           ))}
         </nav>
-        <a href={HOTLINE_TEL} onClick={() => pushGtmEvent("click_call", { phone: HOTLINE })} className="flex items-center gap-2 bg-[#E02424] hover:bg-[#B91C1C] text-white font-bold px-5 py-2.5 rounded-lg transition-colors text-sm">
-          <PhoneIcon /> Gọi ngay: {HOTLINE}
-        </a>
+        <div className="flex items-center gap-3">
+          <a
+            href={ZALO_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => pushGtmEvent("click_zalo", { phone: HOTLINE })}
+            className="flex items-center gap-1.5 bg-[#0EA5E9] hover:bg-[#0284C7] text-white font-bold px-4 py-2.5 rounded-lg transition-colors text-sm shadow-sm"
+          >
+            💬 Nhắn Zalo
+          </a>
+          <a
+            href={HOTLINE_TEL}
+            onClick={() => pushGtmEvent("click_call", { phone: HOTLINE })}
+            className="flex items-center gap-2 bg-[#E02424] hover:bg-[#B91C1C] text-white font-bold px-5 py-2.5 rounded-lg transition-colors text-sm shadow-sm"
+          >
+            <PhoneIcon /> Gọi ngay: {HOTLINE}
+          </a>
+        </div>
       </div>
       {/* Mobile */}
       <div className="flex md:hidden items-center justify-between px-4 h-14">
         <span className="text-[#E02424] font-black text-lg">🔥 GAS NHÀ MÌNH</span>
-        <a href={HOTLINE_TEL} onClick={() => pushGtmEvent("click_call", { phone: HOTLINE })} className="bg-[#FF5722] text-white rounded-full p-2.5">
-          <PhoneIcon size={18} />
-        </a>
+        <div className="flex items-center gap-2">
+          <a
+            href={ZALO_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => pushGtmEvent("click_zalo", { phone: HOTLINE })}
+            className="bg-[#0EA5E9] text-white rounded-full px-3 py-1.5 text-xs font-bold flex items-center gap-1"
+          >
+            💬 Zalo
+          </a>
+          <a href={HOTLINE_TEL} onClick={() => pushGtmEvent("click_call", { phone: HOTLINE })} className="bg-[#FF5722] text-white rounded-full p-2.5">
+            <PhoneIcon size={18} />
+          </a>
+        </div>
       </div>
     </header>
   );
@@ -774,6 +800,24 @@ function PhoneIcon({ size = 20 }: { size?: number }) {
   );
 }
 
+function FloatingContactButtons() {
+  return (
+    <div className="fixed bottom-20 md:bottom-8 right-4 md:right-6 z-40 flex flex-col gap-2.5 items-end">
+      <a
+        href={ZALO_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+        onClick={() => pushGtmEvent("click_zalo", { phone: HOTLINE })}
+        className="flex items-center gap-2 bg-[#0EA5E9] hover:bg-[#0284C7] text-white font-bold px-3.5 py-2.5 rounded-full shadow-lg hover:shadow-xl transition-all transform hover:scale-105"
+        title="Chat Zalo tư vấn giao gas nhanh"
+      >
+        <span className="text-lg leading-none">💬</span>
+        <span className="text-xs md:text-sm tracking-wide">Nhắn Zalo</span>
+      </a>
+    </div>
+  );
+}
+
 export default function App() {
   const tabs = usePricingTabs();
   const [activeCategory, setActiveCategory] = useState(0);
@@ -808,7 +852,9 @@ export default function App() {
       <FaqSection />
       <Footer />
       <MobileStickyBar onOrderClick={scrollToForm} />
+      <FloatingContactButtons />
       {showSuccess && <SuccessModal onClose={() => setShowSuccess(false)} />}
     </div>
   );
 }
+

@@ -179,7 +179,11 @@ export async function trackInteractionApi(
   if (typeof window === 'undefined') return;
   try {
     const domain = window.location.hostname || 'gasnhaminh.com';
-    const tracking = getTrackingData();
+    let tracking = {};
+    try {
+      tracking = getTrackingData();
+    } catch (_) {}
+
     const payload = {
       event,
       domain,
@@ -193,19 +197,36 @@ export async function trackInteractionApi(
     };
 
     const endpoint = `${API_BASE_URL}/api/v1/tracking/interaction`;
-    if (typeof navigator !== 'undefined' && navigator.sendBeacon) {
-      const blob = new Blob([JSON.stringify(payload)], { type: 'application/json' });
-      navigator.sendBeacon(endpoint, blob);
-    } else {
+    const jsonStr = JSON.stringify(payload);
+
+    // 1. Luôn ưu tiên dùng fetch với keepalive: true và mode: 'cors'
+    // Chuẩn W3C hiện đại nhất, vượt qua CORS sạch sẽ mà không bị trình duyệt chặn ngầm như sendBeacon + JSON Blob
+    try {
       fetch(endpoint, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        body: jsonStr,
         keepalive: true,
-      }).catch(() => {});
+        mode: 'cors',
+      }).catch((fetchErr) => {
+        console.warn('[API] Track interaction fetch failed, trying beacon fallback:', fetchErr);
+        if (typeof navigator !== 'undefined' && navigator.sendBeacon) {
+          const blob = new Blob([jsonStr], { type: 'text/plain' });
+          navigator.sendBeacon(endpoint, blob);
+        }
+      });
+    } catch (e) {
+      if (typeof navigator !== 'undefined' && navigator.sendBeacon) {
+        const blob = new Blob([jsonStr], { type: 'text/plain' });
+        navigator.sendBeacon(endpoint, blob);
+      }
     }
   } catch (err) {
     console.error('[API] Error tracking interaction:', err);
   }
 }
+
 
