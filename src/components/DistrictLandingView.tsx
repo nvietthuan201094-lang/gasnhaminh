@@ -622,35 +622,69 @@ export default function DistrictLandingView({ district }: DistrictLandingViewPro
       </footer>
 
       {/* Mobile Sticky Bar */}
-      <div className="fixed bottom-0 left-0 right-0 z-50 flex sm:hidden h-14 bg-white border-t border-neutral-200 shadow-[0_-2px_10px_rgba(0,0,0,0.12)]">
-        <a
-          href={HOTLINE_TEL}
-          onClick={() => {
-            trackInteractionApi('click_call', {
-              district: district.name,
-              phone: HOTLINE_DISPLAY,
-              notes: `Khách bấm Gọi Hotline từ thanh di động tại ${district.name}`,
-            });
-          }}
-          className="flex-1 flex items-center justify-center gap-2 text-red-600 font-bold text-xs border-r border-neutral-200"
-        >
-          📞 GỌI HOTLINE
-        </a>
-        <a
-          href={ZALO_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          onClick={() => {
-            trackInteractionApi('click_zalo', {
-              district: district.name,
-              phone: HOTLINE_DISPLAY,
-              notes: `Khách bấm Chat Zalo từ thanh di động tại ${district.name}`,
-            });
-          }}
-          className="flex-1 flex items-center justify-center gap-2 bg-[#FF5722] text-white font-bold text-xs"
-        >
-          💬 NHẮN ZALO
-        </a>
+      <div className="fixed bottom-0 left-0 right-0 z-50 sm:hidden bg-white/95 backdrop-blur-md border-t border-neutral-200 shadow-[0_-4px_20px_rgba(0,0,0,0.15)]">
+        {/* Cam kết giao nhanh & an toàn theo quận */}
+        <div className="bg-gradient-to-r from-[#B91C1C] via-[#DC2626] to-[#EF4444] py-1 px-3 text-center flex items-center justify-center gap-2 text-[11px] font-bold text-white tracking-wide">
+          <span className="flex h-2 w-2 relative">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-300 opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-amber-400"></span>
+          </span>
+          <span>⚡ Có mặt sau {district.slaMinutes} phút • Cân đủ ký • Kiểm tra bình an toàn</span>
+        </div>
+
+        {/* Action Buttons */}
+        <div className="flex items-center gap-2 px-3 py-2 max-w-lg mx-auto">
+          <a
+            href={HOTLINE_TEL}
+            onClick={() => {
+              trackInteractionApi('click_call', {
+                district: district.name,
+                phone: HOTLINE_DISPLAY,
+                notes: `Khách bấm Gọi Hotline từ thanh di động tại ${district.name}`,
+              });
+            }}
+            className="flex flex-col items-center justify-center bg-white border border-red-200 text-[#E02424] active:bg-red-50 rounded-xl px-3 py-1.5 min-w-[62px] transition-all shadow-sm"
+            title="Gọi hotline"
+          >
+            <span className="text-sm">📞</span>
+            <span className="text-[10px] font-bold mt-0.5">Gọi ngay</span>
+          </a>
+
+          <a
+            href={ZALO_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => {
+              trackInteractionApi('click_zalo', {
+                district: district.name,
+                phone: HOTLINE_DISPLAY,
+                notes: `Khách bấm Chat Zalo từ thanh di động tại ${district.name}`,
+              });
+            }}
+            className="flex flex-col items-center justify-center bg-red-50 border border-red-200 text-[#E02424] active:bg-red-100 rounded-xl px-3 py-1.5 min-w-[62px] transition-all shadow-sm"
+            title="Chat Zalo"
+          >
+            <span className="text-sm leading-none">💬</span>
+            <span className="text-[10px] font-bold mt-0.5">Zalo</span>
+          </a>
+
+          <button
+            type="button"
+            onClick={() => {
+              const el = document.getElementById('order-form-box');
+              if (el) {
+                el.scrollIntoView({ behavior: 'smooth' });
+                const phoneInput = el.querySelector("input[type='tel']") as HTMLInputElement | null;
+                if (phoneInput) {
+                  setTimeout(() => phoneInput.focus(), 450);
+                }
+              }
+            }}
+            className="flex-1 flex items-center justify-center gap-1.5 bg-gradient-to-r from-[#DC2626] to-[#B91C1C] hover:from-[#B91C1C] hover:to-[#991B1B] active:scale-[0.98] text-white font-black text-xs py-3 px-3 rounded-xl shadow-lg shadow-red-500/30 transition-all uppercase tracking-wide"
+          >
+            <span>🚀 ĐẶT GAS {district.name.toUpperCase()} (15P)</span>
+          </button>
+        </div>
       </div>
     </div>
   );

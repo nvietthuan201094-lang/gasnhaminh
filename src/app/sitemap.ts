@@ -2,6 +2,9 @@ import { MetadataRoute } from 'next';
 import { headers } from 'next/headers';
 import { getAllDistricts } from '@/lib/districts';
 
+// Ngày cập nhật phiên bản nội dung chuẩn SEO cho Google Search Console
+const STATIC_LAST_MODIFIED = new Date('2026-09-14T00:00:00.000Z');
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const headersList = await headers();
   const host = headersList.get('x-forwarded-host') || headersList.get('host') || 'gasnhaminh.com';
@@ -12,7 +15,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const districtUrls: MetadataRoute.Sitemap = districts.map((d) => ({
     url: `${baseUrl}/giao-gas/${d.slug}`,
-    lastModified: new Date(),
+    lastModified: STATIC_LAST_MODIFIED,
     changeFrequency: 'daily',
     priority: 0.9,
   }));
@@ -20,7 +23,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   return [
     {
       url: baseUrl,
-      lastModified: new Date(),
+      lastModified: STATIC_LAST_MODIFIED,
       changeFrequency: 'daily',
       priority: 1.0,
     },
