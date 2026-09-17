@@ -418,7 +418,7 @@ export const DISTRICTS_DATA: DistrictInfo[] = [
     popularWards: ["Phường Gò Vấp (mới)", "Phường An Hội Đông (mới)", "Phường Thông Tây Hội (mới)", "Phường Hạnh Thông (mới)", "Phường An Nhơn (mới)", "Phường An Hội Tây (mới)", "Phường 1", "Phường 3", "Phường 5", "Phường 8", "Phường 10", "Phường 11", "Phường 15", "Phường 16"],
     newWards: ["Phường Gò Vấp", "Phường An Hội Đông", "Phường Thông Tây Hội", "Phường Hạnh Thông", "Phường An Nhơn", "Phường An Hội Tây"],
     neighboringSlugs: ["binh-thanh", "phu-nhuan", "quan-12", "tan-binh"],
-    description: "Đại lý Gas Nhà Mình Gò Vấp phục vụ hỏa tốc các phường mới Gò Vấp, An Hội Đông, Thông Tây Hội, Hạnh Thông, An Nhơn, An Hội Tây. Cam kết gas đủ ký 100%.",
+    description: "Đại lý Gas Nhà Mình Gò Vấp phục vụ hỏa tốc các phường mới Gò Vấp, An Hội Đông, Thông Tây Hội, Hạnh Thông, An Nhơn, An Hội Tây. Cam kết bình chính hãng nguyên tem chống giả.",
   },
   {
     slug: "phu-nhuan",
