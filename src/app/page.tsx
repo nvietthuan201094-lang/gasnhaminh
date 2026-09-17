@@ -354,21 +354,6 @@ const DEFAULT_PRICING_TABS: TabItem[] = [
       { id: 12, slug: "petrolimex-48kg", name: "Petrolimex 48kg", tag: "Nhà máy, Xưởng", tagColor: "bg-[#1A56DB]", exchangePrice: "Liên hệ báo giá", newPrice: null, img: BASE + "220x245x2/images-(32)-9513.jpg" },
     ],
   },
-  {
-    label: "Bộ Bình Gas",
-    products: [
-      { id: 13, slug: "bo-binh-xam-12kg", name: "Bộ Bình Xám + Van + Dây Gas", tag: "Đầy đủ phụ kiện", tagColor: "bg-[#FF5722]", exchangePrice: "660.000đ", newPrice: null, img: BASE + "220x245x2/gasviet-1-7016-300x480-667.png" },
-      { id: 14, slug: "bo-binh-do-12kg", name: "Bộ Bình Đỏ + Van Tự Ngắt + Dây", tag: "An toàn cao", tagColor: "bg-[#E02424]", exchangePrice: "680.000đ", newPrice: null, img: BASE + "220x245x2/tai-xuong-(30)-58.jpg" },
-      { id: 15, slug: "bo-binh-petrolimex-12kg", name: "Bộ Bình Petrolimex + Van + Dây", tag: "Chính hãng", tagColor: "bg-[#1A56DB]", exchangePrice: "720.000đ", newPrice: null, img: BASE + "220x245x2/gasviet-1-7016-300x480-667.png" },
-    ],
-  },
-  {
-    label: "Bộ Bình Gas Bếp Gas",
-    products: [
-      { id: 16, slug: "bo-binh-xam-bep-don", name: "Bình Xám + Bếp Gas Đơn Mặt Kính", tag: "Combo tiết kiệm", tagColor: "bg-[#FF5722]", exchangePrice: "1.200.000đ", newPrice: null, img: BASE + "220x245x2/gasviet-1-7016-300x480-667.png" },
-      { id: 17, slug: "bo-binh-do-bep-don", name: "Bình Đỏ + Bếp Gas + Van + Dây", tag: "Trọn gói", tagColor: "bg-[#0E9F6E]", exchangePrice: "1.450.000đ", newPrice: null, img: BASE + "220x245x2/tai-xuong-(30)-58.jpg" },
-    ],
-  },
 ];
 
 let productsPromise: Promise<any[]> | null = null;
@@ -387,9 +372,7 @@ function usePricingTabs() {
       if (data && data.length > 0) {
         const catMap: Record<string, any[]> = {
           'gas_dan_dung': [],
-          'gas_cong_nghiep': [],
-          'bo_binh_gas': [],
-          'bo_binh_gas_bep_gas': []
+          'gas_cong_nghiep': []
         };
         data.forEach(p => {
           if (p.landingpageCategory && catMap[p.landingpageCategory]) {
@@ -408,9 +391,7 @@ function usePricingTabs() {
         
         setTabs([
           { label: "Gas Dân Dụng", products: catMap['gas_dan_dung'].length > 0 ? catMap['gas_dan_dung'] : DEFAULT_PRICING_TABS[0].products },
-          { label: "Gas Công Nghiệp", products: catMap['gas_cong_nghiep'].length > 0 ? catMap['gas_cong_nghiep'] : DEFAULT_PRICING_TABS[1].products },
-          { label: "Bộ Bình Gas", products: catMap['bo_binh_gas'].length > 0 ? catMap['bo_binh_gas'] : DEFAULT_PRICING_TABS[2].products },
-          { label: "Bộ Bình Gas Bếp Gas", products: catMap['bo_binh_gas_bep_gas'].length > 0 ? catMap['bo_binh_gas_bep_gas'] : DEFAULT_PRICING_TABS[3].products }
+          { label: "Gas Công Nghiệp", products: catMap['gas_cong_nghiep'].length > 0 ? catMap['gas_cong_nghiep'] : DEFAULT_PRICING_TABS[1].products }
         ]);
       }
     }).catch(console.error);
