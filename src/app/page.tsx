@@ -916,19 +916,20 @@ function Footer() {
   return (
     <footer className="bg-[#0D1117] text-white py-12 pb-20 md:pb-12">
       <div className="max-w-[1440px] mx-auto px-4 md:px-8 lg:px-20">
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-10">
+        <div className="grid md:grid-cols-3 gap-8 mb-10">
           <div>
             <div className="text-[#E02424] font-black text-2xl mb-3">🔥 GAS NHÀ MÌNH</div>
             <p className="text-white/60 text-sm leading-relaxed mb-4">
-              Kênh đặt gas chính hãng uy tín tại TP.HCM. Giao hỏa tốc 15-20 phút, nguyên tem chống giả, kiểm định an toàn PCCC.
+              Kênh đặt gas chính hãng uy tín tại TP.HCM. Giao hỏa tốc 15–20 phút, nguyên tem chống giả, hỗ trợ kiểm tra an toàn tận nơi.
             </p>
-            <div className="space-y-1.5 text-xs text-white/70">
-              <div>☎️ Hotline: <a href={HOTLINE_TEL} className="text-[#FF5722] font-bold">{HOTLINE}</a></div>
+            <div className="space-y-2 text-xs text-white/70">
+              <div>☎️ Hotline: <a href={HOTLINE_TEL} className="text-[#FF5722] font-bold text-sm">{HOTLINE}</a></div>
               <div>🕐 Hoạt động: 24/7 kể cả Lễ & Tết</div>
+              <div>⚡ Phục vụ: Giao hỏa tốc tất cả các quận huyện TP.HCM</div>
             </div>
           </div>
 
-          <div className="lg:col-span-2">
+          <div className="md:col-span-2">
             <h4 className="font-bold text-white mb-3 text-sm uppercase tracking-wider text-[#FF5722]">Hệ thống 5 Cửa Hàng & Trạm Kho Trực Chiến</h4>
             <div className="grid sm:grid-cols-2 gap-3 text-xs text-white/70">
               <div className="bg-white/5 p-3 rounded-xl border border-white/10">
@@ -962,18 +963,6 @@ function Footer() {
                 <div>14R Đường 32B Cư Xá Bình Phú, Phường 10, Quận 6</div>
               </div>
             </div>
-          </div>
-
-          <div>
-            <h4 className="font-bold text-white mb-3 text-sm uppercase tracking-wider text-[#FF5722]">Tiêu Chuẩn & Chứng Nhận</h4>
-            <div className="flex gap-2 flex-wrap mb-4">
-              {["ĐKKD Khí Dầu Mỏ LPG", "Chứng Nhận PCCC", "Đo Lường Chuẩn 12kg", "Bộ Công Thương"].map((c) => (
-                <span key={c} className="bg-white/10 border border-white/20 rounded-lg px-2.5 py-1 text-[11px] text-white/80">{c}</span>
-              ))}
-            </div>
-            <p className="text-[11px] text-white/50 leading-relaxed">
-              Mạng lưới cửa hàng được cấp phép kinh doanh khí LPG và chứng nhận an toàn PCCC bởi cơ quan chức năng có thẩm quyền.
-            </p>
           </div>
         </div>
 
