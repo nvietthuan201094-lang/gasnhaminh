@@ -124,16 +124,19 @@ function MobileStickyBar({ onOrderClick }: { onOrderClick: () => void }) {
 
 function WatermarkOverlay({ size = "md" }: { size?: "sm" | "md" | "lg" }) {
   const sizeClasses = {
-    sm: "w-28 max-w-[120px]",
-    md: "w-36 max-w-[150px]",
-    lg: "w-44 max-w-[180px]",
+    sm: "w-32 max-w-[130px]",
+    md: "w-44 max-w-[185px]",
+    lg: "w-56 max-w-[240px]",
   };
   return (
     <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none z-10 p-2">
       <img
         src="/watermark-logo.png"
         alt="goodGas STORE"
-        className={`${sizeClasses[size]} object-contain opacity-25 -rotate-12 mix-blend-multiply transition-opacity duration-300 group-hover:opacity-35`}
+        className={`${sizeClasses[size]} object-contain opacity-70 group-hover:opacity-90 transition-all duration-300`}
+        style={{
+          filter: "drop-shadow(0 0 6px rgba(255,255,255,0.95)) drop-shadow(0 0 12px rgba(255,255,255,0.8)) drop-shadow(0 2px 4px rgba(0,0,0,0.15))",
+        }}
         draggable={false}
       />
     </div>
