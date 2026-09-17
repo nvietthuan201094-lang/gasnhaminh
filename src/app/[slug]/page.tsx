@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import { notFound, redirect } from 'next/navigation';
+import { notFound, permanentRedirect } from 'next/navigation';
 import { getProductBySlug } from '@/lib/api';
 import { getDistrictBySlug, BRAND_NAME } from '@/lib/districts';
 import ClientCheckoutWrapper from './ClientCheckoutWrapper';
@@ -19,6 +19,10 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
     return {
       metadataBase: new URL(siteUrl),
       title: `Giao Gas ${district.name} Siêu Tốc 15 Phút | ${BRAND_NAME}`,
+      robots: {
+        index: false,
+        follow: true,
+      },
       alternates: {
         canonical: `${siteUrl}/giao-gas/${district.slug}`,
       },
@@ -30,6 +34,10 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
   if (!product) {
     return {
       title: `Sản phẩm không tồn tại | ${BRAND_NAME}`,
+      robots: {
+        index: false,
+        follow: false,
+      },
     };
   }
 
@@ -54,10 +62,10 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
 export default async function ProductPage({ params }: ProductPageProps) {
   const { slug } = await params;
 
-  // Nếu slug là đường dẫn quận (ví dụ /giao-gas-quan-7 hoặc /quan-7), chuyển hướng 308/301 sang /giao-gas/quan-7 chuẩn SEO
+  // Nếu slug là đường dẫn quận (ví dụ /giao-gas-quan-7 hoặc /quan-7), chuyển hướng 308 Permanent Redirect sang /giao-gas/quan-7 chuẩn SEO
   const district = getDistrictBySlug(slug);
   if (district) {
-    redirect(`/giao-gas/${district.slug}`);
+    permanentRedirect(`/giao-gas/${district.slug}`);
   }
 
   const product = await getProductBySlug(slug);
