@@ -216,8 +216,8 @@ export default function DistrictLandingView({ district }: DistrictLandingViewPro
                 <div className="bg-white p-3.5 rounded-xl border border-neutral-200 shadow-sm flex items-center gap-3">
                   <span className="text-2xl">🛡️</span>
                   <div>
-                    <div className="font-bold text-xs text-neutral-900">Bảo Hiểm 10 Tỷ</div>
-                    <div className="text-[11px] text-neutral-500">Chính hãng dầu khí</div>
+                    <div className="font-bold text-xs text-neutral-900">An Toàn PCCC</div>
+                    <div className="text-[11px] text-neutral-500">Kiểm tra rò rỉ miễn phí</div>
                   </div>
                 </div>
                 <div className="bg-white p-3.5 rounded-xl border border-neutral-200 shadow-sm flex items-center gap-3 col-span-2 sm:col-span-1">
@@ -571,10 +571,10 @@ export default function DistrictLandingView({ district }: DistrictLandingViewPro
 
             <div className="bg-white p-5 rounded-xl border border-neutral-200 shadow-sm">
               <h3 className="font-bold text-sm text-neutral-900 mb-2">
-                4. Đổi bình gas có được bảo hành van dây và bảo hiểm an toàn không?
+                4. Đổi bình gas có được hỗ trợ kiểm tra van dây và an toàn không?
               </h3>
               <p className="text-xs text-neutral-600 leading-relaxed">
-                100% bình gas phân phối tại {district.name} có bảo hiểm cháy nổ chính hãng dầu khí lên đến 10 tỷ đồng. Kỹ thuật viên kiểm tra rò rỉ gas bằng thiết bị dò khí chuyên dụng miễn phí trước khi bàn giao.
+                100% bình gas phân phối tại {district.name} là hàng chính hãng có tem kiểm định an toàn của nhà sản xuất. Kỹ thuật viên giao gas hỗ trợ kiểm tra rò rỉ gas bằng bọt xà phòng hoặc thiết bị dò khí chuyên dụng, thay gioăng cao su van miễn phí trước khi bàn giao.
               </p>
             </div>
           </div>

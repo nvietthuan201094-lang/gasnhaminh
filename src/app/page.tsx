@@ -201,7 +201,7 @@ function HeroSection({ tabs, activeCategory, setActiveCategory, selectedProduct,
             </span>
           </h1>
           <p className="text-[#6B7280] text-base md:text-lg mb-6 leading-relaxed">
-            Bình gas chính hãng 100%, đủ ký, có bảo hiểm an toàn. Miễn phí kiểm tra dây van và vệ sinh bếp.
+            Bình gas chính hãng 100%, nguyên tem chống giả, kiểm định an toàn PCCC. Miễn phí kiểm tra dây van và vệ sinh bếp.
           </p>
           <ul className="space-y-3 mb-8">
             {[
@@ -707,8 +707,8 @@ function FaqSection() {
       a: "Bình gas 12kg gia đình đã được chiết nạp tự động chuẩn xác đủ 12kg ruột tại nhà máy của hãng và niêm phong màng co nhiệt chống giả. Trọng lượng vỏ bình được dập nổi rõ ràng trên quai xách (ví dụ: vỏ 13.5kg + 12kg nước gas = 25.5kg). Để đảm bảo giao hỏa tốc 15 phút, nhân viên không mang theo cân cồng kềnh mà sẽ cùng quý khách kiểm tra nguyên vẹn tem màng co, hạn kiểm định vỏ bình và thử rò rỉ khí gas an toàn. Nếu gia đình có sẵn cân tại nhà, quý khách hoàn toàn có thể kiểm tra đối chứng trước khi nhận."
     },
     {
-      q: "Đổi bình gas có được bảo hành và bảo hiểm an toàn không?",
-      a: "Tất cả bình gas do Gas Nhà Mình cung cấp đều có bảo hiểm trách nhiệm cháy nổ lên đến 10 tỷ đồng. Kỹ thuật viên kiểm tra rò rỉ khí gas bằng máy chuyên dụng và vệ sinh bếp miễn phí."
+      q: "Quy trình kiểm tra an toàn khi đổi bình gas như thế nào?",
+      a: "Mọi bình gas phân phối qua Gas Nhà Mình đều là hàng chính hãng từ nhà sản xuất uy tín, có tem kiểm định an toàn PCCC và nguyên màng co niêm phong. Khi giao gas, kỹ thuật viên sẽ hỗ trợ kiểm tra độ kín của van dây, kiểm tra rò rỉ khí gas bằng máy dò/dung dịch chuyên dụng và vệ sinh bếp miễn phí trước khi bàn giao."
     }
   ];
 
@@ -744,7 +744,7 @@ function Footer() {
         <div className="grid md:grid-cols-3 gap-8 mb-8">
           <div>
             <div className="text-[#E02424] font-black text-2xl mb-2">🔥 GAS NHÀ MÌNH</div>
-            <p className="text-white/60 text-sm leading-relaxed">Chuỗi phân phối gas chính hãng uy tín tại TP.HCM. Giao hỏa tốc 24/7, nguyên tem chống giả, bảo hiểm 10 tỷ.</p>
+            <p className="text-white/60 text-sm leading-relaxed">Kênh đặt gas chính hãng uy tín tại TP.HCM. Giao hỏa tốc 24/7, nguyên tem chống giả, hỗ trợ kiểm tra an toàn tận nơi.</p>
           </div>
           <div>
             <h4 className="font-bold text-white mb-3">Liên hệ</h4>

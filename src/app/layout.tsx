@@ -218,10 +218,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                     },
                     {
                       "@type": "Question",
-                      "name": "Bình gas tại Gas Nhà Mình có bảo hiểm không?",
+                      "name": "Quy trình kiểm tra an toàn khi đổi bình gas như thế nào?",
                       "acceptedAnswer": {
                         "@type": "Answer",
-                        "text": "Tất cả bình gas tại Gas Nhà Mình đều là hàng chính hãng 100%, có tem niêm phong màng co chống giả và được bảo hiểm trách nhiệm cháy nổ lên đến 10 tỷ đồng."
+                        "text": "Mọi bình gas phân phối qua Gas Nhà Mình đều là hàng chính hãng từ nhà sản xuất uy tín, có tem kiểm định an toàn PCCC và nguyên màng co niêm phong. Khi giao gas, kỹ thuật viên sẽ hỗ trợ kiểm tra độ kín của van dây, kiểm tra rò rỉ khí gas bằng máy dò/dung dịch chuyên dụng và vệ sinh bếp miễn phí trước khi bàn giao."
                       }
                     }
                   ]

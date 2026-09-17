@@ -82,7 +82,7 @@ export const SEO_PRODUCTS: SeoProductItem[] = [
     newPriceVal: 735000,
     image: "https://crm.posplus.vn/api/v1/public_image/product.template/172/image_1024",
     tag: "Chính hãng 100%",
-    desc: "Bình V-Gas đỏ 12kg chịu áp lực cao, vỏ bình sơn tĩnh điện chống rỉ sét, bảo hiểm cháy nổ 10 tỷ.",
+    desc: "Bình V-Gas đỏ 12kg chịu áp lực cao, vỏ bình sơn tĩnh điện chống rỉ sét, kiểm định an toàn PCCC tiêu chuẩn.",
   },
   {
     id: "gas-v-gas-vang-12kg",
@@ -255,7 +255,7 @@ export const DISTRICTS_DATA: DistrictInfo[] = [
     isInnerCity: true,
     popularWards: ["Thảo Điền", "An Phú", "An Khánh", "Bình An", "Bình Trưng Đông", "Bình Trưng Tây", "Cát Lái", "Thạnh Mỹ Lợi"],
     neighboringSlugs: ["binh-thanh", "quan-1", "quan-7", "quan-9", "thu-duc"],
-    description: "Giao gas Quận 2 từ hệ thống Gas Nhà Mình tại Thảo Điền, An Phú, chung cư cao cấp. Bình gas chính hãng, bảo hiểm an toàn 10 tỷ, kiểm tra van dây an toàn tận nơi.",
+    description: "Giao gas Quận 2 từ hệ thống Gas Nhà Mình tại Thảo Điền, An Phú, chung cư cao cấp. Bình gas chính hãng nguyên tem, kiểm định PCCC, hỗ trợ kiểm tra van dây an toàn tận nơi.",
   },
   {
     slug: "quan-3",
@@ -471,7 +471,7 @@ export const DISTRICTS_DATA: DistrictInfo[] = [
     isInnerCity: true,
     popularWards: ["An Lạc", "An Lạc A", "Bình Hưng Hòa", "Bình Hưng Hòa A", "Bình Hưng Hòa B", "Bình Trị Đông", "Bình Trị Đông A", "Bình Trị Đông B", "Tân Tạo"],
     neighboringSlugs: ["quan-6", "tan-phu", "binh-chanh", "quan-8"],
-    description: "Gas Nhà Mình Bình Tân giao hàng nhanh khu Tên Lửa, Lê Văn Quới, Quốc lộ 1A... Đầy đủ hóa đơn, tem chống giả và bảo hiểm an toàn toàn diện.",
+    description: "Gas Nhà Mình Bình Tân giao hàng nhanh khu Tên Lửa, Lê Văn Quới, Quốc lộ 1A... Đầy đủ hóa đơn, tem chống giả, kiểm tra an toàn miễn phí.",
   },
   {
     slug: "thu-duc",
@@ -497,7 +497,7 @@ export const DISTRICTS_DATA: DistrictInfo[] = [
     hotline: HOTLINE_DISPLAY,
     popularWards: ["Bình Hưng", "Phong Phú", "Vĩnh Lộc A", "Vĩnh Lộc B", "Tân Kiên", "An Phú Tây", "Đa Phước", "Quy Đức"],
     neighboringSlugs: ["quan-8", "binh-tan", "nha-be"],
-    description: "Gas Nhà Mình Bình Chánh phục vụ Bình Hưng, Vĩnh Lộc, Quốc lộ 50. Bình gas chính hãng, bảo hiểm an toàn đầy đủ.",
+    description: "Gas Nhà Mình Bình Chánh phục vụ Bình Hưng, Vĩnh Lộc, Quốc lộ 50. Bình gas chính hãng, nguyên tem kiểm định an toàn PCCC.",
   },
   {
     slug: "nha-be",
