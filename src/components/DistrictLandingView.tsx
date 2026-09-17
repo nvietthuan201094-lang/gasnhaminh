@@ -34,6 +34,10 @@ function WatermarkOverlay({ size = "md" }: { size?: "sm" | "md" | "lg" }) {
   );
 }
 
+interface DistrictLandingViewProps {
+  district: DistrictInfo;
+}
+
 export default function DistrictLandingView({ district }: DistrictLandingViewProps) {
   const [productsList, setProductsList] = useState<SeoProductItem[]>(SEO_PRODUCTS);
   const [selectedProduct, setSelectedProduct] = useState<SeoProductItem>(SEO_PRODUCTS[0]);
