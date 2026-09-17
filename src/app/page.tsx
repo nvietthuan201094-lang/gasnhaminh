@@ -718,7 +718,7 @@ const STORES_LIST = [
   {
     id: 3,
     branch: "Chi nhánh Hóc Môn 1",
-    name: "Cửa Hàng Gas Đông Phương – Hóc Môn",
+    name: "Trạm Gas Bà Điểm – Hóc Môn",
     address: "64A Nguyễn Thị Hai, Xã Bà Điểm, Huyện Hóc Môn, TP.HCM",
     coverage: "Bà Điểm Hóc Môn, Quận 12 (An Sương, Tân Thới Nhất), Bình Tân",
     sla: "15 - 25 phút",
@@ -729,7 +729,7 @@ const STORES_LIST = [
   {
     id: 4,
     branch: "Chi nhánh Hóc Môn 2",
-    name: "Cửa Hàng Gas Nhật Tài – Hóc Môn",
+    name: "Trạm Gas Tân Hiệp – Hóc Môn",
     address: "111/7H Ấp Thới Tây 2, Tân Hiệp 18, Xã Tân Hiệp, Huyện Hóc Môn, TP.HCM",
     coverage: "Tân Hiệp, Thị trấn Hóc Môn, Thới Tam Thôn, Củ Chi giáp ranh",
     sla: "20 - 25 phút",
@@ -946,13 +946,13 @@ function Footer() {
               </div>
               <div className="bg-white/5 p-3 rounded-xl border border-white/10">
                 <div className="font-bold text-white mb-1 flex items-center gap-1.5">
-                  <span className="text-[#FF5722]">📍</span> Chi nhánh Bà Điểm (Đông Phương)
+                  <span className="text-[#FF5722]">📍</span> Chi nhánh Bà Điểm
                 </div>
                 <div>64A Nguyễn Thị Hai, Xã Bà Điểm, Hóc Môn</div>
               </div>
               <div className="bg-white/5 p-3 rounded-xl border border-white/10">
                 <div className="font-bold text-white mb-1 flex items-center gap-1.5">
-                  <span className="text-[#FF5722]">📍</span> Chi nhánh Tân Hiệp (Nhật Tài)
+                  <span className="text-[#FF5722]">📍</span> Chi nhánh Tân Hiệp
                 </div>
                 <div>111/7H Ấp Thới Tây 2, Tân Hiệp 18, Hóc Môn</div>
               </div>

@@ -214,7 +214,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                     },
                     {
                       "@type": "LocalBusiness",
-                      "name": "Gas Nhà Mình - Chi nhánh Bà Điểm (Đông Phương)",
+                      "name": "Gas Nhà Mình - Chi nhánh Bà Điểm",
                       "telephone": "0888 113 831",
                       "address": {
                         "@type": "PostalAddress",
@@ -226,7 +226,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                     },
                     {
                       "@type": "LocalBusiness",
-                      "name": "Gas Nhà Mình - Chi nhánh Tân Hiệp (Nhật Tài)",
+                      "name": "Gas Nhà Mình - Chi nhánh Tân Hiệp",
                       "telephone": "0888 113 831",
                       "address": {
                         "@type": "PostalAddress",
