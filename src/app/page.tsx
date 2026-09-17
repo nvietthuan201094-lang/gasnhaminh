@@ -83,7 +83,7 @@ function MobileStickyBar({ onOrderClick }: { onOrderClick: () => void }) {
           <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-300 opacity-75"></span>
           <span className="relative inline-flex rounded-full h-2 w-2 bg-amber-400"></span>
         </span>
-        <span>⚡ Giao trong 15 phút • Cân đủ ký • Kiểm tra bình an toàn</span>
+        <span>⚡ Giao trong 15 phút • Nguyên tem chính hãng • Kiểm tra an toàn miễn phí</span>
       </div>
 
       {/* Cụm nút hành động tối ưu chuyển đổi */}
@@ -205,7 +205,7 @@ function HeroSection({ tabs, activeCategory, setActiveCategory, selectedProduct,
           </p>
           <ul className="space-y-3 mb-8">
             {[
-              "Đủ trọng lượng – Cân đối chứng ngay khi nhận",
+              "Chuẩn đủ 12kg ruột – Chiết nạp tự động, nguyên tem niêm phong chống giả",
               "Tem niêm phong & màng co chống hàng giả",
               "Kỹ thuật viên kiểm tra rò rỉ gas bằng bọt xà phòng/máy đo chuyên dụng",
             ].map((item) => (
@@ -474,7 +474,7 @@ function ProcessSection() {
   const steps = [
     { num: "01", icon: "📋", title: "Tiếp nhận & Điều phối", desc: "Nhận đơn online/hotline, định vị kho gas gần nhà bạn nhất để xuất đơn." },
     { num: "02", icon: "🚚", title: "Giao hỏa tốc 15 phút", desc: "Giao nhanh bằng xe chuyên dụng, bình gas luôn được chằng buộc an toàn." },
-    { num: "03", icon: "⚖️", title: "Lắp đặt & Cân ký", desc: "Nhân viên cân bình tại chỗ đối chứng, lắp đặt van dây đúng tiêu chuẩn PCCC." },
+    { num: "03", icon: "🔧", title: "Lắp đặt & Kiểm tra tem", desc: "Kiểm tra nguyên tem niêm phong màng co chính hãng, lắp đặt van dây đúng tiêu chuẩn PCCC." },
     { num: "04", icon: "✅", title: "Kiểm tra rò rỉ & Bàn giao", desc: "Dùng máy kiểm tra rò rỉ tia khí, dán tem bảo hành và ghi phiếu giao nhận." },
   ];
 
@@ -589,9 +589,9 @@ function ReviewCarousel({ reviews }: { reviews: { name: string; location: string
 function TrustSection() {
   const badges = [
     {
-      icon: "⚖️",
-      title: "Cân Đúng Ký Tại Nhà",
-      desc: "Nhân viên mang theo cân đối chứng trực tiếp khi giao gas. Cam kết đủ 100% trọng lượng nước gas theo tiêu chuẩn.",
+      icon: "🏷️",
+      title: "Nguyên Tem Niêm Phong & Đủ 12kg Ruột",
+      desc: "Bình gas được chiết nạp tự động chuẩn xác đủ 12kg ruột tại nhà máy, nguyên màng co chống giả và dập nổi trọng lượng vỏ rõ ràng trên quai xách.",
     },
     {
       icon: "🛡️",
@@ -611,7 +611,7 @@ function TrustSection() {
   ];
 
   const reviews = [
-    { name: "Chị Lan Phương", location: "Chung cư Sunrise City, Quận 7", avatar: "L", stars: 5, tag: "Hộ gia đình", text: "Giao rất nhanh, nhân viên đem cân tận nơi cho xem đủ ký rồi mới gắn van. Rất yên tâm khi dùng." },
+    { name: "Chị Lan Phương", location: "Chung cư Sunrise City, Quận 7", avatar: "L", stars: 5, tag: "Hộ gia đình", text: "Giao rất nhanh, bình còn nguyên tem niêm phong và màng co của hãng, nhân viên kiểm tra van dây tỉ mỉ rồi mới lắp. Rất yên tâm!" },
     { name: "Anh Tuấn Hùng", location: "Quán Cơm Niêu, P.12, Gò Vấp", avatar: "T", stars: 5, tag: "Chủ quán ăn", text: "Quán mình bán ăn trưa hay hết gas đột xuất, gọi bên này tầm 15 phút là có thợ tới thay liền, phục vụ nhiệt tình." },
     { name: "Bác Thanh Bình", location: "Đường Phan Xích Long, Phú Nhuận", avatar: "B", stars: 5, tag: "Khách hàng cá nhân", text: "Thợ giao gas có kiểm tra lại dây dẫn gas cũ của nhà mình bị nứt và báo để thay kịp thời, tác phong rất cẩn thận." },
     { name: "Chị Mai Hương", location: "Chung cư Vinhomes, Bình Thạnh", avatar: "M", stars: 5, tag: "Hộ gia đình", text: "Đặt lúc 11 giờ đêm vẫn giao được, thật sự rất tiện. Bình có tem niêm phong đầy đủ, nhân viên lịch sự." },
@@ -703,8 +703,8 @@ function FaqSection() {
       a: "Chúng tôi cung cấp đầy đủ bình gas chính hãng 100%: V-Gas (xám, đỏ, vàng, PE, Shell), Petrolimex (van đứng, van chụp shell), Tuấn Khang 12kg và bình gas bò 45kg chuyên dụng cho quán ăn, nhà hàng."
     },
     {
-      q: "Tôi có được cân đối chứng kiểm tra trọng lượng bình gas không?",
-      a: "Hoàn toàn được! 100% nhân viên giao gas đều mang theo cân điện tử đối chứng. Khách hàng kiểm tra đủ 12kg ruột gas thực tế mới thanh toán tiền."
+      q: "Tôi có được cân đối chứng kiểm tra trọng lượng bình gas không? Làm sao biết bình đủ 12kg ruột?",
+      a: "Bình gas 12kg gia đình đã được chiết nạp tự động chuẩn xác đủ 12kg ruột tại nhà máy của hãng và niêm phong màng co nhiệt chống giả. Trọng lượng vỏ bình được dập nổi rõ ràng trên quai xách (ví dụ: vỏ 13.5kg + 12kg nước gas = 25.5kg). Để đảm bảo giao hỏa tốc 15 phút, nhân viên không mang theo cân cồng kềnh mà sẽ cùng quý khách kiểm tra nguyên vẹn tem màng co, hạn kiểm định vỏ bình và thử rò rỉ khí gas an toàn. Nếu gia đình có sẵn cân tại nhà, quý khách hoàn toàn có thể kiểm tra đối chứng trước khi nhận."
     },
     {
       q: "Đổi bình gas có được bảo hành và bảo hiểm an toàn không?",
@@ -744,7 +744,7 @@ function Footer() {
         <div className="grid md:grid-cols-3 gap-8 mb-8">
           <div>
             <div className="text-[#E02424] font-black text-2xl mb-2">🔥 GAS NHÀ MÌNH</div>
-            <p className="text-white/60 text-sm leading-relaxed">Chuỗi phân phối gas chính hãng uy tín tại TP.HCM. Giao hỏa tốc 24/7, cân đủ ký, có bảo hiểm.</p>
+            <p className="text-white/60 text-sm leading-relaxed">Chuỗi phân phối gas chính hãng uy tín tại TP.HCM. Giao hỏa tốc 24/7, nguyên tem chống giả, bảo hiểm 10 tỷ.</p>
           </div>
           <div>
             <h4 className="font-bold text-white mb-3">Liên hệ</h4>

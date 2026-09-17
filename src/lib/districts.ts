@@ -66,7 +66,7 @@ export const SEO_PRODUCTS: SeoProductItem[] = [
     newPriceVal: 735000,
     image: "https://crm.posplus.vn/api/v1/public_image/product.template/168/image_1024",
     tag: "Bán chạy nhất 🔥",
-    desc: "Bình V-Gas xám 12kg ngọn lửa xanh tiết kiệm, vỏ bình chuẩn PCCC, cân đối chứng tại nhà khi giao.",
+    desc: "Bình V-Gas xám 12kg ngọn lửa xanh tiết kiệm, vỏ bình chuẩn PCCC, nguyên tem niêm phong chính hãng khi giao.",
   },
   {
     id: "gas-v-gas-do-12kg",
@@ -242,7 +242,7 @@ export const DISTRICTS_DATA: DistrictInfo[] = [
     isInnerCity: true,
     popularWards: ["Bến Nghé", "Bến Thành", "Cô Giang", "Cầu Kho", "Cầu Ông Lãnh", "Đa Kao", "Nguyễn Cư Trinh", "Nguyễn Thái Bình", "Phạm Ngũ Lão", "Tân Định"],
     neighboringSlugs: ["quan-3", "quan-4", "binh-thanh", "phu-nhuan"],
-    description: "Đại lý Gas Nhà Mình Quận 1 giao hàng hỏa tốc trong 15 phút. Bình gas chính hãng V-Gas, Petrolimex, Tuấn Khang, bình gas bò 45kg. Cân đối chứng đủ ký tại nhà, kiểm tra van dây an toàn miễn phí.",
+    description: "Đại lý Gas Nhà Mình Quận 1 giao hàng hỏa tốc trong 15 phút. Bình gas chính hãng V-Gas, Petrolimex, Tuấn Khang, bình gas bò 45kg. Nguyên tem niêm phong, kiểm tra van dây an toàn miễn phí.",
   },
   {
     slug: "quan-2",
@@ -255,7 +255,7 @@ export const DISTRICTS_DATA: DistrictInfo[] = [
     isInnerCity: true,
     popularWards: ["Thảo Điền", "An Phú", "An Khánh", "Bình An", "Bình Trưng Đông", "Bình Trưng Tây", "Cát Lái", "Thạnh Mỹ Lợi"],
     neighboringSlugs: ["binh-thanh", "quan-1", "quan-7", "quan-9", "thu-duc"],
-    description: "Giao gas Quận 2 từ hệ thống Gas Nhà Mình tại Thảo Điền, An Phú, chung cư cao cấp. Bình gas chính hãng, bảo hiểm an toàn 10 tỷ, thợ kỹ thuật cân đủ ký tận nơi.",
+    description: "Giao gas Quận 2 từ hệ thống Gas Nhà Mình tại Thảo Điền, An Phú, chung cư cao cấp. Bình gas chính hãng, bảo hiểm an toàn 10 tỷ, kiểm tra van dây an toàn tận nơi.",
   },
   {
     slug: "quan-3",
@@ -311,7 +311,7 @@ export const DISTRICTS_DATA: DistrictInfo[] = [
     popularWards: ["Phường 1 (mới)", "Phường 2 (mới)", "Phường 9 (mới)", "Phường 14 (mới)", "Phường 10", "Phường 11", "Phường 12", "Bình Phú", "Phú Lâm"],
     newWards: ["Phường 1 (nhập P.3, P.4)", "Phường 2 (nhập P.6)", "Phường 9 (nhập P.5)", "Phường 14 (nhập P.13)"],
     neighboringSlugs: ["quan-5", "quan-8", "binh-tan"],
-    description: "Giao gas Quận 6 siêu tốc từ Gas Nhà Mình. Kỹ thuật viên lành nghề, kiểm tra dây van tỉ mỉ, cam kết bình gas cân đủ ký 100%.",
+    description: "Giao gas Quận 6 siêu tốc từ Gas Nhà Mình. Kỹ thuật viên lành nghề, kiểm tra dây van tỉ mỉ, cam kết bình gas chính hãng nguyên tem 100%.",
   },
   {
     slug: "quan-7",
@@ -324,7 +324,7 @@ export const DISTRICTS_DATA: DistrictInfo[] = [
     isInnerCity: true,
     popularWards: ["Tân Phong", "Tân Phú", "Phú Mỹ", "Tân Quy", "Tân Kiểng", "Bình Thuận", "Tân Thuận Đông", "Tân Thuận Tây", "Phú Thuận"],
     neighboringSlugs: ["quan-4", "quan-8", "nha-be", "binh-chanh", "quan-2"],
-    description: "Gas Nhà Mình Quận 7 phục vụ khu Phú Mỹ Hưng, Sky Garden, Him Lam... Giao gas trong 15 phút, thợ mang cân điện tử đến tận cửa nhà.",
+    description: "Gas Nhà Mình Quận 7 phục vụ khu Phú Mỹ Hưng, Sky Garden, Him Lam... Giao gas trong 15 phút, bình nguyên tem niêm phong, kiểm tra rò rỉ gas miễn phí.",
   },
   {
     slug: "quan-8",
@@ -390,7 +390,7 @@ export const DISTRICTS_DATA: DistrictInfo[] = [
     isInnerCity: true,
     popularWards: ["An Phú Đông", "Đông Hưng Thuận", "Hiệp Thành", "Tân Chánh Hiệp", "Tân Hưng Thuận", "Tân Thới Hiệp", "Thạnh Lộc", "Thạnh Xuân", "Thới An", "Trung Mỹ Tây"],
     neighboringSlugs: ["go-vap", "tan-binh", "hoc-mon", "thu-duc", "binh-duong"],
-    description: "Gas Nhà Mình Quận 12 giao tận nơi trên toàn địa bàn Quốc lộ 1A, Lê Văn Khương, Tô Ký, Nguyễn Ảnh Thủ. Luôn cân gas trước khi lắp đặt.",
+    description: "Gas Nhà Mình Quận 12 giao tận nơi trên toàn địa bàn Quốc lộ 1A, Lê Văn Khương, Tô Ký, Nguyễn Ảnh Thủ. Luôn kiểm tra an toàn trước khi lắp đặt.",
   },
   {
     slug: "binh-thanh",
@@ -533,7 +533,7 @@ export const DISTRICTS_DATA: DistrictInfo[] = [
     hotline: HOTLINE_DISPLAY,
     popularWards: ["Củ Chi", "Tân An Hội", "Phước Vĩnh An", "Tân Phú Trung", "Hòa Phú", "Bình Mỹ", "Tân Thạnh Đông"],
     neighboringSlugs: ["hoc-mon", "binh-duong"],
-    description: "Đại lý Gas Nhà Mình Củ Chi uy tín, giao tận nơi cho gia đình và xưởng, khu công nghiệp Tân Phú Trung. Bình gas đủ cân, tem chống giả.",
+    description: "Đại lý Gas Nhà Mình Củ Chi uy tín, giao tận nơi cho gia đình và xưởng, khu công nghiệp Tân Phú Trung. Bình gas chính hãng nguyên tem chống giả.",
   },
   {
     slug: "can-gio",

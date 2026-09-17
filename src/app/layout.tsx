@@ -4,7 +4,7 @@ import "./globals.css";
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://gasnhaminh.com"),
   title: "Gas Nhà Mình – Đặt Gas, Giao Gas Tận Nhà Siêu Tốc 15-20 Phút TP.HCM",
-  description: "Hết gas, gọi Gas Nhà Mình. Giao gas, đặt gas online, đổi bình gas hỏa tốc tại tất cả quận huyện TP.HCM. Cân đối chứng tại nhà, cam kết bình gas chính hãng V-Gas, Petrolimex, Tuấn Khang 12kg và gas bò 45kg an toàn tuyệt đối. Hotline: 0888 113 831.",
+  description: "Hết gas, gọi Gas Nhà Mình. Giao gas, đặt gas online, đổi bình gas hỏa tốc tại tất cả quận huyện TP.HCM. Bình chính hãng nguyên tem chống giả, cam kết đủ 12kg ruột và gas bò 45kg an toàn tuyệt đối. Hotline: 0888 113 831.",
   keywords: [
     "gas nhà mình",
     "đặt gas nhà mình",
@@ -52,7 +52,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "Gas Nhà Mình – Đặt Gas, Giao Gas Tận Nhà Siêu Tốc 15-20 Phút TP.HCM",
-    description: "Hết gas, gọi Gas Nhà Mình. Giao gas, đặt gas online, đổi bình gas hỏa tốc tại tất cả quận huyện TP.HCM. Cân đối chứng tại nhà, cam kết bình gas chính hãng V-Gas, Petrolimex, Tuấn Khang 12kg và gas bò 45kg an toàn tuyệt đối.",
+    description: "Hết gas, gọi Gas Nhà Mình. Giao gas, đặt gas online, đổi bình gas hỏa tốc tại tất cả quận huyện TP.HCM. Bình chính hãng nguyên tem chống giả, cam kết đủ 12kg ruột và gas bò 45kg an toàn tuyệt đối.",
     url: "https://gasnhaminh.com",
     siteName: "Gas Nhà Mình",
     images: [
@@ -169,7 +169,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                   "image": "https://images.unsplash.com/photo-1736960894843-bc9afe9b22c9?w=1200&h=630&fit=crop&auto=format",
                   "telephone": "0888 113 831",
                   "priceRange": "$$",
-                  "description": "Dịch vụ giao gas tận nhà siêu tốc 15–20 phút tại TP.HCM. Đổi bình gas chính hãng 12kg, 45kg. Cân đối chứng tại nhà, an toàn tuyệt đối.",
+                  "description": "Dịch vụ giao gas tận nhà siêu tốc 15–20 phút tại TP.HCM. Đổi bình gas chính hãng 12kg, 45kg. Nguyên tem chống giả, an toàn tuyệt đối.",
                   "address": {
                     "@type": "PostalAddress",
                     "addressLocality": "TP HCM",
@@ -210,10 +210,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                     },
                     {
                       "@type": "Question",
-                      "name": "Tôi có được cân đối chứng kiểm tra trọng lượng bình gas không?",
+                      "name": "Tôi có được cân đối chứng kiểm tra trọng lượng bình gas không? Làm sao biết bình đủ 12kg ruột?",
                       "acceptedAnswer": {
                         "@type": "Answer",
-                        "text": "100% đơn hàng đều được kỹ thuật viên mang theo cân điện tử kiểm tra đủ 12kg gas thực, thay gioăng van và kiểm tra rò rỉ khí gas an toàn miễn phí trước khi quý khách thanh toán."
+                        "text": "Bình gas 12kg gia đình đã được chiết nạp tự động chuẩn xác đủ 12kg ruột tại nhà máy của hãng và niêm phong màng co nhiệt chống giả. Trọng lượng vỏ bình được dập nổi rõ ràng trên quai xách. Để đảm bảo giao hỏa tốc 15 phút, nhân viên không mang theo cân cồng kềnh mà sẽ cùng quý khách kiểm tra nguyên vẹn tem màng co, hạn kiểm định vỏ bình và thử rò rỉ khí gas an toàn. Nếu gia đình có sẵn cân tại nhà, quý khách hoàn toàn có thể kiểm tra đối chứng trước khi nhận."
                       }
                     },
                     {

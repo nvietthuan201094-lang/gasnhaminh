@@ -33,7 +33,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
 
   const title = `Giao Gas, Đặt Gas, Gọi Gas ${district.name} Siêu Tốc ${district.slaMinutes} Phút | ${BRAND_NAME}`;
-  const description = `Đại lý Gas Nhà Mình tại ${district.fullName}. Đặt gas online, gọi đổi gas giao tận nhà trong ${district.slaMinutes} phút. Đầy đủ bình V-Gas xám/đỏ/vàng/PE/Shell, Petrolimex đứng/shell, Tuấn Khang vàng 12kg và gas bò 45kg. Cân đối chứng tại nhà. Hotline: ${district.hotline}.`;
+  const description = `Đại lý Gas Nhà Mình tại ${district.fullName}. Đặt gas online, gọi đổi gas giao tận nhà trong ${district.slaMinutes} phút. Đầy đủ bình V-Gas xám/đỏ/vàng/PE/Shell, Petrolimex đứng/shell, Tuấn Khang vàng 12kg và gas bò 45kg. Bình chính hãng nguyên tem chống giả, an toàn tuyệt đối. Hotline: ${district.hotline}.`;
 
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://gasnhaminh.com';
   const canonicalUrl = `${siteUrl}/giao-gas/${district.slug}`;
@@ -167,7 +167,7 @@ export default async function DistrictPage({ params }: PageProps) {
                 name: 'Nguyễn Văn Minh',
               },
               datePublished: '2025-01-15',
-              reviewBody: `Dịch vụ giao gas Gas Nhà Mình siêu tốc tại ${district.name}, thợ có mang theo cân đối chứng đủ ký và kiểm tra rò rỉ van gas an toàn miễn phí. Rất an tâm!`,
+              reviewBody: `Dịch vụ giao gas Gas Nhà Mình siêu tốc tại ${district.name}, bình còn nguyên tem niêm phong màng co chính hãng và kiểm tra rò rỉ van gas an toàn miễn phí. Rất an tâm!`,
             },
             offers: {
               '@type': 'Offer',
@@ -247,7 +247,7 @@ export default async function DistrictPage({ params }: PageProps) {
             name: `Quy trình kiểm tra an toàn khi giao gas của Gas Nhà Mình?`,
             acceptedAnswer: {
               '@type': 'Answer',
-              text: `Kỹ thuật viên mang theo cân điện tử kiểm tra đủ 12kg gas thực, thay gioăng cao su miễn phí, vệ sinh đầu đốt bếp và kiểm tra rò rỉ khí gas trước khi khách hàng thanh toán.`,
+              text: `Kỹ thuật viên kiểm tra bình nguyên tem màng co chính hãng, thay gioăng cao su miễn phí, vệ sinh đầu đốt bếp và kiểm tra rò rỉ khí gas an toàn trước khi khách hàng thanh toán.`,
             },
           },
         ],

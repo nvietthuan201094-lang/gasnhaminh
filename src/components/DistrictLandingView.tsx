@@ -127,8 +127,8 @@ export default function DistrictLandingView({ district }: DistrictLandingViewPro
     <div className="min-h-screen bg-neutral-50 text-neutral-900 flex flex-col font-sans">
       {/* Top Notification Bar */}
       <div className="bg-neutral-900 text-white text-xs py-2 px-4 text-center font-medium">
-        ⚡ Giao gas, đặt gas nhanh tại <strong className="text-red-400">{district.fullName}</strong> trong{" "}
-        <strong className="text-amber-400">{district.slaMinutes} phút</strong> – Cân đối chứng tại nhà!
+        ⚡ Giao gas, đặt gas siêu tốc tại <strong className="text-amber-400">{district.fullName}</strong> trong{" "}
+        <strong className="text-amber-400">{district.slaMinutes} phút</strong> – Nguyên tem chống giả!
       </div>
 
       {/* Navigation Header */}
@@ -207,10 +207,10 @@ export default function DistrictLandingView({ district }: DistrictLandingViewPro
               {/* Highlights Badge */}
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-8">
                 <div className="bg-white p-3.5 rounded-xl border border-neutral-200 shadow-sm flex items-center gap-3">
-                  <span className="text-2xl">⚖️</span>
+                  <span className="text-2xl">🏷️</span>
                   <div>
-                    <div className="font-bold text-xs text-neutral-900">Cân Đủ Ký</div>
-                    <div className="text-[11px] text-neutral-500">Cân đối chứng tại nhà</div>
+                    <div className="font-bold text-xs text-neutral-900">Chính Hãng 100%</div>
+                    <div className="text-[11px] text-neutral-500">Nguyên tem chống giả</div>
                   </div>
                 </div>
                 <div className="bg-white p-3.5 rounded-xl border border-neutral-200 shadow-sm flex items-center gap-3">
@@ -285,7 +285,7 @@ export default function DistrictLandingView({ district }: DistrictLandingViewPro
 
                 <h3 className="text-xl font-black text-neutral-900 mb-1">Đặt Gas / Đổi Bình Tận Nhà</h3>
                 <p className="text-xs text-neutral-500 mb-5">
-                  Kiểm tra cân đủ ký – Khách hài lòng mới thanh toán.
+                  Cam kết bình chính hãng – Nguyên tem chống giả – An toàn tuyệt đối.
                 </p>
 
                 {orderSuccess ? (
@@ -420,7 +420,7 @@ export default function DistrictLandingView({ district }: DistrictLandingViewPro
                     </button>
 
                     <p className="text-[11px] text-center text-neutral-400">
-                      🔒 Cam kết kiểm tra gas đủ cân trước khi thanh toán. Không phát sinh chi phí.
+                      🔒 Cam kết bình chính hãng nguyên tem chống giả. Không phát sinh chi phí.
                     </p>
                   </form>
                 )}
@@ -562,10 +562,10 @@ export default function DistrictLandingView({ district }: DistrictLandingViewPro
 
             <div className="bg-white p-5 rounded-xl border border-neutral-200 shadow-sm">
               <h3 className="font-bold text-sm text-neutral-900 mb-2">
-                3. Tôi có thể yêu cầu cân bình gas đối chứng trước khi thanh toán không?
+                3. Tôi có được cân đối chứng kiểm tra trọng lượng bình gas không? Làm sao biết bình đủ 12kg ruột?
               </h3>
               <p className="text-xs text-neutral-600 leading-relaxed">
-                Hoàn toàn được! Kỹ thuật viên luôn mang theo cân điện tử đối chứng. Bạn sẽ được trực tiếp kiểm tra tổng trọng lượng bình (Tổng trọng lượng = Vỏ bình ghi trên quai xách + 12kg nước gas). Cân đủ ký quý khách mới thanh toán.
+                Bình gas 12kg gia đình tại {district.name} đã được chiết nạp tự động chuẩn xác đủ 12kg ruột tại nhà máy của hãng và niêm phong màng co nhiệt chống giả. Trọng lượng vỏ bình được dập nổi rõ ràng trên quai xách. Để đảm bảo giao hỏa tốc 15 phút, nhân viên không mang theo cân cồng kềnh mà sẽ cùng quý khách kiểm tra nguyên vẹn tem màng co, hạn kiểm định vỏ bình và thử rò rỉ khí gas an toàn. Nếu gia đình có sẵn cân tại nhà, quý khách hoàn toàn có thể kiểm tra đối chứng trước khi nhận.
               </p>
             </div>
 
@@ -629,7 +629,7 @@ export default function DistrictLandingView({ district }: DistrictLandingViewPro
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-300 opacity-75"></span>
             <span className="relative inline-flex rounded-full h-2 w-2 bg-amber-400"></span>
           </span>
-          <span>⚡ Có mặt sau {district.slaMinutes} phút • Cân đủ ký • Kiểm tra bình an toàn</span>
+          <span>⚡ Có mặt sau {district.slaMinutes} phút • Nguyên tem chính hãng • Kiểm tra an toàn</span>
         </div>
 
         {/* Action Buttons */}
