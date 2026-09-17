@@ -36,7 +36,7 @@ function Header() {
           <span className="text-[10px] text-[#6B7280] font-medium uppercase tracking-widest">Hết gas, gọi Nhà Mình</span>
         </div>
         <nav className="flex gap-8">
-          {[["Bảng giá", "#bang-gia"], ["Cam kết", "#cam-ket"], ["Khu vực giao", "#khu-vuc"]].map(([label, href]) => (
+          {[["Bảng giá", "#bang-gia"], ["Cam kết", "#cam-ket"], ["Cửa hàng", "#he-thong-cua-hang"], ["Khu vực giao", "#khu-vuc"]].map(([label, href]) => (
             <a key={href} href={href} className="text-[#111928] font-semibold text-sm hover:text-[#E02424] transition-colors">{label}</a>
           ))}
         </nav>
@@ -692,6 +692,181 @@ function ServiceAreaSection() {
   );
 }
 
+const STORES_LIST = [
+  {
+    id: 1,
+    branch: "Chi nhánh Quận 8",
+    name: "Trạm Gas Chánh Hưng – Quận 8",
+    address: "1009 Phạm Thế Hiển, Phường Chánh Hưng, Quận 8, TP.HCM",
+    coverage: "Quận 8, Quận 5, Quận 7, Quận 4, Bình Chánh (Trung Sơn, Phạm Hùng)",
+    sla: "15 - 20 phút",
+    badge: "Kho trực chiến 24/7",
+    hotline: HOTLINE,
+    hotlineTel: HOTLINE_TEL,
+  },
+  {
+    id: 2,
+    branch: "Chi nhánh Tân Phú",
+    name: "Trạm Gas Phú Thọ Hòa – Tân Phú",
+    address: "36 Nguyễn Văn Huyên, Phường Phú Thọ Hòa, Quận Tân Phú, TP.HCM",
+    coverage: "Quận Tân Phú, Tân Bình, Quận 11, Quận 10, Bình Tân",
+    sla: "15 - 20 phút",
+    badge: "Trung tâm phân phối khu Tây",
+    hotline: HOTLINE,
+    hotlineTel: HOTLINE_TEL,
+  },
+  {
+    id: 3,
+    branch: "Chi nhánh Hóc Môn 1",
+    name: "Cửa Hàng Gas Đông Phương – Hóc Môn",
+    address: "64A Nguyễn Thị Hai, Xã Bà Điểm, Huyện Hóc Môn, TP.HCM",
+    coverage: "Bà Điểm Hóc Môn, Quận 12 (An Sương, Tân Thới Nhất), Bình Tân",
+    sla: "15 - 25 phút",
+    badge: "Trạm cửa ngõ Tây Bắc",
+    hotline: HOTLINE,
+    hotlineTel: HOTLINE_TEL,
+  },
+  {
+    id: 4,
+    branch: "Chi nhánh Hóc Môn 2",
+    name: "Cửa Hàng Gas Nhật Tài – Hóc Môn",
+    address: "111/7H Ấp Thới Tây 2, Tân Hiệp 18, Xã Tân Hiệp, Huyện Hóc Môn, TP.HCM",
+    coverage: "Tân Hiệp, Thị trấn Hóc Môn, Thới Tam Thôn, Củ Chi giáp ranh",
+    sla: "20 - 25 phút",
+    badge: "Kho hàng quy mô lớn",
+    hotline: HOTLINE,
+    hotlineTel: HOTLINE_TEL,
+  },
+  {
+    id: 5,
+    branch: "Chi nhánh Quận 6",
+    name: "Trạm Gas Cư Xá Bình Phú – Quận 6",
+    address: "14R Đường 32B Cư Xá Bình Phú, Phường 10, Quận 6, TP.HCM",
+    coverage: "Quận 6, Bình Tân (An Lạc, Tên Lửa), Quận 5 (khu Chợ Lớn), Quận 11",
+    sla: "15 - 20 phút",
+    badge: "Kho trực chiến Chợ Lớn",
+    hotline: HOTLINE,
+    hotlineTel: HOTLINE_TEL,
+  },
+];
+
+function StoresSection({ onOrderClick }: { onOrderClick: () => void }) {
+  return (
+    <section id="he-thong-cua-hang" className="py-16 md:py-24 bg-white border-t border-[#E5E7EB]">
+      <div className="max-w-[1440px] mx-auto px-4 md:px-8 lg:px-20">
+        <div className="text-center max-w-3xl mx-auto mb-12 md:mb-16">
+          <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-[#FEE2E2] text-[#E02424] mb-3">
+            <span className="w-2 h-2 rounded-full bg-[#E02424] animate-pulse"></span>
+            Mạng lưới cửa hàng thực tế
+          </span>
+          <h2 className="text-2xl md:text-4xl font-black text-[#111928] leading-tight mb-4">
+            Hệ Thống 5 Cửa Hàng & Trạm Kho Gas Trực Chiến
+          </h2>
+          <p className="text-[#6B7280] text-sm md:text-base leading-relaxed">
+            Mạng lưới trạm kho vật lý đặt tại các vị trí giao thông huyết mạch TP.HCM. Đội ngũ kỹ thuật viên thường trực 24/7, xuất kho giao hỏa tốc 15–20 phút tận nhà, kiểm tra rò rỉ khí gas an toàn miễn phí.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+          {STORES_LIST.map((store) => (
+            <div
+              key={store.id}
+              className="bg-[#F9FAFB] hover:bg-white rounded-2xl p-6 border border-[#E5E7EB] hover:border-[#E02424] shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group"
+            >
+              <div>
+                <div className="flex items-center justify-between mb-4">
+                  <span className="inline-block px-3 py-1 bg-white group-hover:bg-[#FEE2E2] text-[#E02424] border border-[#FECACA] rounded-full text-xs font-bold tracking-wide transition-colors">
+                    {store.branch}
+                  </span>
+                  <div className="flex items-center gap-1.5 text-[11px] font-semibold text-[#057A55] bg-[#DEF7EC] px-2.5 py-0.5 rounded-full">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#31C48D] animate-ping"></span>
+                    <span>Sẵn sàng giao</span>
+                  </div>
+                </div>
+
+                <h3 className="text-lg font-bold text-[#111928] group-hover:text-[#E02424] transition-colors mb-3">
+                  {store.name}
+                </h3>
+
+                <div className="space-y-3 text-xs md:text-sm text-[#4B5563] mb-6">
+                  <div className="flex items-start gap-2.5">
+                    <span className="text-base flex-shrink-0 mt-0.5">📍</span>
+                    <span className="leading-snug">
+                      <strong className="text-[#111928]">Địa chỉ:</strong> {store.address}
+                    </span>
+                  </div>
+                  <div className="flex items-start gap-2.5">
+                    <span className="text-base flex-shrink-0 mt-0.5">🚚</span>
+                    <span className="leading-snug">
+                      <strong className="text-[#111928]">Phục vụ nhanh:</strong> {store.coverage}
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-2.5">
+                    <span className="text-base flex-shrink-0">⚡</span>
+                    <span>
+                      <strong className="text-[#111928]">Thời gian giao:</strong>{" "}
+                      <span className="text-[#E02424] font-bold">{store.sla}</span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="pt-4 border-t border-[#E5E7EB] flex items-center gap-2">
+                <a
+                  href={store.hotlineTel}
+                  className="flex-1 py-2.5 px-3 bg-[#E02424] hover:bg-[#B91C1C] text-white text-xs font-bold rounded-xl text-center shadow-sm transition-colors flex items-center justify-center gap-1.5"
+                >
+                  <PhoneIcon size={14} /> Gọi Trạm Này
+                </a>
+                <button
+                  type="button"
+                  onClick={onOrderClick}
+                  className="py-2.5 px-3 bg-white hover:bg-[#F3F4F6] text-[#111928] border border-[#D1D5DB] text-xs font-bold rounded-xl transition-colors whitespace-nowrap"
+                >
+                  Đặt Giao Tận Bếp
+                </button>
+              </div>
+            </div>
+          ))}
+
+          {/* Card cam kết chất lượng */}
+          <div className="bg-gradient-to-br from-[#991B1B] via-[#B91C1C] to-[#E02424] text-white rounded-2xl p-6 shadow-md flex flex-col justify-between md:col-span-2 lg:col-span-1">
+            <div>
+              <div className="w-10 h-10 rounded-xl bg-white/10 backdrop-blur-sm flex items-center justify-center text-xl mb-4">
+                🛡️
+              </div>
+              <h3 className="text-lg font-bold mb-3">Cam Kết Pháp Lý & An Toàn</h3>
+              <p className="text-white/80 text-xs leading-relaxed mb-4">
+                Tất cả 5 cửa hàng và trạm chiết nạp liên kết đều đáp ứng 100% tiêu chuẩn phòng cháy chữa cháy (PCCC) và giấy phép kinh doanh khí dầu mỏ hóa lỏng (LPG) theo quy định Nhà nước.
+              </p>
+              <ul className="space-y-2 text-xs text-white/90">
+                <li className="flex items-center gap-2">
+                  <span className="text-emerald-300 font-bold">✓</span>
+                  <span>Bình gas chính hãng nguyên tem chống giả</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="text-emerald-300 font-bold">✓</span>
+                  <span>Chiết nạp tự động đủ 12kg ruột</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="text-emerald-300 font-bold">✓</span>
+                  <span>Kỹ thuật viên thử rò rỉ khí gas miễn phí</span>
+                </li>
+              </ul>
+            </div>
+            <div className="pt-6 border-t border-white/20 mt-4">
+              <div className="text-[11px] text-white/70">Tổng đài điều phối hỏa tốc:</div>
+              <a href={HOTLINE_TEL} className="text-xl font-black text-white hover:underline flex items-center gap-2 mt-0.5">
+                <PhoneIcon size={18} /> {HOTLINE}
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function FaqSection() {
   const faqs = [
     {
@@ -741,29 +916,69 @@ function Footer() {
   return (
     <footer className="bg-[#0D1117] text-white py-12 pb-20 md:pb-12">
       <div className="max-w-[1440px] mx-auto px-4 md:px-8 lg:px-20">
-        <div className="grid md:grid-cols-3 gap-8 mb-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-10">
           <div>
-            <div className="text-[#E02424] font-black text-2xl mb-2">🔥 GAS NHÀ MÌNH</div>
-            <p className="text-white/60 text-sm leading-relaxed">Kênh đặt gas chính hãng uy tín tại TP.HCM. Giao hỏa tốc 24/7, nguyên tem chống giả, hỗ trợ kiểm tra an toàn tận nơi.</p>
-          </div>
-          <div>
-            <h4 className="font-bold text-white mb-3">Liên hệ</h4>
-            <div className="space-y-2 text-sm text-white/60">
-              <div>☎️ Hotline 24/7: <a href={HOTLINE_TEL} className="text-[#FF5722] font-bold">{HOTLINE}</a></div>
-              <div>🕐 Hoạt động: 24/7 kể cả Lễ Tết</div>
+            <div className="text-[#E02424] font-black text-2xl mb-3">🔥 GAS NHÀ MÌNH</div>
+            <p className="text-white/60 text-sm leading-relaxed mb-4">
+              Kênh đặt gas chính hãng uy tín tại TP.HCM. Giao hỏa tốc 15-20 phút, nguyên tem chống giả, kiểm định an toàn PCCC.
+            </p>
+            <div className="space-y-1.5 text-xs text-white/70">
+              <div>☎️ Hotline: <a href={HOTLINE_TEL} className="text-[#FF5722] font-bold">{HOTLINE}</a></div>
+              <div>🕐 Hoạt động: 24/7 kể cả Lễ & Tết</div>
             </div>
           </div>
+
+          <div className="lg:col-span-2">
+            <h4 className="font-bold text-white mb-3 text-sm uppercase tracking-wider text-[#FF5722]">Hệ thống 5 Cửa Hàng & Trạm Kho Trực Chiến</h4>
+            <div className="grid sm:grid-cols-2 gap-3 text-xs text-white/70">
+              <div className="bg-white/5 p-3 rounded-xl border border-white/10">
+                <div className="font-bold text-white mb-1 flex items-center gap-1.5">
+                  <span className="text-[#FF5722]">📍</span> Chi nhánh Quận 8
+                </div>
+                <div>1009 Phạm Thế Hiển, P. Chánh Hưng, Q.8</div>
+              </div>
+              <div className="bg-white/5 p-3 rounded-xl border border-white/10">
+                <div className="font-bold text-white mb-1 flex items-center gap-1.5">
+                  <span className="text-[#FF5722]">📍</span> Chi nhánh Tân Phú
+                </div>
+                <div>36 Nguyễn Văn Huyên, P. Phú Thọ Hòa, Q. Tân Phú</div>
+              </div>
+              <div className="bg-white/5 p-3 rounded-xl border border-white/10">
+                <div className="font-bold text-white mb-1 flex items-center gap-1.5">
+                  <span className="text-[#FF5722]">📍</span> Chi nhánh Bà Điểm (Đông Phương)
+                </div>
+                <div>64A Nguyễn Thị Hai, Xã Bà Điểm, Hóc Môn</div>
+              </div>
+              <div className="bg-white/5 p-3 rounded-xl border border-white/10">
+                <div className="font-bold text-white mb-1 flex items-center gap-1.5">
+                  <span className="text-[#FF5722]">📍</span> Chi nhánh Tân Hiệp (Nhật Tài)
+                </div>
+                <div>111/7H Ấp Thới Tây 2, Tân Hiệp 18, Hóc Môn</div>
+              </div>
+              <div className="bg-white/5 p-3 rounded-xl border border-white/10 sm:col-span-2">
+                <div className="font-bold text-white mb-1 flex items-center gap-1.5">
+                  <span className="text-[#FF5722]">📍</span> Chi nhánh Quận 6 (Cư Xá Bình Phú)
+                </div>
+                <div>14R Đường 32B Cư Xá Bình Phú, Phường 10, Quận 6</div>
+              </div>
+            </div>
+          </div>
+
           <div>
-            <h4 className="font-bold text-white mb-3">Chứng nhận</h4>
-            <div className="flex gap-3 flex-wrap">
-              {["ĐKKD: 0123456789", "Bộ Công Thương", "ISO PCCC"].map((c) => (
-                <span key={c} className="bg-white/10 border border-white/20 rounded px-2 py-1 text-xs text-white/70">{c}</span>
+            <h4 className="font-bold text-white mb-3 text-sm uppercase tracking-wider text-[#FF5722]">Tiêu Chuẩn & Chứng Nhận</h4>
+            <div className="flex gap-2 flex-wrap mb-4">
+              {["ĐKKD Khí Dầu Mỏ LPG", "Chứng Nhận PCCC", "Đo Lường Chuẩn 12kg", "Bộ Công Thương"].map((c) => (
+                <span key={c} className="bg-white/10 border border-white/20 rounded-lg px-2.5 py-1 text-[11px] text-white/80">{c}</span>
               ))}
             </div>
+            <p className="text-[11px] text-white/50 leading-relaxed">
+              Mạng lưới cửa hàng được cấp phép kinh doanh khí LPG và chứng nhận an toàn PCCC bởi cơ quan chức năng có thẩm quyền.
+            </p>
           </div>
         </div>
+
         <div className="border-t border-white/10 pt-6 text-center text-xs text-white/40">
-          © {new Date().getFullYear()} GAS NHÀ MÌNH. Đã đăng ký bảo hộ thương hiệu. Cam kết chất lượng – Minh bạch giá cả.
+          © {new Date().getFullYear()} GAS NHÀ MÌNH. Chuỗi cửa hàng và trạm phân phối gas chính hãng tại TP. Hồ Chí Minh.
         </div>
       </div>
     </footer>
@@ -855,6 +1070,7 @@ export default function App() {
       <ProcessSection />
       <TrustSection />
       <ServiceAreaSection />
+      <StoresSection onOrderClick={scrollToForm} />
       <FaqSection />
       <Footer />
       <MobileStickyBar onOrderClick={scrollToForm} />

@@ -186,7 +186,69 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                     ],
                     "opens": "00:00",
                     "closes": "23:59"
-                  }
+                  },
+                  "department": [
+                    {
+                      "@type": "LocalBusiness",
+                      "name": "Gas Nhà Mình - Chi nhánh Quận 8",
+                      "telephone": "0888 113 831",
+                      "address": {
+                        "@type": "PostalAddress",
+                        "streetAddress": "1009 Phạm Thế Hiển, Phường Chánh Hưng",
+                        "addressLocality": "Quận 8",
+                        "addressRegion": "Hồ Chí Minh",
+                        "addressCountry": "VN"
+                      }
+                    },
+                    {
+                      "@type": "LocalBusiness",
+                      "name": "Gas Nhà Mình - Chi nhánh Tân Phú",
+                      "telephone": "0888 113 831",
+                      "address": {
+                        "@type": "PostalAddress",
+                        "streetAddress": "36 Nguyễn Văn Huyên, Phường Phú Thọ Hòa",
+                        "addressLocality": "Quận Tân Phú",
+                        "addressRegion": "Hồ Chí Minh",
+                        "addressCountry": "VN"
+                      }
+                    },
+                    {
+                      "@type": "LocalBusiness",
+                      "name": "Gas Nhà Mình - Chi nhánh Bà Điểm (Đông Phương)",
+                      "telephone": "0888 113 831",
+                      "address": {
+                        "@type": "PostalAddress",
+                        "streetAddress": "64A Nguyễn Thị Hai, Xã Bà Điểm",
+                        "addressLocality": "Huyện Hóc Môn",
+                        "addressRegion": "Hồ Chí Minh",
+                        "addressCountry": "VN"
+                      }
+                    },
+                    {
+                      "@type": "LocalBusiness",
+                      "name": "Gas Nhà Mình - Chi nhánh Tân Hiệp (Nhật Tài)",
+                      "telephone": "0888 113 831",
+                      "address": {
+                        "@type": "PostalAddress",
+                        "streetAddress": "111/7H Ấp Thới Tây 2, Tân Hiệp 18, Xã Tân Hiệp",
+                        "addressLocality": "Huyện Hóc Môn",
+                        "addressRegion": "Hồ Chí Minh",
+                        "addressCountry": "VN"
+                      }
+                    },
+                    {
+                      "@type": "LocalBusiness",
+                      "name": "Gas Nhà Mình - Chi nhánh Quận 6 (Cư Xá Bình Phú)",
+                      "telephone": "0888 113 831",
+                      "address": {
+                        "@type": "PostalAddress",
+                        "streetAddress": "14R Đường 32B Cư Xá Bình Phú, Phường 10",
+                        "addressLocality": "Quận 6",
+                        "addressRegion": "Hồ Chí Minh",
+                        "addressCountry": "VN"
+                      }
+                    }
+                  ]
                 },
                 {
                   "@type": "FAQPage",
