@@ -15,8 +15,18 @@ export async function fetchProducts(domain: string = ''): Promise<any[]> {
 }
 
 export async function getProductBySlug(slug: string): Promise<Product | null> {
+  const SLUG_ALIASES: Record<string, string> = {
+    'gas-v-gas-do-12kg': 'gas-v-gas-do-12-kg',
+    'gas-bo-45kg': 'gas-bo-45-kg',
+  };
+
+  const targetSlug = SLUG_ALIASES[slug] || slug;
+
   try {
-    const res = await fetch(`${API_BASE_URL}/api/v1/products/${slug}`, { next: { revalidate: 60 } });
+    let res = await fetch(`${API_BASE_URL}/api/v1/products/${targetSlug}`, { next: { revalidate: 60 } });
+    if (!res.ok && targetSlug !== slug) {
+      res = await fetch(`${API_BASE_URL}/api/v1/products/${slug}`, { next: { revalidate: 60 } });
+    }
     if (!res.ok) return null;
     const json = await res.json();
     return json.status === 'success' ? json.data : null;
