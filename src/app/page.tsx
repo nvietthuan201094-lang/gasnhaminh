@@ -123,24 +123,85 @@ function MobileStickyBar({ onOrderClick }: { onOrderClick: () => void }) {
   );
 }
 
-function WatermarkOverlay({ size = "md" }: { size?: "sm" | "md" | "lg" }) {
-  const sizeClasses = {
-    sm: "w-32 max-w-[130px]",
-    md: "w-44 max-w-[185px]",
-    lg: "w-56 max-w-[240px]",
-  };
+function WatermarkOverlay({
+  type = "product",
+  hotline = HOTLINE,
+  hotlineTel = HOTLINE_TEL,
+}: {
+  type?: "product" | "banner";
+  size?: string;
+  hotline?: string;
+  hotlineTel?: string;
+}) {
+  if (type === "banner") {
+    return (
+      <>
+        <div className="absolute top-3 left-3 z-10 pointer-events-none select-none">
+          <div className="bg-white/95 backdrop-blur-sm px-2.5 py-1 rounded-lg shadow-md border border-slate-200 flex items-center">
+            <img
+              src={WATERMARK_LOGO_SRC}
+              alt="goodGas STORE"
+              className="h-6 w-auto object-contain"
+              draggable={false}
+            />
+          </div>
+        </div>
+        <div className="absolute bottom-3 right-3 z-10">
+          <a
+            href={hotlineTel}
+            onClick={(e) => e.stopPropagation()}
+            className="inline-flex items-center gap-1.5 bg-[#E02424] hover:bg-[#B91C1C] text-white text-xs font-black px-3 py-1.5 rounded-lg shadow-lg transition-transform hover:scale-105"
+          >
+            <PhoneIcon size={13} />
+            <span>GỌI GAS: {hotline}</span>
+          </a>
+        </div>
+      </>
+    );
+  }
+
   return (
-    <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none z-10 p-2">
-      <img
-        src={WATERMARK_LOGO_SRC}
-        alt="goodGas STORE"
-        className={`${sizeClasses[size]} object-contain opacity-75 group-hover:opacity-95 transition-all duration-300`}
-        style={{
-          filter: "drop-shadow(0 0 6px rgba(255,255,255,0.95)) drop-shadow(0 0 12px rgba(255,255,255,0.85)) drop-shadow(0 2px 4px rgba(0,0,0,0.15))",
-        }}
-        draggable={false}
-      />
-    </div>
+    <>
+      {/* Top Left: Logo goodGas STORE */}
+      <div className="absolute top-2.5 left-2.5 z-10 pointer-events-none select-none">
+        <div className="bg-white/95 backdrop-blur-sm px-2 py-1 rounded-lg shadow-sm border border-slate-100 flex items-center">
+          <img
+            src={WATERMARK_LOGO_SRC}
+            alt="goodGas STORE"
+            className="h-5 sm:h-6 w-auto object-contain"
+            draggable={false}
+          />
+        </div>
+      </div>
+
+      {/* Top Right: 100% Chính Hãng */}
+      <div className="absolute top-2.5 right-2.5 z-10 pointer-events-none select-none">
+        <span className="inline-flex items-center gap-1 bg-red-50/95 text-[#E02424] border border-red-200 text-[10px] font-bold px-2 py-0.5 rounded-full shadow-xs">
+          <span className="w-1.5 h-1.5 rounded-full bg-[#E02424]"></span>
+          100% Chính Hãng
+        </span>
+      </div>
+
+      {/* Bottom Right: Nút Gọi Gas Hotline (theo mẫu) */}
+      <div className="absolute bottom-2.5 right-2.5 z-10">
+        <a
+          href={hotlineTel}
+          onClick={(e) => e.stopPropagation()}
+          className="inline-flex items-center gap-1 bg-[#E02424] hover:bg-[#B91C1C] active:scale-95 text-white text-[10px] sm:text-[11px] font-black px-2.5 py-1 rounded-lg shadow-md transition-all tracking-tight"
+          title="Gọi giao gas hỏa tốc"
+        >
+          <PhoneIcon size={11} />
+          <span>GỌI GAS: {hotline}</span>
+        </a>
+      </div>
+
+      {/* Bottom Left: Giao 15 Phút */}
+      <div className="absolute bottom-2.5 left-2.5 z-10 pointer-events-none select-none">
+        <span className="inline-flex items-center gap-1 text-[10px] font-bold text-amber-900 bg-amber-100/90 border border-amber-200 px-1.5 py-0.5 rounded shadow-2xs">
+          ⚡ 15–20P
+        </span>
+      </div>
+    </>
   );
 }
 
@@ -246,7 +307,7 @@ function HeroSection({ tabs, activeCategory, setActiveCategory, selectedProduct,
               className="w-full object-cover"
               style={{ maxHeight: 220 }}
             />
-            <WatermarkOverlay size="lg" />
+            <WatermarkOverlay type="banner" />
           </div>
         </div>
 
@@ -711,7 +772,7 @@ function ServiceAreaSection() {
               alt="Mạng lưới giao gas TPHCM"
               className="w-full h-full object-cover"
             />
-            <WatermarkOverlay size="lg" />
+            <WatermarkOverlay type="banner" />
           </div>
         </div>
       </div>

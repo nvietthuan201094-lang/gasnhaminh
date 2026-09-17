@@ -17,24 +17,64 @@ import { createOrder, trackInteractionApi } from "@/lib/api";
 import { trackGoogleAdsPurchase } from "@/lib/tracking";
 import { WATERMARK_LOGO_SRC } from "@/lib/watermark";
 
-function WatermarkOverlay({ size = "md" }: { size?: "sm" | "md" | "lg" }) {
-  const sizeClasses = {
-    sm: "w-28 max-w-[120px]",
-    md: "w-40 max-w-[170px]",
-    lg: "w-48 max-w-[200px]",
-  };
+function PhoneIcon({ size = 12 }: { size?: number }) {
   return (
-    <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none z-10 p-2">
-      <img
-        src={WATERMARK_LOGO_SRC}
-        alt="goodGas STORE"
-        className={`${sizeClasses[size]} object-contain opacity-75 group-hover:opacity-95 transition-all duration-300`}
-        style={{
-          filter: "drop-shadow(0 0 6px rgba(255,255,255,0.95)) drop-shadow(0 0 12px rgba(255,255,255,0.85)) drop-shadow(0 2px 4px rgba(0,0,0,0.15))",
-        }}
-        draggable={false}
-      />
-    </div>
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.99 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.9 1.22h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 8.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+    </svg>
+  );
+}
+
+function WatermarkOverlay({
+  hotline = HOTLINE_DISPLAY,
+  hotlineTel = HOTLINE_TEL,
+}: {
+  size?: string;
+  hotline?: string;
+  hotlineTel?: string;
+}) {
+  return (
+    <>
+      {/* Top Left: Logo goodGas STORE */}
+      <div className="absolute top-2 left-2 z-10 pointer-events-none select-none">
+        <div className="bg-white/95 backdrop-blur-sm px-1.5 py-0.5 rounded-lg shadow-sm border border-slate-100 flex items-center">
+          <img
+            src={WATERMARK_LOGO_SRC}
+            alt="goodGas STORE"
+            className="h-4 sm:h-5 w-auto object-contain"
+            draggable={false}
+          />
+        </div>
+      </div>
+
+      {/* Top Right: 100% Chính Hãng */}
+      <div className="absolute top-2 right-2 z-10 pointer-events-none select-none">
+        <span className="inline-flex items-center gap-1 bg-red-50/95 text-[#E02424] border border-red-200 text-[9px] font-bold px-1.5 py-0.5 rounded-full shadow-xs">
+          <span className="w-1.5 h-1.5 rounded-full bg-[#E02424]"></span>
+          100% Chính Hãng
+        </span>
+      </div>
+
+      {/* Bottom Right: Nút Gọi Gas Hotline */}
+      <div className="absolute bottom-2 right-2 z-10">
+        <a
+          href={hotlineTel}
+          onClick={(e) => e.stopPropagation()}
+          className="inline-flex items-center gap-1 bg-[#E02424] hover:bg-[#B91C1C] active:scale-95 text-white text-[10px] font-black px-2 py-0.5 rounded-md shadow-md transition-all tracking-tight"
+          title="Gọi giao gas hỏa tốc"
+        >
+          <PhoneIcon size={10} />
+          <span>GỌI GAS: {hotline}</span>
+        </a>
+      </div>
+
+      {/* Bottom Left: Giao 15 Phút */}
+      <div className="absolute bottom-2 left-2 z-10 pointer-events-none select-none">
+        <span className="inline-flex items-center gap-1 text-[9px] font-bold text-amber-900 bg-amber-100/90 border border-amber-200 px-1 py-0.5 rounded shadow-2xs">
+          ⚡ 15–20P
+        </span>
+      </div>
+    </>
   );
 }
 
@@ -505,7 +545,7 @@ export default function DistrictLandingView({ district }: DistrictLandingViewPro
                         className="w-full h-full object-contain p-2 hover:scale-105 transition-transform duration-300"
                         loading="lazy"
                       />
-                      <WatermarkOverlay size="md" />
+                      <WatermarkOverlay hotline={district.hotline || HOTLINE_DISPLAY} hotlineTel={district.hotline ? `tel:${district.hotline.replace(/\s+/g, '')}` : HOTLINE_TEL} />
                     </div>
                   )}
                   <div className="flex items-center justify-between gap-1 mb-1.5">
