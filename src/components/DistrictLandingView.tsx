@@ -16,8 +16,22 @@ import {
 import { createOrder, trackInteractionApi } from "@/lib/api";
 import { trackGoogleAdsPurchase } from "@/lib/tracking";
 
-interface DistrictLandingViewProps {
-  district: DistrictInfo;
+function WatermarkOverlay({ size = "md" }: { size?: "sm" | "md" | "lg" }) {
+  const sizeClasses = {
+    sm: "w-24 max-w-[100px]",
+    md: "w-32 max-w-[140px]",
+    lg: "w-40 max-w-[160px]",
+  };
+  return (
+    <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none z-10 p-2">
+      <img
+        src="/watermark-logo.png"
+        alt="goodGas STORE"
+        className={`${sizeClasses[size]} object-contain opacity-25 -rotate-12 mix-blend-multiply transition-opacity duration-300 group-hover:opacity-35`}
+        draggable={false}
+      />
+    </div>
+  );
 }
 
 export default function DistrictLandingView({ district }: DistrictLandingViewProps) {
@@ -476,13 +490,14 @@ export default function DistrictLandingView({ district }: DistrictLandingViewPro
               >
                 <div>
                   {prod.image && (
-                    <div className="bg-gradient-to-br from-red-50 to-neutral-50 aspect-square w-full rounded-xl flex items-center justify-center overflow-hidden mb-3">
+                    <div className="bg-gradient-to-br from-rose-50 to-slate-50 aspect-square w-full rounded-xl flex items-center justify-center overflow-hidden mb-3 relative select-none group" onContextMenu={(e) => e.preventDefault()}>
                       <img
                         src={prod.image}
                         alt={prod.name}
                         className="w-full h-full object-contain p-2 hover:scale-105 transition-transform duration-300"
                         loading="lazy"
                       />
+                      <WatermarkOverlay size="md" />
                     </div>
                   )}
                   <div className="flex items-center justify-between gap-1 mb-1.5">

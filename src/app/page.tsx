@@ -122,6 +122,24 @@ function MobileStickyBar({ onOrderClick }: { onOrderClick: () => void }) {
   );
 }
 
+function WatermarkOverlay({ size = "md" }: { size?: "sm" | "md" | "lg" }) {
+  const sizeClasses = {
+    sm: "w-28 max-w-[120px]",
+    md: "w-36 max-w-[150px]",
+    lg: "w-44 max-w-[180px]",
+  };
+  return (
+    <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none z-10 p-2">
+      <img
+        src="/watermark-logo.png"
+        alt="goodGas STORE"
+        className={`${sizeClasses[size]} object-contain opacity-25 -rotate-12 mix-blend-multiply transition-opacity duration-300 group-hover:opacity-35`}
+        draggable={false}
+      />
+    </div>
+  );
+}
+
 function HeroSection({ tabs, activeCategory, setActiveCategory, selectedProduct, setSelectedProduct, onOrderSuccess }: { tabs: TabItem[], activeCategory: number, setActiveCategory: (i: number) => void, selectedProduct: number, setSelectedProduct: (i: number) => void, onOrderSuccess: () => void }) {
   const [selectedOption, setSelectedOption] = useState<"exchange" | "new">("exchange");
   const [name, setName] = useState("");
@@ -187,11 +205,11 @@ function HeroSection({ tabs, activeCategory, setActiveCategory, selectedProduct,
   }
 
   return (
-    <section id="hero" className="pt-[72px] bg-gradient-to-br from-[#fff5f5] to-[#fff] min-h-screen flex items-center">
-      <div className="max-w-[1440px] mx-auto px-4 md:px-8 lg:px-20 w-full py-12 md:py-16 grid md:grid-cols-2 gap-10 items-center">
+    <section id="hero" className="pt-14 md:pt-[72px] bg-gradient-to-br from-[#fff5f5] to-[#fff]">
+      <div className="max-w-[1440px] mx-auto px-4 md:px-8 lg:px-20 w-full pt-4 md:pt-6 pb-12 md:pb-16 grid md:grid-cols-2 gap-8 lg:gap-12 items-start">
         {/* Left */}
         <div>
-          <div className="inline-flex items-center gap-2 bg-[#FFF3CD] text-[#92400E] text-sm font-semibold px-4 py-2 rounded-full mb-6">
+          <div className="inline-flex items-center gap-2 bg-[#FFF3CD] text-[#92400E] text-xs md:text-sm font-semibold px-3.5 py-1.5 md:px-4 md:py-2 rounded-full mb-4">
             ⚡ Giao gas trong 15–20 phút tại TP.HCM
           </div>
           <h1 className="text-3xl md:text-4xl lg:text-5xl font-black text-[#111928] leading-tight mb-4">
@@ -217,12 +235,15 @@ function HeroSection({ tabs, activeCategory, setActiveCategory, selectedProduct,
               </li>
             ))}
           </ul>
-          <img
-            src="https://images.unsplash.com/photo-1698034303551-7e0e114be199?w=600&h=340&fit=crop&auto=format"
-            alt="Nhân viên giao gas chuyên nghiệp"
-            className="rounded-2xl w-full object-cover hidden md:block shadow-lg"
-            style={{ maxHeight: 220 }}
-          />
+          <div className="relative rounded-2xl overflow-hidden shadow-lg hidden md:block select-none group" onContextMenu={(e) => e.preventDefault()}>
+            <img
+              src="https://images.unsplash.com/photo-1698034303551-7e0e114be199?w=600&h=340&fit=crop&auto=format"
+              alt="Nhân viên giao gas chuyên nghiệp"
+              className="w-full object-cover"
+              style={{ maxHeight: 220 }}
+            />
+            <WatermarkOverlay size="lg" />
+          </div>
         </div>
 
         {/* Right — Order Form */}
@@ -404,13 +425,14 @@ function ProductCard({ p, onSelect }: { p: ProductItem; onSelect: () => void }) 
   return (
     <div className="bg-white rounded-2xl border border-[#E5E7EB] overflow-hidden shadow-sm hover:shadow-xl transition-shadow group flex flex-col justify-between h-full">
       <div>
-        <div className="bg-gradient-to-br from-[#fff5f5] to-[#f9fafb] aspect-square w-full flex items-center justify-center overflow-hidden relative">
+        <div className="bg-gradient-to-br from-[#FFF5F5] to-[#f9fafb] aspect-square w-full flex items-center justify-center overflow-hidden relative select-none group" onContextMenu={(e) => e.preventDefault()}>
           <img
             src={p.img}
             alt={p.name}
             className="w-full h-full object-contain p-4 group-hover:scale-105 transition-transform duration-300"
             loading="lazy"
           />
+          <WatermarkOverlay size="md" />
         </div>
         <div className="p-5 pb-0">
           <span className={`text-[10px] font-bold uppercase tracking-wider text-white px-2.5 py-1 rounded-full ${p.tagColor}`}>{p.tag}</span>
@@ -679,12 +701,13 @@ function ServiceAreaSection() {
               <p className="text-sm text-[#92400E] font-semibold">📍 Không thấy khu vực của bạn? Liên hệ hotline <a href={HOTLINE_TEL} className="text-[#E02424] underline">{HOTLINE}</a> – chúng tôi hỗ trợ thêm nhiều khu vực!</p>
             </div>
           </div>
-          <div className="rounded-2xl overflow-hidden border border-[#E5E7EB] shadow-lg h-72 bg-[#E5E7EB] flex items-center justify-center">
+          <div className="rounded-2xl overflow-hidden border border-[#E5E7EB] shadow-lg h-72 bg-[#E5E7EB] flex items-center justify-center relative select-none group" onContextMenu={(e) => e.preventDefault()}>
             <img
               src="https://images.unsplash.com/photo-1736960894843-bc9afe9b22c9?w=600&h=288&fit=crop&auto=format"
               alt="Mạng lưới giao gas TPHCM"
               className="w-full h-full object-cover"
             />
+            <WatermarkOverlay size="lg" />
           </div>
         </div>
       </div>
