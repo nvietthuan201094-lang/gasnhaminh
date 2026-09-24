@@ -95,27 +95,10 @@ export default function DistrictLandingView({ district }: DistrictLandingViewPro
   const [orderSuccess, setOrderSuccess] = useState<string | null>(null);
 
   React.useEffect(() => {
-    import("@/lib/api").then(m => m.fetchProducts()).then(apiData => {
-      if (apiData && apiData.length > 0) {
-        setProductsList(prev => prev.map(p => {
-          const matched = apiData.find((item: any) => 
-            item.slug === p.slug || 
-            item.name.toLowerCase().trim() === p.name.toLowerCase().trim()
-          );
-          if (matched && matched.price > 0) {
-            return {
-              ...p,
-              price: new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(matched.price).replace(/\s/g, ''),
-              priceVal: matched.price,
-              newPrice: matched.deposit_price 
-                ? new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(matched.price + matched.deposit_price).replace(/\s/g, '')
-                : p.newPrice,
-              newPriceVal: matched.deposit_price ? (matched.price + matched.deposit_price) : p.newPriceVal,
-              image: matched.image || p.image,
-            };
-          }
-          return p;
-        }));
+    import("@/lib/api").then(m => m.fetchDynamicGasPrices()).then(dynamicData => {
+      if (dynamicData && dynamicData.length > 0) {
+        setProductsList(dynamicData);
+        setSelectedProduct(prev => dynamicData.find(p => p.slug === prev.slug) || dynamicData[0]);
       }
     }).catch(console.error);
   }, []);

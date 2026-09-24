@@ -9,7 +9,7 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://gasnhaminh.com';
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: 'Bảng Giá Gas Hôm Nay Mới Nhất 2026 | Báo Giá Đổi Bình Gas 12kg, 45kg TP.HCM – Gas Nhà Mình',
-  description: 'Bảng giá gas hôm nay mới nhất cập nhật liên tục từ hệ thống CRM Odoo Gas Nhà Mình. Báo giá đổi bình gas 12kg V-Gas, Petrolimex, Tuấn Khang và gas bò 45kg chính hãng. Cam kết đủ 12kg ruột, cân gas tại chỗ, giao nhanh 15 phút TP.HCM. Hotline: 0888 113 831.',
+  description: 'Bảng giá gas hôm nay mới nhất cập nhật liên tục từ hệ thống CRM Gas Nhà Mình. Báo giá đổi bình gas 12kg V-Gas, Petrolimex, Tuấn Khang và gas bò 45kg chính hãng. Cam kết đủ 12kg ruột, cân gas tại chỗ, giao nhanh 15 phút TP.HCM. Hotline: 0888 113 831.',
   keywords: [
     'giá gas hôm nay',
     'giá gas mới nhất',
@@ -203,7 +203,7 @@ export default async function BangGiaPage() {
             <div className="text-center max-w-4xl mx-auto">
               <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs font-bold mb-4">
                 <span className="inline-block w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                Áp dụng bảng giá Gas Tuấn Khang & Niêm yết mới nhất {currentDateStr}
+                Áp dụng Bảng giá thương hiệu Gas Nhà Mình & Niêm yết mới nhất {currentDateStr}
               </span>
               <h1 className="text-3xl md:text-5xl font-black text-gray-950 tracking-tight leading-tight mb-4">
                 Bảng Giá Gas Hôm Nay Mới Nhất 2026 – Báo Giá Đổi Bình Gas 12kg & 45kg TP.HCM
@@ -216,22 +216,22 @@ export default async function BangGiaPage() {
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-3xl mx-auto text-left">
                 <div className="bg-white p-3.5 rounded-xl border border-gray-200 shadow-sm">
                   <span className="text-[11px] text-gray-500 block font-semibold">V-Gas Xám 12kg:</span>
-                  <span className="text-lg font-black text-[#FF5722]">{products.find(p => p.slug === 'gas-v-gas-xam-12kg')?.price || '480.000đ'}</span>
+                  <span className="text-lg font-black text-[#FF5722]">{products.find(p => p.slug === 'gas-v-gas-xam-12kg')?.price || 'Liên hệ báo giá'}</span>
                   <span className="text-[10px] text-emerald-600 block mt-0.5 font-medium">✓ Bán chạy nhất</span>
                 </div>
                 <div className="bg-white p-3.5 rounded-xl border border-gray-200 shadow-sm">
                   <span className="text-[11px] text-gray-500 block font-semibold">V-Gas Màu/Shell:</span>
-                  <span className="text-lg font-black text-[#FF5722]">{products.find(p => p.slug === 'gas-v-gas-do-12kg')?.price || '500.000đ'}</span>
+                  <span className="text-lg font-black text-[#FF5722]">{products.find(p => p.slug === 'gas-v-gas-do-12kg')?.price || 'Liên hệ báo giá'}</span>
                   <span className="text-[10px] text-gray-500 block mt-0.5">✓ Vỏ bình cao cấp</span>
                 </div>
                 <div className="bg-white p-3.5 rounded-xl border border-gray-200 shadow-sm">
                   <span className="text-[11px] text-gray-500 block font-semibold">Tuấn Khang 12kg:</span>
-                  <span className="text-lg font-black text-[#FF5722]">{products.find(p => p.slug === 'gas-tuan-khang-vang-12kg')?.price || '480.000đ'}</span>
+                  <span className="text-lg font-black text-[#FF5722]">{products.find(p => p.slug === 'gas-tuan-khang-vang-12kg')?.price || 'Liên hệ báo giá'}</span>
                   <span className="text-[10px] text-emerald-600 block mt-0.5 font-medium">✓ Tiết kiệm chi phí</span>
                 </div>
                 <div className="bg-white p-3.5 rounded-xl border border-gray-200 shadow-sm">
                   <span className="text-[11px] text-gray-500 block font-semibold">Petrolimex 12kg:</span>
-                  <span className="text-lg font-black text-[#FF5722]">{products.find(p => p.slug === 'gas-petrolimex-dung-12kg')?.price || '485.000đ'}</span>
+                  <span className="text-lg font-black text-[#FF5722]">{products.find(p => p.slug === 'gas-petrolimex-dung-12kg')?.price || 'Liên hệ báo giá'}</span>
                   <span className="text-[10px] text-gray-500 block mt-0.5">✓ Thương hiệu quốc gia</span>
                 </div>
               </div>

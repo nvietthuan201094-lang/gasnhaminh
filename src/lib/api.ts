@@ -174,7 +174,7 @@ export async function createOrder(payload: OrderPayload): Promise<OrderResponse>
 }
 
 /**
- * Gửi tín hiệu tương tác (Khách bấm Gọi Hotline hoặc Chat Zalo) về Server CRM Odoo
+ * Gửi tín hiệu tương tác (Khách bấm Gọi Hotline hoặc Chat Zalo) về Server CRM Gas Nhà Mình
  * để kích hoạt thông báo đẩy FCM tức thì tới điện thoại nhân viên.
  */
 export async function trackInteractionApi(
@@ -241,7 +241,7 @@ export async function trackInteractionApi(
 }
 
 /**
- * Lấy động bảng giá gas từ Backend Odoo CRM (theo Bảng giá Gas Tuấn Khang).
+ * Lấy động bảng giá gas từ Backend CRM Gas Nhà Mình (theo Bảng giá thương hiệu).
  * Tự động đồng bộ giá bán lẻ, tiền cọc vỏ bình và fallback về giá mặc định nếu sản phẩm không nằm trong bảng giá.
  */
 export async function fetchDynamicGasPrices(): Promise<SeoProductItem[]> {
@@ -254,7 +254,7 @@ export async function fetchDynamicGasPrices(): Promise<SeoProductItem[]> {
     const apiProducts: any[] = productsRes?.data || [];
     const crmProducts: any[] = crmPricelistRes?.data || [];
 
-    // Map giá đã tính toán từ Bảng giá Gas Tuấn Khang (Pricelist ID 2 trên Odoo)
+    // Map giá đã tính toán từ Bảng giá thương hiệu (Pricelist ID 2 trên CRM Gas Nhà Mình)
     const priceMap = new Map<number, { price: number; lst_price: number }>();
     crmProducts.forEach((cp) => {
       if (cp.id) priceMap.set(cp.id, { price: cp.price, lst_price: cp.lst_price });
@@ -284,11 +284,11 @@ export async function fetchDynamicGasPrices(): Promise<SeoProductItem[]> {
       new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(num).replace('₫', 'đ');
 
     return SEO_PRODUCTS.map((prod) => {
-      const odooId = ID_BY_SLUG[prod.slug];
-      if (odooId && priceMap.has(odooId)) {
-        const crmItem = priceMap.get(odooId)!;
+      const crmProductId = ID_BY_SLUG[prod.slug];
+      if (crmProductId && priceMap.has(crmProductId)) {
+        const crmItem = priceMap.get(crmProductId)!;
         const exchangeVal = crmItem.price > 0 ? crmItem.price : crmItem.lst_price;
-        const depositVal = depositMap.get(odooId) || (prod.category === 'cong-nghiep' ? 1000000 : 250000);
+        const depositVal = depositMap.get(crmProductId) || (prod.category === 'cong-nghiep' ? 1000000 : 250000);
         const newVal = exchangeVal + depositVal;
 
         return {

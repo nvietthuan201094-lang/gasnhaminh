@@ -23,7 +23,7 @@ export default function GasPriceTable({
   const [isLoading, setIsLoading] = useState(!initialProducts);
 
   useEffect(() => {
-    // Tự động lấy động bảng giá từ Backend Odoo CRM
+    // Tự động lấy động bảng giá từ Backend CRM Gas Nhà Mình
     fetchDynamicGasPrices()
       .then((dynamicData) => {
         if (dynamicData && dynamicData.length > 0) {
