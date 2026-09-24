@@ -6,6 +6,7 @@ import { DISTRICTS_DATA } from "@/lib/districts";
 import { trackGoogleAdsPurchase } from "@/lib/tracking";
 import { trackInteractionApi } from "@/lib/api";
 import { WATERMARK_LOGO_SRC } from "@/lib/watermark";
+import GasPriceTable from "@/components/GasPriceTable";
 
 const HOTLINE = "0888 113 831";
 const HOTLINE_TEL = "tel:0888113831";
@@ -420,15 +421,15 @@ const DEFAULT_PRICING_TABS: TabItem[] = [
   {
     label: "Gas Dân Dụng 12kg",
     products: [
-      { id: 168, slug: "gas-v-gas-xam-12kg", name: "Gas V-Gas xám 12kg", tag: "Bán chạy nhất", tagColor: "bg-[#FF5722]", exchangePrice: "485.000đ", newPrice: "735.000đ", img: "https://crm.posplus.vn/api/v1/public_image/product.template/168/image_1024" },
-      { id: 172, slug: "gas-v-gas-do-12kg", name: "Gas V-Gas đỏ 12 kg", tag: "Chính hãng", tagColor: "bg-[#0E9F6E]", exchangePrice: "485.000đ", newPrice: "735.000đ", img: "https://crm.posplus.vn/api/v1/public_image/product.template/172/image_1024" },
+      { id: 168, slug: "gas-v-gas-xam-12kg", name: "Gas V-Gas xám 12kg", tag: "Bán chạy nhất", tagColor: "bg-[#FF5722]", exchangePrice: "480.000đ", newPrice: "730.000đ", img: "https://crm.posplus.vn/api/v1/public_image/product.template/168/image_1024" },
+      { id: 172, slug: "gas-v-gas-do-12kg", name: "Gas V-Gas đỏ 12 kg", tag: "Chính hãng", tagColor: "bg-[#0E9F6E]", exchangePrice: "500.000đ", newPrice: "750.000đ", img: "https://crm.posplus.vn/api/v1/public_image/product.template/172/image_1024" },
       { id: 175, slug: "gas-petrolimex-dung-12kg", name: "Gas Petrolimex đứng 12kg", tag: "An toàn tuyệt đối", tagColor: "bg-[#1A56DB]", exchangePrice: "485.000đ", newPrice: "735.000đ", img: "https://crm.posplus.vn/api/v1/public_image/product.template/175/image_1024" },
       { id: 176, slug: "gas-petrolimex-shell-12kg", name: "Gas Petrolimex shell 12kg", tag: "Van Chụp Shell", tagColor: "bg-[#E02424]", exchangePrice: "485.000đ", newPrice: "735.000đ", img: "https://crm.posplus.vn/api/v1/public_image/product.template/176/image_1024" },
-      { id: 178, slug: "gas-v-gas-pe-12kg", name: "Gas V-Gas-PE 12kg", tag: "Bọc nhựa PE", tagColor: "bg-[#7C3AED]", exchangePrice: "485.000đ", newPrice: "735.000đ", img: "https://crm.posplus.vn/api/v1/public_image/product.template/178/image_1024" },
-      { id: 177, slug: "gas-v-gas-shell-12kg", name: "Gas V-Gas-Shell 12kg", tag: "Van Chụp Shell", tagColor: "bg-[#E02424]", exchangePrice: "485.000đ", newPrice: "735.000đ", img: "https://crm.posplus.vn/api/v1/public_image/product.template/177/image_1024" },
-      { id: 174, slug: "gas-v-gas-vang-12kg", name: "Gas V-Gas vàng 12kg", tag: "Lửa xanh bền", tagColor: "bg-[#F59E0B]", exchangePrice: "485.000đ", newPrice: "735.000đ", img: "https://crm.posplus.vn/api/v1/public_image/product.template/174/image_1024" },
-      { id: 169, slug: "gas-tuan-khang-vang-12kg", name: "Gas Tuấn Khang vàng 12kg", tag: "Tiết kiệm", tagColor: "bg-[#10B981]", exchangePrice: "465.000đ", newPrice: "715.000đ", img: "https://crm.posplus.vn/api/v1/public_image/product.template/169/image_1024" },
-      { id: 171, slug: "gas-tuan-khang-xanh-12kg", name: "Gas Tuấn Khang xanh 12kg", tag: "Chất lượng cao", tagColor: "bg-[#10B981]", exchangePrice: "465.000đ", newPrice: "715.000đ", img: "https://crm.posplus.vn/api/v1/public_image/product.template/171/image_1024" },
+      { id: 178, slug: "gas-v-gas-pe-12kg", name: "Gas V-Gas-PE 12kg", tag: "Bọc nhựa PE", tagColor: "bg-[#7C3AED]", exchangePrice: "500.000đ", newPrice: "750.000đ", img: "https://crm.posplus.vn/api/v1/public_image/product.template/178/image_1024" },
+      { id: 177, slug: "gas-v-gas-shell-12kg", name: "Gas V-Gas-Shell 12kg", tag: "Van Chụp Shell", tagColor: "bg-[#E02424]", exchangePrice: "500.000đ", newPrice: "750.000đ", img: "https://crm.posplus.vn/api/v1/public_image/product.template/177/image_1024" },
+      { id: 174, slug: "gas-v-gas-vang-12kg", name: "Gas V-Gas vàng 12kg", tag: "Lửa xanh bền", tagColor: "bg-[#F59E0B]", exchangePrice: "500.000đ", newPrice: "750.000đ", img: "https://crm.posplus.vn/api/v1/public_image/product.template/174/image_1024" },
+      { id: 169, slug: "gas-tuan-khang-vang-12kg", name: "Gas Tuấn Khang vàng 12kg", tag: "Tiết kiệm", tagColor: "bg-[#10B981]", exchangePrice: "480.000đ", newPrice: "730.000đ", img: "https://crm.posplus.vn/api/v1/public_image/product.template/169/image_1024" },
+      { id: 171, slug: "gas-tuan-khang-xanh-12kg", name: "Gas Tuấn Khang xanh 12kg", tag: "Chất lượng cao", tagColor: "bg-[#10B981]", exchangePrice: "480.000đ", newPrice: "730.000đ", img: "https://crm.posplus.vn/api/v1/public_image/product.template/171/image_1024" },
     ],
   },
   {
@@ -462,14 +463,29 @@ function usePricingTabs() {
         };
         data.forEach(p => {
           if (p.landingpageCategory && catMap[p.landingpageCategory]) {
+            // Chuẩn hóa theo Bảng giá Gas Tuấn Khang:
+            let exchangePrice = p.price > 0 ? new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(p.price) : "Liên hệ báo giá";
+            let newPrice = p.deposit_price ? new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(p.price + p.deposit_price) : null;
+            
+            if (p.slug === 'gas-v-gas-xam-12kg') {
+              exchangePrice = '480.000đ';
+              newPrice = '730.000đ';
+            } else if (p.slug?.includes('tuan-khang')) {
+              exchangePrice = '480.000đ';
+              newPrice = '730.000đ';
+            } else if (p.slug?.includes('v-gas')) {
+              exchangePrice = '500.000đ';
+              newPrice = '750.000đ';
+            }
+
             catMap[p.landingpageCategory].push({
               id: p.id,
               slug: p.slug,
               name: p.name,
               tag: p.tags?.[0] || "",
               tagColor: "bg-[#FF5722]",
-              exchangePrice: p.price > 0 ? new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(p.price) : "Liên hệ báo giá",
-              newPrice: p.deposit_price ? new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(p.price + p.deposit_price) : null,
+              exchangePrice,
+              newPrice,
               img: p.image || BASE + "gas-gia-dinh-6965_220x352.jpg"
             });
           }
@@ -529,28 +545,50 @@ function PricingSection({ tabs, onSelectProduct }: { tabs: TabItem[], onSelectPr
 
   const products = tabs[activeTab]?.products || tabs[0].products;
 
+  const handleSelectFromTable = (productSlug: string) => {
+    for (let c = 0; c < tabs.length; c++) {
+      const pIdx = tabs[c].products.findIndex((p) => p.slug === productSlug);
+      if (pIdx !== -1) {
+        onSelectProduct(c, pIdx);
+        return;
+      }
+    }
+    const el = document.getElementById("order-form");
+    if (el) el.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
-    <section id="bang-gia" className="bg-[#F9FAFB] py-16 md:py-20">
+    <section id="bang-gia" className="bg-[#F9FAFB] py-16 md:py-20 border-t border-gray-200">
       <div className="max-w-[1440px] mx-auto px-4 md:px-8 lg:px-20">
-        <div className="text-center mb-10">
-          <span className="text-xs font-bold uppercase tracking-widest text-[#E02424] mb-2 block">Giá cập nhật hôm nay</span>
-          <h2 className="text-3xl md:text-4xl font-black text-[#111928]">Bảng Giá Đổi Gas</h2>
-        </div>
+        {/* Component Bảng Giá Gas Tương Tác */}
+        <GasPriceTable
+          brandName="Gas Nhà Mình"
+          onSelectProduct={handleSelectFromTable}
+          showDetailLink={true}
+        />
 
-        {/* Tabs */}
-        <div className="flex flex-wrap gap-2 justify-center mb-8">
-          {tabs.map((tab, i) => (
-            <button key={tab.label} onClick={() => setActiveTab(i)}
-              className={`px-5 py-2.5 rounded-full font-bold text-sm border-2 transition-all ${activeTab === i ? "bg-[#E02424] border-[#E02424] text-white shadow-md" : "bg-white border-[#E5E7EB] text-[#111928] hover:border-[#E02424] hover:text-[#E02424]"}`}>
-              {tab.label}
-            </button>
-          ))}
-        </div>
+        {/* Danh Mục Thẻ Sản Phẩm Chi Tiết */}
+        <div className="mt-14 pt-12 border-t border-gray-200">
+          <div className="text-center mb-8">
+            <span className="text-xs font-bold uppercase tracking-widest text-[#E02424] mb-2 block">Hình ảnh thực tế</span>
+            <h3 className="text-2xl md:text-3xl font-black text-[#111928]">Danh Mục Bình Gas Chi Tiết</h3>
+          </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-          {products.map((p, i) => (
-            <ProductCard key={p.id} p={p} onSelect={() => onSelectProduct(activeTab, i)} />
-          ))}
+          {/* Tabs */}
+          <div className="flex flex-wrap gap-2 justify-center mb-8">
+            {tabs.map((tab, i) => (
+              <button key={tab.label} onClick={() => setActiveTab(i)}
+                className={`px-5 py-2.5 rounded-full font-bold text-sm border-2 transition-all ${activeTab === i ? "bg-[#E02424] border-[#E02424] text-white shadow-md" : "bg-white border-[#E5E7EB] text-[#111928] hover:border-[#E02424] hover:text-[#E02424]"}`}>
+                {tab.label}
+              </button>
+            ))}
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            {products.map((p, i) => (
+              <ProductCard key={p.id} p={p} onSelect={() => onSelectProduct(activeTab, i)} />
+            ))}
+          </div>
         </div>
       </div>
     </section>

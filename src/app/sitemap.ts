@@ -34,6 +34,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: 'daily',
       priority: 1.0,
     },
+    {
+      url: `${baseUrl}/bang-gia`,
+      lastModified: STATIC_LAST_MODIFIED,
+      changeFrequency: 'daily',
+      priority: 0.95,
+    },
     ...districtUrls,
     ...productUrls,
   ];
