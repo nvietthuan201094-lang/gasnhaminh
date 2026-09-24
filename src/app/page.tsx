@@ -33,12 +33,8 @@ function Header() {
     <header className="fixed top-0 left-0 right-0 z-50 bg-white shadow-md">
       {/* Desktop */}
       <div className="hidden md:flex items-center justify-between px-8 lg:px-20 h-[72px] max-w-[1440px] mx-auto">
-        <a href="#hero" className="flex items-center gap-3">
-          <img src="/logo.png" alt="Gas Nhà Mình Logo" className="h-12 w-auto object-contain" />
-          <div className="flex flex-col leading-tight">
-            <span className="text-[#E02424] font-black text-xl tracking-tight">GAS NHÀ MÌNH</span>
-            <span className="text-[10px] text-[#6B7280] font-medium uppercase tracking-widest">Hết gas, gọi Nhà Mình</span>
-          </div>
+        <a href="#hero" className="flex items-center py-1 hover:opacity-95 transition-opacity">
+          <img src="/logo.png" alt="Gas Nhà Mình - Hết Gas Gọi Mình" className="h-[58px] w-auto object-contain" />
         </a>
         <nav className="flex gap-8">
           {[["Bảng giá", "#bang-gia"], ["Cam kết", "#cam-ket"], ["Cửa hàng", "#he-thong-cua-hang"], ["Khu vực giao", "#khu-vuc"]].map(([label, href]) => (
@@ -66,9 +62,8 @@ function Header() {
       </div>
       {/* Mobile */}
       <div className="flex md:hidden items-center justify-between px-4 h-14">
-        <a href="#hero" className="flex items-center gap-2">
-          <img src="/logo.png" alt="Gas Nhà Mình Logo" className="h-9 w-auto object-contain" />
-          <span className="text-[#E02424] font-black text-base">GAS NHÀ MÌNH</span>
+        <a href="#hero" className="flex items-center py-1">
+          <img src="/logo.png" alt="Gas Nhà Mình - Hết Gas Gọi Mình" className="h-10 w-auto object-contain" />
         </a>
         <a 
           href={HOTLINE_TEL} 
@@ -1056,9 +1051,8 @@ function Footer() {
       <div className="max-w-[1440px] mx-auto px-4 md:px-8 lg:px-20">
         <div className="grid md:grid-cols-3 gap-8 mb-10">
           <div>
-            <div className="flex items-center gap-3 mb-3">
-              <img src="/logo.png" alt="Gas Nhà Mình Logo" className="h-10 w-auto object-contain bg-white rounded-lg p-1" />
-              <div className="text-[#E02424] font-black text-2xl">GAS NHÀ MÌNH</div>
+            <div className="mb-4">
+              <img src="/logo.png" alt="Gas Nhà Mình - Hết Gas Gọi Mình" className="h-14 md:h-16 w-auto object-contain bg-white rounded-xl p-2 shadow-sm" />
             </div>
             <p className="text-white/60 text-sm leading-relaxed mb-4">
               Kênh đặt gas chính hãng uy tín tại TP.HCM. Giao hỏa tốc 15–20 phút, nguyên tem chống giả, hỗ trợ kiểm tra an toàn tận nơi.
