@@ -152,8 +152,9 @@ export default async function BangGiaPage() {
         {/* Header Tối Giản */}
         <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-gray-200">
           <div className="max-w-[1440px] mx-auto px-4 md:px-8 h-16 flex items-center justify-between">
-            <Link href="/" className="flex items-center gap-2">
-              <span className="text-[#FF5722] font-black text-xl tracking-tight">🏠 GAS NHÀ MÌNH</span>
+            <Link href="/" className="flex items-center gap-2.5">
+              <img src="/logo.png" alt="Gas Nhà Mình Logo" className="h-10 w-auto object-contain" />
+              <span className="text-[#FF5722] font-black text-xl tracking-tight">GAS NHÀ MÌNH</span>
               <span className="hidden sm:inline-block text-xs text-gray-500 font-medium pl-2 border-l border-gray-300">
                 Hết gas, gọi Nhà Mình
               </span>

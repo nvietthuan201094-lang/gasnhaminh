@@ -179,8 +179,8 @@ export default function DistrictLandingView({ district }: DistrictLandingViewPro
       {/* Navigation Header */}
       <header className="sticky top-0 z-40 bg-white/95 backdrop-blur border-b border-neutral-200 shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2">
-            <span className="text-2xl">🔥</span>
+          <Link href="/" className="flex items-center gap-2.5">
+            <img src="/logo.png" alt="Gas Nhà Mình Logo" className="h-10 w-auto object-contain" />
             <div>
               <span className="text-xl font-black tracking-tight text-red-600">{BRAND_NAME}</span>
               <span className="hidden sm:inline-block text-xs font-semibold text-neutral-500 ml-2">
@@ -658,7 +658,10 @@ export default function DistrictLandingView({ district }: DistrictLandingViewPro
       {/* Footer */}
       <footer className="bg-neutral-900 text-neutral-400 text-xs py-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-3">
-          <div className="text-white font-black text-lg">🔥 {BRAND_NAME} – {district.fullName}</div>
+          <div className="flex items-center justify-center gap-2.5 text-white font-black text-lg">
+            <img src="/logo.png" alt="Gas Nhà Mình Logo" className="h-8 w-auto object-contain bg-white rounded p-0.5" />
+            <span>{BRAND_NAME} – {district.fullName}</span>
+          </div>
           <p>{BRAND_TAGLINE} | Trạm giao hàng phục vụ: {district.hubName}</p>
           <p>Hotline khẩn cấp 24/7: <a href={HOTLINE_TEL} className="text-red-400 font-bold">{HOTLINE_DISPLAY}</a></p>
           <p className="text-neutral-500 pt-4 border-t border-neutral-800 text-[11px]">

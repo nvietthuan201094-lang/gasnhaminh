@@ -57,7 +57,7 @@ export const metadata: Metadata = {
     siteName: "Gas Nhà Mình",
     images: [
       {
-        url: "https://images.unsplash.com/photo-1736960894843-bc9afe9b22c9?w=1200&h=630&fit=crop&auto=format",
+        url: "/logo.png",
         width: 1200,
         height: 630,
         alt: "Gas Nhà Mình - Giao Gas Siêu Tốc TP.HCM",
@@ -70,7 +70,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Gas Nhà Mình – Đặt Gas, Giao Gas Tận Nhà Siêu Tốc 15-20 Phút TP.HCM",
     description: "Hết gas, gọi Gas Nhà Mình. Giao gas, đặt gas online, đổi bình gas hỏa tốc tại tất cả quận huyện TP.HCM.",
-    images: ["https://images.unsplash.com/photo-1736960894843-bc9afe9b22c9?w=1200&h=630&fit=crop&auto=format"],
+    images: ["/logo.png"],
   },
   icons: {
     icon: [
