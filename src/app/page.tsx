@@ -455,45 +455,51 @@ function usePricingTabs() {
   const [tabs, setTabs] = useState<TabItem[]>(DEFAULT_PRICING_TABS);
 
   useEffect(() => {
-    getProductsPromise().then(data => {
-      if (data && data.length > 0) {
-        const catMap: Record<string, any[]> = {
-          'gas_dan_dung': [],
-          'gas_cong_nghiep': []
+    import("@/lib/api").then(m => m.fetchDynamicGasPrices()).then(products => {
+      if (products && products.length > 0) {
+        const ID_BY_SLUG: Record<string, number> = {
+          'gas-v-gas-xam-12kg': 168,
+          'gas-v-gas-do-12kg': 172,
+          'gas-v-gas-vang-12kg': 174,
+          'gas-v-gas-xanh-den-12kg': 173,
+          'gas-v-gas-pe-12kg': 178,
+          'gas-v-gas-shell-12kg': 177,
+          'gas-petrolimex-dung-12kg': 175,
+          'gas-petrolimex-shell-12kg': 176,
+          'gas-tuan-khang-vang-12kg': 169,
+          'gas-tuan-khang-xanh-12kg': 171,
+          'gas-bo-45kg': 170,
         };
-        data.forEach(p => {
-          if (p.landingpageCategory && catMap[p.landingpageCategory]) {
-            // Chuẩn hóa theo Bảng giá Gas Tuấn Khang:
-            let exchangePrice = p.price > 0 ? new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(p.price) : "Liên hệ báo giá";
-            let newPrice = p.deposit_price ? new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(p.price + p.deposit_price) : null;
-            
-            if (p.slug === 'gas-v-gas-xam-12kg') {
-              exchangePrice = '480.000đ';
-              newPrice = '730.000đ';
-            } else if (p.slug?.includes('tuan-khang')) {
-              exchangePrice = '480.000đ';
-              newPrice = '730.000đ';
-            } else if (p.slug?.includes('v-gas')) {
-              exchangePrice = '500.000đ';
-              newPrice = '750.000đ';
-            }
 
-            catMap[p.landingpageCategory].push({
-              id: p.id,
-              slug: p.slug,
-              name: p.name,
-              tag: p.tags?.[0] || "",
-              tagColor: "bg-[#FF5722]",
-              exchangePrice,
-              newPrice,
-              img: p.image || BASE + "gas-gia-dinh-6965_220x352.jpg"
-            });
-          }
-        });
-        
+        const danDung: ProductItem[] = products
+          .filter(p => p.category !== 'cong-nghiep')
+          .map(p => ({
+            id: ID_BY_SLUG[p.slug] || 168,
+            slug: p.slug,
+            name: p.name,
+            tag: p.tag,
+            tagColor: p.brand === 'V-Gas' ? 'bg-[#FF5722]' : (p.brand === 'Tuấn Khang' ? 'bg-[#10B981]' : 'bg-[#1A56DB]'),
+            exchangePrice: p.price,
+            newPrice: p.newPrice || null,
+            img: p.image || `https://crm.posplus.vn/api/v1/public_image/product.template/${ID_BY_SLUG[p.slug] || 168}/image_1024`
+          }));
+
+        const congNghiep: ProductItem[] = products
+          .filter(p => p.category === 'cong-nghiep')
+          .map(p => ({
+            id: ID_BY_SLUG[p.slug] || 170,
+            slug: p.slug,
+            name: p.name,
+            tag: p.tag,
+            tagColor: 'bg-[#DC2626]',
+            exchangePrice: p.price,
+            newPrice: p.newPrice || null,
+            img: p.image || `https://crm.posplus.vn/api/v1/public_image/product.template/${ID_BY_SLUG[p.slug] || 170}/image_1024`
+          }));
+
         setTabs([
-          { label: "Gas Dân Dụng", products: catMap['gas_dan_dung'].length > 0 ? catMap['gas_dan_dung'] : DEFAULT_PRICING_TABS[0].products },
-          { label: "Gas Công Nghiệp", products: catMap['gas_cong_nghiep'].length > 0 ? catMap['gas_cong_nghiep'] : DEFAULT_PRICING_TABS[1].products }
+          { label: "Gas Dân Dụng 12kg", products: danDung },
+          { label: "Gas Công Nghiệp", products: congNghiep }
         ]);
       }
     }).catch(console.error);

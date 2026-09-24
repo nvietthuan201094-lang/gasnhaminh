@@ -1,23 +1,44 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { SEO_PRODUCTS, HOTLINE_DISPLAY, HOTLINE_TEL, ZALO_URL } from '@/lib/districts';
+import { SEO_PRODUCTS, SeoProductItem, HOTLINE_DISPLAY, HOTLINE_TEL, ZALO_URL } from '@/lib/districts';
+import { fetchDynamicGasPrices } from '@/lib/api';
 
 interface GasPriceTableProps {
   onSelectProduct?: (productSlug: string, isExchange: boolean) => void;
   brandName?: string;
   showDetailLink?: boolean;
+  initialProducts?: SeoProductItem[];
 }
 
 export default function GasPriceTable({
   onSelectProduct,
   brandName = 'Gas Nhà Mình',
   showDetailLink = true,
+  initialProducts,
 }: GasPriceTableProps) {
+  const [products, setProducts] = useState<SeoProductItem[]>(initialProducts || SEO_PRODUCTS);
   const [filterCategory, setFilterCategory] = useState<'all' | '12kg' | '45kg'>('all');
+  const [isLoading, setIsLoading] = useState(!initialProducts);
 
-  const filteredProducts = SEO_PRODUCTS.filter((p) => {
+  useEffect(() => {
+    // Tự động lấy động bảng giá từ Backend Odoo CRM
+    fetchDynamicGasPrices()
+      .then((dynamicData) => {
+        if (dynamicData && dynamicData.length > 0) {
+          setProducts(dynamicData);
+        }
+      })
+      .catch((err) => {
+        console.error('Không thể tải bảng giá từ CRM:', err);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  }, []);
+
+  const filteredProducts = products.filter((p) => {
     if (filterCategory === '12kg') return p.weight === '12kg';
     if (filterCategory === '45kg') return p.weight === '45kg';
     return true;

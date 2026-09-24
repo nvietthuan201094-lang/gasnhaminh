@@ -1,14 +1,15 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
 import GasPriceTable from '@/components/GasPriceTable';
-import { getAllDistricts, SEO_PRODUCTS, HOTLINE_DISPLAY, HOTLINE_TEL, ZALO_URL } from '@/lib/districts';
+import { getAllDistricts, HOTLINE_DISPLAY, HOTLINE_TEL, ZALO_URL } from '@/lib/districts';
+import { fetchDynamicGasPrices } from '@/lib/api';
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://gasnhaminh.com';
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: 'Bảng Giá Gas Hôm Nay Mới Nhất 2026 | Báo Giá Đổi Bình Gas 12kg, 45kg TP.HCM – Gas Nhà Mình',
-  description: 'Bảng giá gas hôm nay mới nhất cập nhật liên tục từ Gas Nhà Mình. Báo giá đổi bình gas 12kg V-Gas, Petrolimex, Tuấn Khang và gas bò 45kg chính hãng. Cam kết đủ 12kg ruột, cân gas tại chỗ, giao nhanh 15 phút TP.HCM. Hotline: 0888 113 831.',
+  description: 'Bảng giá gas hôm nay mới nhất cập nhật liên tục từ hệ thống CRM Odoo Gas Nhà Mình. Báo giá đổi bình gas 12kg V-Gas, Petrolimex, Tuấn Khang và gas bò 45kg chính hãng. Cam kết đủ 12kg ruột, cân gas tại chỗ, giao nhanh 15 phút TP.HCM. Hotline: 0888 113 831.',
   keywords: [
     'giá gas hôm nay',
     'giá gas mới nhất',
@@ -38,8 +39,10 @@ export const metadata: Metadata = {
   },
 };
 
-export default function BangGiaPage() {
+export default async function BangGiaPage() {
   const districts = getAllDistricts();
+  const products = await fetchDynamicGasPrices();
+
   const currentDateStr = new Intl.DateTimeFormat('vi-VN', {
     day: '2-digit',
     month: '2-digit',
@@ -72,7 +75,7 @@ export default function BangGiaPage() {
         '@id': `${SITE_URL}/bang-gia#pricelist`,
         name: 'Bảng giá gas hôm nay mới nhất 2026 - Gas Nhà Mình',
         description: 'Báo giá chi tiết các loại bình gas chính hãng 12kg và 45kg',
-        itemListElement: SEO_PRODUCTS.map((prod, idx) => ({
+        itemListElement: products.map((prod, idx) => ({
           '@type': 'Product',
           position: idx + 1,
           name: prod.name,
@@ -213,22 +216,22 @@ export default function BangGiaPage() {
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-3xl mx-auto text-left">
                 <div className="bg-white p-3.5 rounded-xl border border-gray-200 shadow-sm">
                   <span className="text-[11px] text-gray-500 block font-semibold">V-Gas Xám 12kg:</span>
-                  <span className="text-lg font-black text-[#FF5722]">480.000đ</span>
+                  <span className="text-lg font-black text-[#FF5722]">{products.find(p => p.slug === 'gas-v-gas-xam-12kg')?.price || '480.000đ'}</span>
                   <span className="text-[10px] text-emerald-600 block mt-0.5 font-medium">✓ Bán chạy nhất</span>
                 </div>
                 <div className="bg-white p-3.5 rounded-xl border border-gray-200 shadow-sm">
                   <span className="text-[11px] text-gray-500 block font-semibold">V-Gas Màu/Shell:</span>
-                  <span className="text-lg font-black text-[#FF5722]">500.000đ</span>
+                  <span className="text-lg font-black text-[#FF5722]">{products.find(p => p.slug === 'gas-v-gas-do-12kg')?.price || '500.000đ'}</span>
                   <span className="text-[10px] text-gray-500 block mt-0.5">✓ Vỏ bình cao cấp</span>
                 </div>
                 <div className="bg-white p-3.5 rounded-xl border border-gray-200 shadow-sm">
                   <span className="text-[11px] text-gray-500 block font-semibold">Tuấn Khang 12kg:</span>
-                  <span className="text-lg font-black text-[#FF5722]">480.000đ</span>
+                  <span className="text-lg font-black text-[#FF5722]">{products.find(p => p.slug === 'gas-tuan-khang-vang-12kg')?.price || '480.000đ'}</span>
                   <span className="text-[10px] text-emerald-600 block mt-0.5 font-medium">✓ Tiết kiệm chi phí</span>
                 </div>
                 <div className="bg-white p-3.5 rounded-xl border border-gray-200 shadow-sm">
                   <span className="text-[11px] text-gray-500 block font-semibold">Petrolimex 12kg:</span>
-                  <span className="text-lg font-black text-[#FF5722]">485.000đ</span>
+                  <span className="text-lg font-black text-[#FF5722]">{products.find(p => p.slug === 'gas-petrolimex-dung-12kg')?.price || '485.000đ'}</span>
                   <span className="text-[10px] text-gray-500 block mt-0.5">✓ Thương hiệu quốc gia</span>
                 </div>
               </div>
@@ -239,7 +242,7 @@ export default function BangGiaPage() {
         {/* Khung Bảng Giá Tương Tác Chi Tiết */}
         <section className="py-12 md:py-16">
           <div className="max-w-[1440px] mx-auto px-4 md:px-8">
-            <GasPriceTable showDetailLink={false} brandName="Gas Nhà Mình" />
+            <GasPriceTable initialProducts={products} showDetailLink={false} brandName="Gas Nhà Mình" />
           </div>
         </section>
 
