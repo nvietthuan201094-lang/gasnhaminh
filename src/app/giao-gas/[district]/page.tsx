@@ -133,7 +133,8 @@ export default async function DistrictPage({ params }: PageProps) {
         '@id': `${pageUrl}#products`,
         name: `Bảng giá bình gas chính hãng Gas Nhà Mình tại ${district.name}`,
         itemListElement: SEO_PRODUCTS.map((prod, idx) => {
-          const productPrice = prod.priceVal > 0 ? prod.priceVal : 1730000;
+          const defaultPrice = prod.weight === '45kg' ? 1730000 : (prod.brand === 'Tuấn Khang Gas' || prod.slug === 'gas-v-gas-xam-12kg' ? 480000 : 500000);
+          const productPrice = prod.priceVal > 0 ? prod.priceVal : defaultPrice;
           return {
             '@type': 'Product',
             position: idx + 1,
