@@ -54,7 +54,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       type: 'website',
       images: [
         {
-          url: 'https://images.unsplash.com/photo-1736960894843-bc9afe9b22c9?w=1200&h=630&fit=crop&auto=format',
+          url: '/hero_gasnhaminh.jpg',
           width: 1200,
           height: 630,
           alt: `Giao gas ${district.name} - ${BRAND_NAME}`,
@@ -141,7 +141,7 @@ export default async function DistrictPage({ params }: PageProps) {
             name: `${prod.name} tại ${district.name}`,
             description: prod.desc,
             image: [
-              prod.image || 'https://images.unsplash.com/photo-1736960894843-bc9afe9b22c9?w=800&h=800&fit=crop&auto=format',
+              prod.image || '/hero_gasnhaminh.jpg',
             ],
             sku: `${prod.slug}-${district.slug}`,
             mpn: `${prod.slug}-${district.slug}`,

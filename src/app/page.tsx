@@ -207,212 +207,6 @@ function WatermarkOverlay({
   );
 }
 
-function HeroSection({ tabs, activeCategory, setActiveCategory, selectedProduct, setSelectedProduct, onOrderSuccess }: { tabs: TabItem[], activeCategory: number, setActiveCategory: (i: number) => void, selectedProduct: number, setSelectedProduct: (i: number) => void, onOrderSuccess: () => void }) {
-  const [selectedOption, setSelectedOption] = useState<"exchange" | "new">("exchange");
-  const [name, setName] = useState("");
-  const [phone, setPhone] = useState("");
-  const [address, setAddress] = useState("");
-  const [note, setNote] = useState("");
-
-  const category = tabs[activeCategory] || tabs[0];
-  const product = category.products[selectedProduct] || category.products[0];
-  const isDanDung = activeCategory === 0;
-  const isCN = activeCategory === 1;
-  const isContact = product.exchangePrice.includes("Liên hệ");
-
-  const displayPrice = isDanDung
-    ? selectedOption === "exchange" ? product.exchangePrice : (product.newPrice ?? product.exchangePrice)
-    : product.exchangePrice;
-
-  function handleCategoryChange(i: number) {
-    setActiveCategory(i);
-    setSelectedProduct(0);
-    setSelectedOption("exchange");
-  }
-
-  async function handleSubmit(e: React.FormEvent) {
-    e.preventDefault();
-    if (name && phone && address) {
-      const { createOrder } = await import("@/lib/api");
-      const res = await createOrder({
-        productId: product.id?.toString() || "0",
-        slug: product.slug,
-        quantity: 1,
-        customerName: name,
-        customerPhone: phone,
-        customerAddress: address,
-        note: note + (selectedOption === "new" ? " (Mua trọn bộ)" : " (Chỉ đổi gas)"),
-        cylinderAction: selectedOption
-      });
-      if (res.success) {
-        const val = Number(displayPrice.replace(/\D/g, "")) || 0;
-        const transactionId = (res as any).orderName || res.orderId || `LP-${Date.now()}`;
-
-        // Fire Google Ads Conversion (AW-18424275416/efNKCO--rewcENjDsNFE) & GA4 Purchase strictly after backend confirmation
-        trackGoogleAdsPurchase({
-          transactionId,
-          value: val,
-          currency: "VND",
-          items: [
-            {
-              id: product.id,
-              name: product.name,
-              category: category.label,
-              price: val,
-              quantity: 1,
-            },
-          ],
-        });
-
-        onOrderSuccess();
-      } else {
-        alert(res.message || "Đã có lỗi xảy ra khi đặt hàng.");
-      }
-    }
-  }
-
-  return (
-    <section id="hero" className="pt-14 md:pt-[72px] bg-gradient-to-br from-[#fff5f5] to-[#fff]">
-      <div className="max-w-[1440px] mx-auto px-4 md:px-8 lg:px-20 w-full pt-4 md:pt-6 pb-12 md:pb-16 grid md:grid-cols-2 gap-8 lg:gap-12 items-start">
-        {/* Left */}
-        <div>
-          <div className="inline-flex items-center gap-2 bg-[#FFF3CD] text-[#92400E] text-xs md:text-sm font-semibold px-3.5 py-1.5 md:px-4 md:py-2 rounded-full mb-4">
-            ⚡ Giao gas trong 15–20 phút tại TP.HCM
-          </div>
-          <h1 className="text-3xl md:text-4xl lg:text-5xl font-black text-[#111928] leading-tight mb-4">
-            Giao Gas Tận Nhà Siêu Tốc 15 Phút – <span className="text-[#E02424]">Gas Nhà Mình</span>
-            <span className="block text-xl md:text-2xl lg:text-3xl text-gray-700 font-bold mt-2">
-              Đại lý đổi bình gas chính hãng, an toàn tại TP.HCM
-            </span>
-          </h1>
-          <p className="text-[#6B7280] text-base md:text-lg mb-6 leading-relaxed">
-            Bình gas chính hãng 100%, nguyên tem chống giả, kiểm định an toàn PCCC. Miễn phí kiểm tra dây van và vệ sinh bếp.
-          </p>
-          <ul className="space-y-3 mb-8">
-            {[
-              "Chuẩn đủ 12kg ruột – Chiết nạp tự động, nguyên tem niêm phong chống giả",
-              "Tem niêm phong & màng co chống hàng giả",
-              "Kỹ thuật viên kiểm tra rò rỉ gas bằng bọt xà phòng/máy đo chuyên dụng",
-            ].map((item) => (
-              <li key={item} className="flex items-start gap-3 text-[#111928] text-sm md:text-base">
-                <span className="mt-0.5 flex-shrink-0 w-5 h-5 bg-[#0E9F6E] rounded-full flex items-center justify-center">
-                  <svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4L3.5 6.5L9 1" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/></svg>
-                </span>
-                {item}
-              </li>
-            ))}
-          </ul>
-          <div className="relative rounded-2xl overflow-hidden shadow-lg hidden md:block select-none group" onContextMenu={(e) => e.preventDefault()}>
-            <img
-              src="https://images.unsplash.com/photo-1698034303551-7e0e114be199?w=600&h=340&fit=crop&auto=format"
-              alt="Nhân viên giao gas chuyên nghiệp"
-              className="w-full object-cover"
-              style={{ maxHeight: 220 }}
-            />
-            <WatermarkOverlay type="banner" />
-          </div>
-        </div>
-
-        {/* Right — Order Form */}
-        <div id="order-form" className="bg-white rounded-2xl shadow-2xl border border-[#E5E7EB] p-6 md:p-8">
-          <div className="flex items-center gap-2 mb-5">
-            <span className="w-1.5 h-8 bg-[#E02424] rounded-full inline-block"></span>
-            <h2 className="text-lg font-black text-[#111928] uppercase tracking-wide">Đặt Giao GAS NHÀ MÌNH</h2>
-          </div>
-
-          <form onSubmit={handleSubmit} className="space-y-4">
-            {/* Step 1 — Category */}
-            <div>
-              <label className="text-xs font-semibold text-[#6B7280] uppercase tracking-wider mb-2 block">Danh mục sản phẩm</label>
-              <div className="grid grid-cols-2 gap-1.5">
-                {tabs.map((tab, i) => (
-                  <button key={tab.label} type="button" onClick={() => handleCategoryChange(i)}
-                    className={`text-xs font-bold px-2 py-2.5 rounded-lg border-2 transition-all leading-tight ${activeCategory === i ? "bg-[#E02424] border-[#E02424] text-white" : "bg-white border-[#E5E7EB] text-[#111928] hover:border-[#E02424]"}`}>
-                    {tab.label}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {/* Step 2 — Product */}
-            <div>
-              <label className="text-xs font-semibold text-[#6B7280] uppercase tracking-wider mb-2 block">Chọn sản phẩm</label>
-              <div className="space-y-1.5">
-                {category.products.map((p, i) => (
-                  <label key={p.id}
-                    className={`flex items-center justify-between px-3 py-2.5 rounded-lg border-2 cursor-pointer transition-all ${selectedProduct === i ? "border-[#E02424] bg-[#fff5f5]" : "border-[#E5E7EB] hover:border-[#E02424]/40"}`}>
-                    <div className="flex items-center gap-2.5">
-                      <input type="radio" name="product" checked={selectedProduct === i}
-                        onChange={() => setSelectedProduct(i)} className="accent-[#E02424] flex-shrink-0" />
-                      <span className="text-sm font-medium text-[#111928] leading-snug">{p.name}</span>
-                    </div>
-                    <span className={`text-xs font-black flex-shrink-0 ml-2 ${p.exchangePrice.includes("Liên hệ") ? "text-[#6B7280]" : "text-[#E02424]"}`}>
-                      {p.exchangePrice.includes("Liên hệ") ? "Báo giá" : p.exchangePrice}
-                    </span>
-                  </label>
-                ))}
-              </div>
-            </div>
-
-            {/* Step 3 — Đổi/Mua mới (chỉ hiện cho Gas Dân Dụng có newPrice) */}
-            {isDanDung && product.newPrice && (
-              <div>
-                <label className="text-xs font-semibold text-[#6B7280] uppercase tracking-wider mb-2 block">Tùy chọn</label>
-                <div className="grid grid-cols-2 gap-2">
-                  <label className={`flex flex-col items-center p-3 rounded-lg border-2 cursor-pointer transition-all ${selectedOption === "exchange" ? "border-[#E02424] bg-[#fff5f5]" : "border-[#E5E7EB]"}`}>
-                    <input type="radio" name="buyoption" checked={selectedOption === "exchange"} onChange={() => setSelectedOption("exchange")} className="accent-[#E02424] mb-1" />
-                    <span className="text-xs font-semibold text-[#111928]">Chỉ đổi gas</span>
-                    <span className="text-xs text-[#6B7280]">(Đã có vỏ)</span>
-                    <span className="text-sm font-black text-[#E02424] mt-1">{product.exchangePrice}</span>
-                  </label>
-                  <label className={`flex flex-col items-center p-3 rounded-lg border-2 cursor-pointer transition-all ${selectedOption === "new" ? "border-[#E02424] bg-[#fff5f5]" : "border-[#E5E7EB]"}`}>
-                    <input type="radio" name="buyoption" checked={selectedOption === "new"} onChange={() => setSelectedOption("new")} className="accent-[#E02424] mb-1" />
-                    <span className="text-xs font-semibold text-[#111928]">Mua trọn bộ</span>
-                    <span className="text-xs text-[#6B7280]">(Chưa có vỏ)</span>
-                    <span className="text-sm font-black text-[#E02424] mt-1">{product.newPrice}</span>
-                  </label>
-                </div>
-              </div>
-            )}
-
-            {/* Price summary */}
-            {!isContact && (
-              <div className="flex items-center justify-between bg-[#F9FAFB] rounded-lg px-4 py-2.5 border border-[#E5E7EB]">
-                <span className="text-xs text-[#6B7280] font-semibold">Tổng thanh toán</span>
-                <span className="text-xl font-black text-[#E02424]">{displayPrice}</span>
-              </div>
-            )}
-            {isContact && (
-              <div className="flex items-center gap-2 bg-[#FFF3CD] rounded-lg px-4 py-2.5 border border-[#FCD34D]">
-                <span className="text-sm">📞</span>
-                <span className="text-xs text-[#92400E] font-semibold">Sản phẩm này cần báo giá – nhân viên sẽ liên hệ ngay sau khi đặt.</span>
-              </div>
-            )}
-
-            {/* Contact inputs */}
-            <div className="space-y-2.5">
-              <input required value={name} onChange={e => setName(e.target.value)} type="text" placeholder="Họ và tên *"
-                className="w-full border-2 border-[#E5E7EB] rounded-lg px-4 py-3 text-sm focus:border-[#E02424] outline-none transition-colors" />
-              <input required value={phone} onChange={e => setPhone(e.target.value)} type="tel" placeholder="Số điện thoại của bạn *"
-                className="w-full border-2 border-[#E5E7EB] rounded-lg px-4 py-3 text-sm focus:border-[#E02424] outline-none transition-colors" />
-              <input required value={address} onChange={e => setAddress(e.target.value)} type="text" placeholder="Địa chỉ (Số nhà, Tên đường, Phường/Quận) *"
-                className="w-full border-2 border-[#E5E7EB] rounded-lg px-4 py-3 text-sm focus:border-[#E02424] outline-none transition-colors" />
-              <input value={note} onChange={e => setNote(e.target.value)} type="text" placeholder="Ghi chú (VD: Giao lầu 2, gọi trước khi đến)"
-                className="w-full border-2 border-[#E5E7EB] rounded-lg px-4 py-3 text-sm focus:border-[#E02424] outline-none transition-colors" />
-            </div>
-
-            <button type="submit"
-              className="w-full bg-[#FF5722] hover:bg-[#E65100] text-white font-black text-base py-4 rounded-xl transition-colors uppercase tracking-wide shadow-lg shadow-orange-200">
-              🚀 {isContact ? "GỬI YÊU CẦU BÁO GIÁ" : "GIAO GAS CHO TÔI NGAY"}
-            </button>
-            <p className="text-center text-xs text-[#6B7280]">Cam kết không phát sinh thêm bất kỳ chi phí nào</p>
-          </form>
-        </div>
-      </div>
-    </section>
-  );
-}
-
 const BASE = "https://placehold.co/220x352/f9fafb/6b7280.png?text=";
 
 export type ProductItem = { id: number; slug: string; name: string; tag: string; tagColor: string; exchangePrice: string; newPrice: string | null; img: string };
@@ -509,6 +303,402 @@ function usePricingTabs() {
   return tabs;
 }
 
+function HeroSection({ onOrderClick }: { onOrderClick: () => void }) {
+  return (
+    <section id="hero" className="pt-16 md:pt-[84px] bg-gradient-to-b from-[#FFF5F5] via-white to-white">
+      <div className="max-w-[1440px] mx-auto px-4 md:px-8 lg:px-20 pt-6 md:pt-10 pb-6 md:pb-10">
+        <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+          {/* Left Hero Content (Ảnh 1) */}
+          <div className="lg:col-span-7 flex flex-col justify-center">
+            <div className="inline-flex items-center gap-2 bg-[#FFF3CD] text-[#92400E] text-xs md:text-sm font-bold px-3.5 py-1.5 rounded-full mb-5 w-fit shadow-xs">
+              <span>⚡</span> Giao gas trong 15–20 phút tại TP.HCM
+            </div>
+
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#111928] leading-[1.15] mb-4 tracking-tight">
+              Đổi Gas Chính Hãng Giao Tận Nhà{" "}
+              <span className="text-[#E02424] inline-block">Chỉ 15 Phút! ⏱️</span>
+            </h1>
+
+            <p className="text-lg md:text-xl font-bold text-[#1F2A37] mb-3">
+              Đại lý gas uy tín tại TP.HCM
+            </p>
+
+            <p className="text-[#4B5563] text-sm md:text-base leading-relaxed mb-6 max-w-xl">
+              Bình gas chính hãng 100%, đủ 12kg ruột, nguyên tem niêm phong chống giả. Giao nhanh – kiểm tra rò rỉ an toàn miễn phí – thanh toán linh hoạt.
+            </p>
+
+            {/* CTAs */}
+            <div className="flex flex-wrap items-center gap-3 sm:gap-4 mb-8">
+              <button
+                type="button"
+                onClick={onOrderClick}
+                className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 bg-[#F97316] hover:bg-[#EA580C] text-white font-black text-sm md:text-base px-7 py-4 rounded-xl shadow-lg shadow-orange-500/30 active:scale-95 transition-all uppercase tracking-wide cursor-pointer"
+              >
+                <span>🛒 ĐẶT GAS NGAY</span>
+                <span className="text-lg leading-none">→</span>
+              </button>
+
+              <a
+                href={HOTLINE_TEL}
+                onClick={() => pushGtmEvent("click_call", { phone: HOTLINE })}
+                className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2.5 bg-white hover:bg-red-50 text-[#E02424] border-2 border-[#E02424] font-black text-sm md:text-base px-6 py-3.5 rounded-xl shadow-xs active:scale-95 transition-all cursor-pointer"
+              >
+                <PhoneIcon size={18} />
+                <div className="text-left">
+                  <div className="text-[10px] font-bold text-[#6B7280] leading-none uppercase">GỌI NGAY</div>
+                  <div className="text-sm md:text-base font-black leading-tight text-[#E02424]">{HOTLINE}</div>
+                </div>
+              </a>
+            </div>
+
+            {/* 4 Micro Features */}
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-6 border-t border-gray-200/80">
+              <div className="flex items-center gap-2">
+                <span className="w-6 h-6 rounded-full bg-amber-100 text-amber-700 flex items-center justify-center text-xs font-black flex-shrink-0">⚡</span>
+                <span className="text-xs font-bold text-[#111928]">Giao nhanh 15 phút</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="w-6 h-6 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-xs font-black flex-shrink-0">✔</span>
+                <span className="text-xs font-bold text-[#111928]">Bình chính hãng đủ 12kg</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="w-6 h-6 rounded-full bg-red-100 text-[#E02424] flex items-center justify-center text-xs font-black flex-shrink-0">🛡️</span>
+                <span className="text-xs font-bold text-[#111928]">Kiểm tra rò rỉ miễn phí</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="w-6 h-6 rounded-full bg-indigo-100 text-indigo-700 flex items-center justify-center text-xs font-black flex-shrink-0">💳</span>
+                <span className="text-xs font-bold text-[#111928]">Thanh toán linh hoạt</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Right Hero Image (Ảnh 1) */}
+          <div className="lg:col-span-5">
+            <div className="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-white select-none group" onContextMenu={(e) => e.preventDefault()}>
+              <img
+                src="/hero_gasnhaminh.jpg"
+                alt="Nhân viên giao gas Gas Nhà Mình chính hãng chuyên nghiệp tại TP.HCM"
+                className="w-full h-[320px] sm:h-[400px] lg:h-[460px] object-cover object-center group-hover:scale-105 transition-transform duration-500"
+              />
+              <WatermarkOverlay type="banner" />
+            </div>
+          </div>
+        </div>
+
+        {/* 3-Card Trust Strip (Ảnh 1) */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8 md:mt-10">
+          <div className="flex items-center gap-4 bg-white p-4 md:p-5 rounded-2xl border border-gray-200/70 shadow-xs hover:shadow-md transition-shadow">
+            <div className="w-12 h-12 rounded-xl bg-red-100 text-[#E02424] flex items-center justify-center text-base font-black flex-shrink-0">
+              100%
+            </div>
+            <div>
+              <h4 className="font-black text-[#111928] text-sm md:text-base">Gas chính hãng</h4>
+              <p className="text-xs text-[#6B7280] mt-0.5">Nhập từ nhà phân phối uy tín</p>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-4 bg-white p-4 md:p-5 rounded-2xl border border-gray-200/70 shadow-xs hover:shadow-md transition-shadow">
+            <div className="w-12 h-12 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center text-xl flex-shrink-0">
+              🛡️
+            </div>
+            <div>
+              <h4 className="font-black text-[#111928] text-sm md:text-base">An toàn tuyệt đối</h4>
+              <p className="text-xs text-[#6B7280] mt-0.5">Kiểm tra rò rỉ trước khi bàn giao</p>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-4 bg-white p-4 md:p-5 rounded-2xl border border-gray-200/70 shadow-xs hover:shadow-md transition-shadow">
+            <div className="w-12 h-12 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center text-xl flex-shrink-0">
+              👥
+            </div>
+            <div>
+              <h4 className="font-black text-[#111928] text-sm md:text-base">Phục vụ tận tâm</h4>
+              <p className="text-xs text-[#6B7280] mt-0.5">Hỗ trợ nhanh, tư vấn rõ ràng</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function OrderSection({
+  tabs,
+  activeCategory,
+  setActiveCategory,
+  selectedProduct,
+  setSelectedProduct,
+  onOrderSuccess,
+}: {
+  tabs: TabItem[];
+  activeCategory: number;
+  setActiveCategory: (i: number) => void;
+  selectedProduct: number;
+  setSelectedProduct: (i: number) => void;
+  onOrderSuccess: () => void;
+}) {
+  const [selectedOption, setSelectedOption] = useState<"exchange" | "new">("exchange");
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [address, setAddress] = useState("");
+  const [note, setNote] = useState("");
+  const [submitting, setSubmitting] = useState(false);
+
+  const category = tabs[activeCategory] || tabs[0];
+  const product = category?.products[selectedProduct] || category?.products[0];
+  const isDanDung = activeCategory === 0;
+  const isContact = product?.exchangePrice?.includes("Liên hệ") || false;
+
+  const displayPrice = isDanDung
+    ? selectedOption === "exchange" ? product?.exchangePrice : (product?.newPrice ?? product?.exchangePrice)
+    : product?.exchangePrice;
+
+  const brandName = (() => {
+    const n = product?.name || "";
+    if (n.includes("V-Gas")) return "V-Gas";
+    if (n.includes("Petrolimex")) return "Petrolimex";
+    if (n.includes("Saigon Petro")) return "Saigon Petro";
+    if (n.includes("Tuấn Khang")) return "Tuấn Khang";
+    if (n.includes("Gia Đình")) return "Gas Gia Đình";
+    if (n.includes("Pacific")) return "Gas Pacific";
+    if (n.includes("Dầu Khí")) return "Gas Dầu Khí";
+    return "Chính hãng";
+  })();
+
+  function handleDropdownChange(e: React.ChangeEvent<HTMLSelectElement>) {
+    const [cStr, pStr] = e.target.value.split("-");
+    const c = parseInt(cStr, 10);
+    const p = parseInt(pStr, 10);
+    if (!isNaN(c) && !isNaN(p)) {
+      setActiveCategory(c);
+      setSelectedProduct(p);
+      setSelectedOption("exchange");
+    }
+  }
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    if (!name || !phone || !address || submitting) return;
+    setSubmitting(true);
+    try {
+      const { createOrder } = await import("@/lib/api");
+      const res = await createOrder({
+        productId: product?.id?.toString() || "0",
+        slug: product?.slug || "gas",
+        quantity: 1,
+        customerName: name,
+        customerPhone: phone,
+        customerAddress: address,
+        note: note + (selectedOption === "new" ? " (Mua trọn bộ)" : " (Chỉ đổi gas)"),
+        cylinderAction: selectedOption,
+      });
+
+      if (res.success) {
+        const val = Number((displayPrice || "0").replace(/\D/g, "")) || 0;
+        const transactionId = (res as any).orderName || res.orderId || `LP-${Date.now()}`;
+
+        trackGoogleAdsPurchase({
+          transactionId,
+          value: val,
+          currency: "VND",
+          items: [
+            {
+              id: product?.id || 0,
+              name: product?.name || "Gas",
+              category: category?.label || "Gas",
+              price: val,
+              quantity: 1,
+            },
+          ],
+        });
+
+        onOrderSuccess();
+      } else {
+        alert(res.message || "Đã có lỗi xảy ra khi đặt hàng.");
+      }
+    } catch (err) {
+      console.error(err);
+      alert("Đã có lỗi kết nối khi đặt hàng. Vui lòng bấm gọi hotline để được hỗ trợ nhanh nhất!");
+    } finally {
+      setSubmitting(false);
+    }
+  }
+
+  const selectedKey = `${activeCategory}-${selectedProduct}`;
+
+  return (
+    <section id="order-form" className="py-16 md:py-20 bg-gradient-to-b from-[#F9FAFB] to-white relative border-t border-gray-200">
+      <div className="max-w-[1440px] mx-auto px-4 md:px-8 lg:px-20">
+        <div className="max-w-xl mx-auto bg-white rounded-3xl shadow-2xl border border-red-100 p-6 md:p-8 relative">
+          {/* Top Pill Badge (Ảnh 2) */}
+          <div className="flex justify-end -mt-9 -mr-3 md:-mr-5 mb-3">
+            <span className="bg-[#E02424] text-white text-[11px] font-black uppercase px-3.5 py-1.5 rounded-full shadow-md tracking-wider">
+              Giao gas siêu tốc
+            </span>
+          </div>
+
+          {/* Heading */}
+          <div className="mb-6">
+            <h2 className="text-2xl md:text-3xl font-black text-[#111928] tracking-tight">
+              Đặt Gas / Đổi Bình Tận Nhà
+            </h2>
+            <p className="text-xs md:text-sm text-[#6B7280] mt-1.5 leading-relaxed">
+              Cam kết nguyên tem niêm phong – Kiểm tra an toàn trước khi thanh toán.
+            </p>
+          </div>
+
+          <form onSubmit={handleSubmit} className="space-y-4">
+            {/* Dropdown select (Ảnh 2) */}
+            <div className="border-2 border-red-500/20 bg-red-50/20 p-3.5 rounded-2xl">
+              <label className="text-xs md:text-sm font-bold text-[#111928] mb-2 block">
+                Chọn loại bình gas cần đặt:
+              </label>
+
+              <div className="relative">
+                <select
+                  value={selectedKey}
+                  onChange={handleDropdownChange}
+                  className="w-full bg-white border-2 border-[#E5E7EB] rounded-xl px-4 py-3 text-sm md:text-base font-bold text-[#111928] focus:border-[#E02424] outline-none appearance-none cursor-pointer pr-10 shadow-xs"
+                >
+                  {tabs.map((tab, cIdx) => (
+                    <optgroup key={tab.label} label={tab.label}>
+                      {tab.products.map((p, pIdx) => (
+                        <option key={p.id} value={`${cIdx}-${pIdx}`}>
+                          {p.name} — {p.exchangePrice}
+                        </option>
+                      ))}
+                    </optgroup>
+                  ))}
+                </select>
+                <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-[#6B7280]">
+                  <svg className="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+                  </svg>
+                </div>
+              </div>
+
+              <div className="flex items-center justify-between text-xs mt-2 px-1">
+                <span className="text-[#6B7280] font-semibold">
+                  Hãng: <strong className="text-[#111928]">{brandName}</strong>
+                </span>
+                <span className="font-bold text-[#DC2626]">
+                  {product?.tag || "Bán chạy nhất"} 🔥
+                </span>
+              </div>
+            </div>
+
+            {/* Toggle: Đổi bình vs Mua mới (Ảnh 2) */}
+            {isDanDung && product?.newPrice && (
+              <div className="grid grid-cols-2 gap-2">
+                <button
+                  type="button"
+                  onClick={() => setSelectedOption("exchange")}
+                  className={`flex items-center justify-center gap-1.5 py-3 px-3 rounded-xl border-2 text-xs md:text-sm font-bold transition-all cursor-pointer ${
+                    selectedOption === "exchange"
+                      ? "border-[#E02424] bg-[#FFF5F5] text-[#E02424] shadow-xs"
+                      : "border-[#E5E7EB] bg-white text-[#4B5563] hover:border-gray-300"
+                  }`}
+                >
+                  <span>🔄</span> Đổi bình gas (Đã có vỏ)
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => setSelectedOption("new")}
+                  className={`flex items-center justify-center gap-1.5 py-3 px-3 rounded-xl border-2 text-xs md:text-sm font-bold transition-all cursor-pointer ${
+                    selectedOption === "new"
+                      ? "border-[#E02424] bg-[#FFF5F5] text-[#E02424] shadow-xs"
+                      : "border-[#E5E7EB] bg-white text-[#4B5563] hover:border-gray-300"
+                  }`}
+                >
+                  <span>📦</span> Mua trọn bộ (Chưa có vỏ)
+                </button>
+              </div>
+            )}
+
+            {/* Price highlight card (Ảnh 2) */}
+            {!isContact ? (
+              <div className="bg-[#F8FAFC] border border-[#E2E8F0] rounded-2xl p-4 flex items-center justify-between">
+                <div>
+                  <div className="text-[11px] font-bold uppercase tracking-wider text-[#6B7280]">
+                    {selectedOption === "exchange" ? "Giá đổi bình gas:" : "Tổng thanh toán mua trọn bộ:"}
+                  </div>
+                  <div className="text-2xl md:text-3xl font-black text-[#E02424] mt-0.5">
+                    {displayPrice}
+                  </div>
+                </div>
+
+                <div className="inline-flex items-center gap-1 bg-red-100 text-[#E02424] text-xs font-bold px-3 py-1.5 rounded-lg">
+                  {selectedOption === "exchange" ? "🔄 Đã có vỏ bình" : "📦 Đã gồm vỏ bình"}
+                </div>
+              </div>
+            ) : (
+              <div className="flex items-center gap-2 bg-[#FFF3CD] rounded-2xl p-4 border border-[#FCD34D]">
+                <span className="text-lg">📞</span>
+                <span className="text-xs md:text-sm text-[#92400E] font-semibold">
+                  Sản phẩm này cần báo giá theo số lượng – nhân viên sẽ liên hệ ngay khi nhận đơn.
+                </span>
+              </div>
+            )}
+
+            {/* Contact inputs */}
+            <div className="space-y-3 pt-2">
+              <input
+                required
+                type="text"
+                placeholder="Họ và tên của bạn *"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                className="w-full border-2 border-[#E5E7EB] rounded-xl px-4 py-3.5 text-sm md:text-base focus:border-[#E02424] outline-none transition-colors shadow-2xs"
+              />
+
+              <input
+                required
+                type="tel"
+                placeholder="Số điện thoại nhận gas *"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+                className="w-full border-2 border-[#E5E7EB] rounded-xl px-4 py-3.5 text-sm md:text-base focus:border-[#E02424] outline-none transition-colors shadow-2xs font-semibold"
+              />
+
+              <input
+                required
+                type="text"
+                placeholder="Địa chỉ giao gas (Số nhà, Tên đường, Phường/Quận) *"
+                value={address}
+                onChange={(e) => setAddress(e.target.value)}
+                className="w-full border-2 border-[#E5E7EB] rounded-xl px-4 py-3.5 text-sm md:text-base focus:border-[#E02424] outline-none transition-colors shadow-2xs"
+              />
+
+              <input
+                type="text"
+                placeholder="Ghi chú thêm (VD: Giao lầu 2, gọi trước 5 phút...)"
+                value={note}
+                onChange={(e) => setNote(e.target.value)}
+                className="w-full border-2 border-[#E5E7EB] rounded-xl px-4 py-3.5 text-sm md:text-base focus:border-[#E02424] outline-none transition-colors shadow-2xs"
+              />
+            </div>
+
+            {/* Submit Button */}
+            <button
+              type="submit"
+              disabled={submitting}
+              className="w-full bg-[#E02424] hover:bg-[#B91C1C] active:scale-[0.98] text-white font-black text-base md:text-lg py-4 px-6 rounded-2xl shadow-xl shadow-red-600/25 transition-all uppercase tracking-wide cursor-pointer disabled:opacity-70 mt-2"
+            >
+              {submitting ? "Đang gửi đơn hàng..." : "🚀 XÁC NHẬN GIAO GAS TẬN NHÀ"}
+            </button>
+
+            <div className="text-center text-xs text-[#6B7280] space-y-1 pt-1">
+              <p>⚡ Cam kết giao nhanh 15–20 phút • Đúng giá niêm phong</p>
+              <p>Miễn phí kiểm tra van dây & an toàn bếp khi lắp đặt</p>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function ProductCard({ p, onSelect }: { p: ProductItem; onSelect: () => void }) {
   return (
     <div className="bg-white rounded-2xl border border-[#E5E7EB] overflow-hidden shadow-sm hover:shadow-xl transition-shadow group flex flex-col justify-between h-full">
@@ -538,9 +728,12 @@ function ProductCard({ p, onSelect }: { p: ProductItem; onSelect: () => void }) 
         </div>
       </div>
       <div className="p-5 pt-3">
-        <button onClick={onSelect}
-          className="w-full py-2.5 rounded-lg border-2 border-[#E02424] text-[#E02424] font-bold text-sm hover:bg-[#E02424] hover:text-white transition-all">
-          {p.exchangePrice.includes("Liên hệ") ? "Nhận báo giá ngay" : "Chọn loại này"}
+        <button
+          type="button"
+          onClick={onSelect}
+          className="w-full py-3 rounded-xl bg-[#F97316] hover:bg-[#EA580C] active:scale-95 text-white font-black text-sm shadow-md shadow-orange-500/25 transition-all uppercase tracking-wider flex items-center justify-center gap-2 cursor-pointer"
+        >
+          <span>🛒</span> {p.exchangePrice.includes("Liên hệ") ? "Nhận báo giá ngay" : "ĐẶT NGAY"}
         </button>
       </div>
     </div>
@@ -567,6 +760,24 @@ function PricingSection({ tabs, onSelectProduct }: { tabs: TabItem[], onSelectPr
   return (
     <section id="bang-gia" className="bg-[#F9FAFB] py-16 md:py-20 border-t border-gray-200">
       <div className="max-w-[1440px] mx-auto px-4 md:px-8 lg:px-20">
+        {/* Section Header Bảng Giá Gas Hôm Nay (Ảnh 1) */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 pb-4 border-b border-gray-200 gap-4">
+          <div>
+            <div className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-[#F97316] mb-1.5">
+              <span>—</span> BẢNG GIÁ GAS HÔM NAY <span>—</span>
+            </div>
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-[#111928] tracking-tight">
+              Giá tốt – Rõ ràng – Giao tận nhà
+            </h2>
+          </div>
+          <a
+            href="#bang-gia"
+            className="text-xs md:text-sm font-bold text-[#E02424] hover:text-[#B91C1C] flex items-center gap-1 self-start md:self-end"
+          >
+            Xem tất cả bảng giá <span>→</span>
+          </a>
+        </div>
+
         {/* Component Bảng Giá Gas Tương Tác */}
         <GasPriceTable
           brandName="Gas Nhà Mình"
@@ -585,7 +796,7 @@ function PricingSection({ tabs, onSelectProduct }: { tabs: TabItem[], onSelectPr
           <div className="flex flex-wrap gap-2 justify-center mb-8">
             {tabs.map((tab, i) => (
               <button key={tab.label} onClick={() => setActiveTab(i)}
-                className={`px-5 py-2.5 rounded-full font-bold text-sm border-2 transition-all ${activeTab === i ? "bg-[#E02424] border-[#E02424] text-white shadow-md" : "bg-white border-[#E5E7EB] text-[#111928] hover:border-[#E02424] hover:text-[#E02424]"}`}>
+                className={`px-5 py-2.5 rounded-full font-bold text-sm border-2 transition-all cursor-pointer ${activeTab === i ? "bg-[#E02424] border-[#E02424] text-white shadow-md" : "bg-white border-[#E5E7EB] text-[#111928] hover:border-[#E02424] hover:text-[#E02424]"}`}>
                 {tab.label}
               </button>
             ))}
@@ -595,6 +806,33 @@ function PricingSection({ tabs, onSelectProduct }: { tabs: TabItem[], onSelectPr
             {products.map((p, i) => (
               <ProductCard key={p.id} p={p} onSelect={() => onSelectProduct(activeTab, i)} />
             ))}
+          </div>
+        </div>
+
+        {/* 4-Item Trust bar below Pricing (Ảnh 1) */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mt-14 pt-10 border-t border-gray-200">
+          <div className="flex flex-col items-center text-center p-4 bg-white rounded-2xl border border-gray-200/80 shadow-2xs">
+            <span className="text-3xl mb-2">🛵</span>
+            <h4 className="font-bold text-sm text-[#111928]">Giao hàng siêu tốc</h4>
+            <p className="text-xs text-[#6B7280] mt-1">Chỉ từ 15 phút nội thành</p>
+          </div>
+
+          <div className="flex flex-col items-center text-center p-4 bg-white rounded-2xl border border-gray-200/80 shadow-2xs">
+            <span className="text-3xl mb-2">🛡️</span>
+            <h4 className="font-bold text-sm text-[#111928]">Bình đủ ký, an toàn</h4>
+            <p className="text-xs text-[#6B7280] mt-1">Nguyên tem, kiểm định rõ ràng</p>
+          </div>
+
+          <div className="flex flex-col items-center text-center p-4 bg-white rounded-2xl border border-gray-200/80 shadow-2xs">
+            <span className="text-3xl mb-2">🤝</span>
+            <h4 className="font-bold text-sm text-[#111928]">Đổi bình cũ – mới tận nhà</h4>
+            <p className="text-xs text-[#6B7280] mt-1">Nhanh gọn, không phát sinh</p>
+          </div>
+
+          <div className="flex flex-col items-center text-center p-4 bg-white rounded-2xl border border-gray-200/80 shadow-2xs">
+            <span className="text-3xl mb-2">💳</span>
+            <h4 className="font-bold text-sm text-[#111928]">Nhiều hình thức thanh toán</h4>
+            <p className="text-xs text-[#6B7280] mt-1">Tiền mặt, chuyển khoản, ví điện tử</p>
           </div>
         </div>
       </div>
@@ -1182,7 +1420,9 @@ export default function App() {
   return (
     <div className="min-h-screen bg-white text-[#111928]">
       <Header />
-      <HeroSection 
+      <HeroSection onOrderClick={scrollToForm} />
+      <PricingSection tabs={tabs} onSelectProduct={handleProductSelect} />
+      <OrderSection 
         tabs={tabs} 
         activeCategory={activeCategory} 
         setActiveCategory={setActiveCategory} 
@@ -1190,7 +1430,6 @@ export default function App() {
         setSelectedProduct={setSelectedProduct} 
         onOrderSuccess={() => setShowSuccess(true)} 
       />
-      <PricingSection tabs={tabs} onSelectProduct={handleProductSelect} />
       <ProcessSection />
       <TrustSection />
       <ServiceAreaSection />
