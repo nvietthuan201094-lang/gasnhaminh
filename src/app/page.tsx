@@ -1022,6 +1022,203 @@ function TrustSection() {
   );
 }
 
+function CoverageMapCard({ brand = "gasnhaminh" }: { brand?: "gasdayroi" | "gasnhaminh" }) {
+  const isGDR = brand === "gasdayroi";
+  const primaryColor = isGDR ? "#0284C7" : "#E02424";
+  const accentColor = isGDR ? "#38BDF8" : "#F87171";
+  const ringColor = isGDR ? "rgba(14, 165, 233, 0.22)" : "rgba(239, 68, 68, 0.22)";
+  const hubColor = isGDR ? "#0284C7" : "#DC2626";
+
+  const hubs = [
+    { name: "Trạm Chánh Hưng (Q.8)", x: 210, y: 245, labelX: 210, labelY: 268, align: "middle" },
+    { name: "Trạm Phú Thọ Hòa (Tân Phú)", x: 150, y: 150, labelX: 150, labelY: 137, align: "middle" },
+    { name: "Trạm Cư Xá Bình Phú (Q.6)", x: 145, y: 215, labelX: 135, labelY: 235, align: "end" },
+    { name: "Trạm Bà Điểm (Hóc Môn 1)", x: 110, y: 100, labelX: 110, labelY: 87, align: "middle" },
+    { name: "Trạm Tân Hiệp (Hóc Môn 2)", x: 75, y: 45, labelX: 75, labelY: 33, align: "middle" },
+  ];
+
+  return (
+    <div className="bg-[#0B1528] rounded-3xl border border-slate-700/60 shadow-2xl p-4 sm:p-6 text-white flex flex-col justify-between overflow-hidden relative select-none">
+      {/* Background glow effects */}
+      <div className="absolute -top-20 -right-20 w-64 h-64 bg-red-500/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute -bottom-20 -left-20 w-64 h-64 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
+
+      {/* Header */}
+      <div className="flex items-center justify-between mb-2 z-10">
+        <div>
+          <div className="flex items-center gap-2">
+            <span className="relative flex h-2.5 w-2.5">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+            </span>
+            <span className="text-[11px] font-bold uppercase tracking-wider text-emerald-400">Điều phối vệ tinh trực chiến 24/7</span>
+          </div>
+          <h3 className="text-base sm:text-lg font-black text-white mt-1">Bản Đồ Phủ Sóng & Trạm Giao Hỏa Tốc</h3>
+        </div>
+        <span className="hidden sm:inline-flex items-center gap-1 text-[11px] font-black bg-white/10 text-white px-2.5 py-1 rounded-lg border border-white/10 backdrop-blur-sm">
+          ⚡ 15–20P
+        </span>
+      </div>
+
+      {/* SVG Canvas Map */}
+      <div className="relative w-full aspect-[500/320] bg-slate-950/70 rounded-2xl border border-slate-800 overflow-hidden my-2">
+        <svg viewBox="0 0 500 320" className="w-full h-full">
+          <defs>
+            <pattern id="map-grid-gnh" width="20" height="20" patternUnits="userSpaceOnUse">
+              <circle cx="2" cy="2" r="1" fill="#334155" opacity="0.35" />
+            </pattern>
+            <linearGradient id="riverGrad-gnh" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#DC2626" stopOpacity="0.25" />
+              <stop offset="100%" stopColor="#EA580C" stopOpacity="0.1" />
+            </linearGradient>
+          </defs>
+
+          {/* Background Grid */}
+          <rect width="100%" height="100%" fill="url(#map-grid-gnh)" />
+
+          {/* Sông Sài Gòn */}
+          <path
+            d="M 360 0 C 330 40, 360 90, 320 140 C 290 180, 320 220, 290 270 C 270 300, 290 320, 300 320"
+            fill="none"
+            stroke="url(#riverGrad-gnh)"
+            strokeWidth="14"
+            strokeLinecap="round"
+          />
+          {/* Kênh Tàu Hủ / Bến Nghé */}
+          <path
+            d="M 120 215 C 180 210, 230 205, 295 185"
+            fill="none"
+            stroke="url(#riverGrad-gnh)"
+            strokeWidth="8"
+            strokeLinecap="round"
+          />
+
+          {/* River Label */}
+          <text x="330" y="70" fill="#64748B" fontSize="9" fontWeight="600" letterSpacing="1" transform="rotate(35 330,70)">SÔNG SÀI GÒN</text>
+
+          {/* District Labels */}
+          <g fill="#475569" fontSize="9.5" fontWeight="700">
+            <text x="250" y="80">GÒ VẤP</text>
+            <text x="310" y="115">BÌNH THẠNH</text>
+            <text x="390" y="140">TP. THỦ ĐỨC</text>
+            <text x="255" y="170">Q.1 / Q.3</text>
+            <text x="210" y="190">QUẬN 10</text>
+            <text x="210" y="220">QUẬN 5</text>
+            <text x="80" y="205">BÌNH TÂN</text>
+            <text x="300" y="255">QUẬN 7</text>
+            <text x="120" y="290">BÌNH CHÁNH</text>
+            <text x="280" y="300">NHÀ BÈ</text>
+            <text x="200" y="80">QUẬN 12</text>
+          </g>
+
+          {/* Dispatch Flow Lines */}
+          <g stroke={accentColor} strokeWidth="1.5" strokeDasharray="3,3" opacity="0.6">
+            <line x1="150" y1="150" x2="210" y2="190" />
+            <line x1="150" y1="150" x2="190" y2="135" />
+            <line x1="210" y1="245" x2="300" y2="255" />
+            <line x1="210" y1="245" x2="210" y2="220" />
+            <line x1="210" y1="245" x2="255" y2="170" />
+            <line x1="145" y1="215" x2="80" y2="205" />
+            <line x1="110" y1="100" x2="200" y2="80" />
+            <line x1="110" y1="100" x2="250" y2="80" />
+            <line x1="75" y1="45" x2="110" y2="100" />
+            <line x1="110" y1="100" x2="150" y2="150" />
+            <line x1="150" y1="150" x2="145" y2="215" />
+            <line x1="145" y1="215" x2="210" y2="245" />
+          </g>
+
+          {/* Coverage Radii (15-20 min circles) */}
+          {hubs.map((h, i) => (
+            <g key={i}>
+              <circle cx={h.x} cy={h.y} r="38" fill={ringColor} stroke={accentColor} strokeWidth="1" strokeDasharray="2,2" opacity="0.4" />
+              <circle cx={h.x} cy={h.y} r="20" fill={ringColor} opacity="0.3" />
+            </g>
+          ))}
+
+          {/* 5 Main Hub Pins */}
+          {hubs.map((h, i) => (
+            <g key={i}>
+              <circle cx={h.x} cy={h.y} r="8" fill={hubColor} opacity="0.4" className="animate-ping" style={{ transformOrigin: `${h.x}px ${h.y}px` }} />
+              <circle cx={h.x} cy={h.y} r="5" fill="#FFFFFF" stroke={hubColor} strokeWidth="2.5" />
+              <rect
+                x={h.align === "middle" ? h.labelX - 48 : h.align === "end" ? h.labelX - 96 : h.labelX}
+                y={h.labelY - 9}
+                width="96"
+                height="15"
+                rx="4"
+                fill="#0F172A"
+                fillOpacity="0.9"
+                stroke="#334155"
+                strokeWidth="0.8"
+              />
+              <text
+                x={h.labelX}
+                y={h.labelY + 2}
+                textAnchor={h.align as any}
+                fill="#F8FAFC"
+                fontSize="8"
+                fontWeight="800"
+              >
+                📍 {h.name.split(" ")[1] || h.name}
+              </text>
+            </g>
+          ))}
+
+          {/* Delivery In Transit Badge */}
+          <g transform="translate(195, 135)">
+            <rect width="84" height="20" rx="10" fill={primaryColor} opacity="0.95" />
+            <text x="42" y="13" textAnchor="middle" fill="#FFFFFF" fontSize="8.5" fontWeight="900">
+              🛵 Đang giao 15P
+            </text>
+          </g>
+        </svg>
+
+        {/* Map Legend Overlay */}
+        <div className="absolute bottom-2 left-2 right-2 flex items-center justify-between text-[9px] sm:text-[10px] bg-slate-900/90 backdrop-blur-md px-3 py-1.5 rounded-xl border border-slate-700/60 text-slate-300">
+          <div className="flex items-center gap-1.5">
+            <span className="w-2 h-2 rounded-full" style={{ backgroundColor: hubColor }}></span>
+            <span>Trạm kho trực chiến</span>
+          </div>
+          <div className="flex items-center gap-1.5">
+            <span className="w-3 border-t-2 border-dashed" style={{ borderColor: accentColor }}></span>
+            <span>Tuyến giao hỏa tốc 15P</span>
+          </div>
+          <div className="flex items-center gap-1 text-emerald-400 font-bold">
+            <span>✔ Phủ 24 Q.Huyện</span>
+          </div>
+        </div>
+      </div>
+
+      {/* 3 SLA Metrics */}
+      <div className="grid grid-cols-3 gap-2 my-2 text-center">
+        <div className="bg-slate-800/60 border border-slate-700/50 rounded-xl p-2">
+          <div className="text-base sm:text-lg font-black text-amber-400">15–20P</div>
+          <div className="text-[10px] text-slate-400 font-medium">Tốc độ giao trung bình</div>
+        </div>
+        <div className="bg-slate-800/60 border border-slate-700/50 rounded-xl p-2">
+          <div className="text-base sm:text-lg font-black text-emerald-400">5 Trạm kho</div>
+          <div className="text-[10px] text-slate-400 font-medium">Bố trí khắp TP.HCM</div>
+        </div>
+        <div className="bg-slate-800/60 border border-slate-700/50 rounded-xl p-2">
+          <div className="text-base sm:text-lg font-black text-red-400">Chuẩn PCCC</div>
+          <div className="text-[10px] text-slate-400 font-medium">Đo rò rỉ an toàn 100%</div>
+        </div>
+      </div>
+
+      {/* Action CTA */}
+      <a
+        href={HOTLINE_TEL}
+        onClick={() => pushGtmEvent("click_call", { phone: HOTLINE })}
+        className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl text-white font-black text-xs sm:text-sm tracking-wide shadow-lg transition-transform active:scale-95 cursor-pointer mt-1"
+        style={{ backgroundColor: primaryColor }}
+      >
+        <PhoneIcon size={16} />
+        <span>GỌI ĐIỀU PHỐI TRẠM GẦN NHẤT: {HOTLINE}</span>
+      </a>
+    </div>
+  );
+}
+
 function ServiceAreaSection() {
   return (
     <section id="khu-vuc" className="py-16 md:py-20 bg-white">
@@ -1030,33 +1227,28 @@ function ServiceAreaSection() {
           <span className="text-xs font-bold uppercase tracking-widest text-[#E02424] mb-2 block">Phủ sóng toàn thành phố</span>
           <h2 className="text-3xl md:text-4xl font-black text-[#111928]">Mạng Lưới Giao Gas Phủ Sóng TP.HCM</h2>
         </div>
-        <div className="grid md:grid-cols-2 gap-8 items-start">
-          <div>
-            <p className="text-[#6B7280] mb-5 text-sm">Giao nhanh trong <strong className="text-[#E02424]">15–20 phút</strong> tại các khu vực (bấm để xem chi tiết trạm giao):</p>
-            <div className="flex flex-wrap gap-2">
-              {DISTRICTS_DATA.map((d) => (
-                <Link
-                  key={d.slug}
-                  href={`/giao-gas/${d.slug}`}
-                  title={`Giao gas ${d.name} siêu tốc 15 phút`}
-                  className="flex items-center gap-1.5 bg-[#F9FAFB] border border-[#E5E7EB] hover:border-[#E02424] hover:bg-red-50/60 hover:text-[#E02424] transition-all rounded-lg px-3 py-2 text-sm font-semibold text-[#111928]"
-                >
-                  <span className="w-2 h-2 rounded-full bg-[#0E9F6E] inline-block"></span>{d.name}
-                </Link>
-              ))}
+        <div className="grid md:grid-cols-2 gap-8 items-stretch">
+          <div className="flex flex-col justify-between">
+            <div>
+              <p className="text-[#6B7280] mb-5 text-sm">Giao nhanh trong <strong className="text-[#E02424]">15–20 phút</strong> tại các khu vực (bấm để xem chi tiết trạm giao):</p>
+              <div className="flex flex-wrap gap-2">
+                {DISTRICTS_DATA.map((d) => (
+                  <Link
+                    key={d.slug}
+                    href={`/giao-gas/${d.slug}`}
+                    title={`Giao gas ${d.name} siêu tốc 15 phút`}
+                    className="flex items-center gap-1.5 bg-[#F9FAFB] border border-[#E5E7EB] hover:border-[#E02424] hover:bg-red-50/60 hover:text-[#E02424] transition-all rounded-lg px-3 py-2 text-sm font-semibold text-[#111928]"
+                  >
+                    <span className="w-2 h-2 rounded-full bg-[#0E9F6E] inline-block"></span>{d.name}
+                  </Link>
+                ))}
+              </div>
             </div>
             <div className="mt-6 p-4 bg-[#FFF3CD] rounded-xl border border-[#FCD34D]">
-              <p className="text-sm text-[#92400E] font-semibold">📍 Không thấy khu vực của bạn? Liên hệ hotline <a href={HOTLINE_TEL} className="text-[#E02424] underline">{HOTLINE}</a> – chúng tôi hỗ trợ thêm nhiều khu vực!</p>
+              <p className="text-sm text-[#92400E] font-semibold">📍 Không thấy khu vực của bạn? Liên hệ hotline <a href={HOTLINE_TEL} className="text-[#E02424] underline font-bold">{HOTLINE}</a> – chúng tôi hỗ trợ thêm nhiều khu vực!</p>
             </div>
           </div>
-          <div className="rounded-2xl overflow-hidden border border-[#E5E7EB] shadow-lg h-72 bg-[#E5E7EB] flex items-center justify-center relative select-none group" onContextMenu={(e) => e.preventDefault()}>
-            <img
-              src="https://images.unsplash.com/photo-1736960894843-bc9afe9b22c9?w=600&h=288&fit=crop&auto=format"
-              alt="Mạng lưới giao gas TPHCM"
-              className="w-full h-full object-cover"
-            />
-            <WatermarkOverlay type="banner" />
-          </div>
+          <CoverageMapCard brand="gasnhaminh" />
         </div>
       </div>
     </section>

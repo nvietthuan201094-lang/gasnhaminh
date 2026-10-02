@@ -179,7 +179,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                   "@id": "https://gasnhaminh.com/#business",
                   "name": "GAS NHÀ MÌNH",
                   "url": "https://gasnhaminh.com",
-                  "image": "https://images.unsplash.com/photo-1736960894843-bc9afe9b22c9?w=1200&h=630&fit=crop&auto=format",
+                  "image": "https://gasnhaminh.com/hero_gasnhaminh.jpg",
                   "telephone": "0888 113 831",
                   "priceRange": "480.000đ - 1.730.000đ",
                   "currenciesAccepted": "VND",
