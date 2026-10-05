@@ -207,8 +207,6 @@ function WatermarkOverlay({
   );
 }
 
-const BASE = "https://placehold.co/220x352/f9fafb/6b7280.png?text=";
-
 export type ProductItem = { id: number; slug: string; name: string; tag: string; tagColor: string; exchangePrice: string; newPrice: string | null; img: string };
 export type TabItem = { label: string; products: ProductItem[] };
 
@@ -218,11 +216,12 @@ const DEFAULT_PRICING_TABS: TabItem[] = [
     products: [
       { id: 168, slug: "gas-v-gas-xam-12kg", name: "Gas V-Gas xám 12kg", tag: "Bán chạy nhất", tagColor: "bg-[#FF5722]", exchangePrice: "530.000đ", newPrice: "780.000đ", img: "https://crm.posplus.vn/api/v1/public_image/product.template/168/image_1024" },
       { id: 172, slug: "gas-v-gas-do-12kg", name: "Gas V-Gas đỏ 12 kg", tag: "Chính hãng", tagColor: "bg-[#0E9F6E]", exchangePrice: "550.000đ", newPrice: "800.000đ", img: "https://crm.posplus.vn/api/v1/public_image/product.template/172/image_1024" },
-      { id: 175, slug: "gas-petrolimex-dung-12kg", name: "Gas Petrolimex đứng 12kg", tag: "An toàn tuyệt đối", tagColor: "bg-[#1A56DB]", exchangePrice: "500.000đ", newPrice: "750.000đ", img: "https://crm.posplus.vn/api/v1/public_image/product.template/175/image_1024" },
-      { id: 176, slug: "gas-petrolimex-shell-12kg", name: "Gas Petrolimex shell 12kg", tag: "Van Chụp Shell", tagColor: "bg-[#E02424]", exchangePrice: "500.000đ", newPrice: "750.000đ", img: "https://crm.posplus.vn/api/v1/public_image/product.template/176/image_1024" },
+      { id: 174, slug: "gas-v-gas-vang-12kg", name: "Gas V-Gas vàng 12kg", tag: "Lửa xanh bền", tagColor: "bg-[#F59E0B]", exchangePrice: "550.000đ", newPrice: "800.000đ", img: "https://crm.posplus.vn/api/v1/public_image/product.template/174/image_1024" },
+      { id: 173, slug: "gas-v-gas-xanh-den-12kg", name: "Gas V-Gas xanh đen 12kg", tag: "Thiết kế hiện đại", tagColor: "bg-[#FF5722]", exchangePrice: "550.000đ", newPrice: "800.000đ", img: "https://crm.posplus.vn/api/v1/public_image/product.template/173/image_1024" },
       { id: 178, slug: "gas-v-gas-pe-12kg", name: "Gas V-Gas-PE 12kg", tag: "Bọc nhựa PE", tagColor: "bg-[#7C3AED]", exchangePrice: "550.000đ", newPrice: "800.000đ", img: "https://crm.posplus.vn/api/v1/public_image/product.template/178/image_1024" },
       { id: 177, slug: "gas-v-gas-shell-12kg", name: "Gas V-Gas-Shell 12kg", tag: "Van Chụp Shell", tagColor: "bg-[#E02424]", exchangePrice: "550.000đ", newPrice: "800.000đ", img: "https://crm.posplus.vn/api/v1/public_image/product.template/177/image_1024" },
-      { id: 174, slug: "gas-v-gas-vang-12kg", name: "Gas V-Gas vàng 12kg", tag: "Lửa xanh bền", tagColor: "bg-[#F59E0B]", exchangePrice: "550.000đ", newPrice: "800.000đ", img: "https://crm.posplus.vn/api/v1/public_image/product.template/174/image_1024" },
+      { id: 175, slug: "gas-petrolimex-dung-12kg", name: "Gas Petrolimex đứng 12kg", tag: "An toàn tuyệt đối", tagColor: "bg-[#1A56DB]", exchangePrice: "500.000đ", newPrice: "750.000đ", img: "https://crm.posplus.vn/api/v1/public_image/product.template/175/image_1024" },
+      { id: 176, slug: "gas-petrolimex-shell-12kg", name: "Gas Petrolimex shell 12kg", tag: "Van Chụp Shell", tagColor: "bg-[#E02424]", exchangePrice: "500.000đ", newPrice: "750.000đ", img: "https://crm.posplus.vn/api/v1/public_image/product.template/176/image_1024" },
       { id: 169, slug: "gas-tuan-khang-vang-12kg", name: "Gas Tuấn Khang vàng 12kg", tag: "Tiết kiệm", tagColor: "bg-[#10B981]", exchangePrice: "550.000đ", newPrice: "800.000đ", img: "https://crm.posplus.vn/api/v1/public_image/product.template/169/image_1024" },
       { id: 171, slug: "gas-tuan-khang-xanh-12kg", name: "Gas Tuấn Khang xanh 12kg", tag: "Chất lượng cao", tagColor: "bg-[#10B981]", exchangePrice: "550.000đ", newPrice: "800.000đ", img: "https://crm.posplus.vn/api/v1/public_image/product.template/171/image_1024" },
     ],
@@ -231,9 +230,6 @@ const DEFAULT_PRICING_TABS: TabItem[] = [
     label: "Gas Công Nghiệp",
     products: [
       { id: 170, slug: "gas-bo-45kg", name: "Gas bò 45 kg", tag: "Nhà hàng, Quán ăn", tagColor: "bg-[#DC2626]", exchangePrice: "1.730.000đ", newPrice: "2.730.000đ", img: "https://crm.posplus.vn/api/v1/public_image/product.template/170/image_1024" },
-      { id: 10, slug: "binh-gas-45kg-saigon-petro", name: "Bình Gas 45kg (Saigon Petro)", tag: "Bếp công nghiệp", tagColor: "bg-[#6B7280]", exchangePrice: "1.730.000đ", newPrice: "2.730.000đ", img: "https://crm.posplus.vn/api/v1/public_image/product.template/170/image_1024" },
-      { id: 11, slug: "binh-gas-45kg-dau-khi", name: "Bình Gas 45kg (Gas Dầu Khí)", tag: "Công nghiệp", tagColor: "bg-[#7C3AED]", exchangePrice: "1.730.000đ", newPrice: "2.730.000đ", img: "https://crm.posplus.vn/api/v1/public_image/product.template/170/image_1024" },
-      { id: 12, slug: "petrolimex-48kg", name: "Petrolimex 48kg", tag: "Nhà máy, Xưởng", tagColor: "bg-[#1A56DB]", exchangePrice: "1.850.000đ", newPrice: "2.850.000đ", img: BASE + "220x245x2/images-(32)-9513.jpg" },
     ],
   },
 ];
