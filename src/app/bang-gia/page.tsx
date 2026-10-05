@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     type: 'website',
     images: [
       {
-        url: `${SITE_URL}/logo.png`,
+        url: '/hero_gasnhaminh.jpg',
         width: 1200,
         height: 630,
         alt: 'Bảng Giá Gas Hôm Nay – Gas Nhà Mình',
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Bảng Giá Gas Hôm Nay 2026 – Gas Nhà Mình',
     description: 'Báo giá đổi bình gas 12kg, 45kg chính hãng tại TP.HCM. Nguyên tem niêm phong, giao 15 phút.',
-    images: [`${SITE_URL}/logo.png`],
+    images: ['/hero_gasnhaminh.jpg'],
   },
 };
 
