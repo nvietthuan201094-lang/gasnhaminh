@@ -181,7 +181,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                   "url": "https://gasnhaminh.com",
                   "image": "https://gasnhaminh.com/hero_gasnhaminh.jpg",
                   "telephone": "0888 113 831",
-                  "priceRange": "480.000đ - 1.730.000đ",
+                  "priceRange": "500.000đ - 1.730.000đ",
                   "currenciesAccepted": "VND",
                   "paymentAccepted": "Tiền mặt, Chuyển khoản",
                   "description": "Dịch vụ giao gas tận nhà siêu tốc 15–20 phút tại TP.HCM. Đổi bình gas chính hãng 12kg, 45kg. Nguyên tem chống giả, an toàn tuyệt đối.",
@@ -280,7 +280,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                       "brand": { "@type": "Brand", "name": "V-Gas" },
                       "offers": {
                         "@type": "Offer",
-                        "price": "480000",
+                        "price": "530000",
                         "priceCurrency": "VND",
                         "priceValidUntil": "2026-12-31",
                         "availability": "https://schema.org/InStock",
@@ -328,7 +328,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                       "brand": { "@type": "Brand", "name": "Tuấn Khang Gas" },
                       "offers": {
                         "@type": "Offer",
-                        "price": "480000",
+                        "price": "550000",
                         "priceCurrency": "VND",
                         "priceValidUntil": "2026-12-31",
                         "availability": "https://schema.org/InStock",

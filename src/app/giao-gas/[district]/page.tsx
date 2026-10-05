@@ -32,8 +32,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     };
   }
 
-  const title = `Giao Gas, Đặt Gas, Gọi Gas ${district.name} Siêu Tốc ${district.slaMinutes} Phút | ${BRAND_NAME}`;
-  const description = `Đại lý Gas Nhà Mình tại ${district.fullName}. Đặt gas online, gọi đổi gas giao tận nhà trong ${district.slaMinutes} phút. Đầy đủ bình V-Gas xám/đỏ/vàng/PE/Shell, Petrolimex đứng/shell, Tuấn Khang vàng 12kg và gas bò 45kg. Bình chính hãng nguyên tem chống giả, an toàn tuyệt đối. Hotline: ${district.hotline}.`;
+  const title = `Giao Gas ${district.name} Siêu Tốc ${district.slaMinutes}P | ${BRAND_NAME}`;
+  const description = `Giao gas ${district.name} hỏa tốc ${district.slaMinutes} phút từ ${BRAND_NAME}. Đổi bình gas 12kg, 45kg chính hãng V-Gas, Petrolimex. Nguyên tem, cân đối chứng. Hotline: ${district.hotline}.`;
 
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://gasnhaminh.com';
   const canonicalUrl = `${siteUrl}/giao-gas/${district.slug}`;
@@ -41,7 +41,6 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   return {
     title,
     description,
-    keywords: getDistrictKeywords(district, BRAND_NAME),
     alternates: {
       canonical: canonicalUrl,
     },
@@ -60,6 +59,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
           alt: `Giao gas ${district.name} - ${BRAND_NAME}`,
         },
       ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: ['/hero_gasnhaminh.jpg'],
     },
   };
 }
@@ -86,7 +91,7 @@ export default async function DistrictPage({ params }: PageProps) {
         description: district.description,
         url: pageUrl,
         telephone: district.hotline,
-        priceRange: '465.000đ - 1.730.000đ',
+        priceRange: '500.000đ - 1.730.000đ',
         address: {
           '@type': 'PostalAddress',
           addressLocality: district.name,
@@ -133,7 +138,7 @@ export default async function DistrictPage({ params }: PageProps) {
         '@id': `${pageUrl}#products`,
         name: `Bảng giá bình gas chính hãng Gas Nhà Mình tại ${district.name}`,
         itemListElement: SEO_PRODUCTS.map((prod, idx) => {
-          const defaultPrice = prod.weight === '45kg' ? 1730000 : (prod.brand === 'Tuấn Khang Gas' || prod.slug === 'gas-v-gas-xam-12kg' ? 480000 : 500000);
+          const defaultPrice = prod.priceVal || (prod.weight === '45kg' ? 1730000 : 530000);
           const productPrice = prod.priceVal > 0 ? prod.priceVal : defaultPrice;
           return {
             '@type': 'Product',

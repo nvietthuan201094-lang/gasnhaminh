@@ -78,7 +78,7 @@ export default function GasPriceTable({
           Bảng Giá Gas Hôm Nay Mới Nhất 2026
         </h2>
         <p className="text-sm md:text-base text-gray-600 mt-2">
-          Báo giá đổi bình gas 12kg gia đình và gas bò 45kg nhà hàng. Đầy đủ tem niêm phong chống giả, cân gas tại chỗ, hỗ trợ giao siêu tốc 15 phút tại 21 quận huyện TP.HCM.
+          Báo giá đổi bình gas 12kg gia đình và gas bò 45kg nhà hàng. Đầy đủ tem niêm phong chống giả, kiểm tra an toàn van dây miễn phí, hỗ trợ giao siêu tốc 15 phút tại 24 quận huyện TP.HCM và khu vực lân cận.
         </p>
 
         {/* Bộ lọc nhanh danh mục */}

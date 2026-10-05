@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { DISTRICTS_DATA } from "@/lib/districts";
 import { trackGoogleAdsPurchase } from "@/lib/tracking";
@@ -142,7 +142,7 @@ function WatermarkOverlay({
           <div className="bg-white/95 backdrop-blur-sm px-2.5 py-1 rounded-lg shadow-md border border-slate-200 flex items-center">
             <img
               src={WATERMARK_LOGO_SRC}
-              alt="goodGas STORE"
+              alt="Gas Nhà Mình"
               className="h-6 w-auto object-contain"
               draggable={false}
             />
@@ -164,12 +164,12 @@ function WatermarkOverlay({
 
   return (
     <>
-      {/* Top Left: Logo goodGas STORE */}
+      {/* Top Left: Logo Gas Nhà Mình */}
       <div className="absolute top-2.5 left-2.5 z-10 pointer-events-none select-none">
         <div className="bg-white/95 backdrop-blur-sm px-2 py-1 rounded-lg shadow-sm border border-slate-100 flex items-center">
           <img
             src={WATERMARK_LOGO_SRC}
-            alt="goodGas STORE"
+            alt="Gas Nhà Mình"
             className="h-5 sm:h-6 w-auto object-contain"
             draggable={false}
           />
@@ -216,15 +216,15 @@ const DEFAULT_PRICING_TABS: TabItem[] = [
   {
     label: "Gas Dân Dụng 12kg",
     products: [
-      { id: 168, slug: "gas-v-gas-xam-12kg", name: "Gas V-Gas xám 12kg", tag: "Bán chạy nhất", tagColor: "bg-[#FF5722]", exchangePrice: "480.000đ", newPrice: "730.000đ", img: "https://crm.posplus.vn/api/v1/public_image/product.template/168/image_1024" },
-      { id: 172, slug: "gas-v-gas-do-12kg", name: "Gas V-Gas đỏ 12 kg", tag: "Chính hãng", tagColor: "bg-[#0E9F6E]", exchangePrice: "500.000đ", newPrice: "750.000đ", img: "https://crm.posplus.vn/api/v1/public_image/product.template/172/image_1024" },
+      { id: 168, slug: "gas-v-gas-xam-12kg", name: "Gas V-Gas xám 12kg", tag: "Bán chạy nhất", tagColor: "bg-[#FF5722]", exchangePrice: "530.000đ", newPrice: "780.000đ", img: "https://crm.posplus.vn/api/v1/public_image/product.template/168/image_1024" },
+      { id: 172, slug: "gas-v-gas-do-12kg", name: "Gas V-Gas đỏ 12 kg", tag: "Chính hãng", tagColor: "bg-[#0E9F6E]", exchangePrice: "550.000đ", newPrice: "800.000đ", img: "https://crm.posplus.vn/api/v1/public_image/product.template/172/image_1024" },
       { id: 175, slug: "gas-petrolimex-dung-12kg", name: "Gas Petrolimex đứng 12kg", tag: "An toàn tuyệt đối", tagColor: "bg-[#1A56DB]", exchangePrice: "500.000đ", newPrice: "750.000đ", img: "https://crm.posplus.vn/api/v1/public_image/product.template/175/image_1024" },
       { id: 176, slug: "gas-petrolimex-shell-12kg", name: "Gas Petrolimex shell 12kg", tag: "Van Chụp Shell", tagColor: "bg-[#E02424]", exchangePrice: "500.000đ", newPrice: "750.000đ", img: "https://crm.posplus.vn/api/v1/public_image/product.template/176/image_1024" },
-      { id: 178, slug: "gas-v-gas-pe-12kg", name: "Gas V-Gas-PE 12kg", tag: "Bọc nhựa PE", tagColor: "bg-[#7C3AED]", exchangePrice: "500.000đ", newPrice: "750.000đ", img: "https://crm.posplus.vn/api/v1/public_image/product.template/178/image_1024" },
-      { id: 177, slug: "gas-v-gas-shell-12kg", name: "Gas V-Gas-Shell 12kg", tag: "Van Chụp Shell", tagColor: "bg-[#E02424]", exchangePrice: "500.000đ", newPrice: "750.000đ", img: "https://crm.posplus.vn/api/v1/public_image/product.template/177/image_1024" },
-      { id: 174, slug: "gas-v-gas-vang-12kg", name: "Gas V-Gas vàng 12kg", tag: "Lửa xanh bền", tagColor: "bg-[#F59E0B]", exchangePrice: "500.000đ", newPrice: "750.000đ", img: "https://crm.posplus.vn/api/v1/public_image/product.template/174/image_1024" },
-      { id: 169, slug: "gas-tuan-khang-vang-12kg", name: "Gas Tuấn Khang vàng 12kg", tag: "Tiết kiệm", tagColor: "bg-[#10B981]", exchangePrice: "480.000đ", newPrice: "730.000đ", img: "https://crm.posplus.vn/api/v1/public_image/product.template/169/image_1024" },
-      { id: 171, slug: "gas-tuan-khang-xanh-12kg", name: "Gas Tuấn Khang xanh 12kg", tag: "Chất lượng cao", tagColor: "bg-[#10B981]", exchangePrice: "480.000đ", newPrice: "730.000đ", img: "https://crm.posplus.vn/api/v1/public_image/product.template/171/image_1024" },
+      { id: 178, slug: "gas-v-gas-pe-12kg", name: "Gas V-Gas-PE 12kg", tag: "Bọc nhựa PE", tagColor: "bg-[#7C3AED]", exchangePrice: "550.000đ", newPrice: "800.000đ", img: "https://crm.posplus.vn/api/v1/public_image/product.template/178/image_1024" },
+      { id: 177, slug: "gas-v-gas-shell-12kg", name: "Gas V-Gas-Shell 12kg", tag: "Van Chụp Shell", tagColor: "bg-[#E02424]", exchangePrice: "550.000đ", newPrice: "800.000đ", img: "https://crm.posplus.vn/api/v1/public_image/product.template/177/image_1024" },
+      { id: 174, slug: "gas-v-gas-vang-12kg", name: "Gas V-Gas vàng 12kg", tag: "Lửa xanh bền", tagColor: "bg-[#F59E0B]", exchangePrice: "550.000đ", newPrice: "800.000đ", img: "https://crm.posplus.vn/api/v1/public_image/product.template/174/image_1024" },
+      { id: 169, slug: "gas-tuan-khang-vang-12kg", name: "Gas Tuấn Khang vàng 12kg", tag: "Tiết kiệm", tagColor: "bg-[#10B981]", exchangePrice: "550.000đ", newPrice: "800.000đ", img: "https://crm.posplus.vn/api/v1/public_image/product.template/169/image_1024" },
+      { id: 171, slug: "gas-tuan-khang-xanh-12kg", name: "Gas Tuấn Khang xanh 12kg", tag: "Chất lượng cao", tagColor: "bg-[#10B981]", exchangePrice: "550.000đ", newPrice: "800.000đ", img: "https://crm.posplus.vn/api/v1/public_image/product.template/171/image_1024" },
     ],
   },
   {
@@ -443,6 +443,18 @@ function OrderSection({
   const [address, setAddress] = useState("");
   const [note, setNote] = useState("");
   const [submitting, setSubmitting] = useState(false);
+  const isSubmittingRef = useRef(false);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      try {
+        const savedPhone = localStorage.getItem("gas_customer_phone");
+        if (savedPhone) setPhone(savedPhone);
+        const savedName = localStorage.getItem("gas_customer_name");
+        if (savedName) setName(savedName);
+      } catch (_) {}
+    }
+  }, []);
 
   const category = tabs[activeCategory] || tabs[0];
   const product = category?.products[selectedProduct] || category?.products[0];
@@ -478,7 +490,8 @@ function OrderSection({
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (!name || !phone || !address || submitting) return;
+    if (!name || !phone || !address || submitting || isSubmittingRef.current) return;
+    isSubmittingRef.current = true;
     setSubmitting(true);
     try {
       const { createOrder } = await import("@/lib/api");
@@ -520,6 +533,7 @@ function OrderSection({
       console.error(err);
       alert("Đã có lỗi kết nối khi đặt hàng. Vui lòng bấm gọi hotline để được hỗ trợ nhanh nhất!");
     } finally {
+      isSubmittingRef.current = false;
       setSubmitting(false);
     }
   }
@@ -648,7 +662,13 @@ function OrderSection({
                 type="text"
                 placeholder="Họ và tên của bạn *"
                 value={name}
-                onChange={(e) => setName(e.target.value)}
+                onChange={(e) => {
+                  const val = e.target.value;
+                  setName(val);
+                  if (typeof window !== "undefined" && val.trim().length >= 2) {
+                    try { localStorage.setItem("gas_customer_name", val.trim()); } catch (_) {}
+                  }
+                }}
                 className="w-full border-2 border-[#E5E7EB] rounded-xl px-4 py-3.5 text-sm md:text-base focus:border-[#E02424] outline-none transition-colors shadow-2xs"
               />
 
@@ -657,7 +677,13 @@ function OrderSection({
                 type="tel"
                 placeholder="Số điện thoại nhận gas *"
                 value={phone}
-                onChange={(e) => setPhone(e.target.value)}
+                onChange={(e) => {
+                  const val = e.target.value;
+                  setPhone(val);
+                  if (typeof window !== "undefined" && val.trim().length >= 9) {
+                    try { localStorage.setItem("gas_customer_phone", val.trim()); } catch (_) {}
+                  }
+                }}
                 className="w-full border-2 border-[#E5E7EB] rounded-xl px-4 py-3.5 text-sm md:text-base focus:border-[#E02424] outline-none transition-colors shadow-2xs font-semibold"
               />
 

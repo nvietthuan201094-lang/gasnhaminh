@@ -35,12 +35,12 @@ function WatermarkOverlay({
 }) {
   return (
     <>
-      {/* Top Left: Logo goodGas STORE */}
+      {/* Top Left: Logo Gas Nhà Mình */}
       <div className="absolute top-2 left-2 z-10 pointer-events-none select-none">
         <div className="bg-white/95 backdrop-blur-sm px-1.5 py-0.5 rounded-lg shadow-sm border border-slate-100 flex items-center">
           <img
             src={WATERMARK_LOGO_SRC}
-            alt="goodGas STORE"
+            alt="Gas Nhà Mình"
             className="h-4 sm:h-5 w-auto object-contain"
             draggable={false}
           />
@@ -93,6 +93,18 @@ export default function DistrictLandingView({ district }: DistrictLandingViewPro
   const [note, setNote] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [orderSuccess, setOrderSuccess] = useState<string | null>(null);
+  const isSubmittingRef = React.useRef(false);
+
+  React.useEffect(() => {
+    if (typeof window !== "undefined") {
+      try {
+        const savedPhone = localStorage.getItem("gas_customer_phone");
+        if (savedPhone) setPhone(savedPhone);
+        const savedName = localStorage.getItem("gas_customer_name");
+        if (savedName) setName(savedName);
+      } catch (_) {}
+    }
+  }, []);
 
   React.useEffect(() => {
     import("@/lib/api").then(m => m.fetchDynamicGasPrices()).then(dynamicData => {
@@ -113,11 +125,14 @@ export default function DistrictLandingView({ district }: DistrictLandingViewPro
 
   async function handleOrderSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (!name.trim() || !phone.trim() || !address.trim()) {
-      alert("Vui lòng nhập đầy đủ Tên, Số điện thoại và Địa chỉ giao hàng.");
+    if (!name.trim() || !phone.trim() || !address.trim() || isSubmitting || isSubmittingRef.current) {
+      if (!name.trim() || !phone.trim() || !address.trim()) {
+        alert("Vui lòng nhập đầy đủ Tên, Số điện thoại và Địa chỉ giao hàng.");
+      }
       return;
     }
 
+    isSubmittingRef.current = true;
     setIsSubmitting(true);
     try {
       const res = await createOrder({
@@ -159,6 +174,7 @@ export default function DistrictLandingView({ district }: DistrictLandingViewPro
     } catch {
       alert("Lỗi kết nối. Vui lòng gọi trực tiếp Hotline để giao gas nhanh nhất!");
     } finally {
+      isSubmittingRef.current = false;
       setIsSubmitting(false);
     }
   }
@@ -418,7 +434,13 @@ export default function DistrictLandingView({ district }: DistrictLandingViewPro
                         type="text"
                         required
                         value={name}
-                        onChange={(e) => setName(e.target.value)}
+                        onChange={(e) => {
+                          const val = e.target.value;
+                          setName(val);
+                          if (typeof window !== "undefined" && val.trim().length >= 2) {
+                            try { localStorage.setItem("gas_customer_name", val.trim()); } catch (_) {}
+                          }
+                        }}
                         placeholder="Họ và tên của bạn *"
                         className="w-full text-xs bg-neutral-50 border border-neutral-200 rounded-xl px-3.5 py-2.5 focus:outline-none focus:border-red-500"
                       />
@@ -428,7 +450,13 @@ export default function DistrictLandingView({ district }: DistrictLandingViewPro
                         type="tel"
                         required
                         value={phone}
-                        onChange={(e) => setPhone(e.target.value)}
+                        onChange={(e) => {
+                          const val = e.target.value;
+                          setPhone(val);
+                          if (typeof window !== "undefined" && val.trim().length >= 9) {
+                            try { localStorage.setItem("gas_customer_phone", val.trim()); } catch (_) {}
+                          }
+                        }}
                         placeholder="Số điện thoại nhận gas *"
                         className="w-full text-xs bg-neutral-50 border border-neutral-200 rounded-xl px-3.5 py-2.5 focus:outline-none focus:border-red-500"
                       />
@@ -662,7 +690,7 @@ export default function DistrictLandingView({ district }: DistrictLandingViewPro
           <p>{BRAND_TAGLINE} | Trạm giao hàng phục vụ: {district.hubName}</p>
           <p>Hotline khẩn cấp 24/7: <a href={HOTLINE_TEL} className="text-red-400 font-bold">{HOTLINE_DISPLAY}</a></p>
           <p className="text-neutral-500 pt-4 border-t border-neutral-800 text-[11px]">
-            © {new Date().getFullYear()} GasNhaMinh.com. Nền tảng đặt gas công nghệ giao nhanh hàng đầu TP.HCM.
+            © {new Date().getFullYear()} Gas Nhà Mình. Nền tảng đặt gas công nghệ giao nhanh hàng đầu TP.HCM.
           </p>
         </div>
       </footer>

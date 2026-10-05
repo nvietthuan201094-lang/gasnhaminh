@@ -8,40 +8,43 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://gasnhaminh.com';
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: 'Bảng Giá Gas Hôm Nay Mới Nhất 2026 | Báo Giá Đổi Bình Gas 12kg, 45kg TP.HCM – Gas Nhà Mình',
-  description: 'Bảng giá gas hôm nay mới nhất cập nhật liên tục từ hệ thống CRM Gas Nhà Mình. Báo giá đổi bình gas 12kg V-Gas, Petrolimex, Tuấn Khang và gas bò 45kg chính hãng. Cam kết đủ 12kg ruột, cân gas tại chỗ, giao nhanh 15 phút TP.HCM. Hotline: 0888 113 831.',
-  keywords: [
-    'giá gas hôm nay',
-    'giá gas mới nhất',
-    'bảng giá gas',
-    'bảng giá gas hôm nay',
-    'giá đổi bình gas 12kg',
-    'giá gas petrolimex hôm nay',
-    'giá gas v-gas',
-    'giá gas tuấn khang',
-    'đổi gas bao nhiêu tiền',
-    'giá gas bò 45kg',
-    'bình gas 12kg giá bao nhiêu',
-    'giá đổi gas hôm nay',
-    'giá gas tphcm',
-    'đại lý gas nhà mình'
-  ],
+  title: 'Bảng Giá Gas Hôm Nay 2026 | Đổi Bình 12kg, 45kg – Gas Nhà Mình',
+  description: 'Bảng giá gas hôm nay mới nhất cập nhật tại Gas Nhà Mình. Báo giá đổi bình gas 12kg, 45kg chính hãng. Nguyên tem niêm phong, kiểm tra an toàn miễn phí, giao 15P.',
   alternates: {
     canonical: `${SITE_URL}/bang-gia`,
   },
   openGraph: {
-    title: 'Bảng Giá Gas Hôm Nay Mới Nhất 2026 – Gas Nhà Mình',
-    description: 'Tra cứu bảng giá đổi bình gas 12kg, 45kg chính hãng mới nhất hôm nay. Đầy đủ tem chống giả, giao hỏa tốc 15 phút tại 21 quận huyện TP.HCM.',
+    title: 'Bảng Giá Gas Hôm Nay 2026 – Gas Nhà Mình',
+    description: 'Tra cứu bảng giá đổi bình gas 12kg, 45kg chính hãng mới nhất hôm nay. Đầy đủ tem chống giả, giao hỏa tốc 15 phút tại TP.HCM.',
     url: `${SITE_URL}/bang-gia`,
     siteName: 'Gas Nhà Mình',
     locale: 'vi_VN',
     type: 'website',
+    images: [
+      {
+        url: `${SITE_URL}/logo.png`,
+        width: 1200,
+        height: 630,
+        alt: 'Bảng Giá Gas Hôm Nay – Gas Nhà Mình',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Bảng Giá Gas Hôm Nay 2026 – Gas Nhà Mình',
+    description: 'Báo giá đổi bình gas 12kg, 45kg chính hãng tại TP.HCM. Nguyên tem niêm phong, giao 15 phút.',
+    images: [`${SITE_URL}/logo.png`],
   },
 };
 
 export default async function BangGiaPage() {
   const districts = getAllDistricts();
   const products = await fetchDynamicGasPrices();
+
+  const pVGasXam = products.find(p => p.slug === 'gas-v-gas-xam-12kg')?.price || '530.000đ';
+  const pPetrolimex = products.find(p => p.slug === 'gas-petrolimex-dung-12kg')?.price || '500.000đ';
+  const pVGasMau = products.find(p => p.slug === 'gas-v-gas-do-12kg')?.price || '550.000đ';
+  const pTuanKhang = products.find(p => p.slug === 'gas-tuan-khang-vang-12kg')?.price || '550.000đ';
 
   const currentDateStr = new Intl.DateTimeFormat('vi-VN', {
     day: '2-digit',
@@ -109,7 +112,7 @@ export default async function BangGiaPage() {
             name: 'Giá gas hôm nay bao nhiêu tiền một bình 12kg?',
             acceptedAnswer: {
               '@type': 'Answer',
-              text: 'Giá đổi bình gas 12kg hôm nay dao động từ 480.000đ đến 500.000đ tùy theo thương hiệu (V-Gas xám và Tuấn Khang giá 480.000đ; các dòng V-Gas màu cao cấp và van Shell giá 500.000đ; Petrolimex giá 485.000đ). Giá đã bao gồm VAT và miễn phí giao hàng, kiểm tra an toàn tại nhà.',
+              text: `Giá đổi bình gas 12kg hôm nay dao động từ ${pPetrolimex} đến ${pVGasMau} tùy theo thương hiệu (Petrolimex giá ${pPetrolimex}; V-Gas xám giá ${pVGasXam}; Tuấn Khang và các dòng V-Gas màu/van Shell giá ${pVGasMau}). Giá đã bao gồm VAT và miễn phí giao hàng, kiểm tra an toàn tại nhà.`,
             },
           },
           {
@@ -133,7 +136,7 @@ export default async function BangGiaPage() {
             name: 'Thời gian giao gas tại TP.HCM là bao lâu?',
             acceptedAnswer: {
               '@type': 'Answer',
-              text: 'Với mạng lưới 5 kho gas chiến lược trải đều khắp TP.HCM, thời gian giao gas trung bình từ 15 đến 20 phút kể từ lúc tiếp nhận cuộc gọi hoặc đơn đặt trực tuyến.',
+              text: 'Với mạng lưới 5 trạm kho gas vật lý trực ban trải đều khắp TP.HCM, thời gian giao gas trung bình từ 15 đến 20 phút kể từ lúc tiếp nhận cuộc gọi hoặc đơn đặt trực tuyến.',
             },
           },
         ],
@@ -209,29 +212,29 @@ export default async function BangGiaPage() {
                 Bảng Giá Gas Hôm Nay Mới Nhất 2026 – Báo Giá Đổi Bình Gas 12kg & 45kg TP.HCM
               </h1>
               <p className="text-base md:text-lg text-gray-600 leading-relaxed mb-6">
-                Cập nhật chính xác <strong>giá gas hôm nay</strong> cho các dòng bình gas V-Gas xám/đỏ/vàng/PE/Shell, Petrolimex và Tuấn Khang 12kg tại <strong>Gas Nhà Mình</strong>. Cam kết đủ 12kg ruột, cân gas trực tiếp tại nhà, miễn phí kiểm tra an toàn van bếp.
+                Cập nhật chính xác <strong>giá gas hôm nay</strong> cho các dòng bình gas V-Gas xám/đỏ/vàng/PE/Shell, Petrolimex và Tuấn Khang 12kg tại <strong>Gas Nhà Mình</strong>. Cam kết đủ 12kg ruột chuẩn hãng, nguyên tem màng co niêm phong, kiểm tra rò rỉ an toàn miễn phí.
               </p>
               
               {/* Thẻ tóm tắt nhanh giá hôm nay */}
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-3xl mx-auto text-left">
                 <div className="bg-white p-3.5 rounded-xl border border-gray-200 shadow-sm">
                   <span className="text-[11px] text-gray-500 block font-semibold">V-Gas Xám 12kg:</span>
-                  <span className="text-lg font-black text-[#FF5722]">{products.find(p => p.slug === 'gas-v-gas-xam-12kg')?.price || 'Liên hệ báo giá'}</span>
+                  <span className="text-lg font-black text-[#FF5722]">{pVGasXam}</span>
                   <span className="text-[10px] text-emerald-600 block mt-0.5 font-medium">✓ Bán chạy nhất</span>
                 </div>
                 <div className="bg-white p-3.5 rounded-xl border border-gray-200 shadow-sm">
                   <span className="text-[11px] text-gray-500 block font-semibold">V-Gas Màu/Shell:</span>
-                  <span className="text-lg font-black text-[#FF5722]">{products.find(p => p.slug === 'gas-v-gas-do-12kg')?.price || 'Liên hệ báo giá'}</span>
+                  <span className="text-lg font-black text-[#FF5722]">{pVGasMau}</span>
                   <span className="text-[10px] text-gray-500 block mt-0.5">✓ Vỏ bình cao cấp</span>
                 </div>
                 <div className="bg-white p-3.5 rounded-xl border border-gray-200 shadow-sm">
                   <span className="text-[11px] text-gray-500 block font-semibold">Tuấn Khang 12kg:</span>
-                  <span className="text-lg font-black text-[#FF5722]">{products.find(p => p.slug === 'gas-tuan-khang-vang-12kg')?.price || 'Liên hệ báo giá'}</span>
+                  <span className="text-lg font-black text-[#FF5722]">{pTuanKhang}</span>
                   <span className="text-[10px] text-emerald-600 block mt-0.5 font-medium">✓ Tiết kiệm chi phí</span>
                 </div>
                 <div className="bg-white p-3.5 rounded-xl border border-gray-200 shadow-sm">
                   <span className="text-[11px] text-gray-500 block font-semibold">Petrolimex 12kg:</span>
-                  <span className="text-lg font-black text-[#FF5722]">{products.find(p => p.slug === 'gas-petrolimex-dung-12kg')?.price || 'Liên hệ báo giá'}</span>
+                  <span className="text-lg font-black text-[#FF5722]">{pPetrolimex}</span>
                   <span className="text-[10px] text-gray-500 block mt-0.5">✓ Thương hiệu quốc gia</span>
                 </div>
               </div>
@@ -326,8 +329,8 @@ export default async function BangGiaPage() {
               <div className="bg-white p-5 rounded-xl border border-gray-200 shadow-sm flex items-start gap-3.5">
                 <span className="text-2xl">⚖️</span>
                 <div>
-                  <h3 className="font-bold text-sm text-gray-900">Cân gas tại chỗ</h3>
-                  <p className="text-xs text-gray-600 mt-1">Cân điện tử trước sự chứng kiến của khách, cam kết đủ 12kg/45kg ruột chuẩn.</p>
+                  <h3 className="font-bold text-sm text-gray-900">Cam kết đủ 12kg ruột</h3>
+                  <p className="text-xs text-gray-600 mt-1">Chiết nạp tự động chuẩn xác tại nhà máy, nguyên màng co chống giả, sẵn sàng cân đối chứng tại nhà.</p>
                 </div>
               </div>
               <div className="bg-white p-5 rounded-xl border border-gray-200 shadow-sm flex items-start gap-3.5">
@@ -381,7 +384,7 @@ export default async function BangGiaPage() {
                   <span className="text-[#FF5722] group-open:rotate-180 transition-transform">▼</span>
                 </summary>
                 <p className="text-xs md:text-sm text-gray-600 mt-3 leading-relaxed">
-                  Giá đổi bình gas 12kg hôm nay dao động từ <strong>480.000đ đến 500.000đ</strong> tùy dòng sản phẩm: V-Gas xám và Tuấn Khang vàng/xanh có giá 480.000đ; các dòng V-Gas đỏ/vàng/xanh đen/PE/Shell có giá 500.000đ; Petrolimex đứng/shell có giá 485.000đ. Mức giá đã bao gồm VAT và công giao tận nhà.
+                  Giá đổi bình gas 12kg hôm nay dao động từ <strong>{pPetrolimex} đến {pVGasMau}</strong> tùy dòng sản phẩm: Petrolimex đứng/shell có giá {pPetrolimex}; V-Gas xám có giá {pVGasXam}; Tuấn Khang và các dòng V-Gas đỏ/vàng/PE/Shell có giá {pVGasMau}. Mức giá đã bao gồm VAT và công giao tận nhà.
                 </p>
               </details>
 
@@ -411,7 +414,7 @@ export default async function BangGiaPage() {
                   <span className="text-[#FF5722] group-open:rotate-180 transition-transform">▼</span>
                 </summary>
                 <p className="text-xs md:text-sm text-gray-600 mt-3 leading-relaxed">
-                  Đúng vậy. Nhờ hệ thống định vị O2O liên kết trực tiếp với 5 kho hàng thực tế tại Quận 7, Quận 8, Quận 10, Bình Thạnh và Gò Vấp, đơn hàng được chuyển ngay tới nhân viên giao gas đang trực gần địa chỉ của quý khách nhất.
+                  Đúng vậy. Nhờ hệ thống điều phối liên kết trực tiếp 5 trạm kho thực tế (Quận 8, Tân Phú, Quận 6, Hóc Môn Bà Điểm & Tân Hiệp) cùng mạng lưới kỹ thuật viên trực ban phủ khắp TP.HCM, đơn hàng được chuyển ngay tới nhân viên giao gas đang trực gần địa chỉ của quý khách nhất.
                 </p>
               </details>
             </div>

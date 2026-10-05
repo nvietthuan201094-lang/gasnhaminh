@@ -130,7 +130,44 @@ function getTrackingData(): Record<string, string> {
   }
 }
 
+let isOrderSubmitting = false;
+let lastOrderPayloadHash = '';
+let lastOrderTimestamp = 0;
+let lastOrderCachedResponse: OrderResponse | null = null;
+
 export async function createOrder(payload: OrderPayload): Promise<OrderResponse> {
+  const currentHash = `${payload.customerPhone}_${payload.slug || payload.productId}_${payload.customerAddress || ''}_${payload.cylinderAction || ''}`;
+  const now = Date.now();
+
+  // Deduplicate rapid double submissions (within 5 seconds)
+  if (isOrderSubmitting) {
+    console.warn('[API] Order submission already in flight, ignoring duplicate submission.');
+    if (lastOrderCachedResponse) return lastOrderCachedResponse;
+    return { success: false, message: 'Đơn hàng đang được xử lý, vui lòng không gửi lại liên tục.' };
+  }
+
+  if (currentHash === lastOrderPayloadHash && now - lastOrderTimestamp < 5000) {
+    console.warn('[API] Duplicate order detected within 5 seconds, reusing previous response.');
+    if (lastOrderCachedResponse) return lastOrderCachedResponse;
+    return { success: true, message: 'Đơn hàng của bạn đã được tiếp nhận thành công.' };
+  }
+
+  isOrderSubmitting = true;
+  lastOrderPayloadHash = currentHash;
+  lastOrderTimestamp = now;
+
+  // Persist customer phone and name to localStorage for future caller/interaction tracking
+  if (typeof window !== 'undefined') {
+    try {
+      if (payload.customerPhone) {
+        localStorage.setItem('gas_customer_phone', payload.customerPhone);
+      }
+      if (payload.customerName) {
+        localStorage.setItem('gas_customer_name', payload.customerName);
+      }
+    } catch (_) {}
+  }
+
   try {
     const orderData = {
       customer_name: payload.customerName || 'Khách hàng Landing Page',
@@ -161,21 +198,30 @@ export async function createOrder(payload: OrderPayload): Promise<OrderResponse>
     if (!res.ok) throw new Error('Network response was not ok');
     const json = await res.json();
     
-    return {
+    const result: OrderResponse = {
       success: json.status === 'success',
       orderId: json.order_id?.toString() || '',
       orderName: json.order_name || json.order_id?.toString() || '',
       message: json.message
     };
+    lastOrderCachedResponse = result;
+    return result;
   } catch (error) {
     console.error('Error submitting order:', error);
     return { success: false, message: 'Đã có lỗi xảy ra khi đặt hàng. Vui lòng thử lại.' };
+  } finally {
+    isOrderSubmitting = false;
   }
 }
+
+// In-memory cooldown map to prevent duplicate notification firing when clicking Call or Zalo
+const interactionCooldownMap = new Map<string, number>();
 
 /**
  * Gửi tín hiệu tương tác (Khách bấm Gọi Hotline hoặc Chat Zalo) về Server CRM Gas Nhà Mình
  * để kích hoạt thông báo đẩy FCM tức thì tới điện thoại nhân viên.
+ * 
+ * Đã tối ưu debounce 2.5s và loại bỏ sendBeacon fallback kép để triệt tiêu lỗi x2 thông báo.
  */
 export async function trackInteractionApi(
   event: 'click_zalo' | 'click_call',
@@ -188,6 +234,18 @@ export async function trackInteractionApi(
   }
 ): Promise<void> {
   if (typeof window === 'undefined') return;
+
+  const now = Date.now();
+  const dedupKey = `${event}_${extra?.phone || ''}`;
+  const lastTime = interactionCooldownMap.get(dedupKey) || 0;
+
+  // Chặn gửi trùng lặp nếu người dùng nhấn liên tiếp trong vòng 2.5 giây
+  if (now - lastTime < 2500) {
+    console.debug(`[API] Debounced duplicate interaction: ${dedupKey}`);
+    return;
+  }
+  interactionCooldownMap.set(dedupKey, now);
+
   try {
     const domain = window.location.hostname || 'gasnhaminh.com';
     let tracking = {};
@@ -195,13 +253,25 @@ export async function trackInteractionApi(
       tracking = getTrackingData();
     } catch (_) {}
 
+    // Tự động lấy số điện thoại khách hàng nếu đã từng nhập trên form hoặc đơn hàng
+    let customerPhone = extra?.customerPhone || '';
+    let customerName = extra?.customerName || '';
+    try {
+      if (!customerPhone) {
+        customerPhone = localStorage.getItem('gas_customer_phone') || '';
+      }
+      if (!customerName) {
+        customerName = localStorage.getItem('gas_customer_name') || '';
+      }
+    } catch (_) {}
+
     const payload = {
       event,
       domain,
       phone: extra?.phone || '0888 113 831',
       district: extra?.district || '',
-      customer_phone: extra?.customerPhone || '',
-      customer_name: extra?.customerName || '',
+      customer_phone: customerPhone,
+      customer_name: customerName,
       notes: extra?.notes || '',
       url: window.location.href,
       tracking,
@@ -210,30 +280,33 @@ export async function trackInteractionApi(
     const endpoint = `${API_BASE_URL}/api/v1/tracking/interaction`;
     const jsonStr = JSON.stringify(payload);
 
-    // 1. Luôn ưu tiên dùng fetch với keepalive: true và mode: 'cors'
-    // Chuẩn W3C hiện đại nhất, vượt qua CORS sạch sẽ mà không bị trình duyệt chặn ngầm như sendBeacon + JSON Blob
-    try {
-      fetch(endpoint, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-        },
-        body: jsonStr,
-        keepalive: true,
-        mode: 'cors',
-      }).catch((fetchErr) => {
-        console.warn('[API] Track interaction fetch failed, trying beacon fallback:', fetchErr);
+    // Luôn dùng fetch với keepalive: true và mode: 'cors'.
+    // KHÔNG dùng navigator.sendBeacon trong .catch vì khi mở link tel: hoặc zalo.me,
+    // trình duyệt điều hướng gây abort promise JS cục bộ nhưng request keepalive vẫn được mạng gửi đi.
+    // Nếu gọi thêm sendBeacon sẽ sinh ra 2 request đồng thời gây x2 thông báo chuông.
+    if (typeof fetch === 'function') {
+      try {
+        fetch(endpoint, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+          },
+          body: jsonStr,
+          keepalive: true,
+          mode: 'cors',
+        }).catch((fetchErr) => {
+          console.debug('[API] Track interaction dispatched via keepalive fetch.');
+        });
+      } catch (e) {
         if (typeof navigator !== 'undefined' && navigator.sendBeacon) {
           const blob = new Blob([jsonStr], { type: 'text/plain' });
           navigator.sendBeacon(endpoint, blob);
         }
-      });
-    } catch (e) {
-      if (typeof navigator !== 'undefined' && navigator.sendBeacon) {
-        const blob = new Blob([jsonStr], { type: 'text/plain' });
-        navigator.sendBeacon(endpoint, blob);
       }
+    } else if (typeof navigator !== 'undefined' && navigator.sendBeacon) {
+      const blob = new Blob([jsonStr], { type: 'text/plain' });
+      navigator.sendBeacon(endpoint, blob);
     }
   } catch (err) {
     console.error('[API] Error tracking interaction:', err);
