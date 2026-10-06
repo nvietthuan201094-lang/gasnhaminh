@@ -173,6 +173,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                     {
                       "@type": "LocalBusiness",
                       "name": "Gas Nhà Mình - Chi nhánh Quận 8",
+                      "url": "https://gasnhaminh.com",
+                      "image": "https://gasnhaminh.com/hero_gasnhaminh.jpg",
+                      "priceRange": "500.000đ - 1.730.000đ",
                       "telephone": "0888 113 831",
                       "address": {
                         "@type": "PostalAddress",
@@ -185,6 +188,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                     {
                       "@type": "LocalBusiness",
                       "name": "Gas Nhà Mình - Chi nhánh Tân Phú",
+                      "url": "https://gasnhaminh.com",
+                      "image": "https://gasnhaminh.com/hero_gasnhaminh.jpg",
+                      "priceRange": "500.000đ - 1.730.000đ",
                       "telephone": "0888 113 831",
                       "address": {
                         "@type": "PostalAddress",
@@ -197,6 +203,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                     {
                       "@type": "LocalBusiness",
                       "name": "Gas Nhà Mình - Chi nhánh Bà Điểm",
+                      "url": "https://gasnhaminh.com",
+                      "image": "https://gasnhaminh.com/hero_gasnhaminh.jpg",
+                      "priceRange": "500.000đ - 1.730.000đ",
                       "telephone": "0888 113 831",
                       "address": {
                         "@type": "PostalAddress",
@@ -209,6 +218,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                     {
                       "@type": "LocalBusiness",
                       "name": "Gas Nhà Mình - Chi nhánh Tân Hiệp",
+                      "url": "https://gasnhaminh.com",
+                      "image": "https://gasnhaminh.com/hero_gasnhaminh.jpg",
+                      "priceRange": "500.000đ - 1.730.000đ",
                       "telephone": "0888 113 831",
                       "address": {
                         "@type": "PostalAddress",
@@ -221,6 +233,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                     {
                       "@type": "LocalBusiness",
                       "name": "Gas Nhà Mình - Chi nhánh Quận 6 (Cư Xá Bình Phú)",
+                      "url": "https://gasnhaminh.com",
+                      "image": "https://gasnhaminh.com/hero_gasnhaminh.jpg",
+                      "priceRange": "500.000đ - 1.730.000đ",
                       "telephone": "0888 113 831",
                       "address": {
                         "@type": "PostalAddress",

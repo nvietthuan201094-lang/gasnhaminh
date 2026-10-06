@@ -91,6 +91,7 @@ export default async function DistrictPage({ params }: PageProps) {
         name: `Đại Lý Giao Gas, Đặt Gas ${district.name} - ${BRAND_NAME}`,
         description: district.description,
         url: pageUrl,
+        image: `${siteUrl}/hero_gasnhaminh.jpg`,
         telephone: district.hotline,
         priceRange: '500.000đ - 1.730.000đ',
         address: {
