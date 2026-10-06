@@ -96,8 +96,10 @@ export default async function DistrictPage({ params }: PageProps) {
         priceRange: '500.000đ - 1.730.000đ',
         address: {
           '@type': 'PostalAddress',
+          streetAddress: district.hubName,
           addressLocality: district.name,
-          addressRegion: 'TP. Hồ Chí Minh',
+          addressRegion: 'Thành phố Hồ Chí Minh',
+          postalCode: '700000',
           addressCountry: 'VN',
         },
         areaServed: {

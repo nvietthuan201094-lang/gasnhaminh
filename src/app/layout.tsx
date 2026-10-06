@@ -154,7 +154,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                   "description": "Dịch vụ giao gas tận nhà siêu tốc 15–20 phút tại TP.HCM. Đổi bình gas chính hãng 12kg, 45kg. Nguyên tem chống giả, an toàn tuyệt đối.",
                   "address": {
                     "@type": "PostalAddress",
-                    "addressLocality": "TP HCM",
+                    "streetAddress": "1009 Phạm Thế Hiển, Phường Chánh Hưng",
+                    "addressLocality": "Quận 8",
+                    "addressRegion": "Thành phố Hồ Chí Minh",
+                    "postalCode": "700000",
                     "addressCountry": "VN"
                   },
                   "areaServed": {
@@ -181,7 +184,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                         "@type": "PostalAddress",
                         "streetAddress": "1009 Phạm Thế Hiển, Phường Chánh Hưng",
                         "addressLocality": "Quận 8",
-                        "addressRegion": "Hồ Chí Minh",
+                        "addressRegion": "Thành phố Hồ Chí Minh",
+                        "postalCode": "700000",
                         "addressCountry": "VN"
                       }
                     },
@@ -196,7 +200,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                         "@type": "PostalAddress",
                         "streetAddress": "36 Nguyễn Văn Huyên, Phường Phú Thọ Hòa",
                         "addressLocality": "Quận Tân Phú",
-                        "addressRegion": "Hồ Chí Minh",
+                        "addressRegion": "Thành phố Hồ Chí Minh",
+                        "postalCode": "700000",
                         "addressCountry": "VN"
                       }
                     },
@@ -211,7 +216,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                         "@type": "PostalAddress",
                         "streetAddress": "64A Nguyễn Thị Hai, Xã Bà Điểm",
                         "addressLocality": "Huyện Hóc Môn",
-                        "addressRegion": "Hồ Chí Minh",
+                        "addressRegion": "Thành phố Hồ Chí Minh",
+                        "postalCode": "700000",
                         "addressCountry": "VN"
                       }
                     },
@@ -226,7 +232,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                         "@type": "PostalAddress",
                         "streetAddress": "111/7H Ấp Thới Tây 2, Tân Hiệp 18, Xã Tân Hiệp",
                         "addressLocality": "Huyện Hóc Môn",
-                        "addressRegion": "Hồ Chí Minh",
+                        "addressRegion": "Thành phố Hồ Chí Minh",
+                        "postalCode": "700000",
                         "addressCountry": "VN"
                       }
                     },
@@ -241,7 +248,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                         "@type": "PostalAddress",
                         "streetAddress": "14R Đường 32B Cư Xá Bình Phú, Phường 10",
                         "addressLocality": "Quận 6",
-                        "addressRegion": "Hồ Chí Minh",
+                        "addressRegion": "Thành phố Hồ Chí Minh",
+                        "postalCode": "700000",
                         "addressCountry": "VN"
                       }
                     }
