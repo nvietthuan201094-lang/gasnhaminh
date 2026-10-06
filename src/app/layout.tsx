@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { createProductSchema } from "@/lib/seo-schema";
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://gasnhaminh.com"),
@@ -237,86 +238,66 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                   "name": "Bảng Giá Gas Hôm Nay Mới Nhất 2026 – Gas Nhà Mình",
                   "description": "Báo giá đổi bình gas 12kg gia đình và gas bò 45kg chính hãng tại TP.HCM",
                   "itemListElement": [
-                    {
-                      "@type": "Product",
-                      "position": 1,
-                      "name": "Gas V-Gas xám 12kg",
-                      "image": "https://crm.posplus.vn/api/v1/public_image/product.template/168/image_1024",
-                      "description": "Bình V-Gas xám 12kg ngọn lửa xanh tiết kiệm, vỏ bình chuẩn PCCC, nguyên tem niêm phong chính hãng khi giao.",
-                      "brand": { "@type": "Brand", "name": "V-Gas" },
-                      "offers": {
-                        "@type": "Offer",
-                        "price": "530000",
-                        "priceCurrency": "VND",
-                        "priceValidUntil": "2026-12-31",
-                        "availability": "https://schema.org/InStock",
-                        "url": "https://gasnhaminh.com/bang-gia"
-                      }
-                    },
-                    {
-                      "@type": "Product",
-                      "position": 2,
-                      "name": "Gas Petrolimex đứng 12kg",
-                      "image": "https://crm.posplus.vn/api/v1/public_image/product.template/175/image_1024",
-                      "description": "Bình gas Petrolimex đứng 12kg chính hãng Tập đoàn Dầu khí, màng co chống giả và tem tích hợp QR Code.",
-                      "brand": { "@type": "Brand", "name": "Petrolimex" },
-                      "offers": {
-                        "@type": "Offer",
-                        "price": "500000",
-                        "priceCurrency": "VND",
-                        "priceValidUntil": "2026-12-31",
-                        "availability": "https://schema.org/InStock",
-                        "url": "https://gasnhaminh.com/bang-gia"
-                      }
-                    },
-                    {
-                      "@type": "Product",
-                      "position": 3,
-                      "name": "Gas Petrolimex shell 12kg",
-                      "image": "https://crm.posplus.vn/api/v1/public_image/product.template/176/image_1024",
-                      "description": "Bình Petrolimex van chụp Shell 12kg cao cấp, kiểm định nghiêm ngặt theo tiêu chuẩn quốc tế.",
-                      "brand": { "@type": "Brand", "name": "Petrolimex" },
-                      "offers": {
-                        "@type": "Offer",
-                        "price": "500000",
-                        "priceCurrency": "VND",
-                        "priceValidUntil": "2026-12-31",
-                        "availability": "https://schema.org/InStock",
-                        "url": "https://gasnhaminh.com/bang-gia"
-                      }
-                    },
-                    {
-                      "@type": "Product",
-                      "position": 4,
-                      "name": "Gas Tuấn Khang vàng 12kg",
-                      "image": "https://crm.posplus.vn/api/v1/public_image/product.template/169/image_1024",
-                      "description": "Bình gas Tuấn Khang vàng 12kg chất lượng ổn định, lửa xanh mạnh, lựa chọn kinh tế cho mọi gia đình.",
-                      "brand": { "@type": "Brand", "name": "Tuấn Khang Gas" },
-                      "offers": {
-                        "@type": "Offer",
-                        "price": "550000",
-                        "priceCurrency": "VND",
-                        "priceValidUntil": "2026-12-31",
-                        "availability": "https://schema.org/InStock",
-                        "url": "https://gasnhaminh.com/bang-gia"
-                      }
-                    },
-                    {
-                      "@type": "Product",
-                      "position": 5,
-                      "name": "Gas bò 45 kg",
-                      "image": "https://crm.posplus.vn/api/v1/public_image/product.template/170/image_1024",
-                      "description": "Bình gas bò 45kg chuyên dụng cho nhà hàng, quán ăn, xưởng chế biến. Giao xe tải tận nơi, xuất VAT đầy đủ.",
-                      "brand": { "@type": "Brand", "name": "PetroVietnam / Saigon Petro" },
-                      "offers": {
-                        "@type": "Offer",
-                        "price": "1730000",
-                        "priceCurrency": "VND",
-                        "priceValidUntil": "2026-12-31",
-                        "availability": "https://schema.org/InStock",
-                        "url": "https://gasnhaminh.com/bang-gia"
-                      }
-                    }
+                    createProductSchema({
+                      position: 1,
+                      name: "Gas V-Gas xám 12kg",
+                      image: "https://crm.posplus.vn/api/v1/public_image/product.template/168/image_1024",
+                      description: "Bình V-Gas xám 12kg ngọn lửa xanh tiết kiệm, vỏ bình chuẩn PCCC, nguyên tem niêm phong chính hãng khi giao.",
+                      brand: "V-Gas",
+                      sku: "gas-v-gas-xam-12kg",
+                      mpn: "gas-v-gas-xam-12kg",
+                      price: 530000,
+                      url: "https://gasnhaminh.com/bang-gia",
+                      sellerName: "Gas Nhà Mình",
+                    }),
+                    createProductSchema({
+                      position: 2,
+                      name: "Gas Petrolimex đứng 12kg",
+                      image: "https://crm.posplus.vn/api/v1/public_image/product.template/175/image_1024",
+                      description: "Bình gas Petrolimex đứng 12kg chính hãng Tập đoàn Dầu khí, màng co chống giả và tem tích hợp QR Code.",
+                      brand: "Petrolimex",
+                      sku: "gas-petrolimex-dung-12kg",
+                      mpn: "gas-petrolimex-dung-12kg",
+                      price: 500000,
+                      url: "https://gasnhaminh.com/bang-gia",
+                      sellerName: "Gas Nhà Mình",
+                    }),
+                    createProductSchema({
+                      position: 3,
+                      name: "Gas Petrolimex shell 12kg",
+                      image: "https://crm.posplus.vn/api/v1/public_image/product.template/176/image_1024",
+                      description: "Bình Petrolimex van chụp Shell 12kg cao cấp, kiểm định nghiêm ngặt theo tiêu chuẩn quốc tế.",
+                      brand: "Petrolimex",
+                      sku: "gas-petrolimex-shell-12kg",
+                      mpn: "gas-petrolimex-shell-12kg",
+                      price: 500000,
+                      url: "https://gasnhaminh.com/bang-gia",
+                      sellerName: "Gas Nhà Mình",
+                    }),
+                    createProductSchema({
+                      position: 4,
+                      name: "Gas Tuấn Khang vàng 12kg",
+                      image: "https://crm.posplus.vn/api/v1/public_image/product.template/169/image_1024",
+                      description: "Bình gas Tuấn Khang vàng 12kg chất lượng ổn định, lửa xanh mạnh, lựa chọn kinh tế cho mọi gia đình.",
+                      brand: "Tuấn Khang Gas",
+                      sku: "gas-tuan-khang-vang-12kg",
+                      mpn: "gas-tuan-khang-vang-12kg",
+                      price: 550000,
+                      url: "https://gasnhaminh.com/bang-gia",
+                      sellerName: "Gas Nhà Mình",
+                    }),
+                    createProductSchema({
+                      position: 5,
+                      name: "Gas bò 45 kg",
+                      image: "https://crm.posplus.vn/api/v1/public_image/product.template/170/image_1024",
+                      description: "Bình gas bò 45kg chuyên dụng cho nhà hàng, quán ăn, xưởng chế biến. Giao xe tải tận nơi, xuất VAT đầy đủ.",
+                      brand: "PetroVietnam / Saigon Petro",
+                      sku: "gas-bo-45-kg",
+                      mpn: "gas-bo-45-kg",
+                      price: 1730000,
+                      url: "https://gasnhaminh.com/bang-gia",
+                      sellerName: "Gas Nhà Mình",
+                    }),
                   ]
                 },
                 {

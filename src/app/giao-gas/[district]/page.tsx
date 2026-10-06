@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { getDistrictBySlug, getAllDistricts, getDistrictKeywords, BRAND_NAME, SEO_PRODUCTS } from '@/lib/districts';
+import { createProductSchema } from '@/lib/seo-schema';
 import DistrictLandingView from '@/components/DistrictLandingView';
 
 interface PageProps {
@@ -140,92 +141,19 @@ export default async function DistrictPage({ params }: PageProps) {
         itemListElement: SEO_PRODUCTS.map((prod, idx) => {
           const defaultPrice = prod.priceVal || (prod.weight === '45kg' ? 1730000 : 530000);
           const productPrice = prod.priceVal > 0 ? prod.priceVal : defaultPrice;
-          return {
-            '@type': 'Product',
+          return createProductSchema({
             position: idx + 1,
             name: `${prod.name} tại ${district.name}`,
             description: prod.desc,
-            image: [
-              prod.image || '/hero_gasnhaminh.jpg',
-            ],
+            image: prod.image || '/hero_gasnhaminh.jpg',
             sku: `${prod.slug}-${district.slug}`,
             mpn: `${prod.slug}-${district.slug}`,
-            brand: {
-              '@type': 'Brand',
-              name: prod.brand,
-            },
-            aggregateRating: {
-              '@type': 'AggregateRating',
-              ratingValue: '4.9',
-              reviewCount: '128',
-              bestRating: '5',
-              worstRating: '1',
-            },
-            review: {
-              '@type': 'Review',
-              reviewRating: {
-                '@type': 'Rating',
-                ratingValue: '5',
-                bestRating: '5',
-              },
-              author: {
-                '@type': 'Person',
-                name: 'Nguyễn Văn Minh',
-              },
-              datePublished: '2025-01-15',
-              reviewBody: `Dịch vụ giao gas Gas Nhà Mình siêu tốc tại ${district.name}, bình còn nguyên tem niêm phong màng co chính hãng và kiểm tra rò rỉ van gas an toàn miễn phí. Rất an tâm!`,
-            },
-            offers: {
-              '@type': 'Offer',
-              url: pageUrl,
-              price: productPrice,
-              priceCurrency: 'VND',
-              priceValidUntil: '2026-12-31',
-              validFrom: '2024-01-01',
-              itemCondition: 'https://schema.org/NewCondition',
-              availability: 'https://schema.org/InStock',
-              seller: {
-                '@type': 'Organization',
-                name: BRAND_NAME,
-              },
-              shippingDetails: {
-                '@type': 'OfferShippingDetails',
-                shippingRate: {
-                  '@type': 'MonetaryAmount',
-                  value: '0',
-                  currency: 'VND',
-                },
-                shippingDestination: {
-                  '@type': 'DefinedRegion',
-                  addressCountry: 'VN',
-                  addressRegion: 'Thành phố Hồ Chí Minh',
-                },
-                deliveryTime: {
-                  '@type': 'ShippingDeliveryTime',
-                  handlingTime: {
-                    '@type': 'QuantitativeValue',
-                    minValue: 0,
-                    maxValue: 0,
-                    unitCode: 'DAY',
-                  },
-                  transitTime: {
-                    '@type': 'QuantitativeValue',
-                    minValue: 0,
-                    maxValue: 1,
-                    unitCode: 'DAY',
-                  },
-                },
-              },
-              hasMerchantReturnPolicy: {
-                '@type': 'MerchantReturnPolicy',
-                applicableCountry: 'VN',
-                returnPolicyCategory: 'https://schema.org/MerchantReturnFiniteReturnWindow',
-                merchantReturnDays: 7,
-                returnMethod: 'https://schema.org/ReturnInStore',
-                returnFees: 'https://schema.org/FreeReturn',
-              },
-            },
-          };
+            brand: prod.brand,
+            url: pageUrl,
+            price: productPrice,
+            location: district.name,
+            sellerName: BRAND_NAME,
+          });
         }),
       },
       {

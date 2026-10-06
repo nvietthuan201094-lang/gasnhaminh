@@ -3,6 +3,7 @@ import Link from 'next/link';
 import GasPriceTable from '@/components/GasPriceTable';
 import { getAllDistricts, HOTLINE_DISPLAY, HOTLINE_TEL, ZALO_URL } from '@/lib/districts';
 import { fetchDynamicGasPrices } from '@/lib/api';
+import { createProductSchema } from '@/lib/seo-schema';
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://gasnhaminh.com';
 
@@ -78,30 +79,20 @@ export default async function BangGiaPage() {
         '@id': `${SITE_URL}/bang-gia#pricelist`,
         name: 'Bảng giá gas hôm nay mới nhất 2026 - Gas Nhà Mình',
         description: 'Báo giá chi tiết các loại bình gas chính hãng 12kg và 45kg',
-        itemListElement: products.map((prod, idx) => ({
-          '@type': 'Product',
-          position: idx + 1,
-          name: prod.name,
-          description: prod.desc,
-          image: prod.image,
-          sku: prod.slug,
-          brand: {
-            '@type': 'Brand',
-            name: prod.brand,
-          },
-          offers: {
-            '@type': 'Offer',
+        itemListElement: products.map((prod, idx) =>
+          createProductSchema({
+            position: idx + 1,
+            name: prod.name,
+            description: prod.desc,
+            image: prod.image || '/hero_gasnhaminh.jpg',
+            sku: prod.slug,
+            mpn: prod.slug,
+            brand: prod.brand,
             url: `${SITE_URL}/bang-gia`,
             price: prod.priceVal,
-            priceCurrency: 'VND',
-            priceValidUntil: '2026-12-31',
-            availability: 'https://schema.org/InStock',
-            seller: {
-              '@type': 'Organization',
-              name: 'Gas Nhà Mình',
-            },
-          },
-        })),
+            sellerName: 'Gas Nhà Mình',
+          })
+        ),
       },
       {
         '@type': 'FAQPage',
