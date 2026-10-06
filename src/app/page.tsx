@@ -388,7 +388,7 @@ function HeroSection({ onOrderClick }: { onOrderClick: () => void }) {
               100%
             </div>
             <div>
-              <h4 className="font-black text-[#111928] text-sm md:text-base">Gas chính hãng</h4>
+              <p className="font-black text-[#111928] text-sm md:text-base">Gas chính hãng</p>
               <p className="text-xs text-[#6B7280] mt-0.5">Nhập từ nhà phân phối uy tín</p>
             </div>
           </div>
@@ -398,7 +398,7 @@ function HeroSection({ onOrderClick }: { onOrderClick: () => void }) {
               🛡️
             </div>
             <div>
-              <h4 className="font-black text-[#111928] text-sm md:text-base">An toàn tuyệt đối</h4>
+              <p className="font-black text-[#111928] text-sm md:text-base">An toàn tuyệt đối</p>
               <p className="text-xs text-[#6B7280] mt-0.5">Kiểm tra rò rỉ trước khi bàn giao</p>
             </div>
           </div>
@@ -408,7 +408,7 @@ function HeroSection({ onOrderClick }: { onOrderClick: () => void }) {
               👥
             </div>
             <div>
-              <h4 className="font-black text-[#111928] text-sm md:text-base">Phục vụ tận tâm</h4>
+              <p className="font-black text-[#111928] text-sm md:text-base">Phục vụ tận tâm</p>
               <p className="text-xs text-[#6B7280] mt-0.5">Hỗ trợ nhanh, tư vấn rõ ràng</p>
             </div>
           </div>
@@ -835,25 +835,25 @@ function PricingSection({ tabs, onSelectProduct }: { tabs: TabItem[], onSelectPr
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mt-14 pt-10 border-t border-gray-200">
           <div className="flex flex-col items-center text-center p-4 bg-white rounded-2xl border border-gray-200/80 shadow-2xs">
             <span className="text-3xl mb-2">🛵</span>
-            <h4 className="font-bold text-sm text-[#111928]">Giao hàng siêu tốc</h4>
+            <p className="font-bold text-sm text-[#111928]">Giao hàng siêu tốc</p>
             <p className="text-xs text-[#6B7280] mt-1">Chỉ từ 15 phút nội thành</p>
           </div>
 
           <div className="flex flex-col items-center text-center p-4 bg-white rounded-2xl border border-gray-200/80 shadow-2xs">
             <span className="text-3xl mb-2">🛡️</span>
-            <h4 className="font-bold text-sm text-[#111928]">Bình đủ ký, an toàn</h4>
+            <p className="font-bold text-sm text-[#111928]">Bình đủ ký, an toàn</p>
             <p className="text-xs text-[#6B7280] mt-1">Nguyên tem, kiểm định rõ ràng</p>
           </div>
 
           <div className="flex flex-col items-center text-center p-4 bg-white rounded-2xl border border-gray-200/80 shadow-2xs">
             <span className="text-3xl mb-2">🤝</span>
-            <h4 className="font-bold text-sm text-[#111928]">Đổi bình cũ – mới tận nhà</h4>
+            <p className="font-bold text-sm text-[#111928]">Đổi bình cũ – mới tận nhà</p>
             <p className="text-xs text-[#6B7280] mt-1">Nhanh gọn, không phát sinh</p>
           </div>
 
           <div className="flex flex-col items-center text-center p-4 bg-white rounded-2xl border border-gray-200/80 shadow-2xs">
             <span className="text-3xl mb-2">💳</span>
-            <h4 className="font-bold text-sm text-[#111928]">Nhiều hình thức thanh toán</h4>
+            <p className="font-bold text-sm text-[#111928]">Nhiều hình thức thanh toán</p>
             <p className="text-xs text-[#6B7280] mt-1">Tiền mặt, chuyển khoản, ví điện tử</p>
           </div>
         </div>
@@ -1004,12 +1004,12 @@ function TrustSection() {
 
   const reviews = [
     { name: "Chị Lan Phương", location: "Chung cư Sunrise City, Quận 7", avatar: "L", stars: 5, tag: "Hộ gia đình", text: "Giao rất nhanh, bình còn nguyên tem niêm phong và màng co của hãng, nhân viên kiểm tra van dây tỉ mỉ rồi mới lắp. Rất yên tâm!" },
-    { name: "Anh Tuấn Hùng", location: "Quán Cơm Niêu, P.12, Gò Vấp", avatar: "T", stars: 5, tag: "Chủ quán ăn", text: "Quán mình bán ăn trưa hay hết gas đột xuất, gọi bên này tầm 15 phút là có thợ tới thay liền, phục vụ nhiệt tình." },
-    { name: "Bác Thanh Bình", location: "Đường Phan Xích Long, Phú Nhuận", avatar: "B", stars: 5, tag: "Khách hàng cá nhân", text: "Thợ giao gas có kiểm tra lại dây dẫn gas cũ của nhà mình bị nứt và báo để thay kịp thời, tác phong rất cẩn thận." },
-    { name: "Chị Mai Hương", location: "Chung cư Vinhomes, Bình Thạnh", avatar: "M", stars: 5, tag: "Hộ gia đình", text: "Đặt lúc 11 giờ đêm vẫn giao được, thật sự rất tiện. Bình có tem niêm phong đầy đủ, nhân viên lịch sự." },
-    { name: "Anh Quốc Bảo", location: "Nhà hàng Hải Sản, Quận 4", avatar: "Q", stars: 5, tag: "Nhà hàng", text: "Dùng bình 45kg cho bếp công nghiệp, báo giá nhanh, giao đúng hẹn. Sẽ đặt cố định mỗi tuần." },
-    { name: "Chị Thu Thảo", location: "Căn hộ The Sun Avenue, Quận 2", avatar: "T", stars: 5, tag: "Khách hàng mới", text: "Lần đầu đặt thử, thợ đến đúng 17 phút. Kiểm tra rò rỉ bằng máy rồi mới về, chuyên nghiệp hơn chỗ cũ nhiều." },
-    { name: "Anh Minh Khoa", location: "Khu công nghiệp Tân Bình", avatar: "K", stars: 5, tag: "Doanh nghiệp", text: "Cần gas gấp cho xưởng, gọi hotline có người nghe ngay, nhân viên tư vấn nhiệt tình và giao đúng số lượng yêu cầu." },
+    { name: "Bác Thanh Bình", location: "Đường Phan Xích Long, Phú Nhuận", avatar: "B", stars: 5, tag: "Nhà phố gia đình", text: "Thợ giao gas có kiểm tra lại dây dẫn gas cũ của nhà mình bị rạn nứt và tư vấn thay kịp thời, tác phong rất cẩn thận và lịch sự." },
+    { name: "Chị Mai Hương", location: "Chung cư Vinhomes Central Park, Bình Thạnh", avatar: "M", stars: 5, tag: "Căn hộ chung cư", text: "Đặt lúc tối muộn khi đang nấu cơm dở vẫn giao rất nhanh. Bình có tem niêm phong đầy đủ, lửa xanh đều không đen đáy nồi." },
+    { name: "Anh Hoàng Nam", location: "KDC Him Lam, Chánh Hưng, Quận 8", avatar: "H", stars: 5, tag: "Hộ gia đình", text: "Nhà mình gần Trạm Chánh Hưng, gọi tầm 15 phút là thợ tới. Cân bình đối chứng chuẩn 12kg ruột, dịch vụ tận tâm." },
+    { name: "Chị Thu Thảo", location: "Căn hộ The Sun Avenue, Quận 2", avatar: "T", stars: 5, tag: "Căn hộ chung cư", text: "Lần đầu đặt thử, thợ đến đúng hẹn. Thử bọt xà phòng kiểm tra rò rỉ van gas trước khi bàn giao, chuyên nghiệp hơn hẳn đại lý cũ." },
+    { name: "Chị Ngọc Ánh", location: "Đường Lũy Bán Bích, Tân Phú", avatar: "A", stars: 5, tag: "Hộ gia đình", text: "Thợ bên trạm Phú Thọ Hòa nhiệt tình, hỗ trợ khiêng bình lên tận bếp lầu 2 không nề hà. Đổi bình V-Gas xám chính hãng xài rất êm." },
+    { name: "Cô Mỹ Hạnh", location: "Đường Nguyễn Oanh, Gò Vấp", avatar: "H", stars: 5, tag: "Nhà phố gia đình", text: "Được người quen giới thiệu, gọi hotline có bạn trực máy dạ thưa rất nhã nhặn. Giao bình mới sạch sẽ, hướng dẫn khóa van an toàn." },
   ];
 
   return (
@@ -1401,7 +1401,7 @@ function StoresSection({ onOrderClick }: { onOrderClick: () => void }) {
                   href={store.hotlineTel}
                   className="flex-1 py-2.5 px-3 bg-[#E02424] hover:bg-[#B91C1C] text-white text-xs font-bold rounded-xl text-center shadow-sm transition-colors flex items-center justify-center gap-1.5"
                 >
-                  <PhoneIcon size={14} /> Gọi Trạm Này
+                  <PhoneIcon size={14} /> Giao Từ Trạm Này
                 </a>
                 <button
                   type="button"
@@ -1553,8 +1553,13 @@ function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-white/10 pt-6 text-center text-xs text-white/40">
-          © {new Date().getFullYear()} GAS NHÀ MÌNH. Chuỗi cửa hàng và trạm phân phối gas chính hãng tại TP. Hồ Chí Minh.
+        <div className="border-t border-white/10 pt-6 flex flex-col md:flex-row items-center justify-between gap-3 text-xs text-white/50">
+          <div>
+            © {new Date().getFullYear()} GAS NHÀ MÌNH. Hệ thống phân phối & giao gas chính hãng tận nhà tại TP. Hồ Chí Minh.
+          </div>
+          <div className="text-[11px] text-white/40 text-center md:text-right">
+            Đủ điều kiện kinh doanh LPG & An toàn PCCC theo Nghị định 87/2018/NĐ-CP • Bảo hiểm trách nhiệm sản phẩm
+          </div>
         </div>
       </div>
     </footer>

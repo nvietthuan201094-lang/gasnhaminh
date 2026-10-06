@@ -329,7 +329,7 @@ export const DISTRICTS_DATA: DistrictInfo[] = [
     isInnerCity: true,
     popularWards: ["Tân Phong", "Tân Phú", "Phú Mỹ", "Tân Quy", "Tân Kiểng", "Bình Thuận", "Tân Thuận Đông", "Tân Thuận Tây", "Phú Thuận"],
     neighboringSlugs: ["quan-4", "quan-8", "nha-be", "binh-chanh", "quan-2"],
-    description: "Gas Nhà Mình Quận 7 phục vụ khu Phú Mỹ Hưng, Sky Garden, Him Lam từ Trạm Chánh Hưng giáp ranh... Giao gas trong 15 phút, bình nguyên tem niêm phong, kiểm tra rò rỉ gas miễn phí.",
+    description: "Gas Nhà Mình Quận 7 phục vụ khu Phú Mỹ Hưng, Sky Garden, Him Lam từ Trạm Chánh Hưng giáp ranh qua cầu Him Lam. Giao gas nhanh chóng, bình nguyên tem niêm phong, kiểm tra rò rỉ gas miễn phí.",
   },
   {
     slug: "quan-8",
@@ -343,7 +343,7 @@ export const DISTRICTS_DATA: DistrictInfo[] = [
     popularWards: ["Phường Rạch Ông (mới)", "Phường Hưng Phú (mới)", "Phường Xóm Củi (mới)", "Phường 4", "Phường 5", "Phường 6", "Phường 7", "Phường 14", "Phường 15", "Phường 16"],
     newWards: ["Phường Rạch Ông (P.1, P.2, P.3 mới)", "Phường Hưng Phú (P.8, P.9, P.10 mới)", "Phường Xóm Củi (P.11, P.12, P.13 mới)"],
     neighboringSlugs: ["quan-5", "quan-6", "quan-7", "binh-chanh"],
-    description: "Đại lý Gas Nhà Mình Quận 8 phủ sóng các phường mới Rạch Ông, Hưng Phú, Xóm Củi và tuyến Phạm Thế Hiển, Tạ Quang Bửu... Đổi gas an toàn, tiết kiệm.",
+    description: "Đại lý Gas Nhà Mình Quận 8 phủ sóng các phường mới Rạch Ông, Hưng Phú, Xóm Củi và tuyến Phạm Thế Hiển, Tạ Quang Bửu. Đổi gas an toàn, tiết kiệm, kiểm tra an toàn van dây chu đáo.",
   },
   {
     slug: "quan-9",
@@ -369,7 +369,7 @@ export const DISTRICTS_DATA: DistrictInfo[] = [
     isInnerCity: true,
     popularWards: ["Phường 1", "Phường 2", "Phường 4", "Phường 6", "Phường 8", "Phường 9", "Phường 10", "Phường 12", "Phường 14", "Phường 15"],
     neighboringSlugs: ["quan-3", "quan-5", "quan-11", "tan-binh"],
-    description: "Gas Nhà Mình Quận 10 giao hỏa tốc 15 phút tại Tô Hiến Thành, Sư Vạn Hạnh, Thành Thái... Bình gas đủ ký, tặng dây van chống chuột.",
+    description: "Gas Nhà Mình Quận 10 giao hỏa tốc tại Tô Hiến Thành, Sư Vạn Hạnh, Thành Thái. Cam kết bình gas đủ ký, tem chống giả chính hãng, hỗ trợ kiểm tra an toàn van dây.",
   },
   {
     slug: "quan-11",
@@ -437,7 +437,7 @@ export const DISTRICTS_DATA: DistrictInfo[] = [
     popularWards: ["Phường Đức Nhuận (mới)", "Phường 15 (mới)", "Phường 4 (mới)", "Phường 1", "Phường 2", "Phường 7", "Phường 8", "Phường 10", "Phường 11", "Phường 13"],
     newWards: ["Phường Đức Nhuận (nhập P.4, 5, 9)", "Phường 15 (nhập P.17)", "Phường 4 (nhập P.3)"],
     neighboringSlugs: ["quan-1", "quan-3", "binh-thanh", "tan-binh"],
-    description: "Giao gas Phú Nhuận 15 phút từ Gas Nhà Mình tại phường mới Đức Nhuận, Phan Xích Long, Nguyễn Văn Trỗi, Huỳnh Văn Bánh... Thợ thân thiện, an toàn tuyệt đối.",
+    description: "Giao gas Phú Nhuận từ Gas Nhà Mình tại phường mới Đức Nhuận, trục đường Phan Xích Long, Nguyễn Văn Trỗi, Huỳnh Văn Bánh. Kỹ thuật viên thân thiện, kiểm tra an toàn van dây chu đáo.",
   },
   {
     slug: "tan-binh",
@@ -476,7 +476,7 @@ export const DISTRICTS_DATA: DistrictInfo[] = [
     isInnerCity: true,
     popularWards: ["An Lạc", "An Lạc A", "Bình Hưng Hòa", "Bình Hưng Hòa A", "Bình Hưng Hòa B", "Bình Trị Đông", "Bình Trị Đông A", "Bình Trị Đông B", "Tân Tạo"],
     neighboringSlugs: ["quan-6", "tan-phu", "binh-chanh", "quan-8"],
-    description: "Gas Nhà Mình Bình Tân giao hàng nhanh khu Tên Lửa, Lê Văn Quới, Quốc lộ 1A... Đầy đủ hóa đơn, tem chống giả, kiểm tra an toàn miễn phí.",
+    description: "Gas Nhà Mình Bình Tân giao hàng nhanh khu Tên Lửa, Lê Văn Quới, Quốc lộ 1A. Đầy đủ hóa đơn, tem chống giả, kiểm tra an toàn van dây miễn phí.",
   },
   {
     slug: "thu-duc",

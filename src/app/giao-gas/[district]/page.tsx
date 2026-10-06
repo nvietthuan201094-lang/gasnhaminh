@@ -33,7 +33,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
 
   const title = `Giao Gas ${district.name} Siêu Tốc ${district.slaMinutes}P | ${BRAND_NAME}`;
-  const description = `Giao gas ${district.name} hỏa tốc ${district.slaMinutes} phút từ ${BRAND_NAME}. Đổi bình gas 12kg, 45kg chính hãng V-Gas, Petrolimex. Nguyên tem, cân đối chứng. Hotline: ${district.hotline}.`;
+  const description = `Giao gas ${district.name} ${district.slaMinutes} phút từ ${BRAND_NAME}. Đổi bình gas 12kg, 45kg chính hãng V-Gas, Petrolimex đủ ký, nguyên tem màng co, kiểm tra an toàn miễn phí. Hotline: ${district.hotline}.`;
 
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://gasnhaminh.com';
   const canonicalUrl = `${siteUrl}/giao-gas/${district.slug}`;
@@ -245,7 +245,7 @@ export default async function DistrictPage({ params }: PageProps) {
             name: `Gas Nhà Mình tại ${district.name} có giao các loại bình gas nào?`,
             acceptedAnswer: {
               '@type': 'Answer',
-              text: `Chúng tôi cung cấp đủ 10 dòng sản phẩm: V-Gas xám, V-Gas đỏ, V-Gas vàng, V-Gas xanh đen, V-Gas PE bọc nhựa chống va đập, V-Gas Shell van chụp, Petrolimex van đứng, Petrolimex van chụp Shell, Tuấn Khang vàng 12kg và Gas bò 45kg công nghiệp.`,
+              text: `Chúng tôi cung cấp đủ 11 dòng sản phẩm chính hãng: V-Gas (xám, đỏ, vàng, xanh đen, V-Gas PE bọc nhựa chống va đập, V-Gas Shell van chụp), Petrolimex (van đứng, van chụp Shell), Tuấn Khang (vàng, xanh) 12kg và Gas bò 45kg công nghiệp.`,
             },
           },
           {

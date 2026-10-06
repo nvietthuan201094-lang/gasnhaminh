@@ -40,7 +40,8 @@ function WatermarkOverlay({
         <div className="bg-white/95 backdrop-blur-sm px-1.5 py-0.5 rounded-lg shadow-sm border border-slate-100 flex items-center">
           <img
             src={WATERMARK_LOGO_SRC}
-            alt="Gas Nhà Mình"
+            alt=""
+            aria-hidden="true"
             className="h-4 sm:h-5 w-auto object-contain"
             draggable={false}
           />
@@ -341,7 +342,7 @@ export default function DistrictLandingView({ district }: DistrictLandingViewPro
                   Gas Nhà Mình Giao Nhanh
                 </div>
 
-                <h3 className="text-xl font-black text-neutral-900 mb-1">Đặt Gas / Đổi Bình Tận Nhà</h3>
+                <h2 className="text-xl font-black text-neutral-900 mb-1">Đặt Gas / Đổi Bình Tận Nhà</h2>
                 <p className="text-xs text-neutral-500 mb-5">
                   Cam kết bình chính hãng – Nguyên tem chống giả – An toàn tuyệt đối.
                 </p>
@@ -517,7 +518,7 @@ export default function DistrictLandingView({ district }: DistrictLandingViewPro
           {/* Category Filter Tabs */}
           <div className="flex flex-wrap items-center justify-center gap-2 mb-8">
             {[
-              { key: "all", label: "Tất cả các dòng bình (10)" },
+              { key: "all", label: `Tất cả các dòng bình (${productsList.length})` },
               { key: "v-gas", label: "Dòng V-Gas 12kg (Xám, Đỏ, Vàng, PE, Shell)" },
               { key: "petrolimex-tuankhang", label: "Petrolimex & Tuấn Khang 12kg" },
               { key: "cong-nghiep", label: "Gas bò 45 kg (Công nghiệp)" },
@@ -636,7 +637,7 @@ export default function DistrictLandingView({ district }: DistrictLandingViewPro
                 3. Tôi có được cân đối chứng kiểm tra trọng lượng bình gas không? Làm sao biết bình đủ 12kg ruột?
               </h3>
               <p className="text-xs text-neutral-600 leading-relaxed">
-                Bình gas 12kg gia đình tại {district.name} đã được chiết nạp tự động chuẩn xác đủ 12kg ruột tại nhà máy của hãng và niêm phong màng co nhiệt chống giả. Trọng lượng vỏ bình được dập nổi rõ ràng trên quai xách. Để đảm bảo giao hỏa tốc 15 phút, nhân viên không mang theo cân cồng kềnh mà sẽ cùng quý khách kiểm tra nguyên vẹn tem màng co, hạn kiểm định vỏ bình và thử rò rỉ khí gas an toàn. Nếu gia đình có sẵn cân tại nhà, quý khách hoàn toàn có thể kiểm tra đối chứng trước khi nhận.
+                Bình gas 12kg gia đình tại {district.name} được chiết nạp tự động chuẩn xác đủ 12kg ruột gas lỏng và niêm phong màng co nhiệt chính hãng. Trọng lượng vỏ bình được dập nổi rõ ràng trên quai xách (tổng trọng lượng chuẩn = số kg vỏ dập nổi + 12kg ruột). Kỹ thuật viên sẽ cùng quý khách kiểm tra nguyên tem chống giả, hạn kiểm định vỏ bình và thử rò rỉ bọt xà phòng. Quý khách hoàn toàn có thể kiểm tra cân đối chứng tại chỗ trước khi nhận bình.
               </p>
             </div>
 
@@ -656,9 +657,9 @@ export default function DistrictLandingView({ district }: DistrictLandingViewPro
       {neighboringDistricts.length > 0 && (
         <section className="py-10 bg-white border-b border-neutral-200">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h3 className="text-sm font-bold text-neutral-500 uppercase tracking-wider mb-4 text-center">
+            <h2 className="text-sm font-bold text-neutral-500 uppercase tracking-wider mb-4 text-center">
               Dịch vụ giao gas các khu vực lân cận {district.name}:
-            </h3>
+            </h2>
             <div className="flex flex-wrap justify-center gap-3">
               {neighboringDistricts.map((nd) => (
                 <Link
@@ -756,7 +757,7 @@ export default function DistrictLandingView({ district }: DistrictLandingViewPro
             }}
             className="flex-1 flex items-center justify-center gap-1.5 bg-gradient-to-r from-[#DC2626] to-[#B91C1C] hover:from-[#B91C1C] hover:to-[#991B1B] active:scale-[0.98] text-white font-black text-xs py-3 px-3 rounded-xl shadow-lg shadow-red-500/30 transition-all uppercase tracking-wide"
           >
-            <span>🚀 ĐẶT GAS {district.name.toUpperCase()} (15P)</span>
+            <span>🚀 ĐẶT GAS {district.name.toUpperCase()} ({district.slaMinutes}P)</span>
           </button>
         </div>
       </div>
