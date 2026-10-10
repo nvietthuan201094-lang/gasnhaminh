@@ -9,7 +9,7 @@ export const DEFAULT_SHIPPING_DETAILS = {
   '@type': 'OfferShippingDetails',
   shippingRate: {
     '@type': 'MonetaryAmount',
-    value: '0',
+    value: 0,
     currency: 'VND',
   },
   shippingDestination: {
@@ -41,6 +41,7 @@ export const DEFAULT_RETURN_POLICY = {
   merchantReturnDays: 7,
   returnMethod: 'https://schema.org/ReturnInStore',
   returnFees: 'https://schema.org/FreeReturn',
+  refundType: 'https://schema.org/FullRefund',
 };
 
 export function createProductReviewAndRating(productName: string, location?: string) {
@@ -48,17 +49,17 @@ export function createProductReviewAndRating(productName: string, location?: str
   return {
     aggregateRating: {
       '@type': 'AggregateRating',
-      ratingValue: '4.9',
-      reviewCount: '128',
-      bestRating: '5',
-      worstRating: '1',
+      ratingValue: 4.9,
+      reviewCount: 128,
+      bestRating: 5,
+      worstRating: 1,
     },
     review: {
       '@type': 'Review',
       reviewRating: {
         '@type': 'Rating',
-        ratingValue: '5',
-        bestRating: '5',
+        ratingValue: 5,
+        bestRating: 5,
       },
       author: {
         '@type': 'Person',
