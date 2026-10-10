@@ -637,7 +637,7 @@ export default function DistrictLandingView({ district }: DistrictLandingViewPro
                 3. Tôi có được cân đối chứng kiểm tra trọng lượng bình gas không? Làm sao biết bình đủ 12kg ruột?
               </h3>
               <p className="text-xs text-neutral-600 leading-relaxed">
-                Bình gas 12kg gia đình tại {district.name} được chiết nạp tự động chuẩn xác đủ 12kg ruột gas lỏng và niêm phong màng co nhiệt chính hãng. Trọng lượng vỏ bình được dập nổi rõ ràng trên quai xách (tổng trọng lượng chuẩn = số kg vỏ dập nổi + 12kg ruột). Kỹ thuật viên sẽ cùng quý khách kiểm tra nguyên tem chống giả, hạn kiểm định vỏ bình và thử rò rỉ bọt xà phòng. Quý khách hoàn toàn có thể kiểm tra cân đối chứng tại chỗ trước khi nhận bình.
+                Bình gas 12kg gia đình tại {district.name} được chiết nạp tự động chuẩn xác đủ 12kg ruột gas lỏng và niêm phong màng co nhiệt chính hãng. Trọng lượng vỏ bình được dập nổi rõ ràng trên quai xách (tổng trọng lượng chuẩn = số kg vỏ dập nổi + 12kg ruột). Kỹ thuật viên sẽ cùng quý khách kiểm tra nguyên tem chống giả, hạn kiểm định vỏ bình và thử rò rỉ bọt xà phòng. Nếu gia đình có sẵn cân tại nhà, quý khách hoàn toàn có thể kiểm tra đối chứng trước khi nhận bình.
               </p>
             </div>
 

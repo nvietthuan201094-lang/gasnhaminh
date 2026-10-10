@@ -2,7 +2,8 @@
 
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
-import { DISTRICTS_DATA } from "@/lib/districts";
+import { DISTRICTS_DATA, SEO_PRODUCTS } from "@/lib/districts";
+import { createProductSchema } from "@/lib/seo-schema";
 import { trackGoogleAdsPurchase } from "@/lib/tracking";
 import { trackInteractionApi } from "@/lib/api";
 import { WATERMARK_LOGO_SRC } from "@/lib/watermark";
@@ -1613,6 +1614,69 @@ function FloatingContactButtons() {
   );
 }
 
+const homeJsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'ItemList',
+      '@id': 'https://gasnhaminh.com/#pricelist',
+      'name': 'Bảng Giá Gas Hôm Nay Mới Nhất 2026 – Gas Nhà Mình',
+      'description': 'Báo giá đổi bình gas 12kg gia đình và gas bò 45kg chính hãng tại TP.HCM',
+      'itemListElement': SEO_PRODUCTS.map((prod, idx) =>
+        createProductSchema({
+          position: idx + 1,
+          name: prod.name,
+          description: prod.desc,
+          image: prod.image || 'https://gasnhaminh.com/hero_gasnhaminh.jpg',
+          sku: prod.slug,
+          brand: prod.brand,
+          url: 'https://gasnhaminh.com',
+          price: prod.priceVal,
+          sellerName: 'Gas Nhà Mình',
+        })
+      ),
+    },
+    {
+      '@type': 'FAQPage',
+      '@id': 'https://gasnhaminh.com/#faq',
+      'mainEntity': [
+        {
+          '@type': 'Question',
+          'name': 'Thời gian giao gas của Gas Nhà Mình mất bao lâu?',
+          'acceptedAnswer': {
+            '@type': 'Answer',
+            'text': 'Thời gian giao gas trung bình từ 15–20 phút tại tất cả các quận huyện TP.HCM nhờ hệ thống trạm kho phân phối trực ban phủ khắp các khu vực.',
+          },
+        },
+        {
+          '@type': 'Question',
+          'name': 'Gas Nhà Mình cung cấp những loại bình gas nào?',
+          'acceptedAnswer': {
+            '@type': 'Answer',
+            'text': 'Gas Nhà Mình phân phối đầy đủ các dòng bình gas gia đình 12kg (V-Gas xám, đỏ, vàng, PE, Petrolimex van đứng, Petrolimex van chụp shell, Tuấn Khang) và bình gas bò công nghiệp 45kg chuyên dụng cho quán ăn, nhà hàng.',
+          },
+        },
+        {
+          '@type': 'Question',
+          'name': 'Tôi có được cân đối chứng kiểm tra trọng lượng bình gas không? Làm sao biết bình đủ 12kg ruột?',
+          'acceptedAnswer': {
+            '@type': 'Answer',
+            'text': 'Bình gas 12kg gia đình đã được chiết nạp tự động chuẩn xác đủ 12kg ruột tại nhà máy của hãng và niêm phong màng co nhiệt chống giả. Trọng lượng vỏ bình được dập nổi rõ ràng trên quai xách (ví dụ: vỏ 13.5kg + 12kg nước gas = 25.5kg). Để đảm bảo giao hỏa tốc 15 phút, nhân viên không mang theo cân cồng kềnh mà sẽ cùng quý khách kiểm tra nguyên vẹn tem màng co, hạn kiểm định vỏ bình và thử rò rỉ khí gas an toàn. Nếu gia đình có sẵn cân tại nhà, quý khách hoàn toàn có thể kiểm tra đối chứng trước khi nhận.',
+          },
+        },
+        {
+          '@type': 'Question',
+          'name': 'Quy trình kiểm tra an toàn khi đổi bình gas như thế nào?',
+          'acceptedAnswer': {
+            '@type': 'Answer',
+            'text': 'Mọi bình gas phân phối qua Gas Nhà Mình đều là hàng chính hãng từ nhà sản xuất uy tín, có tem kiểm định an toàn PCCC và nguyên màng co niêm phong. Khi giao gas, kỹ thuật viên sẽ hỗ trợ kiểm tra độ kín của van dây, kiểm tra rò rỉ khí gas bằng máy dò/dung dịch chuyên dụng và vệ sinh bếp miễn phí trước khi bàn giao.',
+          },
+        },
+      ],
+    },
+  ],
+};
+
 export default function App() {
   const tabs = usePricingTabs();
   const [activeCategory, setActiveCategory] = useState(0);
@@ -1637,7 +1701,12 @@ export default function App() {
   }
 
   return (
-    <div className="min-h-screen bg-white text-[#111928]">
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(homeJsonLd) }}
+      />
+      <div className="min-h-screen bg-white text-[#111928]">
       <Header />
       <HeroSection onOrderClick={scrollToForm} />
       <PricingSection tabs={tabs} onSelectProduct={handleProductSelect} />
@@ -1659,6 +1728,7 @@ export default function App() {
       <FloatingContactButtons />
       {showSuccess && <SuccessModal onClose={() => setShowSuccess(false)} />}
     </div>
+    </>
   );
 }
 

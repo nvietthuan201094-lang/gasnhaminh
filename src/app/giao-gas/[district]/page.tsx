@@ -150,7 +150,6 @@ export default async function DistrictPage({ params }: PageProps) {
             description: prod.desc,
             image: prod.image || '/hero_gasnhaminh.jpg',
             sku: `${prod.slug}-${district.slug}`,
-            mpn: `${prod.slug}-${district.slug}`,
             brand: prod.brand,
             url: pageUrl,
             price: productPrice,

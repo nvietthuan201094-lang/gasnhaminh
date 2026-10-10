@@ -86,7 +86,6 @@ export default async function BangGiaPage() {
             description: prod.desc,
             image: prod.image || '/hero_gasnhaminh.jpg',
             sku: prod.slug,
-            mpn: prod.slug,
             brand: prod.brand,
             url: `${SITE_URL}/bang-gia`,
             price: prod.priceVal,
@@ -321,7 +320,7 @@ export default async function BangGiaPage() {
                 <span className="text-2xl">⚖️</span>
                 <div>
                   <h3 className="font-bold text-sm text-gray-900">Cam kết đủ 12kg ruột</h3>
-                  <p className="text-xs text-gray-600 mt-1">Chiết nạp tự động chuẩn xác tại nhà máy, nguyên màng co chống giả, sẵn sàng cân đối chứng tại nhà.</p>
+                  <p className="text-xs text-gray-600 mt-1">Chiết nạp tự động chuẩn xác tại nhà máy, nguyên màng co chống giả, hỗ trợ kiểm tra đối chứng trước khi thanh toán.</p>
                 </div>
               </div>
               <div className="bg-white p-5 rounded-xl border border-gray-200 shadow-sm flex items-start gap-3.5">
@@ -341,7 +340,7 @@ export default async function BangGiaPage() {
               <div className="bg-white p-5 rounded-xl border border-gray-200 shadow-sm flex items-start gap-3.5">
                 <span className="text-2xl">📑</span>
                 <div>
-                  <h3 className="font-bold text-sm text-gray-900">Bảo hiểm 10 tỷ đồng</h3>
+                  <h3 className="font-bold text-sm text-gray-900">Bảo hiểm trách nhiệm chính hãng</h3>
                   <p className="text-xs text-gray-600 mt-1">Tất cả bình gas đều được mua bảo hiểm trách nhiệm sản phẩm theo quy chuẩn PCCC.</p>
                 </div>
               </div>
