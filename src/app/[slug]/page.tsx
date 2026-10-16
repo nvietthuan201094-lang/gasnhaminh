@@ -11,6 +11,12 @@ interface ProductPageProps {
   }>;
 }
 
+export async function generateStaticParams() {
+  return SEO_PRODUCTS.map((p) => ({
+    slug: p.slug,
+  }));
+}
+
 export async function generateMetadata({ params }: ProductPageProps): Promise<Metadata> {
   const { slug } = await params;
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://gasnhaminh.com';

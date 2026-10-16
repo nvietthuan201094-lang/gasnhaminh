@@ -428,10 +428,11 @@ export default async function BangGiaPage() {
                 <Link
                   key={d.slug}
                   href={`/giao-gas/${d.slug}`}
+                  title={`Giao gas, gọi gas, đặt gas ${d.name}`}
                   className="bg-white hover:bg-orange-50 border border-gray-200 hover:border-orange-300 rounded-xl p-3 text-center transition-all group shadow-sm"
                 >
                   <span className="block font-bold text-xs text-gray-800 group-hover:text-[#FF5722]">
-                    {d.name}
+                    Giao gas {d.name}
                   </span>
                   <span className="text-[10px] text-gray-400 block mt-0.5">
                     Giao {d.slaMinutes}P

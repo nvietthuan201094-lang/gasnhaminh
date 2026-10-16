@@ -68,13 +68,11 @@ export const metadata: Metadata = {
 };
 
 import Script from "next/script";
-import { headers } from "next/headers";
 
 async function getDomainConfig() {
   try {
-    const headersList = await headers();
-    const host = headersList.get('x-forwarded-host') || headersList.get('host') || 'gasnhaminh.com';
-    const domain = host.split(':')[0];
+    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://gasnhaminh.com";
+    const domain = siteUrl.replace(/^https?:\/\//, "").split("/")[0].split(":")[0] || "gasnhaminh.com";
     const API_URL = process.env.NEXT_PUBLIC_API_URL || "https://crm.posplus.vn";
     const res = await fetch(`${API_URL}/api/v1/domain_configs?domain=${domain}`, { next: { revalidate: 300 } });
     if (res.ok) {

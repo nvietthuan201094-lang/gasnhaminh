@@ -1259,10 +1259,10 @@ function ServiceAreaSection() {
                   <Link
                     key={d.slug}
                     href={`/giao-gas/${d.slug}`}
-                    title={`Giao gas ${d.name} siêu tốc 15 phút`}
+                    title={`Giao gas, gọi gas, đặt gas ${d.name} siêu tốc ${d.slaMinutes} phút`}
                     className="flex items-center gap-1.5 bg-[#F9FAFB] border border-[#E5E7EB] hover:border-[#E02424] hover:bg-red-50/60 hover:text-[#E02424] transition-all rounded-lg px-3 py-2 text-sm font-semibold text-[#111928]"
                   >
-                    <span className="w-2 h-2 rounded-full bg-[#0E9F6E] inline-block"></span>{d.name}
+                    <span className="w-2 h-2 rounded-full bg-[#0E9F6E] inline-block"></span>Giao gas {d.name}
                   </Link>
                 ))}
               </div>

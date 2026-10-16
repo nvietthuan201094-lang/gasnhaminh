@@ -241,7 +241,7 @@ export default function DistrictLandingView({ district }: DistrictLandingViewPro
         <span className="mx-2">/</span>
         <Link href="/#khu-vuc" className="hover:text-red-600">Mạng lưới giao gas TP.HCM</Link>
         <span className="mx-2">/</span>
-        <span className="font-semibold text-neutral-800">Giao gas {district.name}</span>
+        <span className="font-semibold text-neutral-800">Giao gas, gọi gas, đặt gas {district.name}</span>
       </div>
 
       {/* Hero Section with Form */}
@@ -256,11 +256,11 @@ export default function DistrictLandingView({ district }: DistrictLandingViewPro
               </div>
               
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-neutral-900 tracking-tight leading-tight mb-4">
-                Đại Lý Giao Gas, Đặt Gas <span className="text-red-600">{district.name}</span> – Có Mặt Sau {district.slaMinutes} Phút
+                Giao Gas, Gọi Gas, Đặt Gas <span className="text-red-600">{district.name}</span> – Có Mặt Sau {district.slaMinutes} Phút
               </h1>
 
               <p className="text-base sm:text-lg text-neutral-600 mb-6 leading-relaxed">
-                {district.description} Hệ thống Gas Nhà Mình phân phối bình gas V-Gas, Petrolimex, Tuấn Khang 12kg và gas bò 45kg cho nhà hàng, quán ăn, xưởng chế biến 24/7.
+                {district.description} Hệ thống Gas Nhà Mình nhận <strong>giao gas, gọi gas, đặt gas online tại {district.name}</strong> với đầy đủ bình gas V-Gas, Petrolimex, Tuấn Khang 12kg và gas bò 45kg cho hộ gia đình, nhà hàng, quán ăn.
               </p>
 
               {/* Highlights Badge */}
@@ -291,9 +291,9 @@ export default function DistrictLandingView({ district }: DistrictLandingViewPro
               {/* Phường Xã Coverage Section */}
               <div className="bg-white p-5 rounded-2xl border border-neutral-200 shadow-sm">
                 <div className="flex items-center justify-between mb-3">
-                  <span className="text-xs font-bold uppercase tracking-wider text-red-700">
-                    Khu vực giao nhanh tại {district.name}
-                  </span>
+                  <h2 className="text-xs font-bold uppercase tracking-wider text-red-700">
+                    Giao gas, gọi gas, đặt gas nhanh tại {district.name}
+                  </h2>
                   {district.isInnerCity && (
                     <span className="text-[10px] font-bold bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded-full">
                       Khu vực nội thành TP.HCM
@@ -304,18 +304,22 @@ export default function DistrictLandingView({ district }: DistrictLandingViewPro
                 {district.newWards && district.newWards.length > 0 && (
                   <div className="mb-3 p-3 bg-amber-50 rounded-xl border border-amber-200">
                     <span className="text-xs font-bold text-amber-900 block mb-1.5">
-                      ⭐ Các phường mới sáp nhập chính thức phục vụ siêu tốc:
+                      ⭐ Giao gas, gọi gas, đặt gas tại các phường/xã mới sáp nhập {district.name}:
                     </span>
                     <div className="flex flex-wrap gap-1.5">
                       {district.newWards.map((nw) => (
                         <span
                           key={nw}
+                          title={`Giao gas, gọi gas, đặt gas ${nw} ${district.name}`}
                           className="inline-block text-[11px] font-semibold bg-white text-amber-900 border border-amber-300 px-2.5 py-1 rounded-lg"
                         >
-                          ⚡ {nw}
+                          ⚡ Giao gas {nw}
                         </span>
                       ))}
                     </div>
+                    <p className="text-[11px] text-amber-800/90 mt-2 leading-relaxed">
+                      Hỗ trợ <strong>gọi gas, đặt gas, đổi bình gas 12kg &amp; 45kg</strong> giao tận nơi tại {district.newWards.map((w) => w.replace(/\s*\(.*?\)\s*/g, '')).join(', ')} ({district.name}).
+                    </p>
                   </div>
                 )}
 
@@ -323,6 +327,7 @@ export default function DistrictLandingView({ district }: DistrictLandingViewPro
                   {district.popularWards.map((w) => (
                     <span
                       key={w}
+                      title={`Giao gas, gọi gas, đặt gas ${w} ${district.name}`}
                       className="inline-block text-xs bg-neutral-100 hover:bg-red-50 hover:text-red-700 text-neutral-700 font-medium px-2.5 py-1 rounded-lg transition-colors"
                     >
                       {w}
@@ -330,7 +335,7 @@ export default function DistrictLandingView({ district }: DistrictLandingViewPro
                   ))}
                 </div>
                 <p className="text-[11px] text-neutral-400 mt-3">
-                  * Kỹ thuật viên Gas Nhà Mình có mặt tại mọi tuyến đường và chung cư khu vực {district.name}.
+                  * Kỹ thuật viên Gas Nhà Mình trực chiến giao gas, nhận gọi gas &amp; đặt gas tại mọi tuyến đường, ngõ hẻm và chung cư khu vực {district.name}.
                 </p>
               </div>
             </div>
@@ -609,26 +614,30 @@ export default function DistrictLandingView({ district }: DistrictLandingViewPro
           <div className="text-center mb-10">
             <span className="text-xs font-bold uppercase tracking-widest text-red-600 block mb-2">Hỏi đáp thường gặp</span>
             <h2 className="text-2xl sm:text-3xl font-black text-neutral-900">
-              Câu Hỏi Về Dịch Vụ Giao Gas, Đặt Gas {district.name}
+              Câu Hỏi Về Dịch Vụ Giao Gas, Gọi Gas, Đặt Gas {district.name}
             </h2>
           </div>
 
           <div className="space-y-4">
             <div className="bg-white p-5 rounded-xl border border-neutral-200 shadow-sm">
               <h3 className="font-bold text-sm text-neutral-900 mb-2">
-                1. Thời gian giao gas tại {district.name} (bao gồm các phường mới) mất bao lâu?
+                1. Thời gian giao gas, gọi gas, đặt gas tại {district.name} (bao gồm các phường mới) mất bao lâu?
               </h3>
               <p className="text-xs text-neutral-600 leading-relaxed">
-                Nhờ trạm giao hàng thường trực tại {district.hubName}, thời gian giao gas của Gas Nhà Mình tại tất cả các phường mới và tuyến đường tại {district.name} chỉ từ {district.slaMinutes} phút kể từ khi bạn hoàn tất đặt đơn hoặc gọi hotline.
+                Nhờ trạm giao hàng thường trực tại {district.hubName}, thời gian giao gas của Gas Nhà Mình tại {district.name}
+                {district.newWards && district.newWards.length > 0
+                  ? ` (bao gồm các phường/xã mới sáp nhập: ${district.newWards.map((w) => w.replace(/\s*\(.*?\)\s*/g, '')).join(', ')})`
+                  : ''}{' '}
+                và toàn bộ các tuyến đường chỉ từ {district.slaMinutes} phút kể từ khi quý khách đặt gas online hoặc gọi hotline {district.hotline}.
               </p>
             </div>
 
             <div className="bg-white p-5 rounded-xl border border-neutral-200 shadow-sm">
               <h3 className="font-bold text-sm text-neutral-900 mb-2">
-                2. Gas Nhà Mình có những loại bình gas nào? Có bình gas bò 45kg không?
+                2. Gas Nhà Mình tại {district.name} có những loại bình gas nào? Có bình gas bò 45kg không?
               </h3>
               <p className="text-xs text-neutral-600 leading-relaxed">
-                Chúng tôi cung ứng đầy đủ các dòng: V-Gas (xám, đỏ, vàng, xanh đen, V-Gas PE bọc nhựa chống va đập, V-Gas Shell van chụp), Petrolimex van đứng, Petrolimex van chụp Shell, Tuấn Khang vàng 12kg và bình gas bò 45kg công nghiệp chuyên dụng cho nhà hàng, quán ăn.
+                Chúng tôi cung ứng đầy đủ 11 dòng bình gas chính hãng: V-Gas (xám, đỏ, vàng, xanh đen, V-Gas PE bọc nhựa chống va đập, V-Gas Shell van chụp), Petrolimex (van đứng, van chụp Shell), Tuấn Khang (vàng, xanh) 12kg và bình gas bò 45kg công nghiệp chuyên dụng cho nhà hàng, quán ăn.
               </p>
             </div>
 
@@ -643,11 +652,45 @@ export default function DistrictLandingView({ district }: DistrictLandingViewPro
 
             <div className="bg-white p-5 rounded-xl border border-neutral-200 shadow-sm">
               <h3 className="font-bold text-sm text-neutral-900 mb-2">
-                4. Đổi bình gas có được hỗ trợ kiểm tra van dây và an toàn không?
+                4. Đổi bình gas tại {district.name} có được hỗ trợ kiểm tra van dây và an toàn không?
               </h3>
               <p className="text-xs text-neutral-600 leading-relaxed">
                 100% bình gas phân phối tại {district.name} là hàng chính hãng có tem kiểm định an toàn của nhà sản xuất. Kỹ thuật viên giao gas hỗ trợ kiểm tra rò rỉ gas bằng bọt xà phòng hoặc thiết bị dò khí chuyên dụng, thay gioăng cao su van miễn phí trước khi bàn giao.
               </p>
+            </div>
+          </div>
+
+          {/* Khối Từ Khóa Địa Phương On-Page (Giao gas, Gọi gas, Đặt gas + Quận & Phường mới) */}
+          <div className="mt-8 bg-white p-5 rounded-2xl border border-neutral-200 shadow-sm">
+            <h3 className="text-xs font-extrabold uppercase tracking-wider text-neutral-800 mb-2">
+              Tổng Đài Giao Gas, Gọi Gas, Đặt Gas Tận Nhà Tại {district.name}
+            </h3>
+            <p className="text-xs text-neutral-600 leading-relaxed mb-3">
+              Khi cần <strong>giao gas {district.name}</strong>, <strong>gọi gas {district.name}</strong> hoặc <strong>đặt gas {district.name}</strong> giao nhanh trong {district.slaMinutes} phút, quý khách chỉ cần liên hệ hotline <a href={HOTLINE_TEL} className="text-red-600 font-bold hover:underline">{HOTLINE_DISPLAY}</a>. Trạm {district.hubName} phục vụ xuyên suốt tất cả các phường/xã mới và cũ thuộc {district.fullName}:
+            </p>
+            <div className="flex flex-wrap gap-1.5">
+              {[
+                `Giao gas ${district.name}`,
+                `Gọi gas ${district.name}`,
+                `Đặt gas ${district.name}`,
+                `Đổi bình gas 12kg ${district.name}`,
+                `Đại lý gas ${district.name}`,
+                ...(district.newWards || []).flatMap((nw) => {
+                  const clean = nw.replace(/\s*\(.*?\)\s*/g, '').trim();
+                  return [
+                    `Giao gas ${clean} ${district.name}`,
+                    `Gọi gas ${clean} ${district.name}`,
+                    `Đặt gas ${clean} ${district.name}`,
+                  ];
+                }),
+              ].map((kw) => (
+                <span
+                  key={kw}
+                  className="inline-block text-[11px] bg-neutral-100 text-neutral-600 px-2.5 py-1 rounded-md font-medium"
+                >
+                  {kw}
+                </span>
+              ))}
             </div>
           </div>
         </div>

@@ -33,8 +33,13 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     };
   }
 
-  const title = `Giao Gas ${district.name} Siêu Tốc ${district.slaMinutes}P | ${BRAND_NAME}`;
-  const description = `Giao gas ${district.name} ${district.slaMinutes} phút từ ${BRAND_NAME}. Đổi bình gas 12kg, 45kg chính hãng V-Gas, Petrolimex đủ ký, nguyên tem màng co, kiểm tra an toàn miễn phí. Hotline: ${district.hotline}.`;
+  const newWardsClean = (district.newWards || [])
+    .map((w) => w.replace(/\s*\(.*?\)\s*/g, '').replace(/^(Phường|Xã)\s+/i, '').trim())
+    .slice(0, 5)
+    .join(', ');
+
+  const title = `Giao Gas, Gọi Gas, Đặt Gas ${district.name} (${district.slaMinutes}P) | ${BRAND_NAME}`;
+  const description = `Giao gas, gọi gas, đặt gas ${district.name} tận nhà trong ${district.slaMinutes} phút từ ${BRAND_NAME}${newWardsClean ? ` (phục vụ các phường/xã mới: ${newWardsClean})` : ''}. Đổi bình gas 12kg, 45kg chính hãng V-Gas, Petrolimex nguyên tem, kiểm tra an toàn miễn phí. Hotline: ${district.hotline}.`;
 
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://gasnhaminh.com';
   const canonicalUrl = `${siteUrl}/giao-gas/${district.slug}`;
@@ -42,6 +47,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   return {
     title,
     description,
+    keywords: getDistrictKeywords(district, BRAND_NAME),
     alternates: {
       canonical: canonicalUrl,
     },
@@ -57,7 +63,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
           url: '/hero_gasnhaminh.jpg',
           width: 1200,
           height: 630,
-          alt: `Giao gas ${district.name} - ${BRAND_NAME}`,
+          alt: `Giao gas, gọi gas, đặt gas ${district.name} - ${BRAND_NAME}`,
         },
       ],
     },
@@ -81,6 +87,16 @@ export default async function DistrictPage({ params }: PageProps) {
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://gasnhaminh.com';
   const pageUrl = `${siteUrl}/giao-gas/${district.slug}`;
 
+  const wardNames = Array.from(
+    new Set([
+      ...(district.newWards || []).map((w) => w.replace(/\s*\(.*?\)\s*/g, '').trim()),
+      ...district.popularWards.map((w) => w.replace(/\s*\(.*?\)\s*/g, '').trim()),
+    ])
+  );
+  const newWardsText = (district.newWards || [])
+    .map((w) => w.replace(/\s*\(.*?\)\s*/g, '').trim())
+    .join(', ');
+
   // Structured Data Schema JSON-LD
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -88,7 +104,7 @@ export default async function DistrictPage({ params }: PageProps) {
       {
         '@type': 'LocalBusiness',
         '@id': `${pageUrl}#business`,
-        name: `Đại Lý Giao Gas, Đặt Gas ${district.name} - ${BRAND_NAME}`,
+        name: `Đại Lý Giao Gas, Gọi Gas, Đặt Gas ${district.name} - ${BRAND_NAME}`,
         description: district.description,
         url: pageUrl,
         image: `${siteUrl}/hero_gasnhaminh.jpg`,
@@ -102,10 +118,16 @@ export default async function DistrictPage({ params }: PageProps) {
           postalCode: '700000',
           addressCountry: 'VN',
         },
-        areaServed: {
-          '@type': 'AdministrativeArea',
-          name: district.fullName,
-        },
+        areaServed: [
+          {
+            '@type': 'AdministrativeArea',
+            name: district.fullName,
+          },
+          ...wardNames.map((ward) => ({
+            '@type': 'AdministrativeArea',
+            name: `${ward}, ${district.name}`,
+          })),
+        ],
         openingHoursSpecification: {
           '@type': 'OpeningHoursSpecification',
           dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
@@ -132,7 +154,7 @@ export default async function DistrictPage({ params }: PageProps) {
           {
             '@type': 'ListItem',
             position: 3,
-            name: `Giao gas ${district.name}`,
+            name: `Giao gas, gọi gas, đặt gas ${district.name}`,
             item: pageUrl,
           },
         ],
@@ -164,26 +186,34 @@ export default async function DistrictPage({ params }: PageProps) {
         mainEntity: [
           {
             '@type': 'Question',
-            name: `Thời gian giao gas của Gas Nhà Mình tại ${district.name} là bao lâu?`,
+            name: `Thời gian giao gas, gọi gas, đặt gas tại ${district.name} (bao gồm các phường mới) mất bao lâu?`,
             acceptedAnswer: {
               '@type': 'Answer',
-              text: `Thời gian giao gas tại ${district.name} trung bình từ ${district.slaMinutes} phút kể từ lúc xác nhận đơn hàng nhờ trạm phân phối tại ${district.hubName}, phục vụ tất cả các phường nội thành.`,
+              text: `Nhờ trạm giao hàng thường trực tại ${district.hubName}, thời gian giao gas của Gas Nhà Mình tại ${district.name}${newWardsText ? ` (bao gồm các phường/xã mới sáp nhập: ${newWardsText})` : ''} và toàn bộ các tuyến đường chỉ từ ${district.slaMinutes} phút kể từ khi quý khách đặt gas online hoặc gọi hotline ${district.hotline}.`,
             },
           },
           {
             '@type': 'Question',
-            name: `Gas Nhà Mình tại ${district.name} có giao các loại bình gas nào?`,
+            name: `Gas Nhà Mình tại ${district.name} có những loại bình gas nào? Có bình gas bò 45kg không?`,
             acceptedAnswer: {
               '@type': 'Answer',
-              text: `Chúng tôi cung cấp đủ 11 dòng sản phẩm chính hãng: V-Gas (xám, đỏ, vàng, xanh đen, V-Gas PE bọc nhựa chống va đập, V-Gas Shell van chụp), Petrolimex (van đứng, van chụp Shell), Tuấn Khang (vàng, xanh) 12kg và Gas bò 45kg công nghiệp.`,
+              text: `Chúng tôi cung ứng đầy đủ 11 dòng bình gas chính hãng: V-Gas (xám, đỏ, vàng, xanh đen, V-Gas PE bọc nhựa chống va đập, V-Gas Shell van chụp), Petrolimex (van đứng, van chụp Shell), Tuấn Khang (vàng, xanh) 12kg và bình gas bò 45kg công nghiệp chuyên dụng cho nhà hàng, quán ăn.`,
             },
           },
           {
             '@type': 'Question',
-            name: `Quy trình kiểm tra an toàn khi giao gas của Gas Nhà Mình?`,
+            name: `Tôi có được cân đối chứng kiểm tra trọng lượng bình gas không? Làm sao biết bình đủ 12kg ruột?`,
             acceptedAnswer: {
               '@type': 'Answer',
-              text: `Kỹ thuật viên kiểm tra bình nguyên tem màng co chính hãng, thay gioăng cao su miễn phí, vệ sinh đầu đốt bếp và kiểm tra rò rỉ khí gas an toàn trước khi khách hàng thanh toán.`,
+              text: `Bình gas 12kg gia đình tại ${district.name} được chiết nạp tự động chuẩn xác đủ 12kg ruột gas lỏng và niêm phong màng co nhiệt chính hãng. Trọng lượng vỏ bình được dập nổi rõ ràng trên quai xách (tổng trọng lượng chuẩn = số kg vỏ dập nổi + 12kg ruột). Kỹ thuật viên sẽ cùng quý khách kiểm tra nguyên tem chống giả, hạn kiểm định vỏ bình và thử rò rỉ bọt xà phòng. Nếu gia đình có sẵn cân tại nhà, quý khách hoàn toàn có thể kiểm tra đối chứng trước khi nhận bình.`,
+            },
+          },
+          {
+            '@type': 'Question',
+            name: `Đổi bình gas tại ${district.name} có được hỗ trợ kiểm tra van dây và an toàn không?`,
+            acceptedAnswer: {
+              '@type': 'Answer',
+              text: `100% bình gas phân phối tại ${district.name} là hàng chính hãng có tem kiểm định an toàn của nhà sản xuất. Kỹ thuật viên giao gas hỗ trợ kiểm tra rò rỉ gas bằng bọt xà phòng hoặc thiết bị dò khí chuyên dụng, thay gioăng cao su van miễn phí trước khi bàn giao.`,
             },
           },
         ],
