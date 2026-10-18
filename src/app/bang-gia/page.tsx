@@ -153,6 +153,12 @@ export default async function BangGiaPage() {
             </Link>
             <div className="flex items-center gap-3">
               <Link
+                href="/cam-nang"
+                className="hidden md:inline-block text-xs font-bold text-gray-700 hover:text-[#FF5722] transition-colors"
+              >
+                Cẩm nang an toàn
+              </Link>
+              <Link
                 href="/#khu-vuc"
                 className="hidden md:inline-block text-xs font-bold text-gray-700 hover:text-[#FF5722] transition-colors"
               >

@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { DISTRICTS_DATA, SEO_PRODUCTS } from "@/lib/districts";
+import { GUIDES_DATA } from "@/lib/guides";
 import { createProductSchema } from "@/lib/seo-schema";
 import { trackGoogleAdsPurchase } from "@/lib/tracking";
 import { trackInteractionApi } from "@/lib/api";
@@ -37,8 +38,8 @@ function Header() {
         <a href="#hero" className="flex items-center py-1 hover:opacity-95 transition-opacity">
           <img src="/logo.png" alt="Gas Nhà Mình - Hết Gas Gọi Mình" className="h-[58px] w-auto object-contain" />
         </a>
-        <nav className="flex gap-8">
-          {[["Bảng giá", "#bang-gia"], ["Cam kết", "#cam-ket"], ["Cửa hàng", "#he-thong-cua-hang"], ["Khu vực giao", "#khu-vuc"]].map(([label, href]) => (
+        <nav className="flex gap-7">
+          {[["Bảng giá", "#bang-gia"], ["Cam kết", "#cam-ket"], ["Cửa hàng", "#he-thong-cua-hang"], ["Khu vực giao", "#khu-vuc"], ["Cẩm nang", "/cam-nang"]].map(([label, href]) => (
             <a key={href} href={href} className="text-[#111928] font-semibold text-sm hover:text-[#E02424] transition-colors">{label}</a>
           ))}
         </nav>
@@ -1507,6 +1508,45 @@ function FaqSection() {
               </p>
             </div>
           ))}
+        </div>
+
+        {/* Khối Cẩm Nang Gian Bếp An Toàn & Mẹo Sửa Bếp Gas (Internal Linking Cluster) */}
+        <div className="mt-12 bg-white rounded-3xl p-6 md:p-8 border border-[#E5E7EB] shadow-sm">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6">
+            <div>
+              <span className="text-xs font-extrabold uppercase tracking-wider text-[#E02424]">
+                Mẹo hay cho người nội trợ
+              </span>
+              <h3 className="text-xl md:text-2xl font-black text-[#111928] mt-0.5">
+                Cẩm Nang Chăm Sóc Gian Bếp & Sử Dụng Gas An Toàn
+              </h3>
+            </div>
+            <Link
+              href="/cam-nang"
+              className="text-xs md:text-sm font-extrabold text-[#E02424] hover:underline shrink-0"
+            >
+              Xem toàn bộ cẩm nang →
+            </Link>
+          </div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {GUIDES_DATA.map((g) => (
+              <Link
+                key={g.slug}
+                href={`/cam-nang/${g.slug}`}
+                className="p-4 rounded-2xl bg-[#F9FAFB] hover:bg-[#FEF2F2] border border-[#E5E7EB] hover:border-[#E02424] transition-all flex flex-col justify-between group"
+              >
+                <div>
+                  <span className="text-[11px] font-bold text-[#E02424]">
+                    {g.heroIcon} {g.categoryLabel}
+                  </span>
+                  <h4 className="text-sm font-bold text-[#111928] group-hover:text-[#E02424] transition-colors mt-1.5 mb-2 leading-snug">
+                    {g.title}
+                  </h4>
+                </div>
+                <span className="text-xs font-semibold text-[#E02424]">Đọc chi tiết →</span>
+              </Link>
+            ))}
+          </div>
         </div>
       </div>
     </section>

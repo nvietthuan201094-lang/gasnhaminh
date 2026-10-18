@@ -1,5 +1,6 @@
 import { MetadataRoute } from 'next';
 import { getAllDistricts, SEO_PRODUCTS } from '@/lib/districts';
+import { getAllGuides } from '@/lib/guides';
 import { getLpgPriceValidityDates } from '@/lib/seo-schema';
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -10,6 +11,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const stableLastModified = monthlyCycleDate > contentReleaseDate ? monthlyCycleDate : contentReleaseDate;
 
   const districts = getAllDistricts();
+  const guides = getAllGuides();
 
   const districtUrls: MetadataRoute.Sitemap = districts.map((d) => ({
     url: `${baseUrl}/giao-gas/${d.slug}`,
@@ -25,6 +27,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.85,
   }));
 
+  const guideUrls: MetadataRoute.Sitemap = guides.map((g) => ({
+    url: `${baseUrl}/cam-nang/${g.slug}`,
+    lastModified: stableLastModified,
+    changeFrequency: 'monthly',
+    priority: 0.8,
+  }));
+
   return [
     {
       url: baseUrl,
@@ -38,7 +47,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'daily',
       priority: 0.95,
     },
+    {
+      url: `${baseUrl}/cam-nang`,
+      lastModified: stableLastModified,
+      changeFrequency: 'weekly',
+      priority: 0.9,
+    },
     ...districtUrls,
     ...productUrls,
+    ...guideUrls,
   ];
 }
+

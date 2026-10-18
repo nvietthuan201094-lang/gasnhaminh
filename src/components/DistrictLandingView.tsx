@@ -16,6 +16,7 @@ import {
 import { createOrder, trackInteractionApi } from "@/lib/api";
 import { trackGoogleAdsPurchase } from "@/lib/tracking";
 import { WATERMARK_LOGO_SRC } from "@/lib/watermark";
+import { getDistrictStreetsAndAreas, GUIDES_DATA } from "@/lib/guides";
 
 function PhoneIcon({ size = 12 }: { size?: number }) {
   return (
@@ -678,36 +679,87 @@ export default function DistrictLandingView({ district }: DistrictLandingViewPro
             </div>
           </div>
 
-          {/* Khối Từ Khóa Địa Phương On-Page (Giao gas, Gọi gas, Đặt gas + Quận & Phường mới) */}
-          <div className="mt-8 bg-white p-5 rounded-2xl border border-neutral-200 shadow-sm">
-            <h3 className="text-xs font-extrabold uppercase tracking-wider text-neutral-800 mb-2">
-              Tổng Đài Giao Gas, Gọi Gas, Đặt Gas Tận Nhà Tại {district.name}
-            </h3>
-            <p className="text-xs text-neutral-600 leading-relaxed mb-3">
-              Khi cần <strong>giao gas {district.name}</strong>, <strong>gọi gas {district.name}</strong> hoặc <strong>đặt gas {district.name}</strong> giao nhanh trong {district.slaMinutes} phút, quý khách chỉ cần liên hệ hotline <a href={HOTLINE_TEL} className="text-red-600 font-bold hover:underline">{HOTLINE_DISPLAY}</a>. Trạm {district.hubName} phục vụ xuyên suốt tất cả các phường/xã mới và cũ thuộc {district.fullName}:
-            </p>
-            <div className="flex flex-wrap gap-1.5">
-              {[
-                `Giao gas ${district.name}`,
-                `Gọi gas ${district.name}`,
-                `Đặt gas ${district.name}`,
-                `Đổi bình gas 12kg ${district.name}`,
-                `Đại lý gas ${district.name}`,
-                ...(district.newWards || []).flatMap((nw) => {
-                  const clean = nw.replace(/\s*\(.*?\)\s*/g, '').trim();
-                  return [
-                    `Giao gas ${clean} ${district.name}`,
-                    `Gọi gas ${clean} ${district.name}`,
-                    `Đặt gas ${clean} ${district.name}`,
-                  ];
-                }),
-              ].map((kw) => (
-                <span
-                  key={kw}
-                  className="inline-block text-[11px] bg-neutral-100 text-neutral-600 px-2.5 py-1 rounded-md font-medium"
+          {/* Khối Tuyến Đường Huyết Mạch & Chung Cư / Khu Dân Cư Phục Vụ Nhanh */}
+          {(() => {
+            const areaInfo = getDistrictStreetsAndAreas(district.slug);
+            return (
+              <div className="mt-8 bg-white p-5 rounded-2xl border border-neutral-200 shadow-sm space-y-4">
+                <div>
+                  <h3 className="text-xs font-extrabold uppercase tracking-wider text-neutral-800 mb-2">
+                    🛣️ Tuyến Đường Chính & Khu Dân Cư Giao Gas 15 Phút Tại {district.name}
+                  </h3>
+                  <p className="text-xs text-neutral-600 leading-relaxed mb-2.5">
+                    Đội ngũ nhân viên của <strong>Gas Nhà Mình ({district.hubName})</strong> thông thuộc mọi tuyến đường, ngõ hẻm và chung cư tại {district.name}, sẵn sàng giao bình gas chính hãng tận gian bếp trong {district.slaMinutes} phút tại:
+                  </p>
+                  <div className="grid sm:grid-cols-2 gap-3 text-xs">
+                    <div className="bg-neutral-50 p-3.5 rounded-xl border border-neutral-100">
+                      <div className="font-bold text-neutral-900 mb-1.5">📍 Các tuyến đường phục vụ nhanh:</div>
+                      <p className="text-neutral-600 leading-relaxed">
+                        {areaInfo.majorStreets.map((s) => `Đường ${s}`).join(' • ')}
+                      </p>
+                    </div>
+                    <div className="bg-neutral-50 p-3.5 rounded-xl border border-neutral-100">
+                      <div className="font-bold text-neutral-900 mb-1.5">🏡 Khu dân cư & Cư xá tiêu biểu:</div>
+                      <p className="text-neutral-600 leading-relaxed">
+                        {areaInfo.residentialAreas.join(' • ')}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Khối Từ Khóa Địa Phương On-Page (Giao gas, Gọi gas, Đặt gas + Quận & Phường mới) */}
+                <div className="pt-3 border-t border-neutral-100">
+                  <div className="text-[11px] font-bold text-neutral-700 mb-2">
+                    Phục vụ xuyên suốt 100% các phường/xã mới sau sáp nhập thuộc {district.fullName}:
+                  </div>
+                  <div className="flex flex-wrap gap-1.5">
+                    {[
+                      `Giao gas ${district.name}`,
+                      `Gọi gas ${district.name}`,
+                      `Đặt gas ${district.name}`,
+                      `Đổi bình gas 12kg ${district.name}`,
+                      `Đại lý gas ${district.name}`,
+                      ...(district.newWards || []).flatMap((nw) => {
+                        const clean = nw.replace(/\s*\(.*?\)\s*/g, '').trim();
+                        return [
+                          `Giao gas ${clean} ${district.name}`,
+                          `Đổi gas ${clean} ${district.name}`,
+                        ];
+                      }),
+                    ].map((kw) => (
+                      <span
+                        key={kw}
+                        className="inline-block text-[11px] bg-neutral-100 text-neutral-600 px-2.5 py-1 rounded-md font-medium"
+                      >
+                        {kw}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            );
+          })()}
+
+          {/* Khối Liên Kết Cẩm Nang Gian Bếp An Toàn */}
+          <div className="mt-6 bg-red-50/70 p-5 rounded-2xl border border-red-200/80">
+            <div className="flex items-center justify-between mb-3">
+              <h3 className="text-xs font-extrabold uppercase tracking-wider text-red-900">
+                📚 Cẩm Nang Chăm Sóc Gian Bếp & Mẹo Sử Dụng Gas An Toàn
+              </h3>
+              <Link href="/cam-nang" className="text-xs font-bold text-red-700 hover:underline">
+                Xem tất cả →
+              </Link>
+            </div>
+            <div className="grid sm:grid-cols-2 gap-2.5">
+              {GUIDES_DATA.slice(0, 4).map((g) => (
+                <Link
+                  key={g.slug}
+                  href={`/cam-nang/${g.slug}`}
+                  className="bg-white p-3 rounded-xl border border-red-100 hover:border-red-400 text-xs font-bold text-neutral-800 hover:text-red-700 transition-all flex items-start gap-2"
                 >
-                  {kw}
-                </span>
+                  <span>{g.heroIcon}</span>
+                  <span className="line-clamp-2 leading-snug">{g.title}</span>
+                </Link>
               ))}
             </div>
           </div>
