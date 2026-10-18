@@ -139,7 +139,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
               "@context": "https://schema.org",
               "@graph": [
                 {
-                  "@type": "LocalBusiness",
+                  "@type": ["LocalBusiness", "HomeAndConstructionBusiness"],
                   "@id": "https://gasnhaminh.com/#business",
                   "name": "GAS NHÀ MÌNH",
                   "url": "https://gasnhaminh.com",
@@ -148,7 +148,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                   "priceRange": "500.000đ - 1.730.000đ",
                   "currenciesAccepted": "VND",
                   "paymentAccepted": "Tiền mặt, Chuyển khoản",
-                  "description": "Dịch vụ giao gas tận nhà siêu tốc 15–20 phút tại TP.HCM. Đổi bình gas chính hãng 12kg, 45kg. Nguyên tem chống giả, an toàn tuyệt đối.",
+                  "description": "Dịch vụ đổi bình gas 12kg, 45kg chính hãng chăm sóc gian bếp gia đình tại TP.HCM. Giao nhanh 15–20 phút, đủ cân, nguyên tem chống giả, vệ sinh bếp miễn phí.",
                   "address": {
                     "@type": "PostalAddress",
                     "streetAddress": "1009 Phạm Thế Hiển, Phường Chánh Hưng",
@@ -157,6 +157,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                     "postalCode": "700000",
                     "addressCountry": "VN"
                   },
+                  "geo": {
+                    "@type": "GeoCoordinates",
+                    "latitude": 10.7428,
+                    "longitude": 106.6634
+                  },
+                  "sameAs": [
+                    "https://zalo.me/0888113831"
+                  ],
                   "areaServed": {
                     "@type": "City",
                     "name": "Thành phố Hồ Chí Minh"
@@ -171,9 +179,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                   },
                   "department": [
                     {
-                      "@type": "LocalBusiness",
+                      "@type": "HomeAndConstructionBusiness",
                       "name": "Gas Nhà Mình - Chi nhánh Quận 8",
-                      "url": "https://gasnhaminh.com",
+                      "url": "https://gasnhaminh.com/giao-gas/quan-8",
                       "image": "https://gasnhaminh.com/logo.png",
                       "priceRange": "500.000đ - 1.730.000đ",
                       "telephone": "0888 113 831",
@@ -193,9 +201,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                       }
                     },
                     {
-                      "@type": "LocalBusiness",
+                      "@type": "HomeAndConstructionBusiness",
                       "name": "Gas Nhà Mình - Chi nhánh Tân Phú",
-                      "url": "https://gasnhaminh.com",
+                      "url": "https://gasnhaminh.com/giao-gas/tan-phu",
                       "image": "https://gasnhaminh.com/logo.png",
                       "priceRange": "500.000đ - 1.730.000đ",
                       "telephone": "0888 113 831",
@@ -215,9 +223,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                       }
                     },
                     {
-                      "@type": "LocalBusiness",
-                      "name": "Gas Nhà Mình - Chi nhánh Bà Điểm",
-                      "url": "https://gasnhaminh.com",
+                      "@type": "HomeAndConstructionBusiness",
+                      "name": "Gas Nhà Mình - Chi nhánh Bà Điểm (Hóc Môn)",
+                      "url": "https://gasnhaminh.com/giao-gas/hoc-mon",
                       "image": "https://gasnhaminh.com/logo.png",
                       "priceRange": "500.000đ - 1.730.000đ",
                       "telephone": "0888 113 831",
@@ -237,9 +245,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                       }
                     },
                     {
-                      "@type": "LocalBusiness",
-                      "name": "Gas Nhà Mình - Chi nhánh Tân Hiệp",
-                      "url": "https://gasnhaminh.com",
+                      "@type": "HomeAndConstructionBusiness",
+                      "name": "Gas Nhà Mình - Chi nhánh Tân Hiệp (Hóc Môn)",
+                      "url": "https://gasnhaminh.com/giao-gas/hoc-mon",
                       "image": "https://gasnhaminh.com/logo.png",
                       "priceRange": "500.000đ - 1.730.000đ",
                       "telephone": "0888 113 831",
@@ -259,9 +267,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                       }
                     },
                     {
-                      "@type": "LocalBusiness",
+                      "@type": "HomeAndConstructionBusiness",
                       "name": "Gas Nhà Mình - Chi nhánh Quận 6 (Cư Xá Bình Phú)",
-                      "url": "https://gasnhaminh.com",
+                      "url": "https://gasnhaminh.com/giao-gas/quan-6",
                       "image": "https://gasnhaminh.com/logo.png",
                       "priceRange": "500.000đ - 1.730.000đ",
                       "telephone": "0888 113 831",

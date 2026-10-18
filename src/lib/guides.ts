@@ -729,6 +729,185 @@ export const GUIDES_DATA: GuideArticle[] = [
     ],
     relatedDistrictSlugs: ['quan-1', 'quan-7', 'quan-8', 'tan-phu', 'binh-thanh', 'thu-duc'],
   },
+  {
+    slug: 'binh-gas-bi-do-mo-hoi-dong-da-co-nguy-hiem-khong',
+    title: 'Bình Gas Bị Đổ Mồ Hôi, Lạnh Buốt Hoặc Đóng Đá Trong Bếp Có Sao Không? Cách Nhận Biết An Toàn',
+    metaTitle: 'Bình Gas Bị Đổ Mồ Hôi, Đóng Đá Có Nguy Hiểm Không? | Gas Nhà Mình',
+    metaDescription: 'Thấy vỏ bình gas 12kg trong tủ bếp tự nhiên đọng nước lạnh buốt hoặc đóng đá trắng xóa có nguy hiểm không? Xem ngay lời giải đáp dễ hiểu và mẹo xử lý an toàn cho gia đình.',
+    category: 'an-toan-gas',
+    categoryLabel: 'An Toàn Phòng Cháy',
+    badgeColor: 'bg-amber-100 text-amber-900 border-amber-300',
+    heroIcon: '❄️',
+    readingTime: '5 phút đọc',
+    publishedAt: '2026-10-18',
+    updatedAt: '2026-10-18',
+    authorName: 'Đội ngũ Kỹ thuật Gas Nhà Mình',
+    authorRole: 'Chuyên viên Chăm sóc & An toàn Gian bếp Gia đình',
+    excerpt: 'Nhiều chị em nội trợ khi mở cánh tủ bếp tình cờ chạm tay vào bình gas 12kg thấy lạnh toát và ướt đẫm nước như ly nước đá nên vô cùng lo lắng. Cùng Gas Nhà Mình tìm hiểu khi nào hiện tượng này hoàn toàn bình thường và khi nào cần khóa van ngay!',
+    tldr: [
+      'Khi bạn đang nấu ăn liên tục (ninh xương, nấu cỗ) hoặc khi bình gas gần hết, phần đáy bình mát lạnh và đọng sương ("đổ mồ hôi") là hiện tượng vật lý tự nhiên, hoàn toàn KHÔNG nguy hiểm.',
+      'Ngược lại, nếu cả nhà KHÔNG bật bếp nấu ăn mà bình gas vẫn tự nhiên đóng tuyết trắng xóa kèm mùi gas hăng nồng thì chắc chắn đang bị xì gas mạnh – cần khóa van bình ngay lập tức!',
+      'Tuyệt đối KHÔNG bao giờ dội nước sôi nóng già lên bình gas để làm tan đá vì sự giãn nở nhiệt đột ngột cực kỳ nguy hiểm cho vỏ bình.',
+    ],
+    sections: [
+      {
+        id: 'tai-sao-binh-gas-bi-do-mo-hoi-lanh-buot',
+        heading: '1. Giải thích dễ hiểu: Tại sao bình gas đang nấu lại lạnh buốt và đọng nước?',
+        paragraphs: [
+          'Bên trong bình gas 12kg của gia đình mình, khí gas được nén dưới dạng nước lỏng. Mỗi khi bạn bật bếp nấu ăn, phần nước gas lỏng này sẽ sôi nhẹ và bốc hơi thành khí gas chạy theo dây dẫn lên bếp.',
+          'Quá trình nước gas chuyển thành hơi gas sẽ hút nhiệt làm lạnh vỏ thép của bình (giống hệt như khi bạn xịt nước hoa hay thoa cồn lên da tay sẽ thấy mát lạnh). Khi vỏ bình lạnh đi, hơi nước ẩm trong không khí nhà bếp chạm vào vỏ bình sẽ đọng lại thành những giọt nước nhỏ li ti – ông bà ta hay gọi là "bình gas đổ mồ hôi".',
+        ],
+        callout: {
+          type: 'info',
+          title: 'Mẹo hay cho người nội trợ kiểm tra lượng gas còn lại:',
+          text: 'Sau khi đun bếp khoảng 10 phút, bạn chỉ cần chạm nhẹ lòng bàn tay từ trên cổ bình vuốt dọc xuống đáy bình. Chỗ nào vỏ bình bắt đầu mát lạnh và ẩm nước chính là vạch mực nước gas thực tế đang còn lại bên trong bình!',
+        },
+      },
+      {
+        id: 'khi-nao-binh-gas-dong-da-la-nguy-hiem',
+        heading: '2. Cách phân biệt nhanh: Bình gas đổ mồ hôi bình thường và Đóng đá do rò rỉ gas',
+        paragraphs: [
+          'Để cả gia đình luôn yên tâm mỗi khi vào bếp, bạn chỉ cần quan sát 3 dấu hiệu đơn giản trong bảng dưới đây:',
+        ],
+        table: {
+          caption: 'Phân biệt hiện tượng bình gas đọng sương tự nhiên và sự cố rò rỉ khí gas',
+          headers: ['Dấu hiệu quan sát', 'Hoàn toàn bình thường (An toàn)', 'Cảnh báo sự cố xì gas (Cần xử lý ngay)'],
+          rows: [
+            ['Thời điểm xuất hiện', 'Chỉ xuất hiện khi đang đun nấu lâu hoặc lúc bình sắp hết gas', 'Xuất hiện cả khi bếp đã tắt hoàn toàn nhiều giờ'],
+            ['Biểu hiện trên vỏ bình', 'Đọng hạt sương mát lạnh ở phần gần đáy bình', 'Đóng lớp tuyết đá trắng xóa ngay cổ van hoặc đầu dây dẫn'],
+            ['Mùi & Âm thanh', 'Không có mùi gas lạ, bếp cháy lửa xanh êm', 'Ngửi thấy mùi gas nồng nặc kèm tiếng xì "xè xè"'],
+          ],
+        },
+      },
+      {
+        id: '3-nguyen-tac-an-toan-khi-binh-gas-lanh',
+        heading: '3. 3 Nguyên tắc xử lý an toàn khi bình gas bị lạnh làm lửa yếu',
+        paragraphs: [
+          'Vào những ngày nấu cỗ Tết, đám giỗ hoặc ở các quán ăn gia đình đun lửa lớn liên tục, bình gas có thể bị lạnh sâu khiến khí gas bốc hơi chậm lại và ngọn lửa trên bếp yếu dần:',
+        ],
+        bullets: [
+          {
+            label: 'Không bao giờ dội nước sôi hoặc hơ lửa dưới đáy bình:',
+            text: 'Tuyệt đối không dùng ấm nước sôi dội vào bình gas vì nhiệt độ cao đột ngột sẽ làm áp suất trong bình tăng vọt mất kiểm soát.',
+          },
+          {
+            label: 'Cho bình gas "nghỉ" 10–15 phút hoặc lau khăn ấm nhẹ:',
+            text: 'Bạn chỉ cần vặn nhỏ lửa hoặc tắt bếp nghỉ khoảng 10 phút, mở cánh tủ bếp cho thoáng gió là vỏ bình sẽ ấm trở lại và lửa mạnh bình thường.',
+          },
+          {
+            label: 'Chọn bình vỏ bọc nhựa PE để giữ sàn bếp luôn khô sạch:',
+            text: 'Nếu bạn không thích nước ngưng tụ từ đáy bình thép chảy ra làm ố vàng gạch men, lần đổi gas tới hãy nhắn Gas Nhà Mình đổi sang dòng Bình V-Gas-PE 12kg (bọc nhựa cách nhiệt sạch sẽ).',
+          },
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: 'Bình gas bị đổ mồ hôi làm ướt sàn tủ bếp gỗ có làm mục tủ bếp không?',
+        answer: 'Lượng nước ngưng tụ thường rất ít và tự khô sau khi tắt bếp 20 phút. Tuy nhiên với tủ bếp gỗ công nghiệp, bạn nên lót một khay nhựa mỏng dưới chân bình gas hoặc đổi sang dòng bình V-Gas bọc nhựa PE 12kg tại Gas Nhà Mình để vừa chống ẩm vừa không bao giờ bị vết rỉ sét tròn dưới sàn tủ.',
+      },
+      {
+        question: 'Tại sao lúc bình gas gần hết lại hay bị đổ mồ hôi ở đáy bình nhiều hơn lúc bình mới?',
+        answer: 'Vì khi bình mới đầy, quá trình bay hơi thu nhiệt được phân tán đều trên toàn bộ thể tích lớn của bình. Khi bình gần cạn chỉ còn một ít nước gas dưới đáy, toàn bộ quá trình thu nhiệt dồn hết vào phần đáy bình nhỏ hẹp nên đáy bình sẽ lạnh hơn rõ rệt.',
+      },
+      {
+        question: 'Nếu thấy cổ bình gas tự nhiên đóng tuyết trắng khi không nấu ăn thì gọi ai hỗ trợ?',
+        answer: 'Bạn hãy khóa chặt núm van bình gas ngay lập tức, mở rộng cửa sổ thông gió (tuyệt đối không bật/tắt công tắc điện) và gọi ngay Hotline Gas Nhà Mình 0888 113 831. Kỹ thuật viên gần nhất sẽ có mặt sau 15 phút để kiểm tra và đổi bình an toàn cho gia đình.',
+      },
+    ],
+    relatedProductSlugs: [
+      'gas-v-gas-pe-12kg',
+      'gas-petrolimex-dung-12kg',
+      'gas-bo-45kg',
+    ],
+    relatedDistrictSlugs: ['quan-8', 'tan-phu', 'quan-6', 'hoc-mon', 'binh-tan'],
+  },
+  {
+    slug: 'bep-gas-bat-khong-len-lua-nguyen-nhan-cach-sua',
+    title: 'Bếp Gas Bật Không Lên Lửa Hoặc Thả Tay Ra Là Tắt: 5 Nguyên Nhân & Mẹo Chữa Nhanh Tại Nhà',
+    metaTitle: 'Bếp Gas Bật Không Lên Lửa: 5 Nguyên Nhân & Cách Sửa | Gas Nhà Mình',
+    metaDescription: 'Đang nấu ăn mà bếp gas bật mãi không lên lửa, kêu tạch tạch không cháy hoặc buông tay ra là tắt? Xem ngay 5 mẹo tự kiểm tra và khắc phục cực dễ cho người nội trợ.',
+    category: 'xu-ly-su-co',
+    categoryLabel: 'Mẹo Chăm Sóc Bếp',
+    badgeColor: 'bg-emerald-100 text-emerald-800 border-emerald-200',
+    heroIcon: '🔧',
+    readingTime: '6 phút đọc',
+    publishedAt: '2026-10-18',
+    updatedAt: '2026-10-18',
+    authorName: 'Đội ngũ Kỹ thuật Gas Nhà Mình',
+    authorRole: 'Chuyên viên Chăm sóc & An toàn Gian bếp Gia đình',
+    excerpt: 'Chắc hẳn ai làm bếp cũng từng gặp cảnh đang vội nấu cơm mà vặn núm bếp gas mãi không cháy, hoặc lửa vừa bùng lên nhưng hễ thả tay ra khỏi núm vặn là tắt ngúm. Cùng Gas Nhà Mình điểm qua 5 nguyên nhân phổ biến nhất và cách tự xử lý nhẹ nhàng trong 3 phút!',
+    tldr: [
+      'Vặn bếp kêu "tạch tạch" nhưng không có gas lên cả 2 bên bếp: Kiểm tra xem đã mở van cổ bình gas và đã ấn nút tròn (cầu chì an toàn) trên van điều áp chưa.',
+      'Vặn bếp âm mặt kính mà im lìm không có tiếng đánh lửa: 90% là do viên Pin Đại (Pin D) lắp ở hộp pin dưới gầm bếp đã hết điện.',
+      'Bật lên lửa nhưng thả tay ra là tắt ngay: Do bạn buông tay quá nhanh (cần ấn giữ núm 3–5 giây) hoặc đầu kim cảm biến sát mâm chia lửa bị bám bẩn.',
+    ],
+    sections: [
+      {
+        id: 'bang-bat-benh-bep-gas-khong-chay',
+        heading: '1. Bảng bắt bệnh 5 lỗi bếp gas bật không lên lửa thường gặp trong gia đình',
+        paragraphs: [
+          'Chỉ cần lắng nghe âm thanh khi vặn núm bếp, bạn có thể biết ngay nguyên nhân vì sao bếp gas nhà mình không chịu lên lửa:',
+        ],
+        table: {
+          caption: '5 tình huống bếp gas không cháy và cách xử lý nhanh cho người nội trợ',
+          headers: ['Biểu hiện thực tế', 'Thủ phạm gây lỗi', 'Mẹo tự khắc phục tại chỗ'],
+          rows: [
+            ['Bật kêu "tạch tạch" nhưng không có hơi gas lên ở cả 2 lò nấu', 'Chưa nhấn nút cầu chì trên van điều áp hoặc bình đã hết sạch gas', 'Mở van bình gas rồi lấy ngón tay ấn mạnh nút tròn trên cổ van điều áp 1 cái'],
+            ['Có tiếng đánh lửa và thoảng mùi gas nhưng lửa không bén vào mâm', 'Nước canh trào hoặc dầu mỡ làm ướt đầu sứ trắng đánh lửa', 'Lấy khăn giấy khô lau sạch đầu sứ trắng và thông khe nhỏ trên vành chia lửa'],
+            ['Bếp gas âm vặn núm không kêu "tạch tạch", không nảy tia lửa', 'Hết pin đánh lửa IC nằm ở hộp pin dưới đáy bếp', 'Mua 1 viên Pin Đại (cỡ D 1.5V) ở tiệm tạp hóa về thay vào hộp pin dưới gầm bếp'],
+            ['Lửa cháy xanh khi đang ấn núm nhưng vừa buông tay ra là tắt phụt', 'Đầu kim cảm biến ngắt gas tự động bị đóng cặn đen hoặc giữ núm chưa đủ 3 giây', 'Nhấn giữ núm bếp 3–5 giây cho kim cảm biến đủ nóng; lấy bàn chải chà sạch đầu kim nhọn'],
+            ['Vừa mới thay bình gas mới xong bật vài lần đầu không cháy', 'Không khí lọt vào ống dây dẫn gas trong lúc tháo lắp bình', 'Vặn bật tắt núm bếp liên tiếp 4–5 lần để đẩy hết hơi gió trong ống ra ngoài'],
+          ],
+        },
+      },
+      {
+        id: '4-buoc-cham-soc-bo-danh-lua-bep-gas',
+        heading: '2. 4 Bước vệ sinh giúp bếp gas luôn nhạy lửa ngay từ lần bật đầu tiên',
+        paragraphs: [
+          'Lưu ý an toàn: Nếu bạn vừa bật thử nhiều lần không cháy và ngửi thấy mùi gas sống quanh mặt bếp, hãy dừng tay khoảng 2 phút và quạt nhẹ cho tan hết hơi gas rồi mới tiến hành kiểm tra nhé:',
+        ],
+        bullets: [
+          {
+            label: 'Bước 1 – Lau khô "Cây sứ trắng" và "Kim cảm biến":',
+            text: 'Khi nhấc kiềng bếp lên, bạn sẽ thấy sát bên cạnh mâm chia lửa có 1 trụ sứ màu trắng (phóng tia lửa điện) và 1 đầu kim đồng nhọn (cảm biến an toàn). Mỗi khi nấu canh bị trào hoặc lau mặt kính bằng khăn ướt, hãy nhớ dùng khăn giấy khô lau sạch 2 chi tiết nhỏ này.',
+          },
+          {
+            label: 'Bước 2 – Thông lỗ lửa mồi nhỏ xíu đối diện cây sứ:',
+            text: 'Trên vành đồng chia lửa có một khe hoặc lỗ nhỏ nằm ngay trước mặt cây sứ trắng. Nếu lỗ này bị cặn thức ăn bít kín, tia lửa điện bắn ra sẽ không gặp được hơi gas. Bạn chỉ cần dùng tăm tre khêu sạch lỗ nhỏ này là bật bếp nhạy ngay.',
+          },
+          {
+            label: 'Bước 3 – Đặt lại mâm đồng ngay ngắn vào khớp:',
+            text: 'Sau khi chùi rửa mâm chia lửa, nếu đặt lệch ngàm dù chỉ một chút cũng làm khí gas thoát sai hướng và bật không cháy. Hãy xoay nhẹ cho mâm đồng nằm phẳng khít trên họng bếp.',
+          },
+          {
+            label: 'Bước 4 – Nhờ kỹ thuật viên Gas Nhà Mình bảo dưỡng miễn phí:',
+            text: 'Nếu bếp đã dùng lâu năm bị mòn búa đánh lửa hoặc nghẹt ống dẫn bên trong, bạn đừng tự tháo bụng bếp. Hãy gọi ngay 0888 113 831 – anh em kỹ thuật viên Gas Nhà Mình sẽ ghé kiểm tra và chỉnh lại bếp hoàn toàn miễn phí mỗi lần giao gas!',
+          },
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: 'Tại sao bếp gas bật không lên lửa nhưng lấy quẹt gas mồi vào mâm lửa thì vẫn cháy bình thường?',
+        answer: 'Nếu dùng hộp quẹt mồi mà bếp vẫn cháy xanh đẹp chứng tỏ bình vẫn còn gas và đường ống hoàn toàn thông suốt. Nguyên nhân 100% nằm ở bộ phận đánh lửa của bếp: hoặc hết pin (bếp âm), hoặc đầu sứ trắng bị ướt/bẩn làm tia lửa yếu, hoặc lỗ thoát gas nhỏ ngay sát đầu sứ bị cặn thức ăn che khuất.',
+      },
+      {
+        question: 'Làm sao phân biệt bếp gas hết gas với bếp gas bị nhảy nút cầu chì van điều áp?',
+        answer: 'Bạn hãy nhấc nhẹ bình gas lên thử: nếu bình nhẹ bẫng (chỉ nặng khoảng 13kg) và lửa yếu dần rồi mới tắt thì là hết gas. Còn nếu bình vẫn nặng trịch mà tự nhiên cả 2 bếp tắt hẳn không có một chút hơi gas nào lên thì chắc chắn viên bi an toàn trong van điều áp đã tự khóa – bạn chỉ cần ấn nút tròn trên cổ van là dùng tiếp bình thường.',
+      },
+      {
+        question: 'Gas Nhà Mình có hỗ trợ sửa bếp gas không lên lửa tận nhà không?',
+        answer: 'Có! Đội ngũ kỹ thuật viên của Gas Nhà Mình tại 5 chi nhánh TP.HCM (Quận 8, Tân Phú, Quận 6, Hóc Môn) luôn hỗ trợ kiểm tra van dây, thông béc phun và chỉnh bộ đánh lửa miễn phí cho khách hàng gọi đổi gas qua Hotline 0888 113 831.',
+      },
+    ],
+    relatedProductSlugs: [
+      'gas-v-gas-xam-12kg',
+      'gas-petrolimex-dung-12kg',
+      'gas-v-gas-shell-12kg',
+    ],
+    relatedDistrictSlugs: ['quan-8', 'tan-phu', 'quan-6', 'go-vap', 'binh-thanh'],
+  },
 ];
 
 export function getAllGuides(): GuideArticle[] {

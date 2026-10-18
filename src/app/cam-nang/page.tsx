@@ -8,8 +8,8 @@ const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || 'https://gasnhaminh.com').
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: 'Cẩm Nang Chăm Sóc Gian Bếp, An Toàn Gas & Mẹo Đổi Gas 2026 | Gas Nhà Mình',
-  description: 'Cẩm nang an toàn gas cho gia đình: Bí quyết kiểm tra bình gas 12kg đủ ký, 5 bước xử lý khi ngửi thấy mùi gas, mẹo chỉnh bếp gas bị đỏ lửa đen nồi và cảnh báo tờ rơi lừa đảo.',
+  title: 'Cẩm Nang Chăm Sóc Bếp & An Toàn Gas 2026 | Gas Nhà Mình',
+  description: 'Cẩm nang gian bếp gia đình: Bí quyết kiểm tra bình gas 12kg đủ ký, 5 bước xử lý khi ngửi thấy mùi gas, chỉnh bếp gas đỏ lửa và cảnh báo tờ rơi giả.',
   alternates: {
     canonical: `${SITE_URL}/cam-nang`,
   },
