@@ -64,6 +64,16 @@ export const DEFAULT_SHIPPING_DETAILS = {
   },
 };
 
+export const DEFAULT_MERCHANT_RETURN_POLICY = {
+  '@type': 'MerchantReturnPolicy',
+  applicableCountry: 'VN',
+  returnPolicyCategory: 'https://schema.org/MerchantReturnFiniteReturnWindow',
+  merchantReturnDays: 7,
+  returnMethod: 'https://schema.org/ReturnAtKiosk',
+  returnFees: 'https://schema.org/FreeReturn',
+  refundType: 'https://schema.org/FullRefund',
+};
+
 export function createProductOffer({
   url,
   price,
@@ -100,7 +110,7 @@ export function createProductOffer({
       name: sellerName,
     },
     shippingDetails: DEFAULT_SHIPPING_DETAILS,
-    ...(returnPolicy ? { hasMerchantReturnPolicy: returnPolicy } : {}),
+    hasMerchantReturnPolicy: returnPolicy || DEFAULT_MERCHANT_RETURN_POLICY,
   };
 }
 

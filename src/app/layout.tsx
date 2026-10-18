@@ -3,8 +3,8 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://gasnhaminh.com"),
-  title: "Giao Gas Tận Nhà Siêu Tốc 15 Phút | Đổi Gas Chính Hãng – Gas Nhà Mình",
-  description: "Dịch vụ giao gas tận nhà hỏa tốc 15–20 phút tại TP.HCM. Đổi bình gas 12kg, 45kg chính hãng đủ cân, nguyên tem chống giả. Hotline: 0888 113 831.",
+  title: "Đổi Bình Gas Chính Hãng TP.HCM – Giao 15P | Gas Nhà Mình",
+  description: "Dịch vụ đổi bình gas 12kg, 45kg chính hãng giao tận nhà 15–20 phút tại TP.HCM. Đủ cân, nguyên tem chống giả, kiểm tra van miễn phí. Gọi: 0888 113 831.",
   keywords: [
     "gas nhà mình",
     "giao gas tận nhà",
@@ -17,8 +17,8 @@ export const metadata: Metadata = {
     canonical: "https://gasnhaminh.com",
   },
   openGraph: {
-    title: "Giao Gas Tận Nhà Siêu Tốc 15 Phút | Đổi Gas Chính Hãng – Gas Nhà Mình",
-    description: "Dịch vụ giao gas tận nhà hỏa tốc 15–20 phút tại TP.HCM. Đổi bình gas 12kg, 45kg chính hãng đủ cân, nguyên tem chống giả. Hotline: 0888 113 831.",
+    title: "Đổi Bình Gas Chính Hãng TP.HCM – Giao 15P | Gas Nhà Mình",
+    description: "Dịch vụ đổi bình gas 12kg, 45kg chính hãng giao tận nhà 15–20 phút tại TP.HCM. Đủ cân, nguyên tem chống giả, kiểm tra van miễn phí. Gọi: 0888 113 831.",
     url: "https://gasnhaminh.com",
     siteName: "Gas Nhà Mình",
     images: [
@@ -34,8 +34,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Giao Gas Tận Nhà Siêu Tốc 15 Phút | Đổi Gas Chính Hãng – Gas Nhà Mình",
-    description: "Dịch vụ giao gas tận nhà hỏa tốc 15–20 phút tại TP.HCM. Đổi bình gas 12kg, 45kg chính hãng. Hotline: 0888 113 831.",
+    title: "Đổi Bình Gas Chính Hãng TP.HCM – Giao 15P | Gas Nhà Mình",
+    description: "Dịch vụ đổi bình gas 12kg, 45kg chính hãng giao tận nhà 15–20 phút tại TP.HCM. Hotline: 0888 113 831.",
     images: ["/hero_gasnhaminh.jpg"],
   },
   icons: {
@@ -143,7 +143,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                   "@id": "https://gasnhaminh.com/#business",
                   "name": "GAS NHÀ MÌNH",
                   "url": "https://gasnhaminh.com",
-                  "image": "https://gasnhaminh.com/hero_gasnhaminh.jpg",
+                  "image": "https://gasnhaminh.com/logo.png",
                   "telephone": "0888 113 831",
                   "priceRange": "500.000đ - 1.730.000đ",
                   "currenciesAccepted": "VND",
@@ -174,7 +174,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                       "@type": "LocalBusiness",
                       "name": "Gas Nhà Mình - Chi nhánh Quận 8",
                       "url": "https://gasnhaminh.com",
-                      "image": "https://gasnhaminh.com/hero_gasnhaminh.jpg",
+                      "image": "https://gasnhaminh.com/logo.png",
                       "priceRange": "500.000đ - 1.730.000đ",
                       "telephone": "0888 113 831",
                       "openingHoursSpecification": {
@@ -196,7 +196,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                       "@type": "LocalBusiness",
                       "name": "Gas Nhà Mình - Chi nhánh Tân Phú",
                       "url": "https://gasnhaminh.com",
-                      "image": "https://gasnhaminh.com/hero_gasnhaminh.jpg",
+                      "image": "https://gasnhaminh.com/logo.png",
                       "priceRange": "500.000đ - 1.730.000đ",
                       "telephone": "0888 113 831",
                       "openingHoursSpecification": {
@@ -218,7 +218,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                       "@type": "LocalBusiness",
                       "name": "Gas Nhà Mình - Chi nhánh Bà Điểm",
                       "url": "https://gasnhaminh.com",
-                      "image": "https://gasnhaminh.com/hero_gasnhaminh.jpg",
+                      "image": "https://gasnhaminh.com/logo.png",
                       "priceRange": "500.000đ - 1.730.000đ",
                       "telephone": "0888 113 831",
                       "openingHoursSpecification": {
@@ -240,7 +240,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                       "@type": "LocalBusiness",
                       "name": "Gas Nhà Mình - Chi nhánh Tân Hiệp",
                       "url": "https://gasnhaminh.com",
-                      "image": "https://gasnhaminh.com/hero_gasnhaminh.jpg",
+                      "image": "https://gasnhaminh.com/logo.png",
                       "priceRange": "500.000đ - 1.730.000đ",
                       "telephone": "0888 113 831",
                       "openingHoursSpecification": {
@@ -262,7 +262,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                       "@type": "LocalBusiness",
                       "name": "Gas Nhà Mình - Chi nhánh Quận 6 (Cư Xá Bình Phú)",
                       "url": "https://gasnhaminh.com",
-                      "image": "https://gasnhaminh.com/hero_gasnhaminh.jpg",
+                      "image": "https://gasnhaminh.com/logo.png",
                       "priceRange": "500.000đ - 1.730.000đ",
                       "telephone": "0888 113 831",
                       "openingHoursSpecification": {

@@ -726,7 +726,12 @@ function ProductCard({ p, onSelect }: { p: ProductItem; onSelect: () => void }) 
   return (
     <div className="bg-white rounded-2xl border border-[#E5E7EB] overflow-hidden shadow-sm hover:shadow-xl transition-shadow group flex flex-col justify-between h-full">
       <div>
-        <div className="bg-gradient-to-br from-[#FFF5F5] to-[#f9fafb] aspect-square w-full flex items-center justify-center overflow-hidden relative select-none group" onContextMenu={(e) => e.preventDefault()}>
+        <Link
+          href={`/${p.slug}`}
+          className="bg-gradient-to-br from-[#FFF5F5] to-[#f9fafb] aspect-square w-full flex items-center justify-center overflow-hidden relative select-none group block"
+          onContextMenu={(e) => e.preventDefault()}
+          title={`Xem chi tiết ${p.name}`}
+        >
           <img
             src={p.img}
             alt={p.name}
@@ -734,10 +739,14 @@ function ProductCard({ p, onSelect }: { p: ProductItem; onSelect: () => void }) 
             loading="lazy"
           />
           <WatermarkOverlay size="md" />
-        </div>
+        </Link>
         <div className="p-5 pb-0">
           <span className={`text-[10px] font-bold uppercase tracking-wider text-white px-2.5 py-1 rounded-full ${p.tagColor}`}>{p.tag}</span>
-          <h3 className="font-black text-[#111928] mt-3 mb-3 text-base leading-snug">{p.name}</h3>
+          <h3 className="font-black text-[#111928] mt-3 mb-3 text-base leading-snug">
+            <Link href={`/${p.slug}`} className="hover:text-[#E02424] transition-colors">
+              {p.name}
+            </Link>
+          </h3>
           <div className="mb-1">
             <span className="text-[10px] text-[#6B7280] uppercase font-semibold">{p.newPrice ? "Đổi gas" : "Giá"}</span>
             <div className="text-2xl font-black text-[#E02424]">{p.exchangePrice}</div>
@@ -750,7 +759,7 @@ function ProductCard({ p, onSelect }: { p: ProductItem; onSelect: () => void }) 
           )}
         </div>
       </div>
-      <div className="p-5 pt-3">
+      <div className="p-5 pt-3 space-y-2">
         <button
           type="button"
           onClick={onSelect}
@@ -758,6 +767,12 @@ function ProductCard({ p, onSelect }: { p: ProductItem; onSelect: () => void }) 
         >
           <span>🛒</span> {p.exchangePrice.includes("Liên hệ") ? "Nhận báo giá ngay" : "ĐẶT NGAY"}
         </button>
+        <Link
+          href={`/${p.slug}`}
+          className="block text-center text-xs font-bold text-[#E02424] hover:underline py-1"
+        >
+          Xem thông số & chi tiết bình →
+        </Link>
       </div>
     </div>
   );
@@ -1630,7 +1645,7 @@ const homeJsonLd = {
           image: prod.image || 'https://gasnhaminh.com/hero_gasnhaminh.jpg',
           sku: prod.slug,
           brand: prod.brand,
-          url: 'https://gasnhaminh.com',
+          url: `https://gasnhaminh.com/${prod.slug}`,
           price: prod.priceVal,
           sellerName: 'Gas Nhà Mình',
         })

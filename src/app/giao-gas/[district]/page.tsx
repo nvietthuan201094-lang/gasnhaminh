@@ -35,11 +35,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   const newWardsClean = (district.newWards || [])
     .map((w) => w.replace(/\s*\(.*?\)\s*/g, '').replace(/^(Phường|Xã)\s+/i, '').trim())
-    .slice(0, 5)
+    .slice(0, 3)
     .join(', ');
 
-  const title = `Giao Gas, Gọi Gas, Đặt Gas ${district.name} (${district.slaMinutes}P) | ${BRAND_NAME}`;
-  const description = `Giao gas, gọi gas, đặt gas ${district.name} tận nhà trong ${district.slaMinutes} phút từ ${BRAND_NAME}${newWardsClean ? ` (phục vụ các phường/xã mới: ${newWardsClean})` : ''}. Đổi bình gas 12kg, 45kg chính hãng V-Gas, Petrolimex nguyên tem, kiểm tra an toàn miễn phí. Hotline: ${district.hotline}.`;
+  const title = `Đổi Bình Gas, Giao Gas ${district.name} 15P | ${BRAND_NAME}`;
+  const description = `Đổi bình gas 12kg, 45kg chính hãng giao tận nhà tại ${district.name} trong ${district.slaMinutes} phút${newWardsClean ? ` (phường ${newWardsClean})` : ''}. Đủ ký, nguyên tem chống giả. Hotline: ${district.hotline}.`;
 
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://gasnhaminh.com';
   const canonicalUrl = `${siteUrl}/giao-gas/${district.slug}`;
@@ -107,7 +107,7 @@ export default async function DistrictPage({ params }: PageProps) {
         name: `Đại Lý Giao Gas, Gọi Gas, Đặt Gas ${district.name} - ${BRAND_NAME}`,
         description: district.description,
         url: pageUrl,
-        image: `${siteUrl}/hero_gasnhaminh.jpg`,
+        image: `${siteUrl}/logo.png`,
         telephone: district.hotline,
         priceRange: '500.000đ - 1.730.000đ',
         address: {
@@ -173,7 +173,7 @@ export default async function DistrictPage({ params }: PageProps) {
             image: prod.image || '/hero_gasnhaminh.jpg',
             sku: `${prod.slug}-${district.slug}`,
             brand: prod.brand,
-            url: pageUrl,
+            url: `${siteUrl}/${prod.slug}`,
             price: productPrice,
             location: district.name,
             sellerName: BRAND_NAME,

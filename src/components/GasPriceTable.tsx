@@ -23,6 +23,10 @@ export default function GasPriceTable({
   const [isLoading, setIsLoading] = useState(!initialProducts);
 
   useEffect(() => {
+    if (initialProducts && initialProducts.length > 0) {
+      setIsLoading(false);
+      return;
+    }
     // Tự động lấy động bảng giá từ Backend CRM Gas Nhà Mình
     fetchDynamicGasPrices()
       .then((dynamicData) => {
@@ -36,7 +40,7 @@ export default function GasPriceTable({
       .finally(() => {
         setIsLoading(false);
       });
-  }, []);
+  }, [initialProducts]);
 
   const filteredProducts = products.filter((p) => {
     if (filterCategory === '12kg') return p.weight === '12kg';
@@ -58,7 +62,7 @@ export default function GasPriceTable({
       if (formEl) {
         formEl.scrollIntoView({ behavior: 'smooth' });
       } else {
-        window.location.href = `tel:0888113831`;
+        window.location.href = `/${slug}`;
       }
     }
   };
@@ -75,7 +79,7 @@ export default function GasPriceTable({
           <span>CẬP NHẬT HÔM NAY: {currentDateStr} • ÁP DỤNG BẢNG GIÁ CHÍNH HÃNG</span>
         </div>
         <h2 className="text-2xl md:text-4xl font-black text-gray-900 tracking-tight leading-tight">
-          Bảng Giá Gas Hôm Nay Mới Nhất 2026
+          Bảng Giá Đổi Bình Gas Chính Hãng Hôm Nay – Gas Nhà Mình
         </h2>
         <p className="text-sm md:text-base text-gray-600 mt-2">
           Báo giá đổi bình gas 12kg gia đình và gas bò 45kg nhà hàng. Đầy đủ tem niêm phong chống giả, kiểm tra an toàn van dây miễn phí, hỗ trợ giao siêu tốc 15 phút tại 24 quận huyện TP.HCM và khu vực lân cận.
@@ -148,18 +152,25 @@ export default function GasPriceTable({
                   </td>
                   <td className="py-3.5 px-4">
                     <div className="flex items-center gap-3">
-                      <div className="w-12 h-12 rounded-xl bg-gray-50 border border-gray-100 p-1 flex-shrink-0 flex items-center justify-center">
+                      <Link
+                        href={`/${p.slug}`}
+                        className="w-12 h-12 rounded-xl bg-gray-50 border border-gray-100 p-1 flex-shrink-0 flex items-center justify-center hover:border-orange-300 transition-colors"
+                        title={`Xem chi tiết ${p.name}`}
+                      >
                         <img
                           src={p.image}
                           alt={p.name}
                           className="w-full h-full object-contain"
                           loading="lazy"
                         />
-                      </div>
+                      </Link>
                       <div>
-                        <div className="font-bold text-gray-900 group-hover:text-[#FF5722] transition-colors">
+                        <Link
+                          href={`/${p.slug}`}
+                          className="font-bold text-gray-900 group-hover:text-[#FF5722] hover:underline transition-colors block"
+                        >
                           {p.name}
-                        </div>
+                        </Link>
                         <div className="flex items-center gap-1.5 mt-0.5">
                           <span className="text-[11px] font-semibold text-gray-500 bg-gray-100 px-2 py-0.5 rounded">
                             {p.brand}
@@ -199,6 +210,13 @@ export default function GasPriceTable({
                       >
                         Đổi gas 15P
                       </button>
+                      <Link
+                        href={`/${p.slug}`}
+                        className="bg-orange-50 hover:bg-orange-100 text-[#FF5722] border border-orange-200 font-bold text-xs px-2.5 py-2 rounded-lg transition-colors whitespace-nowrap"
+                        title={`Thông số & đặt mua ${p.name}`}
+                      >
+                        Chi tiết
+                      </Link>
                       <a
                         href={HOTLINE_TEL}
                         className="bg-gray-100 hover:bg-gray-200 text-gray-700 p-2 rounded-lg transition-colors"
@@ -223,14 +241,17 @@ export default function GasPriceTable({
             className="bg-white rounded-xl border border-gray-200 p-4 shadow-sm flex flex-col justify-between"
           >
             <div className="flex gap-3">
-              <div className="w-16 h-16 rounded-xl bg-gray-50 border border-gray-100 p-1 flex-shrink-0 flex items-center justify-center">
+              <Link
+                href={`/${p.slug}`}
+                className="w-16 h-16 rounded-xl bg-gray-50 border border-gray-100 p-1 flex-shrink-0 flex items-center justify-center"
+              >
                 <img
                   src={p.image}
                   alt={p.name}
                   className="w-full h-full object-contain"
                   loading="lazy"
                 />
-              </div>
+              </Link>
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-1.5 mb-1">
                   <span className="text-[10px] font-bold text-white bg-[#FF5722] px-2 py-0.5 rounded-full">
@@ -241,7 +262,9 @@ export default function GasPriceTable({
                   </span>
                 </div>
                 <h3 className="font-bold text-gray-900 text-sm leading-tight truncate">
-                  {p.name}
+                  <Link href={`/${p.slug}`} className="hover:text-[#FF5722] hover:underline">
+                    {p.name}
+                  </Link>
                 </h3>
                 <p className="text-[11px] text-gray-500 mt-0.5 line-clamp-1">
                   {p.valveType}

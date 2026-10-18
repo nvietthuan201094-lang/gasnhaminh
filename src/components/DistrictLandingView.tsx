@@ -513,10 +513,13 @@ export default function DistrictLandingView({ district }: DistrictLandingViewPro
           <div className="text-center max-w-3xl mx-auto mb-10">
             <span className="text-xs font-bold uppercase tracking-widest text-red-600 block mb-2">Bảng giá niêm yết chính hãng</span>
             <h2 className="text-2xl sm:text-3xl font-black text-neutral-900">
-              Giá Đổi Bình Gas Hôm Nay Tại {district.name}
+              Bảng Giá Đổi Bình Gas Tại {district.name} – {BRAND_NAME}
             </h2>
             <p className="text-sm text-neutral-500 mt-2">
-              Bảng giá công khai minh bạch tất cả các dòng bình: V-Gas (xám, đỏ, vàng, xanh đen, PE, Shell), Petrolimex (đứng, shell), Tuấn Khang và bình Gas bò 45kg. Miễn phí công lắp đặt và kiểm tra an toàn van dây.
+              Bảng giá công khai minh bạch tất cả các dòng bình: V-Gas (xám, đỏ, vàng, xanh đen, PE, Shell), Petrolimex (đứng, shell), Tuấn Khang và bình Gas bò 45kg. Miễn phí công lắp đặt và kiểm tra an toàn van dây.{" "}
+              <Link href="/bang-gia" className="text-red-600 font-bold hover:underline">
+                Xem bảng giá gas hôm nay toàn TP.HCM →
+              </Link>
             </p>
           </div>
 
@@ -552,7 +555,12 @@ export default function DistrictLandingView({ district }: DistrictLandingViewPro
               >
                 <div>
                   {prod.image && (
-                    <div className="bg-gradient-to-br from-rose-50 to-slate-50 aspect-square w-full rounded-xl flex items-center justify-center overflow-hidden mb-3 relative select-none group" onContextMenu={(e) => e.preventDefault()}>
+                    <Link
+                      href={`/${prod.slug}`}
+                      className="bg-gradient-to-br from-rose-50 to-slate-50 aspect-square w-full rounded-xl flex items-center justify-center overflow-hidden mb-3 relative select-none group block"
+                      onContextMenu={(e) => e.preventDefault()}
+                      title={`Xem chi tiết ${prod.name}`}
+                    >
                       <img
                         src={prod.image}
                         alt={prod.name}
@@ -560,7 +568,7 @@ export default function DistrictLandingView({ district }: DistrictLandingViewPro
                         loading="lazy"
                       />
                       <WatermarkOverlay hotline={district.hotline || HOTLINE_DISPLAY} hotlineTel={district.hotline ? `tel:${district.hotline.replace(/\s+/g, '')}` : HOTLINE_TEL} />
-                    </div>
+                    </Link>
                   )}
                   <div className="flex items-center justify-between gap-1 mb-1.5">
                     <span className="inline-block text-[10px] font-bold text-amber-800 bg-amber-100 px-2 py-0.5 rounded-full">
@@ -571,7 +579,9 @@ export default function DistrictLandingView({ district }: DistrictLandingViewPro
                     </span>
                   </div>
                   <h3 className="font-extrabold text-neutral-900 text-sm mb-1 leading-snug">
-                    {prod.name}
+                    <Link href={`/${prod.slug}`} className="hover:text-red-600 transition-colors">
+                      {prod.name}
+                    </Link>
                   </h3>
                   <div className="text-[11px] text-neutral-400 mb-2">
                     {prod.brand} • {prod.valveType}
@@ -595,12 +605,20 @@ export default function DistrictLandingView({ district }: DistrictLandingViewPro
                   >
                     Đặt Bình Này
                   </button>
-                  <a
-                    href={HOTLINE_TEL}
-                    className="w-full py-1.5 rounded-lg bg-neutral-100 hover:bg-neutral-200 text-neutral-700 font-bold text-[11px] text-center transition-colors block"
-                  >
-                    Gọi: {HOTLINE_DISPLAY}
-                  </a>
+                  <div className="grid grid-cols-2 gap-1.5">
+                    <Link
+                      href={`/${prod.slug}`}
+                      className="py-1.5 rounded-lg bg-rose-50 hover:bg-rose-100 text-red-700 font-bold text-[11px] text-center transition-colors block"
+                    >
+                      Chi tiết bình
+                    </Link>
+                    <a
+                      href={HOTLINE_TEL}
+                      className="py-1.5 rounded-lg bg-neutral-100 hover:bg-neutral-200 text-neutral-700 font-bold text-[11px] text-center transition-colors block"
+                    >
+                      Gọi: {HOTLINE_DISPLAY}
+                    </a>
+                  </div>
                 </div>
               </div>
             ))}

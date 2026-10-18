@@ -71,7 +71,7 @@ export const SEO_PRODUCTS: SeoProductItem[] = [
     newPriceVal: 780000,
     image: "https://crm.posplus.vn/api/v1/public_image/product.template/168/image_1024",
     tag: "Bán chạy nhất 🔥",
-    desc: "Bình V-Gas xám 12kg ngọn lửa xanh tiết kiệm, vỏ bình chuẩn PCCC, nguyên tem niêm phong chính hãng khi giao.",
+    desc: "Đổi bình V-Gas xám 12kg tại Gas Nhà Mình: đủ 12kg nước gas tinh khiết, lửa xanh đều, nguyên màng co chống giả và miễn phí kiểm tra van bếp.",
   },
   {
     id: "gas-v-gas-do-12kg",
@@ -87,7 +87,7 @@ export const SEO_PRODUCTS: SeoProductItem[] = [
     newPriceVal: 800000,
     image: "https://crm.posplus.vn/api/v1/public_image/product.template/172/image_1024",
     tag: "Chính hãng 100%",
-    desc: "Bình V-Gas đỏ 12kg chịu áp lực cao, vỏ bình sơn tĩnh điện chống rỉ sét, kiểm định an toàn PCCC tiêu chuẩn.",
+    desc: "Bình V-Gas đỏ 12kg vỏ thép chịu lực sơn tĩnh điện bền đẹp, đạt chuẩn kiểm định PCCC, giao lắp tận nhà trong 15 phút bởi đội ngũ Gas Nhà Mình.",
   },
   {
     id: "gas-v-gas-vang-12kg",
@@ -103,7 +103,7 @@ export const SEO_PRODUCTS: SeoProductItem[] = [
     newPriceVal: 800000,
     image: "https://crm.posplus.vn/api/v1/public_image/product.template/174/image_1024",
     tag: "Khuyên dùng",
-    desc: "Bình V-Gas vàng 12kg nước gas tinh khiết, nhiệt lượng cao, không đen đáy nồi, an toàn tuyệt đối.",
+    desc: "Dòng V-Gas vàng 12kg cao cấp cho gian bếp gia đình: nhiệt lượng ổn định, cháy sạch không muội đen đáy nồi, có bảo hiểm an toàn chính hãng.",
   },
   {
     id: "gas-v-gas-xanh-den-12kg",
@@ -119,7 +119,7 @@ export const SEO_PRODUCTS: SeoProductItem[] = [
     newPriceVal: 800000,
     image: "https://crm.posplus.vn/api/v1/public_image/product.template/173/image_1024",
     tag: "Thiết kế hiện đại",
-    desc: "Bình V-Gas xanh đen 12kg công nghệ chiết nạp tự động khép kín, tem niêm phong chống giả nghiêm ngặt.",
+    desc: "Bình V-Gas xanh đen 12kg chiết nạp tự động chuẩn 12kg ruột gas LPG, niêm phong màng co nhiệt kèm mã QR xác thực từ nhà máy.",
   },
   {
     id: "gas-v-gas-pe-12kg",
@@ -135,7 +135,7 @@ export const SEO_PRODUCTS: SeoProductItem[] = [
     newPriceVal: 800000,
     image: "https://crm.posplus.vn/api/v1/public_image/product.template/178/image_1024",
     tag: "Công nghệ mới 🛡️",
-    desc: "Bình V-Gas bọc nhựa PE cách điện, chống va đập, siêu an toàn cho căn hộ chung cư và gia đình hiện đại.",
+    desc: "Bình V-Gas-PE 12kg bọc nhựa Polyethylene chống ăn mòn, không trầy xước gạch nền, lựa chọn tối ưu cho nhà phố và căn hộ hiện đại.",
   },
   {
     id: "gas-v-gas-shell-12kg",
@@ -151,7 +151,7 @@ export const SEO_PRODUCTS: SeoProductItem[] = [
     newPriceVal: 800000,
     image: "https://crm.posplus.vn/api/v1/public_image/product.template/177/image_1024",
     tag: "Van chụp Shell 🛡️",
-    desc: "Bình V-Gas van chụp Shell 12kg cơ chế tự khóa khi có sự cố, tháo lắp cực kỳ tiện lợi và an toàn.",
+    desc: "Bình V-Gas-Shell 12kg sử dụng cổ van chụp tự khóa thông minh, tháo lắp 1 chạm chống rò rỉ khí gas tối đa cho người lớn tuổi.",
   },
   {
     id: "gas-petrolimex-dung-12kg",
@@ -167,7 +167,7 @@ export const SEO_PRODUCTS: SeoProductItem[] = [
     newPriceVal: 750000,
     image: "https://crm.posplus.vn/api/v1/public_image/product.template/175/image_1024",
     tag: "Thương hiệu quốc gia 🇻🇳",
-    desc: "Bình gas Petrolimex đứng 12kg chính hãng Tập đoàn Dầu khí, màng co chống giả và tem tích hợp QR Code.",
+    desc: "Đổi bình gas Petrolimex van đứng 12kg chính hãng tại Gas Nhà Mình: đầy đủ tem chống giả bộ Công An, đủ cân và an toàn tuyệt đối.",
   },
   {
     id: "gas-petrolimex-shell-12kg",
@@ -183,7 +183,7 @@ export const SEO_PRODUCTS: SeoProductItem[] = [
     newPriceVal: 750000,
     image: "https://crm.posplus.vn/api/v1/public_image/product.template/176/image_1024",
     tag: "Petrolimex Van Chụp",
-    desc: "Bình Petrolimex van chụp Shell 12kg cao cấp, kiểm định nghiêm ngặt theo tiêu chuẩn quốc tế.",
+    desc: "Bình gas Petrolimex van chụp Shell 12kg tiêu chuẩn an toàn kép, tương thích hoàn hảo với các dòng van điều áp chụp cao cấp.",
   },
   {
     id: "gas-tuan-khang-vang-12kg",
@@ -199,7 +199,7 @@ export const SEO_PRODUCTS: SeoProductItem[] = [
     newPriceVal: 800000,
     image: "https://crm.posplus.vn/api/v1/public_image/product.template/169/image_1024",
     tag: "Giá tốt tiết kiệm",
-    desc: "Bình gas Tuấn Khang vàng 12kg chất lượng ổn định, lửa xanh mạnh, lựa chọn kinh tế cho mọi gia đình.",
+    desc: "Bình gas Tuấn Khang vàng 12kg chính hãng: ngọn lửa xanh mạnh, tiết kiệm chi phí sinh hoạt hàng tháng cho gia đình và quán ăn nhỏ.",
   },
   {
     id: "gas-tuan-khang-xanh-12kg",
@@ -215,7 +215,7 @@ export const SEO_PRODUCTS: SeoProductItem[] = [
     newPriceVal: 800000,
     image: "https://crm.posplus.vn/api/v1/public_image/product.template/171/image_1024",
     tag: "Chất lượng cao",
-    desc: "Bình gas Tuấn Khang xanh 12kg chính hãng, van khóa an toàn, ngọn lửa xanh đều nhiệt lượng cao.",
+    desc: "Bình gas Tuấn Khang xanh 12kg vỏ bình kiểm định nghiêm ngặt, van đứng ren ngoài thông dụng, hỗ trợ đổi vỏ ngang miễn phí 0đ.",
   },
   {
     id: "gas-bo-45kg",
@@ -231,7 +231,7 @@ export const SEO_PRODUCTS: SeoProductItem[] = [
     newPriceVal: 2730000,
     image: "https://crm.posplus.vn/api/v1/public_image/product.template/170/image_1024",
     tag: "Quán ăn - Nhà hàng 🏭",
-    desc: "Bình gas bò 45kg chuyên dụng cho nhà hàng, quán ăn, xưởng chế biến. Giao xe tải tận nơi, xuất VAT đầy đủ.",
+    desc: "Bình gas bò công nghiệp 45kg áp suất ổn định cho bếp nhà hàng, quán ăn, bếp ăn tập thể. Giao nhanh bằng xe chuyên dụng, hỗ trợ hóa đơn VAT.",
   },
 ];
 

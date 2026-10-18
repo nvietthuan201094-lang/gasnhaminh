@@ -87,7 +87,7 @@ export default async function BangGiaPage() {
             image: prod.image || '/hero_gasnhaminh.jpg',
             sku: prod.slug,
             brand: prod.brand,
-            url: `${SITE_URL}/bang-gia`,
+            url: `${SITE_URL}/${prod.slug}`,
             price: prod.priceVal,
             sellerName: 'Gas Nhà Mình',
           })
@@ -199,7 +199,7 @@ export default async function BangGiaPage() {
                 Áp dụng Bảng giá thương hiệu Gas Nhà Mình & Niêm yết mới nhất {currentDateStr}
               </span>
               <h1 className="text-3xl md:text-5xl font-black text-gray-950 tracking-tight leading-tight mb-4">
-                Bảng Giá Gas Hôm Nay Mới Nhất 2026 – Báo Giá Đổi Bình Gas 12kg & 45kg TP.HCM
+                Bảng Giá Đổi Bình Gas 12kg & 45kg Chính Hãng Hôm Nay 2026 – Gas Nhà Mình
               </h1>
               <p className="text-base md:text-lg text-gray-600 leading-relaxed mb-6">
                 Cập nhật chính xác <strong>giá gas hôm nay</strong> cho các dòng bình gas V-Gas xám/đỏ/vàng/PE/Shell, Petrolimex và Tuấn Khang 12kg tại <strong>Gas Nhà Mình</strong>. Cam kết đủ 12kg ruột chuẩn hãng, nguyên tem màng co niêm phong, kiểm tra rò rỉ an toàn miễn phí.
