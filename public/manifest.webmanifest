@@ -1,0 +1,27 @@
+{
+  "name": "Gas Nhà Mình - Giao Gas Siêu Tốc 15 Phút",
+  "short_name": "Gas Nhà Mình",
+  "description": "Dịch vụ đổi bình gas 12kg, 45kg chính hãng giao tận nhà 15–20 phút tại TP.HCM. Hotline 0888 113 831.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0284C7",
+  "lang": "vi",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ]
+}

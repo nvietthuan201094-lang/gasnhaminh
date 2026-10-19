@@ -62,6 +62,10 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
+  manifest: "/manifest.webmanifest",
+  formatDetection: {
+    telephone: false,
+  },
   verification: {
     google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || undefined,
   },
@@ -104,6 +108,13 @@ export default async function RootLayout({
   return (
     <html lang="vi">
       <head>
+        {/* ─── Resource Hints & Preconnect ───────────────────────────────── */}
+        <link rel="preconnect" href="https://www.googletagmanager.com" />
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+        <link rel="preconnect" href="https://crm.posplus.vn" />
+        <link rel="dns-prefetch" href="https://crm.posplus.vn" />
+        <meta name="theme-color" content="#0284C7" />
+
         {/* ─── Google Tag (gtag.js) for Google Ads & GA4 ─────────────────── */}
         <script
           async
@@ -295,7 +306,22 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                   "@id": "https://gasnhaminh.com/#website",
                   "name": "Gas Nhà Mình",
                   "url": "https://gasnhaminh.com",
+                  "inLanguage": "vi-VN",
                   "description": "Dịch vụ giao gas tận nhà siêu tốc 15–20 phút tại TP.HCM. Đổi bình gas chính hãng 12kg, 45kg đủ cân, nguyên tem chống giả."
+                },
+                {
+                  "@type": "Service",
+                  "@id": "https://gasnhaminh.com/#service-delivery",
+                  "name": "Dịch vụ đổi bình gas & giao gas tận nhà 15 phút",
+                  "serviceType": "Giao gas siêu tốc",
+                  "provider": {
+                    "@id": "https://gasnhaminh.com/#business"
+                  },
+                  "areaServed": {
+                    "@type": "City",
+                    "name": "Thành phố Hồ Chí Minh"
+                  },
+                  "description": "Dịch vụ đổi bình gas 12kg, 45kg giao tận nơi trong 15–20 phút tại 24 quận huyện TP.HCM. Bình chính hãng nguyên tem niêm phong, kiểm tra rò rỉ van bếp miễn phí."
                 }
               ]
             })
