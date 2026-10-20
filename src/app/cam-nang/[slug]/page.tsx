@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation';
 import { getAllGuides, getGuideBySlug } from '@/lib/guides';
 import { getAllDistricts, HOTLINE_DISPLAY, HOTLINE_TEL, ZALO_URL } from '@/lib/districts';
 import { fetchDynamicGasPrices } from '@/lib/api';
+import { createHowToSchema } from '@/lib/seo-schema';
 
 const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || 'https://gasnhaminh.com').replace(/\/$/, '');
 
@@ -89,6 +90,26 @@ export default async function GuideDetailPage({ params }: PageProps) {
 
   const pageUrl = `${SITE_URL}/cam-nang/${guide.slug}`;
 
+  const isHowToGuide =
+    guide.slug.startsWith('cach-') ||
+    guide.slug.includes('quy-trinh') ||
+    guide.slug.includes('kiem-tra') ||
+    guide.category === 'xu-ly-su-co';
+
+  const howToSchema = isHowToGuide
+    ? createHowToSchema({
+        name: guide.title,
+        description: guide.metaDescription,
+        totalTime: 'PT5M',
+        image: [`${SITE_URL}/hero_gasnhaminh.jpg`],
+        steps: guide.sections.map((s) => ({
+          name: s.heading,
+          text: s.paragraphs[0] || s.heading,
+          url: `${pageUrl}#${s.id}`,
+        })),
+      })
+    : null;
+
   const jsonLd = {
     '@context': 'https://schema.org',
     '@graph': [
@@ -155,6 +176,7 @@ export default async function GuideDetailPage({ params }: PageProps) {
           },
         })),
       },
+      ...(howToSchema ? [howToSchema] : []),
     ],
   };
 

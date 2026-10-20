@@ -908,6 +908,241 @@ export const GUIDES_DATA: GuideArticle[] = [
     ],
     relatedDistrictSlugs: ['quan-8', 'tan-phu', 'quan-6', 'go-vap', 'binh-thanh'],
   },
+  {
+    "slug": "han-kiem-dinh-binh-gas-cach-xem-han-su-dung-vo-binh",
+    "title": "Bình Gas Có Hạn Sử Dụng Không? Cách Xem Năm Kiểm Định Vỏ Bình Gas Chuẩn An Toàn Bếp",
+    "metaTitle": "Cách Xem Năm Kiểm Định & Hạn Sử Dụng Bình Gas 12kg – Gas Nhà Mình",
+    "metaDescription": "Hướng dẫn đọc hạn kiểm định dập trên quai xách vỏ bình gas 12kg (chu kỳ 5 năm/lần theo QCVN 04:2013/BCT), niên hạn sử dụng và cách phát hiện vỏ bình hết hạn nguy hiểm.",
+    "category": "an-toan-gas",
+    "categoryLabel": "Kiểm Định PCCC",
+    "badgeColor": "bg-emerald-100 text-emerald-800 border-emerald-200",
+    "heroIcon": "📋",
+    "readingTime": "5 phút đọc",
+    "publishedAt": "2026-10-20",
+    "updatedAt": "2026-10-20",
+    "authorName": "Tổ Kỹ Thuật Chăm Sóc Gian Bếp – Gas Nhà Mình",
+    "authorRole": "Chuyên viên Kiểm định An toàn Bếp Gia Đình TP.HCM",
+    "excerpt": "Nhiều người nội trợ lo lắng bình gas để lâu có bị hỏng gas không? Thực tế nước gas không có hạn sử dụng, nhưng vỏ bình thép chịu lực bắt buộc phải kiểm định định kỳ 5 năm/lần.",
+    "tldr": [
+      "Bình gas LPG không có hạn sử dụng đối với nước gas bên trong, nhưng vỏ bình thép chịu áp lực bắt buộc phải kiểm định áp lực thủy lực định kỳ 5 năm/lần theo Quy chuẩn QCVN 04:2013/BCT.",
+      "Cách đọc hạn kiểm định: Nhìn vào 1 trong 2 quai xách bằng thép, tìm các chữ cái dập chìm quy ước quý (A: Quý 1, B: Quý 2, C: Quý 3, D: Quý 4) kèm 2 chữ số năm (ví dụ \"C 26\" nghĩa là hạn kiểm định đến Tháng 9/2026).",
+      "Niên hạn sử dụng tối đa của vỏ bình gas là 25 năm kể từ ngày chế tạo xuất xưởng. Sau 25 năm, vỏ bình bắt buộc phải loại bỏ và tiêu hủy thành phế liệu.",
+      "Tuyệt đối từ chối nhận bình gas bị mài mòn tai quai, chân đế gỉ sét thủng lỗ hoặc chữ dập kiểm định bị tẩy xóa hàn vá."
+    ],
+    "sections": [
+      {
+        "id": "quy-dinh-kiem-dinh-vo-binh",
+        "heading": "1. Vỏ bình gas có hạn sử dụng không? Quy chuẩn kiểm định áp lực định kỳ 5 năm/lần",
+        "paragraphs": [
+          "Một trong những thắc mắc phổ biến nhất của người dùng gas tại TP.HCM là: \"Bình gas để lâu có bị hết hạn không?\". Về mặt hóa học, khí dầu mỏ hóa lỏng (LPG - hỗn hợp Propane và Butane) được chứa kín trong bình không bao giờ bị biến chất hay ôi thiu theo thời gian.",
+          "Tuy nhiên, vỏ bình chứa bằng thép chịu áp lực cao (thường từ 7 đến 18 bar) phải liên tục chịu ứng suất dãn nở và tác động môi trường nồm ẩm. Theo Quy chuẩn Kỹ thuật Quốc gia QCVN 04:2013/BCT của Bộ Công Thương, mọi vỏ chai chứa LPG dân dụng đều phải qua quy trình thử bền thủy lực và kiểm tra siêu âm định kỳ 5 năm một lần."
+        ],
+        "table": {
+          "caption": "Bảng quy chuẩn chu kỳ kiểm định và thời hạn an toàn vỏ bình gas theo pháp luật Việt Nam",
+          "headers": [
+            "Chu kỳ sử dụng",
+            "Thời hạn bắt buộc",
+            "Quy trình thử nghiệm PCCC"
+          ],
+          "rows": [
+            [
+              "Kiểm định xuất xưởng lần đầu",
+              "Năm sản xuất (dập nổi trên thân vỏ)",
+              "Thử áp suất thủy lực 30 bar, chụp X-quang mối hàn"
+            ],
+            [
+              "Kiểm định định kỳ các lần sau",
+              "5 năm / 1 lần",
+              "Thử kín khí, kiểm tra độ dày thành vỏ, tẩy rỉ sơn lại"
+            ],
+            [
+              "Niên hạn sử dụng tối đa",
+              "Tối đa 25 năm",
+              "Sau 25 năm bắt buộc cắt tiêu hủy, cấm tái sử dụng"
+            ]
+          ]
+        }
+      },
+      {
+        "id": "cach-doc-ky-hieu-tren-quai-binh",
+        "heading": "2. Cách đọc ký hiệu năm và quý kiểm định dập chìm trên quai xách bình gas",
+        "paragraphs": [
+          "Để tự kiểm tra tại nhà khi nhân viên giao gas mang bình tới, bạn chỉ cần nhìn vào mặt trong hoặc mặt ngoài của một trong hai quai xách bằng thép. Các nhà sản xuất chính hãng (Petrolimex, V-Gas, Tuấn Khang...) đều dùng bộ ký hiệu chuẩn quốc tế:"
+        ],
+        "bullets": [
+          {
+            "label": "Chữ cái quy ước quý trong năm",
+            "text": "Chữ A (Quý 1: Tháng 1 - 3), Chữ B (Quý 2: Tháng 4 - 6), Chữ C (Quý 3: Tháng 7 - 9), Chữ D (Quý 4: Tháng 10 - 12)."
+          },
+          {
+            "label": "Hai chữ số năm kiểm định",
+            "text": "Ví dụ số \"26\" nghĩa là năm 2026, số \"27\" nghĩa là năm 2027, số \"28\" nghĩa là năm 2028."
+          },
+          {
+            "label": "Ví dụ đọc thực tế",
+            "text": "Ký hiệu \"B 27\" nghĩa là hạn kiểm định vỏ bình có hiệu lực đến hết Quý 2 năm 2027 (hết tháng 6/2027). Ký hiệu \"C 26\" nghĩa là còn hạn đến hết tháng 9/2026."
+          }
+        ],
+        "callout": {
+          "type": "warning",
+          "title": "Cảnh báo bình gas quá hạn:",
+          "text": "Nếu hôm nay là năm 2026 nhưng quai bình dập chữ \"D 24\" hoặc \"A 25\", nghĩa là vỏ bình này đã hết hạn kiểm định từ 1 đến 2 năm trước và trạm chiết nạp lậu đã bỏ qua khâu thử áp lực an toàn. Hãy yêu cầu đổi ngay bình khác!"
+        }
+      },
+      {
+        "id": "dau-hieu-vo-binh-nguy-hiem",
+        "heading": "3. 3 Dấu hiệu nhận biết vỏ bình gas hết đát, rỉ sét và sang chiết lậu",
+        "paragraphs": [
+          "Các cơ sở sang chiết lậu thường thu gom vỏ bình quá đát với giá rẻ, sau đó mài bỏ tên thương hiệu nổi tiếng để dán nhãn giả. Hãy cẩn trọng nếu phát hiện các đặc điểm sau:"
+        ],
+        "bullets": [
+          {
+            "label": "Vỏ quai bị mài phẳng láng",
+            "text": "Quai xách có vết cắt gọt, mài mỏng để xóa chữ dập nổi của hãng gốc hoặc xóa năm sản xuất."
+          },
+          {
+            "label": "Chân đế bị rỉ sét mục kim loại",
+            "text": "Đáy bình là nơi đọng nước và dễ bị ăn mòn nhất. Nếu chân đế rỉ tạo vảy sắt bong tróc, áp lực gas có thể làm xé toạc đáy bình khi va chạm."
+          },
+          {
+            "label": "Sơn xịt thủ công đè lên tem cũ",
+            "text": "Bình gas chính hãng được sơn tĩnh điện mịn bóng tại nhà máy, không có mùi sơn nồng nặc và không bị tróc vảy bẩn dính tay."
+          }
+        ]
+      },
+      {
+        "id": "chinh-sach-doi-vo-an-toan",
+        "heading": "4. Chính sách kiểm định và đổi vỏ an toàn miễn phí tại Gas Nhà Mình",
+        "paragraphs": [
+          "Tại Gas Nhà Mình, mỗi bình gas mang đến gian bếp của bạn đều được kỹ thuật viên kiểm tra ngày kiểm định trên quai xách và quét mã QR nhà máy trước khi giao. Chúng tôi kiên quyết loại bỏ 100% vỏ bình cận đát hoặc có dấu hiệu mài mòn tai quai.",
+          "Đổi vỏ bình 12kg hợp chuẩn hoàn toàn miễn phí 0đ, đồng hành giữ gìn an toàn cho từng bữa cơm ấm cúng của mọi gia đình Việt."
+        ]
+      }
+    ],
+    "faqs": [
+      {
+        "question": "Vỏ bình gas hết hạn kiểm định thì đổi có mất phí phạt không?",
+        "answer": "Không. Tại Gas Đây Rồi, chính sách đổi vỏ bình hợp chuẩn là hoàn toàn miễn phí 0đ. Vỏ bình đến hạn kiểm định sẽ được chúng tôi thu hồi và gửi về nhà máy kiểm định lại theo đúng quy chuẩn Nhà nước."
+      },
+      {
+        "question": "Bình gas còn gas nhưng để trong nhà 2 năm không dùng có nổ không?",
+        "answer": "Bình gas để lâu không tự nổ nếu không tiếp xúc với nguồn nhiệt cao (>50°C) và van đóng kín. Tuy nhiên, gioăng cao su cổ van có thể bị lão hóa chai cứng gây rò rỉ ngầm. Trước khi sử dụng lại, hãy dùng bọt xà phòng kiểm tra cổ van."
+      },
+      {
+        "question": "Dãy số Tara Weight (TW) khác gì với hạn kiểm định?",
+        "answer": "Dãy số TW (hoặc W) là trọng lượng vỏ bình rỗng (ví dụ 13.2kg), dùng để tính bình đủ ký. Còn ký hiệu quý + năm (ví dụ B 27) là thời hạn kiểm định áp lực của vỏ bình."
+      }
+    ],
+    "relatedProductSlugs": [
+      "gas-v-gas-xam-12kg",
+      "gas-petrolimex-dung-12kg",
+      "gas-tuan-khang-vang-12kg"
+    ],
+    "relatedDistrictSlugs": [
+      "quan-8",
+      "tan-phu",
+      "quan-6"
+    ]
+  },
+  {
+    "slug": "co-nen-khoa-binh-gas-sau-khi-nau-khong-quy-trinh-tat-bep-an-toan",
+    "title": "Nấu Xong Có Cần Khóa Bình Gas Không? Quy Trình Tắt Bếp An Toàn Cho Gian Bếp Gia Đình",
+    "metaTitle": "Nấu Xong Có Nên Khóa Van Bình Gas? Quy Trình Tắt Bếp – Gas Nhà Mình",
+    "metaDescription": "Giải đáp câu hỏi có nên khóa van bình gas sau khi nấu không. Phân tích áp suất dây dẫn, nguy cơ chuột cắn và quy trình 3 bước vàng khóa van bếp gas an toàn tuyệt đối.",
+    "category": "an-toan-gas",
+    "categoryLabel": "Quy Chuẩn PCCC",
+    "badgeColor": "bg-amber-100 text-amber-800 border-amber-200",
+    "heroIcon": "🔒",
+    "readingTime": "5 phút đọc",
+    "publishedAt": "2026-10-20",
+    "updatedAt": "2026-10-20",
+    "authorName": "Tổ Kỹ Thuật Chăm Sóc Gian Bếp – Gas Nhà Mình",
+    "authorRole": "Chuyên viên An toàn Thiết bị Bếp Gia Đình TP.HCM",
+    "excerpt": "Sau khi nấu ăn xong, người nội trợ nên khóa van bình gas hay chỉ cần tắt bếp? Phân tích nguy cơ chuột cắn dây dẫn ban đêm và quy tắc 3 bước tắt bếp an toàn, tiện lợi.",
+    "tldr": [
+      "Bắt buộc NÊN KHÓA van bình gas sau mỗi lần nấu nướng hoặc ít nhất là trước khi đi ngủ và ra khỏi nhà.",
+      "Nếu chỉ tắt bếp mà không khóa van bình gas, đường ống cao su mềm nối từ bình lên bếp luôn phải chịu áp lực thường trực 0.03 – 0.05 bar. Nếu ống bị chuột cắn thủng hoặc khớp siết cổ dê bị lỏng, khí gas sẽ xì ngầm toàn bộ gian bếp.",
+      "Quy trình 3 bước vàng tắt bếp chuẩn PCCC: (1) Khóa van cổ bình gas trước -> (2) Chờ ngọn lửa trên bếp tự tắt hẳn (cháy hết lượng gas tồn trong dây) -> (3) Tắt núm vặn công tắc bếp.",
+      "Khóa van hàng ngày KHÔNG làm hỏng bình gas. Van điều áp hiện đại được thiết kế chịu hàng trăm nghìn lần đóng mở cơ học an toàn."
+    ],
+    "sections": [
+      {
+        "id": "vi-sao-can-khoa-van-binh-gas",
+        "heading": "1. Có nên khóa van bình gas sau khi nấu không? Cảnh báo từ cơ quan PCCC",
+        "paragraphs": [
+          "Theo thống kê của lực lượng Cảnh sát PCCC & CNCH, hơn 70% các vụ tai nạn cháy nổ liên quan đến gas sinh hoạt tại các căn hộ và nhà phố không xuất phát từ việc nổ bình thép, mà bắt nguồn từ rò rỉ khí gas qua ống dẫn cao su hoặc cụm khóa bếp.",
+          "Khi bạn không khóa van đầu bình, toàn bộ đoạn dây cao su nối từ van điều áp lên tới bếp luôn ở trong tình trạng chứa đầy khí gas dưới áp suất liên tục. Chỉ cần một vết chuột gặm nhỏ vào ban đêm hoặc cổ dê lỏng lẻo, hàng nghìn lít khí gas sẽ thoát ra, tích tụ ở sàn nhà và chực chờ bùng phát khi có tia lửa điện từ công tắc đèn, tủ lạnh hay ổ cắm."
+        ],
+        "callout": {
+          "type": "warning",
+          "title": "Quy tắc an toàn tối thượng:",
+          "text": "Khóa van bình gas là cắt đứt hoàn toàn nguồn cung cấp nhiên liệu ngay tại gốc. Dù dây dẫn hay bếp có hỏng hóc, khí gas cũng không thể rò rỉ ra ngoài gian bếp của bạn."
+        }
+      },
+      {
+        "id": "quy-trinh-3-buoc-tat-bep",
+        "heading": "2. Quy trình 3 bước tắt bếp gas chuẩn an toàn PCCC (Không lo đọng gas trong ống)",
+        "paragraphs": [
+          "Rất nhiều người có thói quen tắt bếp trước rồi mới cúi xuống vặn khóa bình gas. Tuy nhiên, trình tự này vẫn để lại một lượng khí gas dư thừa nén chặt bên trong đường ống cao su. Trình tự chuẩn PCCC phải thực hiện như sau:"
+        ],
+        "bullets": [
+          {
+            "label": "Bước 1: Vặn khóa chặt van bình gas",
+            "text": "Xoay tay van theo chiều kim đồng hồ (hoặc gạt chốt ngắt van chụp Shell về vị trí OFF) khi bếp vẫn đang bật đỏ lửa."
+          },
+          {
+            "label": "Bước 2: Quan sát ngọn lửa tự tàn trên bếp",
+            "text": "Chờ khoảng 3 – 5 giây để bếp đốt cháy sạch toàn bộ lượng khí gas còn tồn đọng trong ống mềm cao su. Khi ngọn lửa tắt hoàn toàn, đường ống đã được giải phóng áp lực về mức 0 an toàn."
+          },
+          {
+            "label": "Bước 3: Vặn tắt công tắc bếp gas",
+            "text": "Xoay núm công tắc bếp về vị trí OFF ban đầu và kiểm tra nút khóa trẻ em nếu có."
+          }
+        ]
+      },
+      {
+        "id": "khoa-van-co-lam-hong-binh",
+        "heading": "3. Khóa van bình gas thường xuyên có làm nhanh hỏng ren hoặc rỉ van không?",
+        "paragraphs": [
+          "Một số gia đình e ngại vặn van hàng ngày sẽ gây trờn ren hoặc rách màng cao su. Thực tế kỹ thuật hoàn toàn ngược lại: Cụm van bình gas được chế tạo bằng đồng thau nguyên khối đúc áp lực cao, kiểm nghiệm độ bền đóng mở trên 50.000 chu kỳ.",
+          "Ngược lại, việc để áp suất gas liên tục căng phồng trong dây dẫn cao su mới là nguyên nhân khiến ống dẫn bị chai cứng, lão hóa nhanh gấp 3 lần và dễ nứt gãy ở các điểm uốn cong."
+        ]
+      },
+      {
+        "id": "chon-van-dieu-ap-tu-ngat",
+        "heading": "4. Lựa chọn van điều áp ngắt gas tự động bảo vệ gian bếp nhà bạn",
+        "paragraphs": [
+          "Để gia đình luôn an tâm khi đi làm hay đi ngủ, hãy trang bị van ngắt gas tự động. Khi có sự cố tuột dây hay rò rỉ, van sẽ tự động đóng ngắt nguồn gas tức thì.",
+          "Kỹ thuật viên Gas Nhà Mình luôn sẵn sàng kiểm tra độ nhạy của van điều áp và vệ sinh bếp miễn phí mỗi lần đổi gas tại nhà quý khách."
+        ]
+      }
+    ],
+    "faqs": [
+      {
+        "question": "Khóa van bình gas trước hay tắt công tắc bếp trước?",
+        "answer": "Khóa van bình gas trước! Để bếp đốt cháy hết phần gas dư bên trong ống cao su rồi mới tắt công tắc bếp. Đây là quy chuẩn vàng được lực lượng PCCC khuyến cáo."
+      },
+      {
+        "question": "Bình van chụp Shell thì khóa như thế nào?",
+        "answer": "Với van chụp Shell (van gạt), bạn chỉ cần gạt tay gạt màu đen từ vị trí thẳng đứng (ON) sang vị trí nằm ngang vuông góc (OFF) là gas được ngắt hoàn toàn."
+      },
+      {
+        "question": "Dây dẫn gas cao su bao lâu nên thay một lần?",
+        "answer": "Dây dẫn gas cao su chuyên dụng nên được thay mới định kỳ từ 12 đến 24 tháng/lần, hoặc thay ngay khi thấy dấu hiệu vỏ cao su bị ố vàng, chai cứng, nứt chân chim."
+      }
+    ],
+    "relatedProductSlugs": [
+      "gas-v-gas-van-chup-shell-12kg",
+      "gas-petrolimex-shell-12kg",
+      "gas-v-gas-boc-nhua-pe-12kg"
+    ],
+    "relatedDistrictSlugs": [
+      "quan-8",
+      "tan-phu",
+      "hoc-mon",
+      "quan-6"
+    ]
+  },
 ];
 
 export function getAllGuides(): GuideArticle[] {

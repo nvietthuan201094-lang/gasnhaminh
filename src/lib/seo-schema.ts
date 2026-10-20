@@ -198,3 +198,54 @@ export function createProductSchema({
     }),
   };
 }
+
+export interface HowToStepInput {
+  name: string;
+  text: string;
+  url?: string;
+  image?: string;
+}
+
+export function createHowToSchema({
+  name,
+  description,
+  totalTime,
+  estimatedCost,
+  steps,
+  image,
+}: {
+  name: string;
+  description: string;
+  totalTime?: string;
+  estimatedCost?: {
+    currency: string;
+    value: string | number;
+  };
+  steps: HowToStepInput[];
+  image?: string | string[];
+}) {
+  return {
+    '@type': 'HowTo',
+    name,
+    description,
+    ...(totalTime ? { totalTime } : {}),
+    ...(image ? { image: Array.isArray(image) ? image : [image] } : {}),
+    ...(estimatedCost
+      ? {
+          estimatedCost: {
+            '@type': 'MonetaryAmount',
+            currency: estimatedCost.currency,
+            value: estimatedCost.value,
+          },
+        }
+      : {}),
+    step: steps.map((s, idx) => ({
+      '@type': 'HowToStep',
+      position: idx + 1,
+      name: s.name,
+      text: s.text,
+      ...(s.url ? { url: s.url } : {}),
+      ...(s.image ? { image: s.image } : {}),
+    })),
+  };
+}

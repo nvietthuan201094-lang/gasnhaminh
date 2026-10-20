@@ -1609,6 +1609,47 @@ function Footer() {
           </div>
         </div>
 
+        
+        {/* ─── Liên kết SEO Chân Trang (Footer Quick Links) ────────────────────────── */}
+        <div className="border-t border-white/10 pt-8 pb-8 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 gap-6 text-xs text-white/70">
+          <div>
+            <h5 className="font-bold text-white text-xs uppercase tracking-wider mb-3 text-[#0EA5E9]">
+              Tra cứu & Sản phẩm chính hãng
+            </h5>
+            <ul className="space-y-2">
+              <li><Link href="/bang-gia" className="hover:text-white transition-colors">🔥 Bảng giá gas hôm nay 2026</Link></li>
+              <li><Link href="/gas-v-gas-xam-12kg" className="hover:text-white transition-colors">Bình Gas V-Gas xám 12kg</Link></li>
+              <li><Link href="/gas-petrolimex-dung-12kg" className="hover:text-white transition-colors">Bình Gas Petrolimex 12kg</Link></li>
+              <li><Link href="/gas-tuan-khang-vang-12kg" className="hover:text-white transition-colors">Bình Gas Tuấn Khang 12kg</Link></li>
+              <li><Link href="/gas-bo-cong-nghiep-45kg" className="hover:text-white transition-colors">Bình gas bò công nghiệp 45kg</Link></li>
+            </ul>
+          </div>
+          <div>
+            <h5 className="font-bold text-white text-xs uppercase tracking-wider mb-3 text-[#0EA5E9]">
+              Cẩm nang an toàn & PCCC
+            </h5>
+            <ul className="space-y-2">
+              <li><Link href="/cam-nang" className="hover:text-white transition-colors">📚 Thư viện cẩm nang an toàn gas</Link></li>
+              <li><Link href="/cam-nang/cach-kiem-tra-binh-gas-chinh-hang-du-ky" className="hover:text-white transition-colors">5 Cách kiểm tra bình gas đủ ký</Link></li>
+              <li><Link href="/cam-nang/cach-xu-ly-khi-ngui-thay-mui-gas-ro-ri" className="hover:text-white transition-colors">Cách xử lý mùi gas rò rỉ khẩn cấp</Link></li>
+              <li><Link href="/cam-nang/han-kiem-dinh-binh-gas-cach-xem-han-su-dung-vo-binh" className="hover:text-white transition-colors">Cách xem hạn kiểm định vỏ bình</Link></li>
+              <li><Link href="/cam-nang/co-nen-khoa-binh-gas-sau-khi-nau-khong-quy-trinh-tat-bep-an-toan" className="hover:text-white transition-colors">Quy trình tắt bếp chuẩn an toàn</Link></li>
+            </ul>
+          </div>
+          <div className="col-span-2 sm:col-span-1">
+            <h5 className="font-bold text-white text-xs uppercase tracking-wider mb-3 text-[#0EA5E9]">
+              Trạm giao gas 15P tiêu biểu
+            </h5>
+            <ul className="space-y-2">
+              <li><Link href="/giao-gas/quan-8" className="hover:text-white transition-colors">⚡ Giao gas hỏa tốc Quận 8</Link></li>
+              <li><Link href="/giao-gas/tan-phu" className="hover:text-white transition-colors">⚡ Giao gas hỏa tốc Tân Phú</Link></li>
+              <li><Link href="/giao-gas/quan-6" className="hover:text-white transition-colors">⚡ Giao gas hỏa tốc Quận 6</Link></li>
+              <li><Link href="/giao-gas/hoc-mon" className="hover:text-white transition-colors">⚡ Giao gas hỏa tốc Hóc Môn</Link></li>
+              <li><Link href="/giao-gas/binh-tan" className="hover:text-white transition-colors">⚡ Giao gas hỏa tốc Bình Tân</Link></li>
+            </ul>
+          </div>
+        </div>
+
         <div className="border-t border-white/10 pt-6 flex flex-col md:flex-row items-center justify-between gap-3 text-xs text-white/50">
           <div>
             © {new Date().getFullYear()} GAS NHÀ MÌNH. Hệ thống phân phối & giao gas chính hãng tận nhà tại TP. Hồ Chí Minh.

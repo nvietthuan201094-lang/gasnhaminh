@@ -115,6 +115,12 @@ export default async function RootLayout({
         <link rel="dns-prefetch" href="https://crm.posplus.vn" />
         <meta name="theme-color" content="#0284C7" />
 
+        {/* ─── Local SEO & Geo Meta Tags (TP.HCM) ───────────────────────── */}
+        <meta name="geo.region" content="VN-SG" />
+        <meta name="geo.placename" content="Thành phố Hồ Chí Minh" />
+        <meta name="geo.position" content="10.7428;106.6634" />
+        <meta name="ICBM" content="10.7428, 106.6634" />
+
         {/* ─── Google Tag (gtag.js) for Google Ads & GA4 ─────────────────── */}
         <script
           async
@@ -176,6 +182,40 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                   "sameAs": [
                     "https://zalo.me/0888113831"
                   ],
+                  "contactPoint": {
+                    "@type": "ContactPoint",
+                    "telephone": "+84-888-113-831",
+                    "contactType": "customer service",
+                    "areaServed": "VN",
+                    "availableLanguage": "Vietnamese"
+                  },
+                  "hasOfferCatalog": {
+                    "@type": "OfferCatalog",
+                    "name": "Dịch vụ giao gas và đổi bình gas chính hãng",
+                    "itemListElement": [
+                      {
+                        "@type": "Offer",
+                        "itemOffered": {
+                          "@type": "Service",
+                          "name": "Đổi bình gas dân dụng 12kg giao tận nhà 15 phút"
+                        }
+                      },
+                      {
+                        "@type": "Offer",
+                        "itemOffered": {
+                          "@type": "Service",
+                          "name": "Cung ứng bình gas công nghiệp 45kg cho nhà hàng, quán ăn"
+                        }
+                      },
+                      {
+                        "@type": "Offer",
+                        "itemOffered": {
+                          "@type": "Service",
+                          "name": "Kiểm tra rò rỉ van dây an toàn và vệ sinh bếp miễn phí"
+                        }
+                      }
+                    ]
+                  },
                   "areaServed": {
                     "@type": "City",
                     "name": "Thành phố Hồ Chí Minh"
@@ -307,6 +347,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                   "name": "Gas Nhà Mình",
                   "url": "https://gasnhaminh.com",
                   "inLanguage": "vi-VN",
+                  "potentialAction": {
+                    "@type": "SearchAction",
+                    "target": {
+                      "@type": "EntryPoint",
+                      "urlTemplate": "https://gasnhaminh.com/bang-gia?q={search_term_string}"
+                    },
+                    "query-input": "required name=search_term_string"
+                  },
                   "description": "Dịch vụ giao gas tận nhà siêu tốc 15–20 phút tại TP.HCM. Đổi bình gas chính hãng 12kg, 45kg đủ cân, nguyên tem chống giả."
                 },
                 {
