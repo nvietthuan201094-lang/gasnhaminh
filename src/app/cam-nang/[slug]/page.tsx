@@ -92,6 +92,7 @@ export default async function GuideDetailPage({ params }: PageProps) {
 
   const isHowToGuide =
     guide.slug.startsWith('cach-') ||
+    guide.slug.startsWith('huong-dan-') ||
     guide.slug.includes('quy-trinh') ||
     guide.slug.includes('kiem-tra') ||
     guide.category === 'xu-ly-su-co';

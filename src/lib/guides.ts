@@ -1110,10 +1110,10 @@ export const GUIDES_DATA: GuideArticle[] = [
       },
       {
         "id": "chon-van-dieu-ap-tu-ngat",
-        "heading": "4. Lựa chọn van điều áp ngắt gas tự động bảo vệ gian bếp nhà bạn",
+        "heading": "4. Giải pháp an toàn kép: Trang bị van điều áp ngắt gas tự động",
         "paragraphs": [
-          "Để gia đình luôn an tâm khi đi làm hay đi ngủ, hãy trang bị van ngắt gas tự động. Khi có sự cố tuột dây hay rò rỉ, van sẽ tự động đóng ngắt nguồn gas tức thì.",
-          "Kỹ thuật viên Gas Nhà Mình luôn sẵn sàng kiểm tra độ nhạy của van điều áp và vệ sinh bếp miễn phí mỗi lần đổi gas tại nhà quý khách."
+          "Để an tâm tuyệt đối, các gia đình nên sử dụng loại van điều áp có tích hợp bi ngắt tự động (Safety Auto Cut-Off). Khi xảy ra sự cố đứt dây dẫn gas hoặc tụt áp đột ngột, viên bi thép bên trong sẽ tự động bít kín lỗ thoát gas chỉ trong 0.1 giây.",
+          "Gas Nhà Mình cung cấp và miễn phí kiểm tra định kỳ van điều áp tự ngắt chính hãng cho tất cả khách hàng đổi gas tại 24 quận huyện TP.HCM."
         ]
       }
     ],
@@ -1143,6 +1143,243 @@ export const GUIDES_DATA: GuideArticle[] = [
       "quan-6"
     ]
   },
+  {
+    "slug": "huong-dan-thay-van-day-gas-an-toan-tai-nha-va-khi-nao-can-thay",
+    "title": "Dây Dẫn Gas & Van Điều Áp Bao Lâu Nên Thay? Hướng Dẫn Tự Thay Van Dây An Toàn Tại Nhà (Chuẩn PCCC 2026)",
+    "metaTitle": "Bao Lâu Nên Thay Dây Dẫn Gas & Van Điều Áp? Hướng Dẫn Thay Chuẩn PCCC",
+    "metaDescription": "Dây dẫn gas và van điều áp bao lâu nên thay 1 lần? Hướng dẫn 5 bước tự thay van dây gas an toàn tại nhà, cách chọn dây dẫn 3 lớp chống chuột và kiểm tra bọt xà phòng.",
+    "category": "an-toan-gas",
+    "categoryLabel": "Thiết Bị An Toàn Gas",
+    "badgeColor": "bg-emerald-100 text-emerald-800 border-emerald-200",
+    "heroIcon": "🔧",
+    "readingTime": "6 phút đọc",
+    "publishedAt": "2026-10-22",
+    "updatedAt": "2026-10-22",
+    "authorName": "Đội Ngũ Kỹ Thuật Gian Bếp – Gas Nhà Mình",
+    "authorRole": "Chuyên gia Chăm sóc An toàn Gian Bếp Gia Đình TP.HCM",
+    "excerpt": "Hơn 70% các sự cố cháy nổ gas bắt nguồn từ dây dẫn cao su bị chuột cắn hoặc van điều áp quá hạn nứt gioăng. Tìm hiểu hạn sử dụng thực tế của van dây và quy trình 5 bước tự thay chuẩn an toàn.",
+    "tldr": [
+      "Thời hạn khuyến cáo thay mới định kỳ: Dây dẫn gas cao su mềm nên thay mới sau 18 – 24 tháng (tối đa 2 năm); Van điều áp ngắt gas nên thay mới sau 3 – 5 năm sử dụng.",
+      "Dấu hiệu cảnh báo phải thay ngay lập tức: Dây gas bị chai cứng, ố vàng, rạn nứt chân chim khi bẻ cong hoặc có vết răng cắn; Van gas có tiếng rít xì nhỏ hoặc kim đồng hồ đo áp suất nhảy giật liên tục.",
+      "Tiêu chuẩn chọn mua dây van an toàn: Chọn dây dẫn gas 3 lớp có lõi thép inox dệt chống chuột gặm (nhập khẩu Hàn Quốc, Nhật Bản hoặc châu Âu); Van gas có trang bị cảm ứng viên bi ngắt tự động khi đứt ống.",
+      "Quy trình 5 bước tự thay tại nhà: Khóa bình gas -> Bật bếp đốt sạch khí dư -> Tháo cụm van dây cũ -> Lắp van dây mới và siết chặt cổ dê inox -> Bôi bọt xà phòng kiểm tra rò rỉ 100% trước khi bật lửa."
+    ],
+    "sections": [
+      {
+        "id": "thoi-han-su-dung-van-day-gas",
+        "heading": "1. Bao lâu nên thay dây dẫn gas và van điều áp một lần? Tiêu chuẩn an toàn PCCC",
+        "paragraphs": [
+          "Nhiều gia đình tại TP.HCM chỉ chú ý gọi đổi bình gas khi hết mà quên mất rằng dây dẫn cao su và van điều áp là hai bộ phận chịu áp lực khí hóa lỏng liên tục 24/7 trong môi trường ẩm ướt, dầu mỡ và nhiệt độ cao dưới gầm bếp.",
+          "Theo khuyến nghị chính thức từ Cục Cảnh sát PCCC & CNCH và các chuyên gia kỹ thuật LPG, các linh kiện dẫn gas có niên hạn sử dụng an toàn bắt buộc như sau:"
+        ],
+        "table": {
+          "caption": "Bảng niên hạn sử dụng khuyến cáo và tiêu chuẩn kỹ thuật của linh kiện dẫn gas dân dụng",
+          "headers": ["Thiết bị / Linh kiện", "Thời hạn khuyến cáo thay mới", "Rủi ro nguy hiểm nếu quá hạn", "Tiêu chuẩn kỹ thuật nên chọn"],
+          "rows": [
+            ["Dây dẫn gas cao su thường", "18 – 24 tháng (tối đa 2 năm)", "Cao su lão hóa chai cứng, nứt gãy, chuột gặm thủng gây xì gas âm ỉ", "Dây cao su lưu hóa chịu dầu, chịu áp suất nổ > 10 bar"],
+            ["Dây dẫn gas bọc lưới inox / ống thép", "3 – 5 năm", "Đầu siết cổ dê rỉ sét, gioăng cao su bên trong chai cứng lỏng ren", "Dây inox 304 nguyên khối hoặc dây bọc lưới thép chống chuột"],
+            ["Van điều áp ngắt gas tự động", "3 – 5 năm", "Màng cao su bên trong bị rách, bi ngắt tự động kẹt, rò rỉ cổ van", "Van giảm áp dân dụng áp suất ra 2.8 – 3.2 kPa, có bi ngắt an toàn"],
+            ["Cổ dê (đai siết giữ ống)", "Thay cùng dây dẫn gas", "Cổ dê sắt bị rỉ sét gãy ốc siết làm tụt dây khi áp suất tăng", "Cổ dê inox có tay vặn siết hoặc đai siết ốc vít chống trượt"]
+          ]
+        }
+      },
+      {
+        "id": "dau-hieu-nhan-biet-can-thay-ngay",
+        "heading": "2. 4 Dấu hiệu cảnh báo nguy hiểm cần thay van dây gas ngay lập tức",
+        "paragraphs": [
+          "Nếu kiểm tra gầm bếp và phát hiện bất kỳ dấu hiệu nào dưới đây, bạn không nên chờ đến khi hết hạn mà cần tiến hành thay mới ngay để bảo vệ an toàn cho cả gia đình:"
+        ],
+        "bullets": [
+          {
+            "label": "Dây dẫn bị chai cứng hoặc rạn nứt khi bẻ cong",
+            "text": "Dây gas mới có tính đàn hồi dẻo dai. Nếu sờ vào thấy dây cứng đơ, bề mặt ố vàng và khi uốn cong nhẹ xuất hiện các vết nứt chân chim li ti, lớp cao su đã bị oxy hóa và có thể bục rách bất cứ lúc nào."
+          },
+          {
+            "label": "Có dấu vết gặm nhấm của chuột hoặc côn trùng",
+            "text": "Cao su mềm thường hấp dẫn chuột cắn mài răng. Vết răng chuột cắn có thể chưa làm thủng hoàn toàn nhưng làm thành ống mỏng đi, dễ vỡ toác khi áp lực gas tăng cao trong lúc nấu nướng."
+          },
+          {
+            "label": "Có tiếng rít xì nhỏ hoặc mùi gas thoang thoảng gần cổ bình",
+            "text": "Khi mở van bình gas, nếu ghé sát tai nghe thấy tiếng \"xì xì\" nhẹ hoặc ngửi thấy mùi trứng thối đặc trưng quanh khu vực van điều áp, gioăng cao su ren van đã bị mòn hoặc rách."
+          },
+          {
+            "label": "Bếp cháy phập phù, đỏ lửa dù bình gas mới đổi",
+            "text": "Van điều áp dùng lâu năm bị nghẹt màng lọc hoặc lò xo giãn làm áp suất gas cung cấp cho bếp không đều, khiến ngọn lửa cháy yếu, giật cục hoặc bị đỏ lửa làm đen đáy nồi."
+          }
+        ],
+        "callout": {
+          "type": "warning",
+          "title": "Cảnh báo an toàn tuyệt đối:",
+          "text": "Tuyệt đối không dùng băng keo đen hoặc dây kẽm để quấn vá dây dẫn gas bị nứt hoặc chuột cắn. Áp lực gas bên trong sẽ nhanh chóng xé rách băng dính và gây rò rỉ thảm họa."
+        }
+      },
+      {
+        "id": "quy-trinh-5-buoc-tu-thay-van-day-tai-nha",
+        "heading": "3. Quy trình 5 bước tự thay van dây gas an toàn tại nhà (Chuẩn kỹ thuật PCCC)",
+        "paragraphs": [
+          "Nếu bạn tự mua linh kiện về thay hoặc kỹ thuật viên hỗ trợ kiểm tra, hãy tuân thủ nghiêm ngặt quy trình 5 bước chuẩn hóa sau để đảm bảo không còn nguy cơ tích tụ khí gas:"
+        ],
+        "bullets": [
+          {
+            "label": "Bước 1: Khóa chặt van cổ bình gas",
+            "text": "Xoay tay van theo chiều kim đồng hồ cho đến khi chặt tay (hoặc gạt công tắc van chụp Shell về vị trí OFF)."
+          },
+          {
+            "label": "Bước 2: Bật công tắc bếp để xả sạch gas tồn",
+            "text": "Bật núm bếp gas để ngọn lửa bùng lên và tự lụi tàn trong vài giây. Khi lửa tắt hẳn, lượng khí gas nén trong dây dẫn đã được tiêu thụ hết, áp suất trong ống về 0."
+          },
+          {
+            "label": "Bước 3: Tháo cụm van và dây dẫn cũ",
+            "text": "Dùng tua vít nới lỏng 2 ốc cổ dê ở đuôi bếp và đầu ra van gas, sau đó rút ống dẫn cũ ra. Vặn cụm van điều áp ngược chiều kim đồng hồ để tháo rời khỏi bình gas (chú ý: ren bình gas gia đình thường là ren ngược, xoay thuận chiều kim đồng hồ để mở đối với bình van đứng thông thường)."
+          },
+          {
+            "label": "Bước 4: Lắp đặt van điều áp và dây dẫn mới",
+            "text": "Luồn 2 cổ dê inox mới vào 2 đầu ống dây. Cắm sâu ống dẫn gas vào đuôi bếp và đầu van (ngập ít nhất 2.5cm) rồi dùng tua vít siết chặt ốc cổ dê. Vặn chặt cụm van điều áp mới vào cổ bình gas, đảm bảo gioăng cao su đen được ép đều và khít."
+          },
+          {
+            "label": "Bước 5: Thử kín bằng bọt xà phòng trước khi bật lửa",
+            "text": "Mở van bình gas. Dùng miếng mút thấm nhiều bọt xà phòng rửa chén bôi đều lên 4 điểm khớp nối: (1) Cổ van bình gas, (2) Khớp nối van vào bình, (3) Hai đầu siết cổ dê đuôi van và đuôi bếp. Quan sát kỹ trong 60 giây: Nếu bọt xà phòng giữ nguyên không phập phồng, hệ thống kín 100%. Nếu thấy bọt xà phòng phồng to lên, lập tức khóa van bình và siết lại ốc."
+          }
+        ]
+      },
+      {
+        "id": "tieu-chi-chon-van-day-chinh-hang",
+        "heading": "4. Kinh nghiệm chọn mua van điều áp và dây dẫn gas chuẩn xịn chống chuột",
+        "paragraphs": [
+          "Trên thị trường hiện nay có rất nhiều loại dây gas trôi nổi giá rẻ chỉ 20.000đ – 30.000đ làm bằng nhựa tái chế nhanh giòn gãy. Để bảo đảm an toàn bền lâu, bạn nên chọn sản phẩm đạt các tiêu chuẩn sau:",
+          "1. Dây dẫn gas bọc lưới inox: Bên trong là cao su chuyên dụng dẻo dai chịu áp lực, bên ngoài bọc lưới dệt thép không gỉ inox 304 ngăn chặn 100% chuột cắn và va chạm cơ học.",
+          "2. Van ngắt tự động (Safety Valve): Cụm van có nút bấm reset hồi khí và viên bi ngắt tự động. Khi có sự cố đứt ống hoặc tụt áp đột ngột, viên bi thép bị hút lại bít kín đường ra của gas trong chớp mắt.",
+          "3. Thương hiệu uy tín: Chọn van Katsura (Nhật Bản), van Petrolimex chính hãng, van Namilux hoặc V-Gas có tem kiểm định và bảo hiểm trách nhiệm pháp lý."
+        ]
+      }
+    ],
+    "faqs": [
+      {
+        "question": "Dây dẫn gas bọc inox chống chuột có thật sự hiệu quả không?",
+        "answer": "Rất hiệu quả! Lớp lưới dệt bằng sợi thép không gỉ inox 304 rất sắc và cứng khiến chuột không thể cắn đứt lớp cao su dẫn gas bên trong, bảo vệ an toàn tối đa cho các gia đình nhiều chuột hoặc nhà ở ngõ hẻm ẩm thấp."
+      },
+      {
+        "question": "Tôi có thể nhờ nhân viên giao gas của Gas Nhà Mình thay van dây hộ được không?",
+        "answer": "Hoàn toàn được và miễn phí công lắp đặt! Khi quý khách đổi bình gas tại Gas Nhà Mình, nếu có nhu cầu thay dây dẫn hoặc van điều áp chính hãng, kỹ thuật viên sẽ mang theo linh kiện mới nguyên hộp, tiến hành lắp đặt chuẩn PCCC và thử kín bọt xà phòng trước mặt bạn."
+      },
+      {
+        "question": "Tại sao ren của van bình gas gia đình lại vặn ngược chiều?",
+        "answer": "Đây là tiêu chuẩn an toàn quốc tế dành cho thiết bị khí hóa lỏng dễ cháy. Ren ngược (xoay cùng chiều kim đồng hồ để tháo lỏng và xoay ngược chiều kim đồng hồ để siết chặt) giúp người dùng không bị nhầm lẫn với các khớp nối ống nước thông thường."
+      }
+    ],
+    "relatedProductSlugs": [
+      "gas-v-gas-xam-12kg",
+      "gas-v-gas-van-chup-shell-12kg",
+      "gas-petrolimex-dung-12kg"
+    ],
+    "relatedDistrictSlugs": [
+      "quan-8",
+      "tan-phu",
+      "binh-tan",
+      "quan-6"
+    ]
+  },
+  {
+    "slug": "nguyen-nhan-bep-gas-bi-no-bup-khi-bat-tat-va-cach-sua",
+    "title": "Bếp Gas Kêu Bụp Bụp Khi Bật Hoặc Tắt: 5 Nguyên Nhân & Cách Khắc Phục Triệt Để Không Lo Nổ (2026)",
+    "metaTitle": "Bếp Gas Kêu Bụp Bụp Khi Bật/Tắt: 5 Nguyên Nhân & Cách Sửa Triệt Để",
+    "metaDescription": "Hiện tượng bật bếp gas kêu bụp bụp hoặc tắt bếp có tiếng nổ bùng nhỏ có nguy hiểm không? Tìm hiểu 5 nguyên nhân (lệch mâm chia lửa, nghẹt kim phun gas, lẫy gió sai) và cách sửa tại nhà.",
+    "category": "xu-ly-su-co",
+    "categoryLabel": "Sửa Chữa Bếp Gas",
+    "badgeColor": "bg-rose-100 text-rose-800 border-rose-200",
+    "heroIcon": "💥",
+    "readingTime": "5 phút đọc",
+    "publishedAt": "2026-10-22",
+    "updatedAt": "2026-10-22",
+    "authorName": "Đội Ngũ Kỹ Thuật Gian Bếp – Gas Nhà Mình",
+    "authorRole": "Chuyên gia Chăm sóc An toàn Gian Bếp Gia Đình TP.HCM",
+    "excerpt": "Bạn giật mình mỗi khi vặn bếp nghe tiếng nổ 'bụp' lớn hoặc tắt bếp phát ra tiếng nổ bùng nhỏ? Đừng quá hoang mang, đây là hiện tượng cháy ngược khí gas rất phổ biến. Xem ngay 5 cách xử lý dứt điểm.",
+    "tldr": [
+      "Tiếng nổ \"bụp\" khi bật hoặc tắt bếp gas thực chất là hiện tượng cháy ngược (Backfire) hoặc bùng áp suất do khí gas tích tụ quá nhiều trong họng đốt trước khi gặp tia lửa. Hiện tượng này KHÔNG gây nổ bình gas nhưng có thể gây táp lửa làm sém lông mày, bỏng tay hoặc đen họng bếp.",
+      "Nguyên nhân 1: Mâm chia lửa (bát sen đồng) bị đặt lệch, cập kênh sau khi lau chùi hoặc khe thoát lửa bị bám muội than thức ăn trào làm nghẹt tia lửa lan tỏa.",
+      "Nguyên nhân 2: Lẫy điều chỉnh gió dưới đáy bếp bị sai vị trí (quá nhiều gió làm thổi tạt lửa hoặc quá ít gió làm ứ đọng gas).",
+      "Nguyên nhân 3: Kim đánh lửa điện tử (bugi) bị ẩm ướt, mòn bẩn đánh tia lửa trễ 2–3 giây sau khi gas đã phun đầy khoang đốt.",
+      "Nguyên nhân 4 & 5: Dùng nhầm van điều áp công nghiệp cao áp cho bếp gia đình hoặc béc phun gas bị nghẹt rỉ sét.",
+      "Cách xử lý nhanh: Tắt bếp, chờ nguội -> Đặt lại mâm chia lửa ngay khớp -> Lấy tăm thông sạch các lỗ thoát lửa -> Chỉnh lại lẫy gió dưới đáy bếp cho đến khi lửa xanh êm."
+    ],
+    "sections": [
+      {
+        "id": "hien-tuong-no-bup-co-nguy-hiem-khong",
+        "heading": "1. Bếp gas kêu tiếng bụp bụp khi bật hoặc tắt có nguy hiểm nổ bình không?",
+        "paragraphs": [
+          "Rất nhiều người nội trợ khi bật bếp gas nghe thấy tiếng nổ \"bụp\" kèm ngọn lửa bùng lớn lên mặt bếp thường hoảng loạn lo sợ bình gas sắp nổ tung.",
+          "Về mặt kỹ thuật, hiện tượng này trong ngành gas gọi là cháy ngược (Backfire) hoặc hiện tượng tích tụ hòa khí thừa (Delayed Ignition). Khí gas bên trong bình thép luôn được kiểm soát bởi van điều áp và không có oxy bên trong bình nên bình gas KHÔNG THỂ TỰ NỔ từ ngọn lửa này.",
+          "Tuy nhiên, nếu để tình trạng này kéo dài, tia lửa bùng giật cục có thể làm cháy sém rèm cửa, bỏng rát tay người đứng nấu, làm nứt vỡ mặt kính bếp cường lực và phá hỏng cụm điếu chia lửa của bếp."
+        ],
+        "callout": {
+          "type": "tip",
+          "title": "Bình tĩnh xử lý:",
+          "text": "Bếp gas kêu bụp bụp là lỗi tại cụm mâm chia lửa, kim đánh lửa hoặc điều chỉnh lượng gió của bếp, hoàn toàn không phải do bình gas bị lỗi hay sắp phát nổ."
+        }
+      },
+      {
+        "id": "5-nguyen-nhan-va-cach-sua-triet-de",
+        "heading": "2. 5 Nguyên nhân khiến bếp gas nổ bụp bụp và cách sửa dứt điểm tại nhà",
+        "paragraphs": [
+          "Hãy kiểm tra lần lượt 5 nguyên nhân từ đơn giản nhất đến phức tạp dưới đây để tự khắc phục chỉ trong 5 đến 10 phút:"
+        ],
+        "table": {
+          "caption": "Bảng chẩn đoán nguyên nhân và cách khắc phục lỗi bếp gas kêu bụp khi bật / tắt",
+          "headers": ["Nguyên nhân gây tiếng nổ", "Dấu hiệu nhận biết", "Cách khắc phục tại nhà"],
+          "rows": [
+            ["Mâm chia lửa (bát sen) bị lệch", "Nắp chụp lửa đặt kênh, khe hở không đều, lửa bùng to một góc", "Chờ bếp nguội, nhấc mâm chia lửa ra và đặt lại khớp khít 100% vào chốt định vị"],
+            ["Khe thoát lửa bị nghẹt muội than", "Lửa đỏ phập phù, thức ăn trào dính đen các lỗ thoát khí gas", "Dùng bàn chải kim loại và tăm nhọn thông sạch từng lỗ thoát lửa của bát sen"],
+            ["Lẫy gió dưới gầm bếp bị sai", "Lửa vàng ngọn, có tiếng rít gió xè xè hoặc phụt tắt khi vặn nhỏ", "Cúi xuống gầm bếp gạt nhẹ cần chỉnh gió cho đến khi ngọn lửa xanh đều không tiếng rít"],
+            ["Kim đánh lửa bị bẩn hoặc đánh trễ", "Xoay núm nghe tiếng tạch tạch hồi lâu mới bắt lửa nổ bùng", "Dùng khăn khô lau sạch dầu mỡ trên đầu kim sứ, thay pin đại mới dưới đáy bếp"],
+            ["Van điều áp bị kẹt áp suất cao", "Ngọn lửa bốc cao bất thường, tiếng xì gas rất mạnh ở mọi nấc", "Thay van điều áp dân dụng chính hãng mới (áp suất ra chuẩn 2.8 kPa)"]
+          ]
+        }
+      },
+      {
+        "id": "cach-chinh-can-gio-day-bep",
+        "heading": "3. Hướng dẫn cách chỉnh cần gió dưới đáy bếp gas để lửa xanh êm không tiếng bụp",
+        "paragraphs": [
+          "Hơn 60% các trường hợp tắt bếp nghe tiếng nổ bùng nhỏ xuất phát từ việc tỷ lệ hòa trộn giữa khí gas LPG và không khí (oxy) chưa chuẩn xác. Dưới đáy mỗi lò nấu của bếp gas luôn có một hoặc hai lẫy thép tròn (cần gạt gió):",
+          "Bước 1: Bật bếp gas ở mức lửa trung bình.",
+          "Bước 2: Cúi nhìn xuống dưới gầm bếp, bạn sẽ thấy lẫy kim loại có thể xoay gạt qua lại ở ngay cổ ống điếu.",
+          "Bước 3: Dùng tay gạt nhẹ nhàng lẫy gió từng chút một sang trái hoặc phải. Quan sát ngọn lửa: Khi nào ngọn lửa chuyển sang màu xanh dương biếc, chân ngọn lửa bám chặt vào mâm chia lửa và không còn tiếng rít xè xè thì dừng lại. Đó là điểm hòa trộn khí lý tưởng nhất giúp tiết kiệm gas và chấm dứt tiếng nổ bụp khi tắt bếp."
+        ]
+      },
+      {
+        "id": "khi-nao-can-goi-tho-sua",
+        "heading": "4. Khi nào bạn nên gọi kỹ thuật viên chuyên nghiệp hỗ trợ?",
+        "paragraphs": [
+          "Nếu bạn đã vệ sinh sạch sẽ mâm chia lửa, chỉnh lại cần gió và thay pin mới nhưng bếp vẫn phát ra tiếng nổ lớn hoặc xuất hiện mùi gas nồng nặc sau khi tắt bếp, có thể van gas bị trờn ty đồng hoặc ống điếu dẫn gas bên trong đã bị mục thủng.",
+          "Trong trường hợp này, hãy khóa ngay van bình gas và liên hệ đội ngũ kỹ thuật viên Gas Nhà Mình qua Hotline 0888 113 831 để được hỗ trợ kiểm tra, vệ sinh và sửa chữa bếp miễn phí tận nhà khi đổi gas."
+        ]
+      }
+    ],
+    "faqs": [
+      {
+        "question": "Tại sao tắt bếp gas lại phát ra tiếng nổ bụp nhỏ?",
+        "answer": "Khi bạn xoay núm về OFF để tắt bếp, lượng gas còn sót lại trong họng bếp bị tụt áp nhanh hơn luồng gió đi vào, tạo ra khoảnh khắc hỗn hợp nghèo gas bùng cháy nốt trước khi tắt hẳn. Chỉnh lại cần gió dưới đáy bếp sẽ triệt tiêu hoàn toàn tiếng nổ này."
+      },
+      {
+        "question": "Bếp gas mini có bị hiện tượng nổ bụp không?",
+        "answer": "Có. Bếp gas mini rất hay bị nổ bụp do lon gas nạp lại áp suất không đều hoặc lon gas bị cong vênh phần ngoàm gài. Đối với bếp mini, tuyệt đối không sử dụng lon gas đã tái nạp nhiều lần vì nguy cơ nổ bình mini là rất cao."
+      },
+      {
+        "question": "Vệ sinh mâm chia lửa bằng cách nào tốt nhất?",
+        "answer": "Tháo mâm chia lửa ngâm vào nước ấm pha giấm hoặc nước rửa chén trong 15 phút, sau đó dùng bàn chải đánh răng cũ chà sạch muội than và phơi thật khô ráo trước khi lắp lại vào bếp."
+      }
+    ],
+    "relatedProductSlugs": [
+      "gas-v-gas-xam-12kg",
+      "gas-v-gas-do-12kg",
+      "gas-petrolimex-dung-12kg"
+    ],
+    "relatedDistrictSlugs": [
+      "quan-8",
+      "tan-phu",
+      "go-vap",
+      "quan-7"
+    ]
+  }
 ];
 
 export function getAllGuides(): GuideArticle[] {

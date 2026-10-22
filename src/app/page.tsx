@@ -1634,6 +1634,8 @@ function Footer() {
               <li><Link href="/cam-nang/cach-xu-ly-khi-ngui-thay-mui-gas-ro-ri" className="hover:text-white transition-colors">Cách xử lý mùi gas rò rỉ khẩn cấp</Link></li>
               <li><Link href="/cam-nang/han-kiem-dinh-binh-gas-cach-xem-han-su-dung-vo-binh" className="hover:text-white transition-colors">Cách xem hạn kiểm định vỏ bình</Link></li>
               <li><Link href="/cam-nang/co-nen-khoa-binh-gas-sau-khi-nau-khong-quy-trinh-tat-bep-an-toan" className="hover:text-white transition-colors">Quy trình tắt bếp chuẩn an toàn</Link></li>
+              <li><Link href="/cam-nang/huong-dan-thay-van-day-gas-an-toan-tai-nha-va-khi-nao-can-thay" className="hover:text-white transition-colors">Bao lâu nên thay dây van gas gia đình</Link></li>
+              <li><Link href="/cam-nang/nguyen-nhan-bep-gas-bi-no-bup-khi-bat-tat-va-cach-sua" className="hover:text-white transition-colors">Sửa lỗi bếp gas nổ bụp khi nấu</Link></li>
             </ul>
           </div>
           <div className="col-span-2 sm:col-span-1">
