@@ -1283,7 +1283,7 @@ export const GUIDES_DATA: GuideArticle[] = [
     "slug": "nguyen-nhan-bep-gas-bi-no-bup-khi-bat-tat-va-cach-sua",
     "title": "Bếp Gas Kêu Bụp Bụp Khi Bật Hoặc Tắt: 5 Nguyên Nhân & Cách Khắc Phục Triệt Để Không Lo Nổ (2026)",
     "metaTitle": "Bếp Gas Kêu Bụp Bụp Khi Bật/Tắt: 5 Nguyên Nhân & Cách Sửa Triệt Để",
-    "metaDescription": "Hiện tượng bật bếp gas kêu bụp bụp hoặc tắt bếp có tiếng nổ bùng nhỏ có nguy hiểm không? Tìm hiểu 5 nguyên nhân (lệch mâm chia lửa, nghẹt kim phun gas, lẫy gió sai) và cách sửa tại nhà.",
+    "metaDescription": "Bật hoặc tắt bếp gas kêu bụp bụp có nguy hiểm không? Tìm hiểu 5 nguyên nhân (lệch mâm chia lửa, nghẹt kim phun, sai lẫy gió) và cách sửa an toàn tại nhà.",
     "category": "xu-ly-su-co",
     "categoryLabel": "Sửa Chữa Bếp Gas",
     "badgeColor": "bg-rose-100 text-rose-800 border-rose-200",
