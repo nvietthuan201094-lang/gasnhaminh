@@ -308,8 +308,8 @@ function HeroSection({ onOrderClick }: { onOrderClick: () => void }) {
         <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           {/* Left Hero Content (Ảnh 1) */}
           <div className="lg:col-span-7 flex flex-col justify-center">
-            <div className="inline-flex items-center gap-2 bg-[#FFF3CD] text-[#92400E] text-xs md:text-sm font-bold px-3.5 py-1.5 rounded-full mb-5 w-fit shadow-xs">
-              <span>⚡</span> Giao gas trong 15–20 phút tại TP.HCM
+            <div className="inline-flex items-center gap-2 bg-[#FEE2E2] text-[#991B1B] text-xs md:text-sm font-bold px-3.5 py-1.5 rounded-full mb-5 w-fit shadow-xs border border-red-200">
+              <span>⚡</span> Đặt Gas Online – Giao Gas Nhanh 15 Phút TP.HCM
             </div>
 
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#111928] leading-[1.15] mb-4 tracking-tight">

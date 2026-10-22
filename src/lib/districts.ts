@@ -497,7 +497,7 @@ export const DISTRICTS_DATA: DistrictInfo[] = [
     hubName: "Kho Gas Tổng Thủ Đức - Gas Nhà Mình",
     hotline: HOTLINE_DISPLAY,
     isInnerCity: true,
-    popularWards: ["Phường Thủ Đức (mới)", "Phường Hiệp Bình (mới)", "Phường Tam Bình (mới)", "Phường Linh Xuân (mới)", "Phường An Khánh (mới)", "Phường Bình Trưng (mới)", "Phường Cát Lái (mới)", "Phường Phước Long (mới)", "Phường Tăng Nhơn Phú (mới)", "Thảo Điền", "An Phú", "Hiệp Bình Chánh", "Linh Trung"],
+    popularWards: ["Tam Phú", "Phường Thủ Đức (mới)", "Phường Hiệp Bình (mới)", "Phường Tam Bình (mới)", "Phường Linh Xuân (mới)", "Phường An Khánh (mới)", "Phường Bình Trưng (mới)", "Phường Cát Lái (mới)", "Phường Phước Long (mới)", "Phường Tăng Nhơn Phú (mới)", "Thảo Điền", "An Phú", "Hiệp Bình Chánh", "Linh Trung"],
     newWards: ["Phường Thủ Đức", "Phường Hiệp Bình", "Phường Tam Bình", "Phường Linh Xuân", "Phường An Khánh", "Phường Bình Trưng", "Phường Cát Lái", "Phường Phước Long", "Phường Tăng Nhơn Phú", "Phường Long Bình", "Phường Long Trường", "Phường Long Phước"],
     neighboringSlugs: ["binh-thanh", "quan-1", "quan-12", "quan-2", "quan-9", "binh-duong"],
     description: "Giao gas, gọi gas, đặt gas TP. Thủ Đức của Gas Nhà Mình phủ sóng toàn bộ 12 phường mới (Thủ Đức, Hiệp Bình, Tam Bình, Linh Xuân, An Khánh, Bình Trưng, Cát Lái, Phước Long, Tăng Nhơn Phú, Long Bình, Long Trường, Long Phước).",
