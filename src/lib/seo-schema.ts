@@ -114,6 +114,12 @@ export function createProductOffer({
   };
 }
 
+function toAbsoluteImageUrl(imgUrl: string, base: string = 'https://gasnhaminh.com') {
+  if (!imgUrl) return `${base}/logo.png`;
+  if (imgUrl.startsWith('http://') || imgUrl.startsWith('https://')) return imgUrl;
+  return `${base.replace(/\/$/, '')}${imgUrl.startsWith('/') ? '' : '/'}${imgUrl}`;
+}
+
 export function createProductSchema({
   position,
   name,
@@ -152,7 +158,9 @@ export function createProductSchema({
     ...(position !== undefined ? { position } : {}),
     name,
     description,
-    image: Array.isArray(image) ? image : [image],
+    image: (Array.isArray(image) ? image : [image]).map((img) =>
+      toAbsoluteImageUrl(img, 'https://gasnhaminh.com')
+    ),
     sku,
     brand: {
       '@type': 'Brand',
@@ -229,7 +237,13 @@ export function createHowToSchema({
     name,
     description,
     ...(totalTime ? { totalTime } : {}),
-    ...(image ? { image: Array.isArray(image) ? image : [image] } : {}),
+    ...(image
+      ? {
+          image: (Array.isArray(image) ? image : [image]).map((img) =>
+            toAbsoluteImageUrl(img, 'https://gasnhaminh.com')
+          ),
+        }
+      : {}),
     ...(estimatedCost
       ? {
           estimatedCost: {

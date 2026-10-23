@@ -232,6 +232,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                     {
                       "@type": "HomeAndConstructionBusiness",
                       "name": "Gas Nhà Mình - Chi nhánh Quận 8",
+                      "geo": {
+                        "@type": "GeoCoordinates",
+                        "latitude": 10.7428,
+                        "longitude": 106.6634
+                      },
                       "url": "https://gasnhaminh.com/giao-gas/quan-8",
                       "image": "https://gasnhaminh.com/logo.png",
                       "priceRange": "500.000đ - 1.730.000đ",
@@ -254,6 +259,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                     {
                       "@type": "HomeAndConstructionBusiness",
                       "name": "Gas Nhà Mình - Chi nhánh Tân Phú",
+                      "geo": {
+                        "@type": "GeoCoordinates",
+                        "latitude": 10.7818,
+                        "longitude": 106.6262
+                      },
                       "url": "https://gasnhaminh.com/giao-gas/tan-phu",
                       "image": "https://gasnhaminh.com/logo.png",
                       "priceRange": "500.000đ - 1.730.000đ",
@@ -276,6 +286,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                     {
                       "@type": "HomeAndConstructionBusiness",
                       "name": "Gas Nhà Mình - Chi nhánh Bà Điểm (Hóc Môn)",
+                      "geo": {
+                        "@type": "GeoCoordinates",
+                        "latitude": 10.8402,
+                        "longitude": 106.5985
+                      },
                       "url": "https://gasnhaminh.com/giao-gas/hoc-mon",
                       "image": "https://gasnhaminh.com/logo.png",
                       "priceRange": "500.000đ - 1.730.000đ",
@@ -298,6 +313,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                     {
                       "@type": "HomeAndConstructionBusiness",
                       "name": "Gas Nhà Mình - Chi nhánh Tân Hiệp (Hóc Môn)",
+                      "geo": {
+                        "@type": "GeoCoordinates",
+                        "latitude": 10.8931,
+                        "longitude": 106.5682
+                      },
                       "url": "https://gasnhaminh.com/giao-gas/hoc-mon",
                       "image": "https://gasnhaminh.com/logo.png",
                       "priceRange": "500.000đ - 1.730.000đ",
@@ -320,6 +340,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                     {
                       "@type": "HomeAndConstructionBusiness",
                       "name": "Gas Nhà Mình - Chi nhánh Quận 6 (Cư Xá Bình Phú)",
+                      "geo": {
+                        "@type": "GeoCoordinates",
+                        "latitude": 10.7456,
+                        "longitude": 106.6341
+                      },
                       "url": "https://gasnhaminh.com/giao-gas/quan-6",
                       "image": "https://gasnhaminh.com/logo.png",
                       "priceRange": "500.000đ - 1.730.000đ",

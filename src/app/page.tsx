@@ -1716,6 +1716,19 @@ const homeJsonLd = {
   '@context': 'https://schema.org',
   '@graph': [
     {
+      '@type': 'BreadcrumbList',
+      '@id': 'https://gasnhaminh.com/#breadcrumb',
+      'itemListElement': [
+        {
+          '@type': 'ListItem',
+          'position': 1,
+          'name': 'Trang chủ Gas Nhà Mình',
+          'item': 'https://gasnhaminh.com',
+        },
+      ],
+    },
+
+    {
       '@type': 'ItemList',
       '@id': 'https://gasnhaminh.com/#pricelist',
       'name': 'Bảng Giá Gas Hôm Nay Mới Nhất 2026 – Gas Nhà Mình',
