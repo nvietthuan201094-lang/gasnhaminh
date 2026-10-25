@@ -510,7 +510,7 @@ export default async function GuideDetailPage({ params }: PageProps) {
                     href={`/giao-gas/${d.slug}`}
                     className="text-xs bg-slate-50 hover:bg-red-50 text-slate-700 hover:text-[#E02424] border border-slate-200 px-3 py-1.5 rounded-xl font-semibold transition-colors"
                   >
-                    Giao gas {d.name} ({d.slaMinutes} phút)
+                    {d.slug === 'quan-12' ? `Đổi gas ${d.name} uy tín (15 phút)` : `Giao gas ${d.name} (${d.slaMinutes} phút)`}
                   </Link>
                 ))}
                 <Link
