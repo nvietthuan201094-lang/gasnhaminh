@@ -68,6 +68,37 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
+function getDistrictAnchorText(d: { slug: string; name: string; slaMinutes: string }) {
+  switch (d.slug) {
+    case 'quan-12':
+      return `Đổi gas ${d.name} uy tín (15 phút)`;
+    case 'quan-8':
+      return `Giao gas ${d.name} hỏa tốc (15 phút)`;
+    case 'tan-phu':
+      return `Gọi gas ${d.name} chính hãng (15 phút)`;
+    case 'quan-6':
+      return `Đổi bình gas ${d.name} an toàn (15 phút)`;
+    case 'hoc-mon':
+      return `Giao gas ${d.name} tận nhà (15 phút)`;
+    case 'go-vap':
+      return `Đặt gas ${d.name} đủ ký (15 phút)`;
+    case 'binh-thanh':
+      return `Đổi gas ${d.name} giá tốt (15 phút)`;
+    case 'tan-binh':
+      return `Giao gas ${d.name} siêu tốc (15 phút)`;
+    case 'quan-7':
+      return `Gọi gas ${d.name} nhanh (15 phút)`;
+    case 'binh-tan':
+      return `Đổi bình gas ${d.name} (15 phút)`;
+    case 'quan-1':
+      return `Giao gas ${d.name} trung tâm (15 phút)`;
+    case 'quan-10':
+      return `Gọi gas ${d.name} giá tốt (15 phút)`;
+    default:
+      return `Giao gas ${d.name} (${d.slaMinutes} phút)`;
+  }
+}
+
 export default async function GuideDetailPage({ params }: PageProps) {
   const { slug } = await params;
   const guide = getGuideBySlug(slug);
@@ -510,7 +541,7 @@ export default async function GuideDetailPage({ params }: PageProps) {
                     href={`/giao-gas/${d.slug}`}
                     className="text-xs bg-slate-50 hover:bg-red-50 text-slate-700 hover:text-[#E02424] border border-slate-200 px-3 py-1.5 rounded-xl font-semibold transition-colors"
                   >
-                    {d.slug === 'quan-12' ? `Đổi gas ${d.name} uy tín (15 phút)` : `Giao gas ${d.name} (${d.slaMinutes} phút)`}
+                    {getDistrictAnchorText(d)}
                   </Link>
                 ))}
                 <Link
