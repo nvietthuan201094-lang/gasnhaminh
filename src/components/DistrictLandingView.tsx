@@ -751,16 +751,21 @@ export default function DistrictLandingView({ district }: DistrictLandingViewPro
               </Link>
             </div>
             <div className="grid sm:grid-cols-2 gap-2.5">
-              {GUIDES_DATA.slice(0, 4).map((g) => (
-                <Link
-                  key={g.slug}
-                  href={`/cam-nang/${g.slug}`}
-                  className="bg-white p-3 rounded-xl border border-red-100 hover:border-red-400 text-xs font-bold text-neutral-800 hover:text-red-700 transition-all flex items-start gap-2"
-                >
-                  <span>{g.heroIcon}</span>
-                  <span className="line-clamp-2 leading-snug">{g.title}</span>
-                </Link>
-              ))}
+              {(() => {
+                const districtGuides = GUIDES_DATA.filter((g) => g.relatedDistrictSlugs && g.relatedDistrictSlugs.includes(district.slug));
+                const fallbackGuides = GUIDES_DATA.filter((g) => !districtGuides.some((dg) => dg.slug === g.slug));
+                const relevantGuides = [...districtGuides, ...fallbackGuides].slice(0, 4);
+                return relevantGuides.map((g) => (
+                  <Link
+                    key={g.slug}
+                    href={`/cam-nang/${g.slug}`}
+                    className="bg-white p-3 rounded-xl border border-red-100 hover:border-red-400 text-xs font-bold text-neutral-800 hover:text-red-700 transition-all flex items-start gap-2 shadow-2xs hover:shadow-xs"
+                  >
+                    <span>{g.heroIcon}</span>
+                    <span className="line-clamp-2 leading-snug">{g.title}</span>
+                  </Link>
+                ));
+              })()}
             </div>
           </div>
         </div>

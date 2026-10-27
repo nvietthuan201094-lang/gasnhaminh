@@ -7,10 +7,15 @@ export const metadata: Metadata = {
   description: "Dịch vụ đổi bình gas 12kg, 45kg chính hãng giao tận nhà 15–20 phút tại TP.HCM. Đủ cân, nguyên tem chống giả, kiểm tra van miễn phí. Gọi: 0888 113 831.",
   keywords: [
     "gas nhà mình",
+    "đặt gas",
+    "đặt gas online",
+    "giao gas nhanh",
     "giao gas tận nhà",
     "đổi bình gas 12kg",
     "đổi gas chính hãng",
-    "giao gas hỏa tốc"
+    "giao gas hỏa tốc",
+    "gas quận 12",
+    "bảng giá gas hôm nay",
   ],
   authors: [{ name: "Gas Nhà Mình" }],
   alternates: {

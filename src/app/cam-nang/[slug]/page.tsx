@@ -76,6 +76,8 @@ function getDistrictAnchorText(d: { slug: string; name: string; slaMinutes: stri
       return `Giao gas ${d.name} hỏa tốc (15 phút)`;
     case 'tan-phu':
       return `Gọi gas ${d.name} chính hãng (15 phút)`;
+    case 'quan-12':
+      return `Đổi gas ${d.name} uy tín & an toàn (15 phút)`;
     case 'quan-6':
       return `Đổi bình gas ${d.name} an toàn (15 phút)`;
     case 'hoc-mon':
