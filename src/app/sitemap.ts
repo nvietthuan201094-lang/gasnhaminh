@@ -7,7 +7,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = (process.env.NEXT_PUBLIC_SITE_URL || 'https://gasnhaminh.com').replace(/\/$/, '');
   const { validFrom } = getLpgPriceValidityDates();
   const monthlyCycleDate = new Date(`${validFrom}T00:00:00.000Z`);
-  const contentReleaseDate = new Date('2026-10-27T08:00:00.000Z');
+  const contentReleaseDate = new Date('2026-10-30T08:00:00.000Z');
   const stableLastModified = monthlyCycleDate > contentReleaseDate ? monthlyCycleDate : contentReleaseDate;
 
   const districts = getAllDistricts();
