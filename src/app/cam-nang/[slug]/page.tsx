@@ -108,6 +108,18 @@ function getDistrictAnchorText(d: { slug: string; name: string; slaMinutes: stri
       return `Đặt gas ${d.name} đủ ký (15 phút)`;
     case 'cu-chi':
       return `Giao gas ${d.name} uy tín (20 phút)`;
+    case 'quan-2':
+      return `Đổi gas ${d.name} Thảo Điền & An Phú (15 phút)`;
+    case 'quan-9':
+      return `Giao gas ${d.name} hỏa tốc (15 phút)`;
+    case 'quan-11':
+      return `Đổi bình gas ${d.name} Đầm Sen (15 phút)`;
+    case 'nha-be':
+      return `Giao gas ${d.name} tận nơi (15 phút)`;
+    case 'can-gio':
+      return `Giao gas ${d.name} an toàn (25 phút)`;
+    case 'binh-duong':
+      return `Giao gas công nghiệp & dân dụng ${d.name}`;
     default:
       return `Giao gas ${d.name} (${d.slaMinutes} phút)`;
   }

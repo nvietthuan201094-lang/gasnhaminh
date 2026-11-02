@@ -18,6 +18,9 @@ export const metadata: Metadata = {
     "gas quận 12",
     "bảng giá gas hôm nay",
     "đổi bình gas uy tín tphcm",
+    "giá gas tháng 11 2026",
+    "đổi bình gas 12kg giá bao nhiêu",
+    "số điện thoại gọi gas tphcm",
   ],
   authors: [{ name: "Gas Nhà Mình" }],
   alternates: {
