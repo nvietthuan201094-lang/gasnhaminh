@@ -108,6 +108,8 @@ export function createProductOffer({
     seller: {
       '@type': 'Organization',
       name: sellerName,
+      url: 'https://gasnhaminh.com',
+      '@id': 'https://gasnhaminh.com/#business',
     },
     shippingDetails: DEFAULT_SHIPPING_DETAILS,
     hasMerchantReturnPolicy: returnPolicy || DEFAULT_MERCHANT_RETURN_POLICY,

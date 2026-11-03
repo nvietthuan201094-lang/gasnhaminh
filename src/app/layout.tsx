@@ -17,6 +17,8 @@ export const metadata: Metadata = {
     "giao gas hỏa tốc 15 phút",
     "gas quận 12",
     "bảng giá gas hôm nay",
+    "giá gas hôm nay 03/11/2026",
+    "đổi gas hỏa tốc tphcm",
     "đổi bình gas uy tín tphcm",
     "giá gas tháng 11 2026",
     "đổi bình gas 12kg giá bao nhiêu",
