@@ -114,12 +114,6 @@ function getDistrictAnchorText(d: { slug: string; name: string; slaMinutes: stri
       return `Giao gas ${d.name} hỏa tốc (15 phút)`;
     case 'quan-11':
       return `Đổi bình gas ${d.name} Đầm Sen (15 phút)`;
-    case 'quan-12':
-      return `Đổi gas ${d.name} uy tín (15 phút)`;
-    case 'tan-phu':
-      return `Giao gas ${d.name} có trạm trực chiến (15 phút)`;
-    case 'thu-duc':
-      return `Đổi bình gas TP ${d.name} giao hỏa tốc (15 phút)`;
     case 'nha-be':
       return `Giao gas ${d.name} tận nơi (15 phút)`;
     case 'can-gio':
