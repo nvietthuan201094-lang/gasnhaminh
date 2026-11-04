@@ -109,7 +109,7 @@ export default async function DistrictPage({ params }: PageProps) {
         url: pageUrl,
         image: `${siteUrl}/logo.png`,
         telephone: district.hotline,
-        priceRange: '500.000đ - 1.730.000đ',
+        priceRange: '540.000đ - 1.730.000đ',
         address: {
           '@type': 'PostalAddress',
           streetAddress: district.hubName,
@@ -164,7 +164,7 @@ export default async function DistrictPage({ params }: PageProps) {
         '@id': `${pageUrl}#products`,
         name: `Bảng giá bình gas chính hãng Gas Nhà Mình tại ${district.name}`,
         itemListElement: SEO_PRODUCTS.map((prod, idx) => {
-          const defaultPrice = prod.priceVal || (prod.weight === '45kg' ? 1730000 : 530000);
+          const defaultPrice = prod.priceVal || (prod.weight === '45kg' ? 1730000 : 540000);
           const productPrice = prod.priceVal > 0 ? prod.priceVal : defaultPrice;
           return createProductSchema({
             position: idx + 1,

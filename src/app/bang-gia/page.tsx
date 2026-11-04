@@ -42,10 +42,10 @@ export default async function BangGiaPage() {
   const districts = getAllDistricts();
   const products = await fetchDynamicGasPrices();
 
-  const pVGasXam = products.find(p => p.slug === 'gas-v-gas-xam-12kg')?.price || '530.000đ';
-  const pPetrolimex = products.find(p => p.slug === 'gas-petrolimex-dung-12kg')?.price || '500.000đ';
-  const pVGasMau = products.find(p => p.slug === 'gas-v-gas-do-12kg')?.price || '550.000đ';
-  const pTuanKhang = products.find(p => p.slug === 'gas-tuan-khang-vang-12kg')?.price || '550.000đ';
+  const pVGasXam = products.find(p => p.slug === 'gas-v-gas-xam-12kg')?.price || '540.000đ';
+  const pPetrolimex = products.find(p => p.slug === 'gas-petrolimex-dung-12kg')?.price || '550.000đ';
+  const pVGasMau = products.find(p => p.slug === 'gas-v-gas-do-12kg')?.price || '560.000đ';
+  const pTuanKhang = products.find(p => p.slug === 'gas-tuan-khang-vang-12kg')?.price || '560.000đ';
 
   const currentDateStr = new Intl.DateTimeFormat('vi-VN', {
     day: '2-digit',
@@ -102,7 +102,7 @@ export default async function BangGiaPage() {
             name: 'Giá gas hôm nay bao nhiêu tiền một bình 12kg?',
             acceptedAnswer: {
               '@type': 'Answer',
-              text: `Giá đổi bình gas 12kg hôm nay dao động từ ${pPetrolimex} đến ${pVGasMau} tùy theo thương hiệu (Petrolimex giá ${pPetrolimex}; V-Gas xám giá ${pVGasXam}; Tuấn Khang và các dòng V-Gas màu/van Shell giá ${pVGasMau}). Giá đã bao gồm VAT và miễn phí giao hàng, kiểm tra an toàn tại nhà.`,
+              text: `Giá đổi bình gas 12kg hôm nay dao động từ ${pVGasXam} đến ${pVGasMau} tùy theo thương hiệu (V-Gas xám giá ${pVGasXam}; Petrolimex giá ${pPetrolimex}; Tuấn Khang và các dòng V-Gas màu/van Shell giá ${pVGasMau}). Giá đã bao gồm VAT và miễn phí giao hàng, kiểm tra an toàn tại nhà.`,
             },
           },
           {
@@ -380,7 +380,7 @@ export default async function BangGiaPage() {
                   <span className="text-[#FF5722] group-open:rotate-180 transition-transform">▼</span>
                 </summary>
                 <p className="text-xs md:text-sm text-gray-600 mt-3 leading-relaxed">
-                  Giá đổi bình gas 12kg hôm nay dao động từ <strong>{pPetrolimex} đến {pVGasMau}</strong> tùy dòng sản phẩm: Petrolimex đứng/shell có giá {pPetrolimex}; V-Gas xám có giá {pVGasXam}; Tuấn Khang và các dòng V-Gas đỏ/vàng/PE/Shell có giá {pVGasMau}. Mức giá đã bao gồm VAT và công giao tận nhà.
+                  Giá đổi bình gas 12kg hôm nay dao động từ <strong>{pVGasXam} đến {pVGasMau}</strong> tùy dòng sản phẩm: V-Gas xám có giá {pVGasXam}; Petrolimex đứng/shell có giá {pPetrolimex}; Tuấn Khang và các dòng V-Gas đỏ/vàng/PE/Shell có giá {pVGasMau}. Mức giá đã bao gồm VAT và công giao tận nhà.
                 </p>
               </details>
 

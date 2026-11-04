@@ -71,7 +71,7 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
 
   const seoProd = SEO_PRODUCTS.find((p) => p.slug === slug || p.id === slug);
   const canonicalUrl = `${siteUrl}/${slug}`;
-  const priceText = seoProd?.price || `${new Intl.NumberFormat('vi-VN').format(product.price)}đ`;
+  const priceText = product.price > 0 ? `${new Intl.NumberFormat('vi-VN').format(product.price)}đ` : (seoProd?.price || '540.000đ');
   const weightText = seoProd?.weight || '12kg';
   const imageUrl = product.imageUrl || seoProd?.image || `${siteUrl}/hero_gasnhaminh.jpg`;
 
@@ -136,10 +136,11 @@ export default async function ProductPage({ params }: ProductPageProps) {
   const brandName = seoProd?.brand || BRAND_NAME;
   const weight = seoProd?.weight || '12kg';
   const valveType = seoProd?.valveType || 'Van tiêu chuẩn an toàn';
-  const priceDisplay = seoProd?.price || `${new Intl.NumberFormat('vi-VN').format(product.price)}đ`;
+  const priceDisplay = product.price > 0 ? `${new Intl.NumberFormat('vi-VN').format(product.price)}đ` : (seoProd?.price || '540.000đ');
   const newPriceDisplay =
-    seoProd?.newPrice ||
-    `${new Intl.NumberFormat('vi-VN').format(product.price + (weight === '45kg' ? 1000000 : 250000))}đ`;
+    product.price > 0
+      ? `${new Intl.NumberFormat('vi-VN').format(product.price + (weight === '45kg' ? 1000000 : 250000))}đ`
+      : (seoProd?.newPrice || '790.000đ');
   const depositPriceDisplay = weight === '45kg' ? '1.000.000đ' : '250.000đ';
   const description =
     product.description ||

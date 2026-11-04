@@ -17,7 +17,8 @@ export const metadata: Metadata = {
     "giao gas hỏa tốc 15 phút",
     "gas quận 12",
     "bảng giá gas hôm nay",
-    "giá gas hôm nay 03/11/2026",
+    "giá gas hôm nay 04/11/2026",
+    "đổi gas hôm nay 04/11/2026",
     "đổi gas hỏa tốc tphcm",
     "đổi bình gas uy tín tphcm",
     "giá gas tháng 11 2026",
@@ -174,7 +175,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                   "url": "https://gasnhaminh.com",
                   "image": "https://gasnhaminh.com/logo.png",
                   "telephone": "0888 113 831",
-                  "priceRange": "500.000đ - 1.730.000đ",
+                  "priceRange": "540.000đ - 1.730.000đ",
                   "currenciesAccepted": "VND",
                   "paymentAccepted": "Tiền mặt, Chuyển khoản",
                   "description": "Dịch vụ đổi bình gas 12kg, 45kg chính hãng chăm sóc gian bếp gia đình tại TP.HCM. Giao nhanh 15–20 phút, đủ cân, nguyên tem chống giả, vệ sinh bếp miễn phí.",
@@ -251,7 +252,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                       },
                       "url": "https://gasnhaminh.com/giao-gas/quan-8",
                       "image": "https://gasnhaminh.com/logo.png",
-                      "priceRange": "500.000đ - 1.730.000đ",
+                      "priceRange": "540.000đ - 1.730.000đ",
                       "telephone": "0888 113 831",
                       "openingHoursSpecification": {
                         "@type": "OpeningHoursSpecification",
@@ -278,7 +279,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                       },
                       "url": "https://gasnhaminh.com/giao-gas/tan-phu",
                       "image": "https://gasnhaminh.com/logo.png",
-                      "priceRange": "500.000đ - 1.730.000đ",
+                      "priceRange": "540.000đ - 1.730.000đ",
                       "telephone": "0888 113 831",
                       "openingHoursSpecification": {
                         "@type": "OpeningHoursSpecification",
@@ -305,7 +306,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                       },
                       "url": "https://gasnhaminh.com/giao-gas/hoc-mon",
                       "image": "https://gasnhaminh.com/logo.png",
-                      "priceRange": "500.000đ - 1.730.000đ",
+                      "priceRange": "540.000đ - 1.730.000đ",
                       "telephone": "0888 113 831",
                       "openingHoursSpecification": {
                         "@type": "OpeningHoursSpecification",
@@ -332,7 +333,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                       },
                       "url": "https://gasnhaminh.com/giao-gas/hoc-mon",
                       "image": "https://gasnhaminh.com/logo.png",
-                      "priceRange": "500.000đ - 1.730.000đ",
+                      "priceRange": "540.000đ - 1.730.000đ",
                       "telephone": "0888 113 831",
                       "openingHoursSpecification": {
                         "@type": "OpeningHoursSpecification",
@@ -359,7 +360,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                       },
                       "url": "https://gasnhaminh.com/giao-gas/quan-6",
                       "image": "https://gasnhaminh.com/logo.png",
-                      "priceRange": "500.000đ - 1.730.000đ",
+                      "priceRange": "540.000đ - 1.730.000đ",
                       "telephone": "0888 113 831",
                       "openingHoursSpecification": {
                         "@type": "OpeningHoursSpecification",
