@@ -591,6 +591,13 @@ export function getDistrictKeywords(district: DistrictInfo, brandName: string = 
   const nLower = district.name.toLowerCase();
 
   const keywords: string[] = [
+    // Nhóm 0: GAS + QUẬN (Head Local Keyword - e.g., gas quận 12 [Top 23], gas quận 8...)
+    `gas ${n}`,
+    `gas ${nLower}`,
+    `gas uy tín ${n}`,
+    `cửa hàng gas ${n}`,
+    `đổi gas ${nLower} uy tín`,
+
     // Nhóm 1: GIAO GAS + QUẬN
     `giao gas ${n}`,
     `giao gas ${nLower}`,

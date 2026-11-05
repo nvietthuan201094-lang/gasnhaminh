@@ -257,11 +257,11 @@ export default function DistrictLandingView({ district }: DistrictLandingViewPro
               </div>
               
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-neutral-900 tracking-tight leading-tight mb-4">
-                Giao Gas, Gọi Gas, Đặt Gas <span className="text-red-600">{district.name}</span> – Có Mặt Sau {district.slaMinutes} Phút
+                Đổi Gas, Giao Gas, Đặt Gas <span className="text-red-600">{district.name}</span> – Có Mặt Sau {district.slaMinutes} Phút
               </h1>
 
               <p className="text-base sm:text-lg text-neutral-600 mb-6 leading-relaxed">
-                {district.description} Hệ thống Gas Nhà Mình nhận <strong>giao gas, gọi gas, đặt gas online tại {district.name}</strong> với đầy đủ bình gas V-Gas, Petrolimex, Tuấn Khang 12kg và gas bò 45kg cho hộ gia đình, nhà hàng, quán ăn.
+                {district.description} Hệ thống Gas Nhà Mình là địa chỉ <strong>đổi gas, giao gas, đặt gas online uy tín tại {district.name}</strong> với đầy đủ bình gas V-Gas, Petrolimex, Tuấn Khang 12kg và gas bò 45kg chính hãng cho hộ gia đình, nhà hàng, quán ăn.
               </p>
 
               {/* Highlights Badge */}
