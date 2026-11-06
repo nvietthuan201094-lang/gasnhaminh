@@ -596,7 +596,11 @@ export function getDistrictKeywords(district: DistrictInfo, brandName: string = 
     `gas ${nLower}`,
     `gas uy tín ${n}`,
     `cửa hàng gas ${n}`,
+    `tiệm gas ${n}`,
     `đổi gas ${nLower} uy tín`,
+    `đặt gas hỏa tốc ${n}`,
+    `đổi gas gần đây ${n}`,
+    `cửa hàng gas gần nhất ${n}`,
 
     // Nhóm 1: GIAO GAS + QUẬN
     `giao gas ${n}`,
@@ -630,6 +634,7 @@ export function getDistrictKeywords(district: DistrictInfo, brandName: string = 
     `giá gas hôm nay ${n}`,
     `đại lý gas ${n}`,
     `đại lý gas uy tín ${n}`,
+    `đổi bình gas 12kg giá bao nhiêu ${n}`,
     `gas Nhà Mình ${n}`,
     `gas bò 45kg ${n}`,
     `gas petrolimex ${n}`,

@@ -717,6 +717,8 @@ export default function DistrictLandingView({ district }: DistrictLandingViewPro
                       `Giao gas ${district.name}`,
                       `Gọi gas ${district.name}`,
                       `Đặt gas ${district.name}`,
+                      `Đổi gas gần đây ${district.name}`,
+                      `Cửa hàng gas ${district.name}`,
                       `Đổi bình gas 12kg ${district.name}`,
                       `Đại lý gas ${district.name}`,
                       ...(district.newWards || []).flatMap((nw) => {
