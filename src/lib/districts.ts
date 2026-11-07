@@ -601,6 +601,11 @@ export function getDistrictKeywords(district: DistrictInfo, brandName: string = 
     `đặt gas hỏa tốc ${n}`,
     `đổi gas gần đây ${n}`,
     `cửa hàng gas gần nhất ${n}`,
+    `đổi gas chính hãng ${n}`,
+    `đổi gas giao nhanh 15 phút ${n}`,
+    `đại lý gas chính hãng ${n}`,
+    `gọi gas hỏa tốc ${n}`,
+    `đổi gas sớm ${n}`,
 
     // Nhóm 1: GIAO GAS + QUẬN
     `giao gas ${n}`,

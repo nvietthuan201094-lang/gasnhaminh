@@ -17,9 +17,9 @@ export const metadata: Metadata = {
     "giao gas hỏa tốc 15 phút",
     "gas quận 12",
     "bảng giá gas hôm nay",
-    "giá gas hôm nay 06/11/2026",
-    "đổi gas hôm nay 06/11/2026",
-    "giao gas hỏa tốc 06/11/2026",
+    "giá gas hôm nay 07/11/2026",
+    "đổi gas hôm nay 07/11/2026",
+    "giao gas hỏa tốc 07/11/2026",
     "đổi gas hỏa tốc tphcm",
     "đổi bình gas uy tín tphcm",
     "giá gas tháng 11 2026",
@@ -180,6 +180,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                   "currenciesAccepted": "VND",
                   "paymentAccepted": "Tiền mặt, Chuyển khoản",
                   "description": "Dịch vụ đổi bình gas 12kg, 45kg chính hãng chăm sóc gian bếp gia đình tại TP.HCM. Giao nhanh 15–20 phút, đủ cân, nguyên tem chống giả, vệ sinh bếp miễn phí.",
+                  "knowsAbout": [
+                    "Khí dầu mỏ hóa lỏng (LPG)",
+                    "An toàn PCCC gas dân dụng",
+                    "Đổi bình gas 12kg chính hãng",
+                    "Bình gas công nghiệp 45kg",
+                    "Van điều áp tự ngắt an toàn",
+                    "Bảng giá gas hôm nay tại TP.HCM"
+                  ],
                   "address": {
                     "@type": "PostalAddress",
                     "streetAddress": "1009 Phạm Thế Hiển, Phường Chánh Hưng",
