@@ -718,6 +718,8 @@ export default function DistrictLandingView({ district }: DistrictLandingViewPro
                       `Gọi gas ${district.name}`,
                       `Đặt gas ${district.name}`,
                       `Đổi gas gần đây ${district.name}`,
+                      `Đổi gas chủ nhật ${district.name}`,
+                      `Giao gas ngày chủ nhật ${district.name}`,
                       `Số điện thoại gọi gas ${district.name}`,
                       `Đổi gas chính hãng ${district.name}`,
                       `Đổi gas giao nhanh 15 phút ${district.name}`,
