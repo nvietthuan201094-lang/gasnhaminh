@@ -606,9 +606,10 @@ export function getDistrictKeywords(district: DistrictInfo, brandName: string = 
     `đại lý gas chính hãng ${n}`,
     `gọi gas hỏa tốc ${n}`,
     `đổi gas sớm ${n}`,
-    `đổi gas chủ nhật ${n}`,
-    `giao gas ngày chủ nhật ${n}`,
-    `gọi gas chủ nhật ${n}`,
+    `đổi gas đầu tuần ${n}`,
+    `giao gas sáng thứ hai ${n}`,
+    `gọi gas đầu tuần ${n}`,
+    `đổi gas quán ăn ${n}`,
     `đổi bình gas tận nhà ${n}`,
     `tiệm gas gần đây ${n}`,
 
