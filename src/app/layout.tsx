@@ -17,11 +17,11 @@ export const metadata: Metadata = {
     "giao gas hỏa tốc 15 phút",
     "gas quận 12",
     "bảng giá gas hôm nay",
-    "giá gas hôm nay 13/11/2026",
-    "đổi gas hôm nay 13/11/2026",
-    "giao gas hỏa tốc 13/11/2026",
-    "đổi gas thứ sáu tphcm",
-    "giao gas nhanh thứ 6",
+    "giá gas hôm nay 15/11/2026",
+    "đổi gas hôm nay 15/11/2026",
+    "giao gas hỏa tốc 15/11/2026",
+    "đổi gas chủ nhật tphcm",
+    "giao gas nhanh chủ nhật",
     "đổi gas cuối tuần tphcm",
     "đổi gas quán ăn nhà hàng",
     "tiệm gas gần đây uy tín",
@@ -193,7 +193,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                     "Đổi bình gas 12kg chính hãng",
                     "Bình gas công nghiệp 45kg",
                     "Van điều áp tự ngắt an toàn",
-                    "Bảng giá gas hôm nay 13/11/2026 tại TP.HCM"
+                    "Bảng giá gas hôm nay 15/11/2026 tại TP.HCM"
                   ],
                   "address": {
                     "@type": "PostalAddress",
