@@ -32,6 +32,16 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
   const { slug } = await params;
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://gasnhaminh.com';
 
+  if (slug === 'gas-bo-cong-nghiep-45kg') {
+    return {
+      metadataBase: new URL(siteUrl),
+      title: `Gas Bò Công Nghiệp 45kg Chính Hãng | ${BRAND_NAME}`,
+      alternates: {
+        canonical: `${siteUrl}/gas-bo-45kg`,
+      },
+    };
+  }
+
   if (LEGACY_REDIRECT_SLUGS.has(slug)) {
     return {
       metadataBase: new URL(siteUrl),
@@ -75,8 +85,8 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
   const weightText = seoProd?.weight || '12kg';
   const imageUrl = product.imageUrl || seoProd?.image || `${siteUrl}/hero_gasnhaminh.jpg`;
 
-  const title = `Đổi Bình ${product.name} Chính Hãng – Giá ${priceText} | Gas Nhà Mình`;
-  const description = `Đặt đổi bình ${product.name} chính hãng giá ${priceText} tại Gas Nhà Mình. Cam kết đủ ${weightText} ruột, nguyên tem chống giả, giao nhanh 15 phút TP.HCM. Hotline: ${HOTLINE_DISPLAY}.`;
+  const title = `${product.name} Chính Hãng ${priceText} | Gas Nhà Mình`;
+  const description = `Đổi ${product.name} chính hãng giá ${priceText}, đủ ${weightText} ruột, nguyên tem. Giao tận nhà 15P TP.HCM, thử kín van miễn phí. Gọi ${HOTLINE_DISPLAY}.`;
 
   return {
     metadataBase: new URL(siteUrl),
@@ -113,7 +123,11 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
 export default async function ProductPage({ params }: ProductPageProps) {
   const { slug } = await params;
 
-  // Chuyển hướng 308 cho 2 URL combo cũ để giải quyết triệt để lỗi 404 trong GSC Validation
+  // Chuyển hướng 308 cho các URL cũ để giải quyết triệt để lỗi 404 trong GSC Validation
+  if (slug === 'gas-bo-cong-nghiep-45kg') {
+    permanentRedirect('/gas-bo-45kg');
+  }
+
   if (LEGACY_REDIRECT_SLUGS.has(slug)) {
     permanentRedirect('/bang-gia');
   }

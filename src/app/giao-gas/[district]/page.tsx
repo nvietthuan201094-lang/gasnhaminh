@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { getDistrictBySlug, getAllDistricts, getDistrictKeywords, BRAND_NAME, SEO_PRODUCTS } from '@/lib/districts';
+import { getDistrictBySlug, getAllDistricts, getDistrictKeywords, BRAND_NAME } from '@/lib/districts';
+import { fetchDynamicGasPrices } from '@/lib/api';
 import { createProductSchema } from '@/lib/seo-schema';
 import DistrictLandingView from '@/components/DistrictLandingView';
 
@@ -39,7 +40,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     .join(', ');
 
   const title = `Đổi Bình Gas, Giao Gas ${district.name} 15P | ${BRAND_NAME}`;
-  const description = `Đổi bình gas 12kg, 45kg chính hãng giao tận nhà tại ${district.name} trong ${district.slaMinutes} phút${newWardsClean ? ` (phường ${newWardsClean})` : ''}. Đủ ký, nguyên tem chống giả. Hotline: ${district.hotline}.`;
+  const rawDescription = `Đổi gas 12kg, 45kg tại ${district.name} giao ${district.slaMinutes}P${newWardsClean ? ` (${newWardsClean})` : ''}. Đủ ký, nguyên tem, thử van miễn phí. Gọi ${district.hotline}.`;
+  const description =
+    rawDescription.length <= 160
+      ? rawDescription
+      : `Đổi gas 12kg, 45kg chính hãng tại ${district.name} giao ${district.slaMinutes}P. Đủ ký, nguyên tem, thử kín van miễn phí. Gọi ${district.hotline}.`;
 
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://gasnhaminh.com';
   const canonicalUrl = `${siteUrl}/giao-gas/${district.slug}`;
@@ -86,6 +91,7 @@ export default async function DistrictPage({ params }: PageProps) {
 
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://gasnhaminh.com';
   const pageUrl = `${siteUrl}/giao-gas/${district.slug}`;
+  const products = await fetchDynamicGasPrices();
 
   const wardNames = Array.from(
     new Set([
@@ -163,7 +169,7 @@ export default async function DistrictPage({ params }: PageProps) {
         '@type': 'ItemList',
         '@id': `${pageUrl}#products`,
         name: `Bảng giá bình gas chính hãng Gas Nhà Mình tại ${district.name}`,
-        itemListElement: SEO_PRODUCTS.map((prod, idx) => {
+        itemListElement: products.map((prod, idx) => {
           const defaultPrice = prod.priceVal || (prod.weight === '45kg' ? 1730000 : 540000);
           const productPrice = prod.priceVal > 0 ? prod.priceVal : defaultPrice;
           return createProductSchema({

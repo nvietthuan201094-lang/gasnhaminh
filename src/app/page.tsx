@@ -376,6 +376,7 @@ function HeroSection({ onOrderClick }: { onOrderClick: () => void }) {
               <img
                 src="/hero_gasnhaminh.jpg"
                 alt="Nhân viên giao gas Gas Nhà Mình chính hãng chuyên nghiệp tại TP.HCM"
+                fetchPriority="high"
                 className="w-full h-[320px] sm:h-[400px] lg:h-[460px] object-cover object-center group-hover:scale-105 transition-transform duration-500"
               />
               <WatermarkOverlay type="banner" />
@@ -1621,7 +1622,7 @@ function Footer() {
               <li><Link href="/gas-v-gas-xam-12kg" className="hover:text-white transition-colors">Bình Gas V-Gas xám 12kg</Link></li>
               <li><Link href="/gas-petrolimex-dung-12kg" className="hover:text-white transition-colors">Bình Gas Petrolimex 12kg</Link></li>
               <li><Link href="/gas-tuan-khang-vang-12kg" className="hover:text-white transition-colors">Bình Gas Tuấn Khang 12kg</Link></li>
-              <li><Link href="/gas-bo-cong-nghiep-45kg" className="hover:text-white transition-colors">Bình gas bò công nghiệp 45kg</Link></li>
+              <li><Link href="/gas-bo-45kg" className="hover:text-white transition-colors">Bình gas bò công nghiệp 45kg</Link></li>
             </ul>
           </div>
           <div>
@@ -1648,6 +1649,7 @@ function Footer() {
               <li><Link href="/giao-gas/quan-6" className="hover:text-white transition-colors">⚡ Giao gas hỏa tốc Quận 6</Link></li>
               <li><Link href="/giao-gas/hoc-mon" className="hover:text-white transition-colors">⚡ Giao gas hỏa tốc Hóc Môn</Link></li>
               <li><Link href="/giao-gas/binh-tan" className="hover:text-white transition-colors">⚡ Giao gas hỏa tốc Bình Tân</Link></li>
+              <li><Link href="/giao-gas/quan-12" className="hover:text-white transition-colors">⚡ Đổi gas Quận 12 uy tín (15P)</Link></li>
             </ul>
           </div>
         </div>
