@@ -705,6 +705,16 @@ export default function DistrictLandingView({ district }: DistrictLandingViewPro
                       </p>
                     </div>
                   </div>
+                  <div className="mt-3 bg-red-50/60 border border-red-100 rounded-xl p-3.5 text-xs">
+                    <div className="font-bold text-red-950 mb-1.5">
+                      ⏱️ Lộ trình giao bình gas tận bếp gia đình từ {district.hubName}:
+                    </div>
+                    <ul className="space-y-1 text-neutral-700">
+                      <li>• <strong>Tuyến đường gần chi nhánh ({areaInfo.majorStreets.slice(0, 3).join(', ')}):</strong> Giao lắp trong <strong>5 – 10 phút</strong>.</li>
+                      <li>• <strong>Tuyến liên phường ({areaInfo.majorStreets.slice(3, 7).join(', ')}):</strong> Giao lắp trong <strong>10 – 15 phút</strong>.</li>
+                      <li>• <strong>Khu cư xá, chung cư & hẻm sâu ({areaInfo.residentialAreas.slice(0, 2).join(', ')}):</strong> Có mặt sau <strong>15 – 20 phút</strong> (hỗ trợ kiểm tra van dây & lau bếp miễn phí).</li>
+                    </ul>
+                  </div>
                 </div>
 
                 {/* Khối Từ Khóa Địa Phương On-Page (Giao gas, Gọi gas, Đặt gas + Quận & Phường mới) */}
@@ -718,10 +728,7 @@ export default function DistrictLandingView({ district }: DistrictLandingViewPro
                       `Gọi gas ${district.name}`,
                       `Đặt gas ${district.name}`,
                       `Đổi gas gần đây ${district.name}`,
-                      `Đổi gas hôm nay ${district.name}`,
-                      `Giao gas nhanh thứ 4 ${district.name}`,
-                      `Giao gas trong ngày ${district.name}`,
-                      `Đổi gas quán ăn ${district.name}`,
+                      `Đổi gas gia đình ${district.name}`,
                       `Số điện thoại gọi gas ${district.name}`,
                       `Đổi gas chính hãng ${district.name}`,
                       `Đổi gas giao nhanh 15 phút ${district.name}`,

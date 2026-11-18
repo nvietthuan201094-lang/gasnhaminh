@@ -103,12 +103,22 @@ export default async function DistrictPage({ params }: PageProps) {
     .map((w) => w.replace(/\s*\(.*?\)\s*/g, '').trim())
     .join(', ');
 
+  const PHYSICAL_HUB_COORDS: Record<string, { streetAddress: string; lat: number; lng: number }> = {
+    'quan-8': { streetAddress: '1009 Phạm Thế Hiển, Phường Chánh Hưng', lat: 10.7428, lng: 106.6634 },
+    'tan-phu': { streetAddress: '36 Nguyễn Văn Huyên, Phường Phú Thọ Hòa', lat: 10.7854, lng: 106.6268 },
+    'quan-6': { streetAddress: '14R Đường 32B Cư Xá Bình Phú, Phường 10', lat: 10.7439, lng: 106.6253 },
+    'hoc-mon': { streetAddress: '64A Nguyễn Thị Hai, Xã Bà Điểm & 111/7H Ấp Thới Tây 2, Tân Hiệp 18', lat: 10.8442, lng: 106.6051 },
+    'quan-12': { streetAddress: 'Trạm Chăm Sóc Bếp Phan Văn Hớn – Nguyễn Ảnh Thủ (Kết nối Chi nhánh Bà Điểm)', lat: 10.8672, lng: 106.6413 },
+    'binh-tan': { streetAddress: 'Trạm Chăm Sóc Bếp Tên Lửa – Hương Lộ 2 (Kết nối Chi nhánh Bình Phú & Tân Phú)', lat: 10.7652, lng: 106.6038 },
+  };
+  const hubCoord = PHYSICAL_HUB_COORDS[district.slug];
+
   // Structured Data Schema JSON-LD
   const jsonLd = {
     '@context': 'https://schema.org',
     '@graph': [
       {
-        '@type': 'LocalBusiness',
+        '@type': ['LocalBusiness', 'HomeAndConstructionBusiness'],
         '@id': `${pageUrl}#business`,
         name: `Đại Lý Giao Gas, Gọi Gas, Đặt Gas ${district.name} - ${BRAND_NAME}`,
         description: district.description,
@@ -116,14 +126,26 @@ export default async function DistrictPage({ params }: PageProps) {
         image: `${siteUrl}/logo.png`,
         telephone: district.hotline,
         priceRange: '540.000đ - 1.730.000đ',
+        parentOrganization: {
+          '@id': `${siteUrl}/#business`,
+        },
         address: {
           '@type': 'PostalAddress',
-          streetAddress: district.hubName,
+          streetAddress: hubCoord ? hubCoord.streetAddress : district.hubName,
           addressLocality: district.name,
           addressRegion: 'Thành phố Hồ Chí Minh',
           postalCode: '700000',
           addressCountry: 'VN',
         },
+        ...(hubCoord
+          ? {
+              geo: {
+                '@type': 'GeoCoordinates',
+                latitude: hubCoord.lat,
+                longitude: hubCoord.lng,
+              },
+            }
+          : {}),
         areaServed: [
           {
             '@type': 'AdministrativeArea',

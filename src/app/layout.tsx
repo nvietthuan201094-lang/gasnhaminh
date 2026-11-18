@@ -16,18 +16,12 @@ export const metadata: Metadata = {
     "đổi gas chính hãng",
     "giao gas hỏa tốc 15 phút",
     "gas quận 12",
+    "đổi gas quận 8",
+    "đổi gas tân phú",
+    "đổi gas quận 6",
+    "đổi gas hóc môn",
     "bảng giá gas hôm nay",
-    "giá gas hôm nay 18/11/2026",
-    "đổi gas hôm nay 18/11/2026",
-    "giao gas hỏa tốc 18/11/2026",
-    "đổi gas thứ tư tphcm",
-    "giao gas nhanh thứ 4",
-    "đổi gas trong ngày tphcm",
-    "đổi gas quán ăn nhà hàng",
     "tiệm gas gần đây uy tín",
-    "đổi gas hỏa tốc tphcm",
-    "đổi bình gas uy tín tphcm",
-    "giá gas tháng 11 2026",
     "đổi bình gas 12kg giá bao nhiêu",
     "số điện thoại gọi gas tphcm",
   ],
@@ -132,7 +126,7 @@ export default async function RootLayout({
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
         <link rel="preconnect" href="https://crm.posplus.vn" />
         <link rel="dns-prefetch" href="https://crm.posplus.vn" />
-        <meta name="theme-color" content="#0284C7" />
+        <meta name="theme-color" content="#E02424" />
 
         {/* ─── Local SEO & Geo Meta Tags (TP.HCM) ───────────────────────── */}
         <meta name="geo.region" content="VN-SG" />
@@ -186,14 +180,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                   "paymentAccepted": "Tiền mặt, Chuyển khoản",
                   "description": "Dịch vụ đổi bình gas 12kg, 45kg chính hãng chăm sóc gian bếp gia đình tại TP.HCM. Giao nhanh 15–20 phút, đủ cân, nguyên tem chống giả, vệ sinh bếp miễn phí.",
                   "knowsAbout": [
-                    "Khí dầu mỏ hóa lỏng (LPG)",
-                    "An toàn PCCC gas dân dụng",
-                    "Giao gas hỏa tốc 15 phút",
-                    "Cung ứng gas nhà hàng quán ăn",
-                    "Đổi bình gas 12kg chính hãng",
-                    "Bình gas công nghiệp 45kg",
-                    "Van điều áp tự ngắt an toàn",
-                    "Bảng giá gas hôm nay 18/11/2026 tại TP.HCM"
+                    "Đổi bình gas gia đình 12kg chính hãng tại TP.HCM",
+                    "Bảo dưỡng và vệ sinh bếp gas gia đình miễn phí",
+                    "Kiểm tra rò rỉ khí gas và thay dây dẫn gas chống chuột",
+                    "Giao bình gas Petrolimex, V-Gas, Tuấn Khang tận bếp 15 phút",
+                    "Tư vấn an toàn gian bếp và thiết bị van gas tự ngắt"
                   ],
                   "address": {
                     "@type": "PostalAddress",

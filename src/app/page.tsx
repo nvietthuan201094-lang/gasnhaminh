@@ -1298,56 +1298,66 @@ function ServiceAreaSection() {
 const STORES_LIST = [
   {
     id: 1,
-    branch: "Chi nhánh Quận 8",
-    name: "Trạm Gas Chánh Hưng – Quận 8",
+    branch: "Cửa hàng Quận 8",
+    name: "Chi Nhánh Gas Nhà Mình – Phạm Thế Hiển Q.8",
     address: "1009 Phạm Thế Hiển, Phường Chánh Hưng, Quận 8, TP.HCM",
-    coverage: "Quận 8, Quận 5, Quận 7, Quận 4, Bình Chánh (Trung Sơn, Phạm Hùng)",
-    sla: "15 - 20 phút",
-    badge: "Kho trực chiến 24/7",
+    coverage: "Quận 8, Quận 5, Quận 7, Quận 4, Khu dân cư Trung Sơn – Phạm Hùng",
+    sla: "10 - 15 phút",
+    badge: "Trạm chăm sóc bếp Quận 8",
+    districtUrl: "/giao-gas/quan-8",
+    districtLabel: "Xem dịch vụ đổi gas Quận 8 →",
     hotline: HOTLINE,
     hotlineTel: HOTLINE_TEL,
   },
   {
     id: 2,
-    branch: "Chi nhánh Tân Phú",
-    name: "Trạm Gas Phú Thọ Hòa – Tân Phú",
+    branch: "Cửa hàng Tân Phú",
+    name: "Chi Nhánh Gas Nhà Mình – Phú Thọ Hòa Tân Phú",
     address: "36 Nguyễn Văn Huyên, Phường Phú Thọ Hòa, Quận Tân Phú, TP.HCM",
     coverage: "Quận Tân Phú, Tân Bình, Quận 11, Quận 10, Bình Tân",
-    sla: "15 - 20 phút",
-    badge: "Trung tâm phân phối khu Tây",
+    sla: "10 - 15 phút",
+    badge: "Trạm chăm sóc bếp Tân Phú",
+    districtUrl: "/giao-gas/tan-phu",
+    districtLabel: "Xem dịch vụ đổi gas Tân Phú →",
     hotline: HOTLINE,
     hotlineTel: HOTLINE_TEL,
   },
   {
     id: 3,
-    branch: "Chi nhánh Hóc Môn 1",
-    name: "Trạm Gas Bà Điểm – Hóc Môn",
+    branch: "Cửa hàng Bà Điểm & Quận 12",
+    name: "Chi Nhánh Gas Nhà Mình – Bà Điểm & Quận 12",
     address: "64A Nguyễn Thị Hai, Xã Bà Điểm, Huyện Hóc Môn, TP.HCM",
-    coverage: "Bà Điểm Hóc Môn, Quận 12 (An Sương, Tân Thới Nhất), Bình Tân",
-    sla: "15 - 25 phút",
-    badge: "Trạm cửa ngõ Tây Bắc",
+    coverage: "Quận 12 (Phan Văn Hớn, Nguyễn Ảnh Thủ, Tân Thới Nhất, Hiệp Thành), Bà Điểm Hóc Môn",
+    sla: "10 - 20 phút",
+    badge: "Trạm phục vụ Quận 12 & Tây Bắc",
+    districtUrl: "/giao-gas/quan-12",
+    districtLabel: "Xem dịch vụ đổi gas Quận 12 →",
     hotline: HOTLINE,
     hotlineTel: HOTLINE_TEL,
   },
   {
     id: 4,
-    branch: "Chi nhánh Hóc Môn 2",
-    name: "Trạm Gas Tân Hiệp – Hóc Môn",
+    branch: "Cửa hàng Tân Hiệp – Hóc Môn",
+    name: "Chi Nhánh Gas Nhà Mình – Tân Hiệp Hóc Môn",
     address: "111/7H Ấp Thới Tây 2, Tân Hiệp 18, Xã Tân Hiệp, Huyện Hóc Môn, TP.HCM",
-    coverage: "Tân Hiệp, Thị trấn Hóc Môn, Thới Tam Thôn, Củ Chi giáp ranh",
-    sla: "20 - 25 phút",
-    badge: "Kho hàng quy mô lớn",
+    coverage: "Tân Hiệp, Thị trấn Hóc Môn, Đông Thạnh, Thới Tam Thôn, Củ Chi giáp ranh",
+    sla: "15 - 20 phút",
+    badge: "Trạm chăm sóc bếp Hóc Môn",
+    districtUrl: "/giao-gas/hoc-mon",
+    districtLabel: "Xem dịch vụ đổi gas Hóc Môn →",
     hotline: HOTLINE,
     hotlineTel: HOTLINE_TEL,
   },
   {
     id: 5,
-    branch: "Chi nhánh Quận 6",
-    name: "Trạm Gas Cư Xá Bình Phú – Quận 6",
+    branch: "Cửa hàng Quận 6 & Bình Tân",
+    name: "Chi Nhánh Gas Nhà Mình – Cư Xá Bình Phú Q.6",
     address: "14R Đường 32B Cư Xá Bình Phú, Phường 10, Quận 6, TP.HCM",
-    coverage: "Quận 6, Bình Tân (An Lạc, Tên Lửa), Quận 5 (khu Chợ Lớn), Quận 11",
-    sla: "15 - 20 phút",
-    badge: "Kho trực chiến Chợ Lớn",
+    coverage: "Quận 6, Bình Tân (Khu Tên Lửa, An Lạc, Hương Lộ 2), Quận 5, Quận 11",
+    sla: "10 - 15 phút",
+    badge: "Trạm chăm sóc bếp Bình Phú",
+    districtUrl: "/giao-gas/quan-6",
+    districtLabel: "Xem dịch vụ đổi gas Quận 6 →",
     hotline: HOTLINE,
     hotlineTel: HOTLINE_TEL,
   },
@@ -1360,13 +1370,13 @@ function StoresSection({ onOrderClick }: { onOrderClick: () => void }) {
         <div className="text-center max-w-3xl mx-auto mb-12 md:mb-16">
           <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-[#FEE2E2] text-[#E02424] mb-3">
             <span className="w-2 h-2 rounded-full bg-[#E02424] animate-pulse"></span>
-            Mạng lưới cửa hàng thực tế
+            Địa chỉ cửa hàng thật – An tâm tuyệt đối
           </span>
           <h2 className="text-2xl md:text-4xl font-black text-[#111928] leading-tight mb-4">
-            Hệ Thống 5 Cửa Hàng & Trạm Kho Gas Trực Chiến
+            5 Chi Nhánh Gas Nhà Mình Phục Vụ Tận Gian Bếp Gia Đình
           </h2>
           <p className="text-[#6B7280] text-sm md:text-base leading-relaxed">
-            Mạng lưới trạm kho vật lý đặt tại các vị trí giao thông huyết mạch TP.HCM. Đội ngũ kỹ thuật viên thường trực 24/7, xuất kho giao hỏa tốc 15–20 phút tận nhà, kiểm tra rò rỉ khí gas an toàn miễn phí.
+            Hệ thống 5 cửa hàng chính hãng tại Quận 8, Tân Phú, Quận 6 và Hóc Môn – Quận 12 giúp rút ngắn thời gian giao bình gas xuống chỉ còn 10–15 phút, kèm dịch vụ vệ sinh họng bếp và thử kín van dây miễn phí.
           </p>
         </div>
 
@@ -1378,9 +1388,12 @@ function StoresSection({ onOrderClick }: { onOrderClick: () => void }) {
             >
               <div>
                 <div className="flex items-center justify-between mb-4">
-                  <span className="inline-block px-3 py-1 bg-white group-hover:bg-[#FEE2E2] text-[#E02424] border border-[#FECACA] rounded-full text-xs font-bold tracking-wide transition-colors">
+                  <Link
+                    href={store.districtUrl}
+                    className="inline-block px-3 py-1 bg-white group-hover:bg-[#FEE2E2] text-[#E02424] border border-[#FECACA] rounded-full text-xs font-bold tracking-wide transition-colors"
+                  >
                     {store.branch}
-                  </span>
+                  </Link>
                   <div className="flex items-center gap-1.5 text-[11px] font-semibold text-[#057A55] bg-[#DEF7EC] px-2.5 py-0.5 rounded-full">
                     <span className="w-1.5 h-1.5 rounded-full bg-[#31C48D] animate-ping"></span>
                     <span>Sẵn sàng giao</span>
@@ -1388,10 +1401,10 @@ function StoresSection({ onOrderClick }: { onOrderClick: () => void }) {
                 </div>
 
                 <h3 className="text-lg font-bold text-[#111928] group-hover:text-[#E02424] transition-colors mb-3">
-                  {store.name}
+                  <Link href={store.districtUrl}>{store.name}</Link>
                 </h3>
 
-                <div className="space-y-3 text-xs md:text-sm text-[#4B5563] mb-6">
+                <div className="space-y-3 text-xs md:text-sm text-[#4B5563] mb-4">
                   <div className="flex items-start gap-2.5">
                     <span className="text-base flex-shrink-0 mt-0.5">📍</span>
                     <span className="leading-snug">
@@ -1411,6 +1424,14 @@ function StoresSection({ onOrderClick }: { onOrderClick: () => void }) {
                       <span className="text-[#E02424] font-bold">{store.sla}</span>
                     </span>
                   </div>
+                </div>
+                <div className="mb-4">
+                  <Link
+                    href={store.districtUrl}
+                    className="text-xs font-extrabold text-[#E02424] hover:underline inline-flex items-center gap-1"
+                  >
+                    {store.districtLabel}
+                  </Link>
                 </div>
               </div>
 
