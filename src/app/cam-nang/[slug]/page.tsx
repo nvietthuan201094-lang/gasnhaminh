@@ -152,6 +152,7 @@ export default async function GuideDetailPage({ params }: PageProps) {
     guide.slug.startsWith('huong-dan-') ||
     guide.slug.includes('quy-trinh') ||
     guide.slug.includes('kiem-tra') ||
+    guide.slug.includes('cach-xem') ||
     guide.category === 'xu-ly-su-co';
 
   const howToSchema = isHowToGuide
