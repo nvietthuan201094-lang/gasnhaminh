@@ -1614,9 +1614,9 @@ function Footer() {
         {/* ─── Liên kết SEO Chân Trang (Footer Quick Links) ────────────────────────── */}
         <div className="border-t border-white/10 pt-8 pb-8 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 gap-6 text-xs text-white/70">
           <div>
-            <h5 className="font-bold text-white text-xs uppercase tracking-wider mb-3 text-[#0EA5E9]">
+            <h4 className="font-bold text-xs uppercase tracking-wider mb-3 text-[#0EA5E9]">
               Tra cứu & Sản phẩm chính hãng
-            </h5>
+            </h4>
             <ul className="space-y-2">
               <li><Link href="/bang-gia" className="hover:text-white transition-colors">🔥 Bảng giá gas hôm nay 2026</Link></li>
               <li><Link href="/gas-v-gas-xam-12kg" className="hover:text-white transition-colors">Bình Gas V-Gas xám 12kg</Link></li>
@@ -1626,9 +1626,9 @@ function Footer() {
             </ul>
           </div>
           <div>
-            <h5 className="font-bold text-white text-xs uppercase tracking-wider mb-3 text-[#0EA5E9]">
+            <h4 className="font-bold text-xs uppercase tracking-wider mb-3 text-[#0EA5E9]">
               Cẩm nang an toàn & PCCC
-            </h5>
+            </h4>
             <ul className="space-y-2">
               <li><Link href="/cam-nang" className="hover:text-white transition-colors">📚 Thư viện cẩm nang an toàn gas</Link></li>
               <li><Link href="/cam-nang/cach-kiem-tra-binh-gas-chinh-hang-du-ky" className="hover:text-white transition-colors">5 Cách kiểm tra bình gas đủ ký</Link></li>
@@ -1640,9 +1640,9 @@ function Footer() {
             </ul>
           </div>
           <div className="col-span-2 sm:col-span-1">
-            <h5 className="font-bold text-white text-xs uppercase tracking-wider mb-3 text-[#0EA5E9]">
+            <h4 className="font-bold text-xs uppercase tracking-wider mb-3 text-[#0EA5E9]">
               Trạm giao gas 15P tiêu biểu
-            </h5>
+            </h4>
             <ul className="space-y-2">
               <li><Link href="/giao-gas/quan-8" className="hover:text-white transition-colors">⚡ Giao gas hỏa tốc Quận 8</Link></li>
               <li><Link href="/giao-gas/tan-phu" className="hover:text-white transition-colors">⚡ Giao gas hỏa tốc Tân Phú</Link></li>
