@@ -125,7 +125,7 @@ export default async function DistrictPage({ params }: PageProps) {
         url: pageUrl,
         image: `${siteUrl}/logo.png`,
         telephone: district.hotline,
-        priceRange: '540.000đ - 1.730.000đ',
+        priceRange: '530.000đ - 1.730.000đ',
         parentOrganization: {
           '@id': `${siteUrl}/#business`,
         },

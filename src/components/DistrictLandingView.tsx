@@ -121,15 +121,20 @@ export default function DistrictLandingView({ district }: DistrictLandingViewPro
     district.neighboringSlugs.includes(d.slug)
   );
 
+  const [showOptionalDetails, setShowOptionalDetails] = useState(false);
+
   const filteredProducts = activeCategoryFilter === "all"
-    ? productsList
-    : productsList.filter((p) => p.category === activeCategoryFilter);
+    ? productsList.filter((p) => p.isPrimaryDisplay !== false)
+    : activeCategoryFilter === "full"
+      ? productsList
+      : productsList.filter((p) => p.category === activeCategoryFilter);
 
   async function handleOrderSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (!name.trim() || !phone.trim() || !address.trim() || isSubmitting || isSubmittingRef.current) {
-      if (!name.trim() || !phone.trim() || !address.trim()) {
-        alert("Vui lòng nhập đầy đủ Tên, Số điện thoại và Địa chỉ giao hàng.");
+    const digits = phone.replace(/\D/g, "");
+    if (digits.length < 9 || digits.length > 11 || isSubmitting || isSubmittingRef.current) {
+      if (digits.length < 9 || digits.length > 11) {
+        alert("Vui lòng nhập số điện thoại hợp lệ (9–11 số) để Gas Nhà Mình gọi lại trong 30 giây.");
       }
       return;
     }
@@ -137,13 +142,14 @@ export default function DistrictLandingView({ district }: DistrictLandingViewPro
     isSubmittingRef.current = true;
     setIsSubmitting(true);
     try {
+      const cleanAddress = address.replace(`[${district.name}]`, "").trim();
       const res = await createOrder({
         productId: selectedProduct.id,
         slug: selectedProduct.slug,
         quantity: 1,
-        customerName: name,
-        customerPhone: phone,
-        customerAddress: address,
+        customerName: name.trim() || "Gia đình đặt nhanh 1 chạm",
+        customerPhone: phone.trim(),
+        customerAddress: cleanAddress ? address : `[${district.name}] Xác nhận địa chỉ qua SĐT trong 30 giây`,
         districtCode: district.slug,
         note: `[Khu vực: ${district.name}] [Sản phẩm: ${selectedProduct.name}] ${note} (${actionType === "exchange" ? "Đổi bình" : "Mua trọn bộ cả vỏ"})`,
         cylinderAction: actionType,
@@ -435,26 +441,19 @@ export default function DistrictLandingView({ district }: DistrictLandingViewPro
                       </span>
                     </div>
 
-                    {/* Customer Inputs */}
-                    <div>
-                      <input
-                        type="text"
-                        required
-                        value={name}
-                        onChange={(e) => {
-                          const val = e.target.value;
-                          setName(val);
-                          if (typeof window !== "undefined" && val.trim().length >= 2) {
-                            try { localStorage.setItem("gas_customer_name", val.trim()); } catch (_) {}
-                          }
-                        }}
-                        placeholder="Họ và tên của bạn *"
-                        className="w-full text-xs bg-neutral-50 border border-neutral-200 rounded-xl px-3.5 py-2.5 focus:outline-none focus:border-red-500"
-                      />
+                    {/* Nhãn Đổi Ngang Vỏ 0đ */}
+                    <div className="p-2.5 bg-emerald-50 border border-emerald-200 rounded-xl text-[11px] text-emerald-900 leading-snug">
+                      <strong>🔄 Đổi ngang vỏ khác hãng 0đ:</strong> Bếp đang dùng vỏ Saigon Petro, Petrolimex, Gia Đình... đổi sang V-Gas không thu cọc vỏ!
                     </div>
+
+                    {/* 1-Tap Phone Input */}
                     <div>
+                      <label className="block text-xs font-bold text-neutral-800 mb-1">
+                        Chỉ cần nhập Số Điện Thoại gia đình nhận gas *
+                      </label>
                       <input
                         type="tel"
+                        inputMode="tel"
                         required
                         value={phone}
                         onChange={(e) => {
@@ -464,40 +463,80 @@ export default function DistrictLandingView({ district }: DistrictLandingViewPro
                             try { localStorage.setItem("gas_customer_phone", val.trim()); } catch (_) {}
                           }
                         }}
-                        placeholder="Số điện thoại nhận gas *"
-                        className="w-full text-xs bg-neutral-50 border border-neutral-200 rounded-xl px-3.5 py-2.5 focus:outline-none focus:border-red-500"
-                      />
-                    </div>
-                    <div>
-                      <input
-                        type="text"
-                        required
-                        value={address}
-                        onChange={(e) => setAddress(e.target.value)}
-                        placeholder={`Số nhà, tên đường, Phường tại ${district.name} *`}
-                        className="w-full text-xs bg-neutral-50 border border-neutral-200 rounded-xl px-3.5 py-2.5 focus:outline-none focus:border-red-500"
-                      />
-                    </div>
-                    <div>
-                      <input
-                        type="text"
-                        value={note}
-                        onChange={(e) => setNote(e.target.value)}
-                        placeholder="Ghi chú thêm (VD: Giao lầu 2, gọi trước 5 phút...)"
-                        className="w-full text-xs bg-neutral-50 border border-neutral-200 rounded-xl px-3.5 py-2.5 focus:outline-none focus:border-red-500"
+                        placeholder="Nhập SĐT nhận gas (VD: 0909...)"
+                        className="w-full text-sm font-bold bg-white border-2 border-red-300 rounded-xl px-3.5 py-3 focus:outline-none focus:border-red-600 text-neutral-900"
                       />
                     </div>
 
                     <button
-                      type="submit"
-                      disabled={isSubmitting}
-                      className="w-full py-3.5 rounded-xl bg-red-600 hover:bg-red-700 disabled:opacity-50 text-white font-black text-sm tracking-wide shadow-lg shadow-red-600/30 transition-all flex items-center justify-center gap-2"
+                      type="button"
+                      onClick={() => setShowOptionalDetails((v) => !v)}
+                      className="text-[11px] font-bold text-red-700 hover:underline cursor-pointer"
                     >
-                      {isSubmitting ? "Đang gửi đơn..." : "🚀 XÁC NHẬN GIAO GAS TẬN NHÀ"}
+                      {showOptionalDetails
+                        ? "− Ẩn bớt địa chỉ chi tiết"
+                        : "+ Nhập sẵn tên chung cư / số nhà / dặn dò thợ (Không bắt buộc)"}
                     </button>
 
-                    <p className="text-[11px] text-center text-neutral-400">
-                      🔒 Cam kết bình chính hãng nguyên tem chống giả. Không phát sinh chi phí.
+                    {showOptionalDetails && (
+                      <div className="space-y-2.5 pt-1">
+                        <input
+                          type="text"
+                          value={name}
+                          onChange={(e) => {
+                            const val = e.target.value;
+                            setName(val);
+                            if (typeof window !== "undefined" && val.trim().length >= 2) {
+                              try { localStorage.setItem("gas_customer_name", val.trim()); } catch (_) {}
+                            }
+                          }}
+                          placeholder="Tên của bạn (Tùy chọn)"
+                          className="w-full text-xs bg-neutral-50 border border-neutral-200 rounded-xl px-3.5 py-2.5 focus:outline-none focus:border-red-500"
+                        />
+                        <input
+                          type="text"
+                          value={address}
+                          onChange={(e) => setAddress(e.target.value)}
+                          placeholder={`Tên chung cư / Số nhà tại ${district.name} (Tùy chọn)`}
+                          className="w-full text-xs bg-neutral-50 border border-neutral-200 rounded-xl px-3.5 py-2.5 focus:outline-none focus:border-red-500"
+                        />
+                        <input
+                          type="text"
+                          value={note}
+                          onChange={(e) => setNote(e.target.value)}
+                          placeholder="Dặn thợ (VD: Vào hầm chung cư, nhà có người lớn tuổi...)"
+                          className="w-full text-xs bg-neutral-50 border border-neutral-200 rounded-xl px-3.5 py-2.5 focus:outline-none focus:border-red-500"
+                        />
+                      </div>
+                    )}
+
+                    <button
+                      type="submit"
+                      disabled={isSubmitting}
+                      className="w-full py-3.5 rounded-xl bg-red-600 hover:bg-red-700 disabled:opacity-50 text-white font-black text-sm tracking-wide shadow-lg shadow-red-600/25 transition-all flex items-center justify-center gap-2 cursor-pointer"
+                    >
+                      {isSubmitting ? "Đang kết nối chi nhánh..." : "⚡ GỌI LẠI TRONG 30 GIÂY — GIAO TẬN BẾP"}
+                    </button>
+
+                    <a
+                      href={ZALO_URL}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={() =>
+                        trackInteractionApi("click_zalo", {
+                          district: district.name,
+                          phone: district.hotline || HOTLINE_DISPLAY,
+                          customerPhone: phone,
+                          notes: `Khách bấm Gửi Định Vị Zalo từ form ${district.name}`,
+                        })
+                      }
+                      className="w-full py-2.5 rounded-xl bg-red-50 hover:bg-red-100 border border-red-200 text-red-700 font-bold text-xs flex items-center justify-center gap-1.5"
+                    >
+                      📍 Gửi Định Vị Zalo (Không cần gõ địa chỉ)
+                    </a>
+
+                    <p className="text-[11px] text-center text-neutral-500">
+                      ⚖️ Cân điện tử 50kg tại bếp • Đo rò rỉ bằng máy &amp; vệ sinh họng bếp 0đ.
                     </p>
                   </form>
                 )}

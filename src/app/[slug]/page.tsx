@@ -81,7 +81,7 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
 
   const seoProd = SEO_PRODUCTS.find((p) => p.slug === slug || p.id === slug);
   const canonicalUrl = `${siteUrl}/${slug}`;
-  const priceText = product.price > 0 ? `${new Intl.NumberFormat('vi-VN').format(product.price)}đ` : (seoProd?.price || '540.000đ');
+  const priceText = product.price > 0 ? `${new Intl.NumberFormat('vi-VN').format(product.price)}đ` : (seoProd?.price || '530.000đ');
   const weightText = seoProd?.weight || '12kg';
   const imageUrl = product.imageUrl || seoProd?.image || `${siteUrl}/hero_gasnhaminh.jpg`;
 
@@ -150,7 +150,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
   const brandName = seoProd?.brand || BRAND_NAME;
   const weight = seoProd?.weight || '12kg';
   const valveType = seoProd?.valveType || 'Van tiêu chuẩn an toàn';
-  const priceDisplay = product.price > 0 ? `${new Intl.NumberFormat('vi-VN').format(product.price)}đ` : (seoProd?.price || '540.000đ');
+  const priceDisplay = product.price > 0 ? `${new Intl.NumberFormat('vi-VN').format(product.price)}đ` : (seoProd?.price || '530.000đ');
   const newPriceDisplay =
     product.price > 0
       ? `${new Intl.NumberFormat('vi-VN').format(product.price + (weight === '45kg' ? 1000000 : 250000))}đ`
@@ -179,8 +179,8 @@ export default async function ProductPage({ params }: ProductPageProps) {
       answer: `Bình ${product.name} trang bị ${valveType}. Mỗi lần giao gas, kỹ thuật viên Gas Nhà Mình đều thực hiện quy trình an toàn: kiểm tra van điều áp, thay gioăng cao su mới miễn phí, thử kín bằng bọt xà phòng và chỉnh lửa xanh đều trước khi bàn giao.`,
     },
     {
-      question: `Đặt bình ${product.name} bao lâu thì nhân viên giao tới nơi?`,
-      answer: `Chỉ từ 15–20 phút. Hệ thống Gas Nhà Mình có 5 trạm kho trực ban trải khắp TP.HCM (Quận 8, Tân Phú, Quận 6, Hóc Môn Bà Điểm & Tân Hiệp), giúp điều phối nhân viên gần địa chỉ của bạn nhất giao ngay cả trong giờ cao điểm nấu nướng.`,
+      question: `Đặt bình ${product.name} bao lâu thì giao tới? Thợ có mang cân kiểm tra và vào hầm chung cư được không?`,
+      answer: `Chỉ từ 15–20 phút nhờ mạng lưới 5 chi nhánh chính hãng kết hợp hơn 30 đại lý liên kết khắp TP.HCM (xuất bình cách nhà dưới 2km). Kỹ thuật viên Gas Nhà Mình rành quy trình đăng ký hầm chung cư, mang sẵn cân móc điện tử cầm tay 50kg cân đối chứng đủ ký, đo rò rỉ bằng máy và vệ sinh họng bếp miễn phí mới nhận tiền.`,
     },
   ];
 

@@ -14,66 +14,85 @@ const HOTLINE = "0888 113 831";
 const HOTLINE_TEL = "tel:0888113831";
 const ZALO_URL = "https://zalo.me/0888113831";
 
-// ─── GTM & CRM Interaction Tracking Helper ──────────────────────────────────────────
 function pushGtmEvent(eventName: string, params: Record<string, unknown> = {}) {
   if (typeof window === "undefined") return;
   (window as any).dataLayer = (window as any).dataLayer || [];
   (window as any).dataLayer.push({ event: eventName, ...params });
 
-  // Gửi tín hiệu tương tác về CRM Gas Nhà Mình để phát thông báo chuông FCM tới điện thoại nhân viên
   if (eventName === "click_zalo" || eventName === "click_call") {
     trackInteractionApi(eventName as "click_zalo" | "click_call", {
       phone: HOTLINE,
-      notes: eventName === "click_zalo" ? "Khách bấm Chat Zalo từ trang chủ" : "Khách bấm Gọi Hotline từ trang chủ",
+      customerPhone: (params.customerPhone as string) || undefined,
+      notes:
+        (params.notes as string) ||
+        (eventName === "click_zalo"
+          ? "Khách bấm Gửi Định Vị / Chat Zalo từ trang chủ Gas Nhà Mình"
+          : "Khách bấm Gọi Hotline từ trang chủ Gas Nhà Mình"),
     });
   }
 }
 
 function Header() {
-  const [menuOpen, setMenuOpen] = useState(false);
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-white shadow-md">
-      {/* Desktop */}
+    <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200/80 shadow-xs">
       <div className="hidden md:flex items-center justify-between px-8 lg:px-20 h-[72px] max-w-[1440px] mx-auto">
-        <a href="#hero" className="flex items-center py-1 hover:opacity-95 transition-opacity">
-          <img src="/logo.png" alt="Gas Nhà Mình - Hết Gas Gọi Mình" className="h-[58px] w-auto object-contain" />
+        <a href="#hero" className="flex items-center gap-3 py-1 hover:opacity-95 transition-opacity">
+          <img src="/logo.png" alt="Gas Nhà Mình - Chăm Sóc Gian Bếp Gia Đình & Chung Cư" className="h-[54px] w-auto object-contain" />
+          <div className="hidden xl:block pl-3 border-l border-slate-200">
+            <div className="text-xs font-black text-[#DC2626] uppercase tracking-wider">Chuyên Gia Bếp Gia Đình &amp; Chung Cư</div>
+            <div className="text-[11px] text-slate-500 font-semibold">Đo rò rỉ bằng máy • Vệ sinh bếp 0đ</div>
+          </div>
         </a>
-        <nav className="flex gap-7">
-          {[["Bảng giá", "#bang-gia"], ["Cam kết", "#cam-ket"], ["Cửa hàng", "#he-thong-cua-hang"], ["Khu vực giao", "#khu-vuc"], ["Cẩm nang", "/cam-nang"]].map(([label, href]) => (
-            <a key={href} href={href} className="text-[#111928] font-semibold text-sm hover:text-[#E02424] transition-colors">{label}</a>
+        <nav className="flex gap-6">
+          {[
+            ["Bảng giá 530K", "#bang-gia"],
+            ["3 Không nhận bình", "#ba-khong"],
+            ["Chăm sóc chung cư", "#cham-soc-bep"],
+            ["Khu vực <2km", "#khu-vuc"],
+            ["Cẩm nang", "/cam-nang"],
+          ].map(([label, href]) => (
+            <a key={href} href={href} className="text-slate-800 font-semibold text-sm hover:text-[#DC2626] transition-colors">
+              {label}
+            </a>
           ))}
         </nav>
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2.5">
           <a
             href={ZALO_URL}
             target="_blank"
             rel="noopener noreferrer"
-            onClick={() => pushGtmEvent("click_zalo", { phone: HOTLINE })}
-            className="flex items-center gap-1.5 bg-[#0EA5E9] hover:bg-[#0284C7] text-white font-bold px-4 py-2.5 rounded-lg transition-colors text-sm shadow-sm"
+            onClick={() => pushGtmEvent("click_zalo", { phone: HOTLINE, notes: "Khách bấm Gửi Định Vị Zalo trên Header" })}
+            className="flex items-center gap-1.5 bg-red-50 hover:bg-red-100 text-[#DC2626] border border-red-200 font-bold px-3.5 py-2.5 rounded-xl transition-colors text-xs lg:text-sm"
           >
-            💬 Nhắn Zalo
+            📍 Gửi Vị Trí Zalo
           </a>
           <a
             href={HOTLINE_TEL}
             onClick={() => pushGtmEvent("click_call", { phone: HOTLINE })}
-            className="flex items-center gap-2 bg-[#E02424] hover:bg-[#B91C1C] text-white font-bold px-5 py-2.5 rounded-lg transition-colors text-sm shadow-sm"
+            className="flex items-center gap-2 bg-[#DC2626] hover:bg-[#B91C1C] text-white font-black px-4 py-2.5 rounded-xl transition-colors text-xs lg:text-sm shadow-xs"
           >
-            <PhoneIcon /> Gọi ngay: {HOTLINE}
+            <PhoneIcon size={16} /> {HOTLINE}
           </a>
         </div>
       </div>
+
       {/* Mobile */}
       <div className="flex md:hidden items-center justify-between px-4 h-14">
         <a href="#hero" className="flex items-center py-1">
-          <img src="/logo.png" alt="Gas Nhà Mình - Hết Gas Gọi Mình" className="h-10 w-auto object-contain" />
+          <img src="/logo.png" alt="Gas Nhà Mình" className="h-10 w-auto object-contain" />
         </a>
-        <a 
-          href={HOTLINE_TEL} 
-          onClick={() => pushGtmEvent("click_call", { phone: HOTLINE })} 
-          className="flex items-center gap-1.5 bg-[#E02424] text-white rounded-full px-3 py-1.5 text-xs font-bold shadow-sm"
-        >
-          <PhoneIcon size={14} /> {HOTLINE}
-        </a>
+        <div className="flex items-center gap-1.5">
+          <span className="text-[10px] font-extrabold text-emerald-800 bg-emerald-50 border border-emerald-200 px-2 py-1 rounded-full">
+            Chuẩn PCCC
+          </span>
+          <a
+            href={HOTLINE_TEL}
+            onClick={() => pushGtmEvent("click_call", { phone: HOTLINE })}
+            className="flex items-center gap-1 bg-[#DC2626] text-white rounded-full px-3 py-1.5 text-xs font-black shadow-xs"
+          >
+            <PhoneIcon size={13} /> {HOTLINE}
+          </a>
+        </div>
       </div>
     </header>
   );
@@ -81,46 +100,39 @@ function Header() {
 
 function MobileStickyBar({ onOrderClick }: { onOrderClick: () => void }) {
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-50 md:hidden bg-white/95 backdrop-blur-md border-t border-[#E5E7EB] shadow-[0_-4px_20px_rgba(0,0,0,0.15)]">
-      {/* Cam kết giao nhanh & kiểm tra bình an toàn */}
-      <div className="bg-gradient-to-r from-[#B91C1C] via-[#DC2626] to-[#EF4444] py-1 px-3 text-center flex items-center justify-center gap-2 text-[11px] font-bold text-white tracking-wide">
-        <span className="flex h-2 w-2 relative">
-          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-300 opacity-75"></span>
-          <span className="relative inline-flex rounded-full h-2 w-2 bg-amber-400"></span>
-        </span>
-        <span>⚡ Giao trong 15 phút • Nguyên tem chính hãng • Kiểm tra an toàn miễn phí</span>
+    <div className="fixed bottom-0 left-0 right-0 z-50 md:hidden bg-white/95 backdrop-blur-md border-t border-slate-200 shadow-[0_-4px_20px_rgba(15,23,42,0.12)]">
+      <div className="bg-[#B91C1C] py-1 px-3 text-center flex items-center justify-center gap-1.5 text-[11px] font-bold text-white">
+        <span className="inline-block w-2 h-2 rounded-full bg-amber-300 animate-pulse"></span>
+        <span>⚖️ Cân điện tử tại bếp • Đo rò rỉ &amp; Vệ sinh bếp 0đ</span>
       </div>
 
-      {/* Cụm nút hành động tối ưu chuyển đổi */}
-      <div className="flex items-center gap-2 px-3 py-2 max-w-lg mx-auto">
+      <div className="flex items-center gap-2 px-2.5 py-2 max-w-lg mx-auto">
         <a
           href={HOTLINE_TEL}
-          onClick={() => pushGtmEvent("click_call", { phone: HOTLINE })}
-          className="flex flex-col items-center justify-center bg-white border border-red-200 text-[#E02424] active:bg-red-50 rounded-xl px-3 py-1.5 min-w-[62px] transition-all shadow-sm"
-          title="Gọi hotline tư vấn"
+          onClick={() => pushGtmEvent("click_call", { phone: HOTLINE, notes: "Khách bấm Gọi từ thanh đáy Mobile" })}
+          className="flex flex-col items-center justify-center bg-white border border-red-200 text-[#DC2626] rounded-xl px-2.5 py-1.5 min-w-[60px]"
         >
-          <PhoneIcon size={16} />
-          <span className="text-[10px] font-bold mt-0.5">Gọi ngay</span>
+          <PhoneIcon size={15} />
+          <span className="text-[10px] font-bold mt-0.5">Gọi 15P</span>
         </a>
 
         <a
           href={ZALO_URL}
           target="_blank"
           rel="noopener noreferrer"
-          onClick={() => pushGtmEvent("click_zalo", { phone: HOTLINE })}
-          className="flex flex-col items-center justify-center bg-red-50 border border-red-200 text-[#E02424] active:bg-red-100 rounded-xl px-3 py-1.5 min-w-[62px] transition-all shadow-sm"
-          title="Chat Zalo đặt gas"
+          onClick={() => pushGtmEvent("click_zalo", { phone: HOTLINE, notes: "Khách bấm Gửi Định Vị Zalo thanh đáy Mobile" })}
+          className="flex flex-col items-center justify-center bg-red-50 border border-red-200 text-[#DC2626] rounded-xl px-2.5 py-1.5 min-w-[84px]"
         >
-          <span className="text-sm leading-none">💬</span>
-          <span className="text-[10px] font-bold mt-0.5">Zalo</span>
+          <span className="text-xs leading-none">📍</span>
+          <span className="text-[10px] font-bold mt-0.5">Gửi Vị Trí Zalo</span>
         </a>
 
         <button
           type="button"
           onClick={onOrderClick}
-          className="flex-1 flex items-center justify-center gap-1.5 bg-gradient-to-r from-[#DC2626] to-[#B91C1C] hover:from-[#B91C1C] hover:to-[#991B1B] active:scale-[0.98] text-white font-black text-sm py-3 px-3 rounded-xl shadow-lg shadow-red-500/30 transition-all uppercase tracking-wide"
+          className="flex-1 flex items-center justify-center gap-1 bg-[#DC2626] hover:bg-[#B91C1C] text-white font-black text-xs sm:text-sm py-3 px-3 rounded-xl shadow-md shadow-red-500/25 uppercase tracking-wide cursor-pointer"
         >
-          <span>🚀 ĐẶT GAS HỎA TỐC</span>
+          <span>⚡ ĐẶT 1 CHẠM (530K)</span>
         </button>
       </div>
     </div>
@@ -142,22 +154,17 @@ function WatermarkOverlay({
       <>
         <div className="absolute top-3 left-3 z-10 pointer-events-none select-none">
           <div className="bg-white/95 backdrop-blur-sm px-2.5 py-1 rounded-lg shadow-md border border-slate-200 flex items-center">
-            <img
-              src={WATERMARK_LOGO_SRC}
-              alt="Gas Nhà Mình"
-              className="h-6 w-auto object-contain"
-              draggable={false}
-            />
+            <img src={WATERMARK_LOGO_SRC} alt="Gas Nhà Mình" className="h-6 w-auto object-contain" draggable={false} />
           </div>
         </div>
         <div className="absolute bottom-3 right-3 z-10">
           <a
             href={hotlineTel}
             onClick={(e) => e.stopPropagation()}
-            className="inline-flex items-center gap-1.5 bg-[#E02424] hover:bg-[#B91C1C] text-white text-xs font-black px-3 py-1.5 rounded-lg shadow-lg transition-transform hover:scale-105"
+            className="inline-flex items-center gap-1.5 bg-[#DC2626] hover:bg-[#B91C1C] text-white text-xs font-black px-3 py-1.5 rounded-lg shadow-lg"
           >
             <PhoneIcon size={13} />
-            <span>GỌI GAS: {hotline}</span>
+            <span>GỌI GAS NHÀ MÌNH: {hotline}</span>
           </a>
         </div>
       </>
@@ -166,253 +173,324 @@ function WatermarkOverlay({
 
   return (
     <>
-      {/* Top Left: Logo Gas Nhà Mình */}
       <div className="absolute top-2.5 left-2.5 z-10 pointer-events-none select-none">
-        <div className="bg-white/95 backdrop-blur-sm px-2 py-1 rounded-lg shadow-sm border border-slate-100 flex items-center">
-          <img
-            src={WATERMARK_LOGO_SRC}
-            alt="Gas Nhà Mình"
-            className="h-5 sm:h-6 w-auto object-contain"
-            draggable={false}
-          />
+        <div className="bg-white/95 backdrop-blur-sm px-2 py-1 rounded-lg shadow-xs border border-slate-100 flex items-center">
+          <img src={WATERMARK_LOGO_SRC} alt="Gas Nhà Mình" className="h-5 sm:h-6 w-auto object-contain" draggable={false} />
         </div>
       </div>
-
-      {/* Top Right: 100% Chính Hãng */}
       <div className="absolute top-2.5 right-2.5 z-10 pointer-events-none select-none">
-        <span className="inline-flex items-center gap-1 bg-red-50/95 text-[#E02424] border border-red-200 text-[10px] font-bold px-2 py-0.5 rounded-full shadow-xs">
-          <span className="w-1.5 h-1.5 rounded-full bg-[#E02424]"></span>
-          100% Chính Hãng
+        <span className="inline-flex items-center gap-1 bg-emerald-50/95 text-[#057A55] border border-emerald-200 text-[10px] font-bold px-2 py-0.5 rounded-full">
+          🛡️ Chuẩn PCCC • Đủ Ký
         </span>
       </div>
-
-      {/* Bottom Right: Nút Gọi Gas Hotline (theo mẫu) */}
       <div className="absolute bottom-2.5 right-2.5 z-10">
         <a
           href={hotlineTel}
           onClick={(e) => e.stopPropagation()}
-          className="inline-flex items-center gap-1 bg-[#E02424] hover:bg-[#B91C1C] active:scale-95 text-white text-[10px] sm:text-[11px] font-black px-2.5 py-1 rounded-lg shadow-md transition-all tracking-tight"
-          title="Gọi giao gas hỏa tốc"
+          className="inline-flex items-center gap-1 bg-[#DC2626] hover:bg-[#B91C1C] text-white text-[10px] sm:text-[11px] font-black px-2.5 py-1 rounded-lg shadow-md tracking-tight"
         >
           <PhoneIcon size={11} />
-          <span>GỌI GAS: {hotline}</span>
+          <span>{hotline}</span>
         </a>
       </div>
-
-      {/* Bottom Left: Giao 15 Phút */}
       <div className="absolute bottom-2.5 left-2.5 z-10 pointer-events-none select-none">
-        <span className="inline-flex items-center gap-1 text-[10px] font-bold text-amber-900 bg-amber-100/90 border border-amber-200 px-1.5 py-0.5 rounded shadow-2xs">
-          ⚡ 15–20P
+        <span className="inline-flex items-center gap-1 text-[10px] font-bold text-amber-900 bg-amber-100/95 border border-amber-200 px-1.5 py-0.5 rounded">
+          🏠 Bếp Gia Đình
         </span>
       </div>
     </>
   );
 }
 
-export type ProductItem = { id: number; slug: string; name: string; tag: string; tagColor: string; exchangePrice: string; newPrice: string | null; img: string };
+export type ProductItem = {
+  id: number;
+  slug: string;
+  name: string;
+  valveNote: string;
+  tag: string;
+  tagColor: string;
+  exchangePrice: string;
+  originalPrice?: string;
+  newPrice: string | null;
+  img: string;
+};
 export type TabItem = { label: string; products: ProductItem[] };
 
-const DEFAULT_PRICING_TABS: TabItem[] = [
-  {
-    label: "Gas Dân Dụng 12kg",
-    products: [
-      { id: 168, slug: "gas-v-gas-xam-12kg", name: "Gas V-Gas xám 12kg", tag: "Bán chạy nhất", tagColor: "bg-[#FF5722]", exchangePrice: "540.000đ", newPrice: "790.000đ", img: "https://crm.posplus.vn/api/v1/public_image/product.template/168/image_1024" },
-      { id: 172, slug: "gas-v-gas-do-12kg", name: "Gas V-Gas đỏ 12 kg", tag: "Chính hãng", tagColor: "bg-[#0E9F6E]", exchangePrice: "560.000đ", newPrice: "810.000đ", img: "https://crm.posplus.vn/api/v1/public_image/product.template/172/image_1024" },
-      { id: 174, slug: "gas-v-gas-vang-12kg", name: "Gas V-Gas vàng 12kg", tag: "Lửa xanh bền", tagColor: "bg-[#F59E0B]", exchangePrice: "560.000đ", newPrice: "810.000đ", img: "https://crm.posplus.vn/api/v1/public_image/product.template/174/image_1024" },
-      { id: 173, slug: "gas-v-gas-xanh-den-12kg", name: "Gas V-Gas xanh đen 12kg", tag: "Thiết kế hiện đại", tagColor: "bg-[#FF5722]", exchangePrice: "560.000đ", newPrice: "810.000đ", img: "https://crm.posplus.vn/api/v1/public_image/product.template/173/image_1024" },
-      { id: 178, slug: "gas-v-gas-pe-12kg", name: "Gas V-Gas-PE 12kg", tag: "Bọc nhựa PE", tagColor: "bg-[#7C3AED]", exchangePrice: "560.000đ", newPrice: "810.000đ", img: "https://crm.posplus.vn/api/v1/public_image/product.template/178/image_1024" },
-      { id: 177, slug: "gas-v-gas-shell-12kg", name: "Gas V-Gas-Shell 12kg", tag: "Van Chụp Shell", tagColor: "bg-[#E02424]", exchangePrice: "560.000đ", newPrice: "810.000đ", img: "https://crm.posplus.vn/api/v1/public_image/product.template/177/image_1024" },
-      { id: 175, slug: "gas-petrolimex-dung-12kg", name: "Gas Petrolimex đứng 12kg", tag: "An toàn tuyệt đối", tagColor: "bg-[#1A56DB]", exchangePrice: "550.000đ", newPrice: "800.000đ", img: "https://crm.posplus.vn/api/v1/public_image/product.template/175/image_1024" },
-      { id: 176, slug: "gas-petrolimex-shell-12kg", name: "Gas Petrolimex shell 12kg", tag: "Van Chụp Shell", tagColor: "bg-[#E02424]", exchangePrice: "550.000đ", newPrice: "800.000đ", img: "https://crm.posplus.vn/api/v1/public_image/product.template/176/image_1024" },
-      { id: 169, slug: "gas-tuan-khang-vang-12kg", name: "Gas Tuấn Khang vàng 12kg", tag: "Tiết kiệm", tagColor: "bg-[#10B981]", exchangePrice: "560.000đ", newPrice: "810.000đ", img: "https://crm.posplus.vn/api/v1/public_image/product.template/169/image_1024" },
-      { id: 171, slug: "gas-tuan-khang-xanh-12kg", name: "Gas Tuấn Khang xanh 12kg", tag: "Chất lượng cao", tagColor: "bg-[#10B981]", exchangePrice: "560.000đ", newPrice: "810.000đ", img: "https://crm.posplus.vn/api/v1/public_image/product.template/171/image_1024" },
-    ],
-  },
-  {
-    label: "Gas Công Nghiệp",
-    products: [
-      { id: 170, slug: "gas-bo-45kg", name: "Gas bò 45 kg", tag: "Nhà hàng, Quán ăn", tagColor: "bg-[#DC2626]", exchangePrice: "1.730.000đ", newPrice: "2.730.000đ", img: "https://crm.posplus.vn/api/v1/public_image/product.template/170/image_1024" },
-    ],
-  },
-];
+const ID_BY_SLUG: Record<string, number> = {
+  "gas-v-gas-xam-12kg": 168,
+  "gas-v-gas-do-12kg": 172,
+  "gas-v-gas-vang-12kg": 174,
+  "gas-v-gas-xanh-den-12kg": 173,
+  "gas-v-gas-pe-12kg": 178,
+  "gas-v-gas-shell-12kg": 177,
+  "gas-petrolimex-dung-12kg": 175,
+  "gas-petrolimex-shell-12kg": 176,
+  "gas-tuan-khang-vang-12kg": 169,
+  "gas-tuan-khang-xanh-12kg": 171,
+  "gas-bo-45kg": 170,
+};
 
-let productsPromise: Promise<any[]> | null = null;
-function getProductsPromise() {
-  if (!productsPromise) {
-    productsPromise = import("@/lib/api").then(m => m.fetchProducts());
-  }
-  return productsPromise;
+function buildTabsFromSeoProducts(list = SEO_PRODUCTS): TabItem[] {
+  const primary12kg = list
+    .filter((p) => p.category !== "cong-nghiep" && p.isPrimaryDisplay !== false)
+    .map((p) => ({
+      id: ID_BY_SLUG[p.slug] || 168,
+      slug: p.slug,
+      name: p.name,
+      valveNote: p.valveType,
+      tag: p.tag,
+      tagColor:
+        p.slug === "gas-v-gas-xam-12kg" || p.slug === "gas-v-gas-shell-12kg"
+          ? "bg-[#DC2626]"
+          : p.brand.includes("Tuấn Khang")
+            ? "bg-[#059669]"
+            : "bg-[#1D4ED8]",
+      exchangePrice: p.price,
+      originalPrice: p.originalPrice,
+      newPrice: p.newPrice || null,
+      img: p.image || `https://crm.posplus.vn/api/v1/public_image/product.template/${ID_BY_SLUG[p.slug] || 168}/image_1024`,
+    }));
+
+  const congNghiep = list
+    .filter((p) => p.category === "cong-nghiep")
+    .map((p) => ({
+      id: ID_BY_SLUG[p.slug] || 170,
+      slug: p.slug,
+      name: p.name,
+      valveNote: p.valveType,
+      tag: p.tag,
+      tagColor: "bg-[#B91C1C]",
+      exchangePrice: p.price,
+      originalPrice: p.originalPrice,
+      newPrice: p.newPrice || null,
+      img: p.image || `https://crm.posplus.vn/api/v1/public_image/product.template/${ID_BY_SLUG[p.slug] || 170}/image_1024`,
+    }));
+
+  return [
+    { label: "Bình 12kg Hộ Gia Đình & Chung Cư", products: primary12kg },
+    { label: "Bình 45kg Bếp Ăn Tập Thể & Nhà Hàng", products: congNghiep },
+  ];
 }
 
 function usePricingTabs() {
-  const [tabs, setTabs] = useState<TabItem[]>(DEFAULT_PRICING_TABS);
+  const [tabs, setTabs] = useState<TabItem[]>(() => buildTabsFromSeoProducts(SEO_PRODUCTS));
 
   useEffect(() => {
-    import("@/lib/api").then(m => m.fetchDynamicGasPrices()).then(products => {
-      if (products && products.length > 0) {
-        const ID_BY_SLUG: Record<string, number> = {
-          'gas-v-gas-xam-12kg': 168,
-          'gas-v-gas-do-12kg': 172,
-          'gas-v-gas-vang-12kg': 174,
-          'gas-v-gas-xanh-den-12kg': 173,
-          'gas-v-gas-pe-12kg': 178,
-          'gas-v-gas-shell-12kg': 177,
-          'gas-petrolimex-dung-12kg': 175,
-          'gas-petrolimex-shell-12kg': 176,
-          'gas-tuan-khang-vang-12kg': 169,
-          'gas-tuan-khang-xanh-12kg': 171,
-          'gas-bo-45kg': 170,
-        };
-
-        const danDung: ProductItem[] = products
-          .filter(p => p.category !== 'cong-nghiep')
-          .map(p => ({
-            id: ID_BY_SLUG[p.slug] || 168,
-            slug: p.slug,
-            name: p.name,
-            tag: p.tag,
-            tagColor: p.brand === 'V-Gas' ? 'bg-[#FF5722]' : (p.brand === 'Tuấn Khang' ? 'bg-[#10B981]' : 'bg-[#1A56DB]'),
-            exchangePrice: p.price,
-            newPrice: p.newPrice || null,
-            img: p.image || `https://crm.posplus.vn/api/v1/public_image/product.template/${ID_BY_SLUG[p.slug] || 168}/image_1024`
-          }));
-
-        const congNghiep: ProductItem[] = products
-          .filter(p => p.category === 'cong-nghiep')
-          .map(p => ({
-            id: ID_BY_SLUG[p.slug] || 170,
-            slug: p.slug,
-            name: p.name,
-            tag: p.tag,
-            tagColor: 'bg-[#DC2626]',
-            exchangePrice: p.price,
-            newPrice: p.newPrice || null,
-            img: p.image || `https://crm.posplus.vn/api/v1/public_image/product.template/${ID_BY_SLUG[p.slug] || 170}/image_1024`
-          }));
-
-        setTabs([
-          { label: "Gas Dân Dụng 12kg", products: danDung },
-          { label: "Gas Công Nghiệp", products: congNghiep }
-        ]);
-      }
-    }).catch(console.error);
+    import("@/lib/api")
+      .then((m) => m.fetchDynamicGasPrices())
+      .then((products) => {
+        if (products && products.length > 0) {
+          setTabs(buildTabsFromSeoProducts(products));
+        }
+      })
+      .catch(console.error);
   }, []);
 
   return tabs;
 }
 
-function HeroSection({ onOrderClick }: { onOrderClick: () => void }) {
+function HeroSection({
+  onOrderSuccess,
+  onScrollToPricing,
+}: {
+  onOrderSuccess: () => void;
+  onScrollToPricing: () => void;
+}) {
+  const [quickPhone, setQuickPhone] = useState("");
+  const [submitting, setSubmitting] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      try {
+        const saved = localStorage.getItem("gas_customer_phone");
+        if (saved) setQuickPhone(saved);
+      } catch (_) {}
+    }
+  }, []);
+
+  async function handleHeroQuickSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    const digits = quickPhone.replace(/\D/g, "");
+    if (digits.length < 9 || digits.length > 11) {
+      setErrorMsg("Vui lòng nhập SĐT hợp lệ (9–11 chữ số) để nhân viên gọi xác nhận trong 30 giây.");
+      return;
+    }
+    setErrorMsg("");
+    setSubmitting(true);
+    try {
+      const { createOrder } = await import("@/lib/api");
+      const res = await createOrder({
+        productId: "168",
+        slug: "gas-v-gas-xam-12kg",
+        quantity: 1,
+        customerName: "Gia đình đặt 1 chạm (Hero Gas Nhà Mình)",
+        customerPhone: quickPhone.trim(),
+        customerAddress: "Xác nhận địa chỉ căn hộ/nhà phố qua SĐT trong 30 giây",
+        note: "Đặt 1 chạm V-Gas 12kg 530.000đ + Tặng gói đo rò rỉ bằng máy & vệ sinh bếp 0đ",
+        cylinderAction: "exchange",
+      });
+      if (res.success) {
+        trackGoogleAdsPurchase({
+          transactionId: (res as any).orderName || res.orderId || `HERO-GNM-${Date.now()}`,
+          value: 530000,
+          currency: "VND",
+          items: [{ id: 168, name: "Gas V-Gas 12kg Van Phổ Thông", category: "Gas 12kg", price: 530000, quantity: 1 }],
+        });
+        onOrderSuccess();
+      } else {
+        setErrorMsg(res.message || "Không gửi được yêu cầu. Vui lòng bấm gọi 0888 113 831.");
+      }
+    } catch {
+      setErrorMsg("Lỗi kết nối mạng. Vui lòng bấm gọi 0888 113 831 để được hỗ trợ ngay!");
+    } finally {
+      setSubmitting(false);
+    }
+  }
+
   return (
-    <section id="hero" className="pt-16 md:pt-[84px] bg-gradient-to-b from-[#FFF5F5] via-white to-white">
-      <div className="max-w-[1440px] mx-auto px-4 md:px-8 lg:px-20 pt-6 md:pt-10 pb-6 md:pb-10">
-        <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-          {/* Left Hero Content (Ảnh 1) */}
+    <section id="hero" className="pt-16 md:pt-[82px] bg-gradient-to-b from-[#FFF5F5] via-white to-white">
+      <div className="max-w-[1440px] mx-auto px-4 md:px-8 lg:px-20 pt-5 md:pt-8 pb-8 md:pb-12">
+        <div className="grid lg:grid-cols-12 gap-8 lg:gap-10 items-center">
+          {/* Left Hero Content */}
           <div className="lg:col-span-7 flex flex-col justify-center">
-            <div className="inline-flex items-center gap-2 bg-[#FEE2E2] text-[#991B1B] text-xs md:text-sm font-bold px-3.5 py-1.5 rounded-full mb-5 w-fit shadow-xs border border-red-200">
-              <span>⚡</span> Đặt Gas Online – Giao Gas Nhanh 15 Phút TP.HCM
+            <div className="inline-flex items-center gap-2 bg-red-100/80 text-[#991B1B] text-xs md:text-sm font-bold px-3.5 py-1.5 rounded-full mb-4 w-fit border border-red-200">
+              <span>🛡️</span> Chăm Sóc Bếp Gia Đình &amp; Chung Cư — 5 Chi Nhánh + 30+ Trạm Liên Kết (&lt;2km)
             </div>
 
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-[#111928] leading-[1.15] mb-4 tracking-tight">
-              Đổi Gas Chính Hãng Giao Tận Nhà{" "}
-              <span className="text-[#E02424] inline-block">Chỉ 15 Phút! ⏱️</span>
+            <h1 className="text-3xl sm:text-4xl lg:text-[43px] font-black text-slate-900 leading-[1.15] mb-3 tracking-tight">
+              Đổi Gas An Toàn Chuẩn PCCC Tận Căn Hộ —{" "}
+              <span className="text-[#DC2626]">V-Gas 12kg 530.000đ!</span>
             </h1>
 
-            <p className="text-lg md:text-xl font-bold text-[#1F2A37] mb-3">
-              Đại lý gas uy tín tại TP.HCM
+            <p className="text-sm md:text-base text-slate-600 leading-relaxed mb-5 max-w-2xl">
+              Thợ đồng phục lịch sự, rành quy trình vào hầm thang máy chung cư &amp; lễ phép khi nhà chỉ có ông bà lớn tuổi.{" "}
+              <strong className="text-emerald-700">Đổi ngang mọi vỏ hãng cũ 0đ</strong> + tặng gói{" "}
+              <strong className="text-slate-900">Đo rò rỉ bằng máy chuyên dụng &amp; Vệ sinh họng bếp lửa xanh miễn phí!</strong>
             </p>
 
-            <p className="text-[#4B5563] text-sm md:text-base leading-relaxed mb-6 max-w-xl">
-              Bình gas chính hãng 100%, đủ 12kg ruột, nguyên tem niêm phong chống giả. Giao nhanh – kiểm tra rò rỉ an toàn miễn phí – thanh toán linh hoạt.
-            </p>
+            {/* Khung Đặt Nhanh 1 Chạm Cho Gia Đình & Cư Dân Chung Cư */}
+            <div className="bg-white rounded-2xl border-2 border-[#DC2626]/30 shadow-lg p-4 sm:p-5 mb-5">
+              <div className="flex flex-wrap items-center justify-between gap-2 mb-2.5">
+                <span className="text-xs sm:text-sm font-black text-slate-900 uppercase tracking-wide">
+                  🏠 Đặt Nhanh 1 Chạm (Tặng Gói Bảo Dưỡng Bếp 0đ)
+                </span>
+                <span className="text-[11px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2.5 py-0.5 rounded-full">
+                  Cân móc điện tử 50kg tại bếp
+                </span>
+              </div>
 
-            {/* CTAs */}
-            <div className="flex flex-wrap items-center gap-3 sm:gap-4 mb-8">
-              <button
-                type="button"
-                onClick={onOrderClick}
-                className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 bg-[#F97316] hover:bg-[#EA580C] text-white font-black text-sm md:text-base px-7 py-4 rounded-xl shadow-lg shadow-orange-500/30 active:scale-95 transition-all uppercase tracking-wide cursor-pointer"
-              >
-                <span>🛒 ĐẶT GAS NGAY</span>
-                <span className="text-lg leading-none">→</span>
-              </button>
+              <form onSubmit={handleHeroQuickSubmit} className="flex flex-col sm:flex-row gap-2.5">
+                <input
+                  type="tel"
+                  inputMode="tel"
+                  required
+                  value={quickPhone}
+                  onChange={(e) => setQuickPhone(e.target.value)}
+                  placeholder="Nhập SĐT gia đình nhận gas (VD: 0909...)"
+                  className="flex-1 border-2 border-slate-200 focus:border-[#DC2626] rounded-xl px-4 py-3.5 text-sm sm:text-base font-bold text-slate-900 outline-none"
+                />
+                <button
+                  type="submit"
+                  disabled={submitting}
+                  className="bg-[#DC2626] hover:bg-[#B91C1C] text-white font-black text-sm sm:text-base px-6 py-3.5 rounded-xl shadow-md shadow-red-500/25 uppercase tracking-wide whitespace-nowrap cursor-pointer disabled:opacity-60"
+                >
+                  {submitting ? "Đang kết nối..." : "⚡ GỌI LẠI TRONG 30 GIÂY"}
+                </button>
+              </form>
 
-              <a
-                href={HOTLINE_TEL}
-                onClick={() => pushGtmEvent("click_call", { phone: HOTLINE })}
-                className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2.5 bg-white hover:bg-red-50 text-[#E02424] border-2 border-[#E02424] font-black text-sm md:text-base px-6 py-3.5 rounded-xl shadow-xs active:scale-95 transition-all cursor-pointer"
-              >
-                <PhoneIcon size={18} />
-                <div className="text-left">
-                  <div className="text-[10px] font-bold text-[#6B7280] leading-none uppercase">GỌI NGAY</div>
-                  <div className="text-sm md:text-base font-black leading-tight text-[#E02424]">{HOTLINE}</div>
-                </div>
-              </a>
+              {errorMsg && <p className="text-xs font-semibold text-red-600 mt-2">{errorMsg}</p>}
+
+              <div className="flex flex-wrap items-center justify-between gap-2 mt-3 pt-3 border-t border-slate-100 text-xs">
+                <a
+                  href={ZALO_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => pushGtmEvent("click_zalo", { phone: HOTLINE, customerPhone: quickPhone, notes: "Khách bấm Gửi Định Vị Zalo trong Hero Gas Nhà Mình" })}
+                  className="font-bold text-[#DC2626] hover:underline inline-flex items-center gap-1"
+                >
+                  📍 Gửi Vị Trí Căn Hộ / Nhà Phố Qua Zalo (Khỏi gõ địa chỉ) →
+                </a>
+                <button
+                  type="button"
+                  onClick={onScrollToPricing}
+                  className="font-semibold text-slate-500 hover:text-slate-800 cursor-pointer"
+                >
+                  Xem bảng giá V-Gas Van Chụp / Petrolimex ↓
+                </button>
+              </div>
             </div>
 
-            {/* 4 Micro Features */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-6 border-t border-gray-200/80">
+            {/* 4 Tiêu chuẩn gia đình kỹ tính */}
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2">
               <div className="flex items-center gap-2">
-                <span className="w-6 h-6 rounded-full bg-amber-100 text-amber-700 flex items-center justify-center text-xs font-black flex-shrink-0">⚡</span>
-                <span className="text-xs font-bold text-[#111928]">Giao nhanh 15 phút</span>
+                <span className="w-6 h-6 rounded-full bg-emerald-100 text-emerald-800 flex items-center justify-center text-xs font-black flex-shrink-0">📟</span>
+                <span className="text-xs font-bold text-slate-800">Máy dò rò rỉ chuyên dụng</span>
               </div>
               <div className="flex items-center gap-2">
-                <span className="w-6 h-6 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-xs font-black flex-shrink-0">✔</span>
-                <span className="text-xs font-bold text-[#111928]">Bình chính hãng đủ 12kg</span>
+                <span className="w-6 h-6 rounded-full bg-amber-100 text-amber-800 flex items-center justify-center text-xs font-black flex-shrink-0">⚖️</span>
+                <span className="text-xs font-bold text-slate-800">Cân điện tử đủ 12kg ruột</span>
               </div>
               <div className="flex items-center gap-2">
-                <span className="w-6 h-6 rounded-full bg-red-100 text-[#E02424] flex items-center justify-center text-xs font-black flex-shrink-0">🛡️</span>
-                <span className="text-xs font-bold text-[#111928]">Kiểm tra rò rỉ miễn phí</span>
+                <span className="w-6 h-6 rounded-full bg-red-100 text-[#DC2626] flex items-center justify-center text-xs font-black flex-shrink-0">🏢</span>
+                <span className="text-xs font-bold text-slate-800">Rành thủ tục hầm chung cư</span>
               </div>
               <div className="flex items-center gap-2">
-                <span className="w-6 h-6 rounded-full bg-indigo-100 text-indigo-700 flex items-center justify-center text-xs font-black flex-shrink-0">💳</span>
-                <span className="text-xs font-bold text-[#111928]">Thanh toán linh hoạt</span>
+                <span className="w-6 h-6 rounded-full bg-sky-100 text-sky-800 flex items-center justify-center text-xs font-black flex-shrink-0">✨</span>
+                <span className="text-xs font-bold text-slate-800">Vệ sinh họng bếp lửa xanh</span>
               </div>
             </div>
           </div>
 
-          {/* Right Hero Image (Ảnh 1) */}
+          {/* Right Hero Image */}
           <div className="lg:col-span-5">
-            <div className="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-white select-none group" onContextMenu={(e) => e.preventDefault()}>
+            <div className="relative rounded-3xl overflow-hidden shadow-xl border-4 border-white select-none group" onContextMenu={(e) => e.preventDefault()}>
               <img
                 src="/hero_gasnhaminh.jpg"
-                alt="Nhân viên giao gas Gas Nhà Mình chính hãng chuyên nghiệp tại TP.HCM"
+                alt="Kỹ thuật viên Gas Nhà Mình giao lắp an toàn và bảo dưỡng bếp gia đình tại TP.HCM"
                 fetchPriority="high"
-                className="w-full h-[320px] sm:h-[400px] lg:h-[460px] object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                className="w-full h-[300px] sm:h-[380px] lg:h-[430px] object-cover object-center"
               />
               <WatermarkOverlay type="banner" />
             </div>
           </div>
         </div>
 
-        {/* 3-Card Trust Strip (Ảnh 1) */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8 md:mt-10">
-          <div className="flex items-center gap-4 bg-white p-4 md:p-5 rounded-2xl border border-gray-200/70 shadow-xs hover:shadow-md transition-shadow">
-            <div className="w-12 h-12 rounded-xl bg-red-100 text-[#E02424] flex items-center justify-center text-base font-black flex-shrink-0">
-              100%
+        {/* 3 Đặc Quyền Gian Bếp Gia Đình & Chung Cư */}
+        <div id="cham-soc-bep" className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8">
+          <div className="flex items-start gap-3.5 bg-white p-4 md:p-5 rounded-2xl border border-slate-200 shadow-2xs">
+            <div className="w-11 h-11 rounded-xl bg-red-100 text-[#DC2626] flex items-center justify-center text-lg flex-shrink-0">
+              🏢
             </div>
             <div>
-              <p className="font-black text-[#111928] text-sm md:text-base">Gas chính hãng</p>
-              <p className="text-xs text-[#6B7280] mt-0.5">Nhập từ nhà phân phối uy tín</p>
+              <p className="font-black text-slate-900 text-sm md:text-base">Chuẩn Mực Chung Cư &amp; Người Lớn Tuổi</p>
+              <p className="text-xs text-slate-600 mt-0.5 leading-relaxed">
+                Thợ tự đăng ký bảo vệ, có xe đẩy chuyên dụng vào thang hàng, ăn nói lễ phép, hướng dẫn khóa van tận tình.
+              </p>
             </div>
           </div>
 
-          <div className="flex items-center gap-4 bg-white p-4 md:p-5 rounded-2xl border border-gray-200/70 shadow-xs hover:shadow-md transition-shadow">
-            <div className="w-12 h-12 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center text-xl flex-shrink-0">
-              🛡️
+          <div className="flex items-start gap-3.5 bg-white p-4 md:p-5 rounded-2xl border border-slate-200 shadow-2xs">
+            <div className="w-11 h-11 rounded-xl bg-emerald-100 text-emerald-800 flex items-center justify-center text-lg flex-shrink-0">
+              📟
             </div>
             <div>
-              <p className="font-black text-[#111928] text-sm md:text-base">An toàn tuyệt đối</p>
-              <p className="text-xs text-[#6B7280] mt-0.5">Kiểm tra rò rỉ trước khi bàn giao</p>
+              <p className="font-black text-slate-900 text-sm md:text-base">Đo Máy Dò Khí &amp; Chỉnh Lửa Xanh 0đ</p>
+              <p className="text-xs text-slate-600 mt-0.5 leading-relaxed">
+                Kiểm tra độ kín cổ van – dây dẫn bằng thiết bị dò khí, thay gioăng mới và vệ sinh họng bếp không đen nồi.
+              </p>
             </div>
           </div>
 
-          <div className="flex items-center gap-4 bg-white p-4 md:p-5 rounded-2xl border border-gray-200/70 shadow-xs hover:shadow-md transition-shadow">
-            <div className="w-12 h-12 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center text-xl flex-shrink-0">
-              👥
+          <div className="flex items-start gap-3.5 bg-white p-4 md:p-5 rounded-2xl border border-slate-200 shadow-2xs">
+            <div className="w-11 h-11 rounded-xl bg-amber-100 text-amber-800 flex items-center justify-center text-lg flex-shrink-0">
+              ⚖️
             </div>
             <div>
-              <p className="font-black text-[#111928] text-sm md:text-base">Phục vụ tận tâm</p>
-              <p className="text-xs text-[#6B7280] mt-0.5">Hỗ trợ nhanh, tư vấn rõ ràng</p>
+              <p className="font-black text-slate-900 text-sm md:text-base">Cân Điện Tử Đối Chứng &amp; Đổi Vỏ 0đ</p>
+              <p className="text-xs text-slate-600 mt-0.5 leading-relaxed">
+                Móc cân điện tử 50kg kiểm tra đủ <strong>[Vỏ + 12kg ruột]</strong> tại chỗ. Đổi ngang mọi vỏ hãng cũ miễn phí.
+              </p>
             </div>
           </div>
         </div>
@@ -437,10 +515,11 @@ function OrderSection({
   onOrderSuccess: () => void;
 }) {
   const [selectedOption, setSelectedOption] = useState<"exchange" | "new">("exchange");
-  const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
+  const [name, setName] = useState("");
   const [address, setAddress] = useState("");
   const [note, setNote] = useState("");
+  const [showMoreFields, setShowMoreFields] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const isSubmittingRef = useRef(false);
 
@@ -458,23 +537,12 @@ function OrderSection({
   const category = tabs[activeCategory] || tabs[0];
   const product = category?.products[selectedProduct] || category?.products[0];
   const isDanDung = activeCategory === 0;
-  const isContact = product?.exchangePrice?.includes("Liên hệ") || false;
 
   const displayPrice = isDanDung
-    ? selectedOption === "exchange" ? product?.exchangePrice : (product?.newPrice ?? product?.exchangePrice)
+    ? selectedOption === "exchange"
+      ? product?.exchangePrice
+      : product?.newPrice ?? product?.exchangePrice
     : product?.exchangePrice;
-
-  const brandName = (() => {
-    const n = product?.name || "";
-    if (n.includes("V-Gas")) return "V-Gas";
-    if (n.includes("Petrolimex")) return "Petrolimex";
-    if (n.includes("Saigon Petro")) return "Saigon Petro";
-    if (n.includes("Tuấn Khang")) return "Tuấn Khang";
-    if (n.includes("Gia Đình")) return "Gas Gia Đình";
-    if (n.includes("Pacific")) return "Gas Pacific";
-    if (n.includes("Dầu Khí")) return "Gas Dầu Khí";
-    return "Chính hãng";
-  })();
 
   function handleDropdownChange(e: React.ChangeEvent<HTMLSelectElement>) {
     const [cStr, pStr] = e.target.value.split("-");
@@ -489,25 +557,31 @@ function OrderSection({
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (!name || !phone || !address || submitting || isSubmittingRef.current) return;
+    const digits = phone.replace(/\D/g, "");
+    if (digits.length < 9 || digits.length > 11 || submitting || isSubmittingRef.current) {
+      if (digits.length < 9 || digits.length > 11) {
+        alert("Vui lòng nhập số điện thoại hợp lệ (9–11 số) để Gas Nhà Mình gọi lại trong 30 giây!");
+      }
+      return;
+    }
     isSubmittingRef.current = true;
     setSubmitting(true);
     try {
       const { createOrder } = await import("@/lib/api");
       const res = await createOrder({
-        productId: product?.id?.toString() || "0",
-        slug: product?.slug || "gas",
+        productId: product?.id?.toString() || "168",
+        slug: product?.slug || "gas-v-gas-xam-12kg",
         quantity: 1,
-        customerName: name,
-        customerPhone: phone,
-        customerAddress: address,
-        note: note + (selectedOption === "new" ? " (Mua trọn bộ)" : " (Chỉ đổi gas)"),
+        customerName: name.trim() || "Gia đình đặt nhanh 1 chạm",
+        customerPhone: phone.trim(),
+        customerAddress: address.trim() || "Xác nhận địa chỉ căn hộ/nhà phố qua SĐT trong 30 giây",
+        note: `${note.trim()} (${selectedOption === "new" ? "Mua trọn bộ kèm vỏ" : "Đổi ruột + Gói bảo dưỡng bếp 0đ"})`.trim(),
         cylinderAction: selectedOption,
       });
 
       if (res.success) {
-        const val = Number((displayPrice || "0").replace(/\D/g, "")) || 0;
-        const transactionId = (res as any).orderName || res.orderId || `LP-${Date.now()}`;
+        const val = Number((displayPrice || "0").replace(/\D/g, "")) || 530000;
+        const transactionId = (res as any).orderName || res.orderId || `GNM-${Date.now()}`;
 
         trackGoogleAdsPurchase({
           transactionId,
@@ -515,8 +589,8 @@ function OrderSection({
           currency: "VND",
           items: [
             {
-              id: product?.id || 0,
-              name: product?.name || "Gas",
+              id: product?.id || 168,
+              name: product?.name || "Gas V-Gas 12kg",
               category: category?.label || "Gas",
               price: val,
               quantity: 1,
@@ -526,11 +600,11 @@ function OrderSection({
 
         onOrderSuccess();
       } else {
-        alert(res.message || "Đã có lỗi xảy ra khi đặt hàng.");
+        alert(res.message || "Đã có lỗi xảy ra. Vui lòng gọi 0888 113 831 để giao ngay.");
       }
     } catch (err) {
       console.error(err);
-      alert("Đã có lỗi kết nối khi đặt hàng. Vui lòng bấm gọi hotline để được hỗ trợ nhanh nhất!");
+      alert("Lỗi kết nối mạng. Vui lòng bấm gọi 0888 113 831 để được hỗ trợ ngay!");
     } finally {
       isSubmittingRef.current = false;
       setSubmitting(false);
@@ -540,184 +614,295 @@ function OrderSection({
   const selectedKey = `${activeCategory}-${selectedProduct}`;
 
   return (
-    <section id="order-form" className="py-16 md:py-20 bg-gradient-to-b from-[#F9FAFB] to-white relative border-t border-gray-200">
+    <section id="order-form" className="py-14 md:py-20 bg-white border-t border-slate-200">
       <div className="max-w-[1440px] mx-auto px-4 md:px-8 lg:px-20">
-        <div className="max-w-xl mx-auto bg-white rounded-3xl shadow-2xl border border-red-100 p-6 md:p-8 relative">
-          {/* Top Pill Badge (Ảnh 2) */}
-          <div className="flex justify-end -mt-9 -mr-3 md:-mr-5 mb-3">
-            <span className="bg-[#E02424] text-white text-[11px] font-black uppercase px-3.5 py-1.5 rounded-full shadow-md tracking-wider">
-              Giao gas siêu tốc
-            </span>
-          </div>
+        <div className="grid lg:grid-cols-12 gap-8 lg:gap-10 items-start">
+          {/* Cột Trái: Form Đặt Hàng 1 Chạm Cho Gia Đình */}
+          <div className="lg:col-span-6 bg-white rounded-3xl shadow-xl border-2 border-red-200 p-6 md:p-8">
+            <div className="flex items-center justify-between gap-2 mb-4">
+              <span className="bg-[#DC2626] text-white text-[11px] font-black uppercase px-3 py-1 rounded-full tracking-wider">
+                🏠 Đặt 1 chạm — Gọi lại 30 giây
+              </span>
+              <span className="text-xs font-bold text-emerald-700">+ Tặng vệ sinh bếp 0đ</span>
+            </div>
 
-          {/* Heading */}
-          <div className="mb-6">
-            <h2 className="text-2xl md:text-3xl font-black text-[#111928] tracking-tight">
-              Đặt Gas / Đổi Bình Tận Nhà
+            <h2 className="text-2xl md:text-3xl font-black text-slate-900 tracking-tight mb-1.5">
+              Đặt Đổi Bình Gas &amp; Bảo Dưỡng Bếp
             </h2>
-            <p className="text-xs md:text-sm text-[#6B7280] mt-1.5 leading-relaxed">
-              Cam kết nguyên tem niêm phong – Kiểm tra an toàn trước khi thanh toán.
+            <p className="text-xs md:text-sm text-slate-600 mb-5">
+              Chỉ cần để lại <strong>Số Điện Thoại</strong> — Nhân viên chi nhánh gần nhà nhất sẽ gọi xác nhận nhẹ nhàng trong 30 giây!
             </p>
+
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <div className="bg-slate-50 border border-slate-200 p-3.5 rounded-2xl">
+                <label className="text-xs md:text-sm font-bold text-slate-900 mb-2 block">
+                  1. Chọn loại bình gas gia đình (Gom gọn dễ chọn):
+                </label>
+
+                <div className="relative">
+                  <select
+                    value={selectedKey}
+                    onChange={handleDropdownChange}
+                    className="w-full bg-white border-2 border-slate-200 rounded-xl px-3.5 py-3 text-sm md:text-base font-bold text-slate-900 focus:border-[#DC2626] outline-none appearance-none cursor-pointer pr-9"
+                  >
+                    {tabs.map((tab, cIdx) => (
+                      <optgroup key={tab.label} label={tab.label}>
+                        {tab.products.map((p, pIdx) => (
+                          <option key={p.id} value={`${cIdx}-${pIdx}`}>
+                            {p.name} — {p.exchangePrice}
+                          </option>
+                        ))}
+                      </optgroup>
+                    ))}
+                  </select>
+                  <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-slate-500">
+                    ▼
+                  </div>
+                </div>
+
+                <p className="text-[11px] text-amber-900 bg-amber-50 border border-amber-200/80 rounded-lg px-2.5 py-1.5 mt-2 font-medium">
+                  🔧 <strong>Không rành loại van?</strong> Thợ Gas Nhà Mình mang sẵn cả van phổ thông &amp; van chụp tự ngắt lắp vừa 100%!
+                </p>
+              </div>
+
+              {isDanDung && product?.newPrice && (
+                <div className="grid grid-cols-2 gap-2">
+                  <button
+                    type="button"
+                    onClick={() => setSelectedOption("exchange")}
+                    className={`py-2.5 px-3 rounded-xl border-2 text-xs md:text-sm font-bold cursor-pointer ${
+                      selectedOption === "exchange"
+                        ? "border-[#DC2626] bg-red-50 text-[#DC2626]"
+                        : "border-slate-200 bg-white text-slate-600"
+                    }`}
+                  >
+                    🔄 Đổi ruột (Đã có vỏ bất kỳ)
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setSelectedOption("new")}
+                    className={`py-2.5 px-3 rounded-xl border-2 text-xs md:text-sm font-bold cursor-pointer ${
+                      selectedOption === "new"
+                        ? "border-[#DC2626] bg-red-50 text-[#DC2626]"
+                        : "border-slate-200 bg-white text-slate-600"
+                    }`}
+                  >
+                    📦 Lắp mới (Chưa có vỏ)
+                  </button>
+                </div>
+              )}
+
+              <div className="bg-emerald-50/80 border-2 border-emerald-300 rounded-2xl p-4">
+                <div className="flex items-center justify-between gap-2">
+                  <div>
+                    <div className="text-[11px] font-bold uppercase tracking-wider text-slate-600">
+                      {selectedOption === "exchange" ? "Giá niêm yết trọn gói:" : "Tổng mua mới (gồm cọc vỏ):"}
+                    </div>
+                    <div className="flex items-baseline gap-2 mt-0.5">
+                      <span className="text-2xl md:text-3xl font-black text-[#DC2626]">{displayPrice}</span>
+                      {selectedOption === "exchange" && product?.originalPrice && (
+                        <span className="text-sm text-slate-400 line-through font-semibold">
+                          {product.originalPrice}
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                  <span className="bg-emerald-600 text-white text-[11px] font-extrabold px-3 py-1.5 rounded-lg text-right">
+                    {selectedOption === "exchange" ? "Đổi vỏ khác hãng 0đ" : "Có phiếu hoàn cọc 100%"}
+                  </span>
+                </div>
+                {selectedOption === "exchange" && (
+                  <p className="text-xs text-emerald-950 font-semibold mt-2 pt-2 border-t border-emerald-200/80">
+                    ✓ Bếp đang dùng vỏ <strong>Saigon Petro, Petrolimex, Gia Đình...</strong> đổi ngang miễn phí 0đ — Tặng vệ sinh họng bếp &amp; đo máy dò khí gas!
+                  </p>
+                )}
+              </div>
+
+              <div>
+                <label className="text-xs md:text-sm font-bold text-slate-900 mb-1.5 block">
+                  2. Nhập Số Điện Thoại gia đình nhận gas *:
+                </label>
+                <input
+                  required
+                  type="tel"
+                  inputMode="tel"
+                  placeholder="Nhập SĐT của bạn (VD: 0909 123 456)"
+                  value={phone}
+                  onChange={(e) => {
+                    const val = e.target.value;
+                    setPhone(val);
+                    if (typeof window !== "undefined" && val.trim().length >= 9) {
+                      try {
+                        localStorage.setItem("gas_customer_phone", val.trim());
+                      } catch (_) {}
+                    }
+                  }}
+                  className="w-full border-2 border-red-300 focus:border-[#DC2626] rounded-xl px-4 py-3.5 text-base font-bold text-slate-900 outline-none"
+                />
+              </div>
+
+              <div>
+                <button
+                  type="button"
+                  onClick={() => setShowMoreFields((v) => !v)}
+                  className="text-xs font-bold text-[#DC2626] hover:underline cursor-pointer"
+                >
+                  {showMoreFields
+                    ? "− Thu gọn ô địa chỉ"
+                    : "+ Nhập trước tên chung cư / địa chỉ / dặn dò thợ (Không bắt buộc)"}
+                </button>
+
+                {showMoreFields && (
+                  <div className="space-y-3 mt-3 pt-3 border-t border-slate-100">
+                    <input
+                      type="text"
+                      placeholder="Tên anh/chị hoặc cô/chú nhận gas (Tùy chọn)"
+                      value={name}
+                      onChange={(e) => {
+                        const val = e.target.value;
+                        setName(val);
+                        if (typeof window !== "undefined" && val.trim().length >= 2) {
+                          try {
+                            localStorage.setItem("gas_customer_name", val.trim());
+                          } catch (_) {}
+                        }
+                      }}
+                      className="w-full border border-slate-300 rounded-xl px-4 py-3 text-sm outline-none focus:border-[#DC2626]"
+                    />
+                    <input
+                      type="text"
+                      placeholder="Tên chung cư / Số nhà, đường, phường (Tùy chọn)"
+                      value={address}
+                      onChange={(e) => setAddress(e.target.value)}
+                      className="w-full border border-slate-300 rounded-xl px-4 py-3 text-sm outline-none focus:border-[#DC2626]"
+                    />
+                    <input
+                      type="text"
+                      placeholder="Dặn thợ (VD: Vào hầm chung cư sảnh A, nhà có ông bà lớn tuổi...)"
+                      value={note}
+                      onChange={(e) => setNote(e.target.value)}
+                      className="w-full border border-slate-300 rounded-xl px-4 py-3 text-sm outline-none focus:border-[#DC2626]"
+                    />
+                  </div>
+                )}
+              </div>
+
+              <button
+                type="submit"
+                disabled={submitting}
+                className="w-full bg-[#DC2626] hover:bg-[#B91C1C] text-white font-black text-base md:text-lg py-4 px-6 rounded-2xl shadow-lg shadow-red-500/25 uppercase tracking-wide cursor-pointer disabled:opacity-70"
+              >
+                {submitting ? "Đang kết nối chi nhánh..." : "⚡ GỌI LẠI TRONG 30 GIÂY — GIAO TẬN BẾP"}
+              </button>
+
+              <a
+                href={ZALO_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() =>
+                  pushGtmEvent("click_zalo", {
+                    phone: HOTLINE,
+                    customerPhone: phone,
+                    notes: "Khách bấm Gửi Định Vị Zalo trong OrderSection Gas Nhà Mình",
+                  })
+                }
+                className="w-full py-3 px-4 rounded-xl bg-red-50 hover:bg-red-100 border border-red-200 text-[#DC2626] font-bold text-xs md:text-sm flex items-center justify-center gap-2"
+              >
+                <span>📍</span> Gửi Định Vị Căn Hộ / Nhà Phố Qua Zalo
+              </a>
+            </form>
           </div>
 
-          <form onSubmit={handleSubmit} className="space-y-4">
-            {/* Dropdown select (Ảnh 2) */}
-            <div className="border-2 border-red-500/20 bg-red-50/20 p-3.5 rounded-2xl">
-              <label className="text-xs md:text-sm font-bold text-[#111928] mb-2 block">
-                Chọn loại bình gas cần đặt:
-              </label>
-
-              <div className="relative">
-                <select
-                  value={selectedKey}
-                  onChange={handleDropdownChange}
-                  className="w-full bg-white border-2 border-[#E5E7EB] rounded-xl px-4 py-3 text-sm md:text-base font-bold text-[#111928] focus:border-[#E02424] outline-none appearance-none cursor-pointer pr-10 shadow-xs"
-                >
-                  {tabs.map((tab, cIdx) => (
-                    <optgroup key={tab.label} label={tab.label}>
-                      {tab.products.map((p, pIdx) => (
-                        <option key={p.id} value={`${cIdx}-${pIdx}`}>
-                          {p.name} — {p.exchangePrice}
-                        </option>
-                      ))}
-                    </optgroup>
-                  ))}
-                </select>
-                <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-[#6B7280]">
-                  <svg className="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
-                    <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
-                  </svg>
-                </div>
+          {/* Cột Phải: Cam kết 3 KHÔNG & Tổng Đài Bảo Vệ Gia Đình */}
+          <div id="ba-khong" className="lg:col-span-6 space-y-6">
+            <div className="bg-amber-50/70 border-2 border-amber-300 rounded-3xl p-6 md:p-7">
+              <div className="inline-flex items-center gap-1.5 bg-amber-600 text-white text-[11px] font-black uppercase px-3 py-1 rounded-full mb-3 tracking-wider">
+                ✓ An tâm tuyệt đối cho người nội trợ
               </div>
+              <h3 className="text-xl md:text-2xl font-black text-slate-900 mb-4">
+                Cam Kết &ldquo;3 KHÔNG&rdquo; Khi Nhận Bình Tại Gian Bếp Gia Đình
+              </h3>
 
-              <div className="flex items-center justify-between text-xs mt-2 px-1">
-                <span className="text-[#6B7280] font-semibold">
-                  Hãng: <strong className="text-[#111928]">{brandName}</strong>
-                </span>
-                <span className="font-bold text-[#DC2626]">
-                  {product?.tag || "Bán chạy nhất"} 🔥
-                </span>
-              </div>
-            </div>
-
-            {/* Toggle: Đổi bình vs Mua mới (Ảnh 2) */}
-            {isDanDung && product?.newPrice && (
-              <div className="grid grid-cols-2 gap-2">
-                <button
-                  type="button"
-                  onClick={() => setSelectedOption("exchange")}
-                  className={`flex items-center justify-center gap-1.5 py-3 px-3 rounded-xl border-2 text-xs md:text-sm font-bold transition-all cursor-pointer ${
-                    selectedOption === "exchange"
-                      ? "border-[#E02424] bg-[#FFF5F5] text-[#E02424] shadow-xs"
-                      : "border-[#E5E7EB] bg-white text-[#4B5563] hover:border-gray-300"
-                  }`}
-                >
-                  <span>🔄</span> Đổi bình gas (Đã có vỏ)
-                </button>
-
-                <button
-                  type="button"
-                  onClick={() => setSelectedOption("new")}
-                  className={`flex items-center justify-center gap-1.5 py-3 px-3 rounded-xl border-2 text-xs md:text-sm font-bold transition-all cursor-pointer ${
-                    selectedOption === "new"
-                      ? "border-[#E02424] bg-[#FFF5F5] text-[#E02424] shadow-xs"
-                      : "border-[#E5E7EB] bg-white text-[#4B5563] hover:border-gray-300"
-                  }`}
-                >
-                  <span>📦</span> Mua trọn bộ (Chưa có vỏ)
-                </button>
-              </div>
-            )}
-
-            {/* Price highlight card (Ảnh 2) */}
-            {!isContact ? (
-              <div className="bg-[#F8FAFC] border border-[#E2E8F0] rounded-2xl p-4 flex items-center justify-between">
-                <div>
-                  <div className="text-[11px] font-bold uppercase tracking-wider text-[#6B7280]">
-                    {selectedOption === "exchange" ? "Giá đổi bình gas:" : "Tổng thanh toán mua trọn bộ:"}
-                  </div>
-                  <div className="text-2xl md:text-3xl font-black text-[#E02424] mt-0.5">
-                    {displayPrice}
+              <div className="space-y-3.5">
+                <div className="bg-white rounded-2xl p-4 border border-amber-200 flex items-start gap-3">
+                  <span className="w-7 h-7 rounded-full bg-red-100 text-red-700 font-black text-xs flex items-center justify-center flex-shrink-0 mt-0.5">
+                    01
+                  </span>
+                  <div className="text-sm text-slate-700 leading-relaxed">
+                    <strong className="text-slate-900">Bật thử lửa đỏ / đen đáy nồi → KHÔNG NHẬN:</strong>{" "}
+                    Thợ vệ sinh họng bếp miễn phí, chỉnh gió bật thử ngọn lửa xanh đều trước mặt gia đình mới bàn giao.
                   </div>
                 </div>
 
-                <div className="inline-flex items-center gap-1 bg-red-100 text-[#E02424] text-xs font-bold px-3 py-1.5 rounded-lg">
-                  {selectedOption === "exchange" ? "🔄 Đã có vỏ bình" : "📦 Đã gồm vỏ bình"}
+                <div className="bg-white rounded-2xl p-4 border border-amber-200 flex items-start gap-3">
+                  <span className="w-7 h-7 rounded-full bg-red-100 text-red-700 font-black text-xs flex items-center justify-center flex-shrink-0 mt-0.5">
+                    02
+                  </span>
+                  <div className="text-sm text-slate-700 leading-relaxed">
+                    <strong className="text-slate-900">Màng co rách / Cân thiếu ký / Vỏ quá hạn PCCC → KHÔNG NHẬN:</strong>{" "}
+                    Thợ mang sẵn <strong>cân móc điện tử cầm tay 50kg</strong> cân đối chiếu công khai <code>[Vỏ bình + 12kg ruột]</code>.
+                  </div>
+                </div>
+
+                <div className="bg-white rounded-2xl p-4 border border-amber-200 flex items-start gap-3">
+                  <span className="w-7 h-7 rounded-full bg-red-100 text-red-700 font-black text-xs flex items-center justify-center flex-shrink-0 mt-0.5">
+                    03
+                  </span>
+                  <div className="text-sm text-slate-700 leading-relaxed">
+                    <strong className="text-slate-900">Đòi phí gửi xe hầm chung cư / phí vác lầu → KHÔNG TRẢ TIỀN:</strong>{" "}
+                    Giá 530.000đ đã trọn gói giao lên tận căn hộ tầng cao hoặc nhà phố nhiều lầu.
+                  </div>
                 </div>
               </div>
-            ) : (
-              <div className="flex items-center gap-2 bg-[#FFF3CD] rounded-2xl p-4 border border-[#FCD34D]">
-                <span className="text-lg">📞</span>
-                <span className="text-xs md:text-sm text-[#92400E] font-semibold">
-                  Sản phẩm này cần báo giá theo số lượng – nhân viên sẽ liên hệ ngay khi nhận đơn.
-                </span>
+
+              <div className="grid grid-cols-3 gap-2.5 mt-4 pt-4 border-t border-amber-200/80 text-center">
+                <div className="bg-white/90 rounded-xl p-2.5 border border-amber-200/60">
+                  <div className="text-lg">🏷️</div>
+                  <div className="text-[11px] font-bold text-slate-900 mt-1">Tem Chống Giả QR</div>
+                  <div className="text-[10px] text-slate-500">Hạn vỏ PCCC rõ ràng</div>
+                </div>
+                <div className="bg-white/90 rounded-xl p-2.5 border border-amber-200/60">
+                  <div className="text-lg">⚖️</div>
+                  <div className="text-[11px] font-bold text-slate-900 mt-1">Móc Cân Điện Tử</div>
+                  <div className="text-[10px] text-slate-500">Chuẩn Vỏ + 12kg ruột</div>
+                </div>
+                <div className="bg-white/90 rounded-xl p-2.5 border border-amber-200/60">
+                  <div className="text-lg">📟</div>
+                  <div className="text-[11px] font-bold text-slate-900 mt-1">Máy Dò Rò Rỉ Khí</div>
+                  <div className="text-[10px] text-slate-500">An toàn tuyệt đối</div>
+                </div>
               </div>
-            )}
-
-            {/* Contact inputs */}
-            <div className="space-y-3 pt-2">
-              <input
-                required
-                type="text"
-                placeholder="Họ và tên của bạn *"
-                value={name}
-                onChange={(e) => {
-                  const val = e.target.value;
-                  setName(val);
-                  if (typeof window !== "undefined" && val.trim().length >= 2) {
-                    try { localStorage.setItem("gas_customer_name", val.trim()); } catch (_) {}
-                  }
-                }}
-                className="w-full border-2 border-[#E5E7EB] rounded-xl px-4 py-3.5 text-sm md:text-base focus:border-[#E02424] outline-none transition-colors shadow-2xs"
-              />
-
-              <input
-                required
-                type="tel"
-                placeholder="Số điện thoại nhận gas *"
-                value={phone}
-                onChange={(e) => {
-                  const val = e.target.value;
-                  setPhone(val);
-                  if (typeof window !== "undefined" && val.trim().length >= 9) {
-                    try { localStorage.setItem("gas_customer_phone", val.trim()); } catch (_) {}
-                  }
-                }}
-                className="w-full border-2 border-[#E5E7EB] rounded-xl px-4 py-3.5 text-sm md:text-base focus:border-[#E02424] outline-none transition-colors shadow-2xs font-semibold"
-              />
-
-              <input
-                required
-                type="text"
-                placeholder="Địa chỉ giao gas (Số nhà, Tên đường, Phường/Quận) *"
-                value={address}
-                onChange={(e) => setAddress(e.target.value)}
-                className="w-full border-2 border-[#E5E7EB] rounded-xl px-4 py-3.5 text-sm md:text-base focus:border-[#E02424] outline-none transition-colors shadow-2xs"
-              />
-
-              <input
-                type="text"
-                placeholder="Ghi chú thêm (VD: Giao lầu 2, gọi trước 5 phút...)"
-                value={note}
-                onChange={(e) => setNote(e.target.value)}
-                className="w-full border-2 border-[#E5E7EB] rounded-xl px-4 py-3.5 text-sm md:text-base focus:border-[#E02424] outline-none transition-colors shadow-2xs"
-              />
             </div>
 
-            {/* Submit Button */}
-            <button
-              type="submit"
-              disabled={submitting}
-              className="w-full bg-[#E02424] hover:bg-[#B91C1C] active:scale-[0.98] text-white font-black text-base md:text-lg py-4 px-6 rounded-2xl shadow-xl shadow-red-600/25 transition-all uppercase tracking-wide cursor-pointer disabled:opacity-70 mt-2"
-            >
-              {submitting ? "Đang gửi đơn hàng..." : "🚀 XÁC NHẬN GIAO GAS TẬN NHÀ"}
-            </button>
-
-            <div className="text-center text-xs text-[#6B7280] space-y-1 pt-1">
-              <p>⚡ Cam kết giao nhanh 15–20 phút • Đúng giá niêm phong</p>
-              <p>Miễn phí kiểm tra van dây & an toàn bếp khi lắp đặt</p>
+            <div className="bg-slate-900 text-white rounded-3xl p-6 md:p-7">
+              <span className="text-[11px] font-extrabold uppercase tracking-wider text-amber-400 block mb-1.5">
+                Bảo vệ gia đình suốt quá trình nấu nướng
+              </span>
+              <h3 className="text-lg md:text-xl font-black mb-3">
+                Vì Sao Các Gia Đình &amp; Cư Dân Chung Cư Chọn Đặt Qua Gas Nhà Mình?
+              </h3>
+              <ul className="space-y-3 text-xs md:text-sm text-slate-300 leading-relaxed">
+                <li className="flex items-start gap-2.5">
+                  <span className="text-emerald-400 font-black mt-0.5">✓</span>
+                  <span>
+                    <strong className="text-white">Khóa cứng giá niêm yết 530.000đ:</strong> Trạm liên kết giao tới thu đúng giá hệ thống, ông bà lớn tuổi ở nhà nhận bình không bao giờ lo bị hét giá.
+                  </span>
+                </li>
+                <li className="flex items-start gap-2.5">
+                  <span className="text-emerald-400 font-black mt-0.5">✓</span>
+                  <span>
+                    <strong className="text-white">Bảo hành kép 1 đầu mối ({HOTLINE}):</strong> Lưu lịch sử ngày thay dây/gioăng theo SĐT gia đình. Khi bếp bật khó cháy hay nghi có mùi gas, gọi 1 số duy nhất — kỹ thuật có mặt kiểm tra miễn phí trong 15 phút.
+                  </span>
+                </li>
+                <li className="flex items-start gap-2.5">
+                  <span className="text-emerald-400 font-black mt-0.5">✓</span>
+                  <span>
+                    <strong className="text-white">Tặng Nam Châm Tủ Lạnh chính chủ:</strong> Ghi rõ ngày lắp đặt, nhắn lại Zalo số cũ giảm ngay <strong>15.000đ</strong> cho bình kế tiếp sau 2 tháng.
+                  </span>
+                </li>
+              </ul>
             </div>
-          </form>
+          </div>
         </div>
       </div>
     </section>
@@ -726,11 +911,11 @@ function OrderSection({
 
 function ProductCard({ p, onSelect }: { p: ProductItem; onSelect: () => void }) {
   return (
-    <div className="bg-white rounded-2xl border border-[#E5E7EB] overflow-hidden shadow-sm hover:shadow-xl transition-shadow group flex flex-col justify-between h-full">
+    <div className="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-xs hover:shadow-lg transition-shadow group flex flex-col justify-between h-full">
       <div>
         <Link
           href={`/${p.slug}`}
-          className="bg-gradient-to-br from-[#FFF5F5] to-[#f9fafb] aspect-square w-full flex items-center justify-center overflow-hidden relative select-none group block"
+          className="bg-gradient-to-br from-[#FFF5F5] to-[#F8FAFC] aspect-square w-full flex items-center justify-center overflow-hidden relative select-none block"
           onContextMenu={(e) => e.preventDefault()}
           title={`Xem chi tiết ${p.name}`}
         >
@@ -743,20 +928,27 @@ function ProductCard({ p, onSelect }: { p: ProductItem; onSelect: () => void }) 
           <WatermarkOverlay size="md" />
         </Link>
         <div className="p-5 pb-0">
-          <span className={`text-[10px] font-bold uppercase tracking-wider text-white px-2.5 py-1 rounded-full ${p.tagColor}`}>{p.tag}</span>
-          <h3 className="font-black text-[#111928] mt-3 mb-3 text-base leading-snug">
-            <Link href={`/${p.slug}`} className="hover:text-[#E02424] transition-colors">
+          <span className={`text-[10px] font-bold uppercase tracking-wider text-white px-2.5 py-1 rounded-full ${p.tagColor}`}>
+            {p.tag}
+          </span>
+          <h3 className="font-black text-slate-900 mt-3 mb-1 text-base leading-snug">
+            <Link href={`/${p.slug}`} className="hover:text-[#DC2626] transition-colors">
               {p.name}
             </Link>
           </h3>
+          <p className="text-xs text-slate-500 mb-3">{p.valveNote}</p>
           <div className="mb-1">
-            <span className="text-[10px] text-[#6B7280] uppercase font-semibold">{p.newPrice ? "Đổi gas" : "Giá"}</span>
-            <div className="text-2xl font-black text-[#E02424]">{p.exchangePrice}</div>
+            <span className="text-[10px] text-slate-500 uppercase font-semibold">Giá đổi ruột (Đổi vỏ khác hãng 0đ)</span>
+            <div className="flex items-baseline gap-2">
+              <span className="text-2xl font-black text-[#DC2626]">{p.exchangePrice}</span>
+              {p.originalPrice && (
+                <span className="text-xs text-slate-400 line-through font-semibold">{p.originalPrice}</span>
+              )}
+            </div>
           </div>
           {p.newPrice && (
-            <div className="mb-2">
-              <span className="text-[10px] text-[#6B7280] uppercase font-semibold">Mua mới</span>
-              <div className="text-sm font-semibold text-[#6B7280]">{p.newPrice}</div>
+            <div className="mb-2 text-xs text-slate-500">
+              Chưa có vỏ bình: <strong className="text-slate-700">{p.newPrice}</strong>
             </div>
           )}
         </div>
@@ -765,24 +957,26 @@ function ProductCard({ p, onSelect }: { p: ProductItem; onSelect: () => void }) 
         <button
           type="button"
           onClick={onSelect}
-          className="w-full py-3 rounded-xl bg-[#F97316] hover:bg-[#EA580C] active:scale-95 text-white font-black text-sm shadow-md shadow-orange-500/25 transition-all uppercase tracking-wider flex items-center justify-center gap-2 cursor-pointer"
+          className="w-full py-3 rounded-xl bg-[#DC2626] hover:bg-[#B91C1C] text-white font-black text-sm shadow-xs uppercase tracking-wider flex items-center justify-center gap-1.5 cursor-pointer"
         >
-          <span>🛒</span> {p.exchangePrice.includes("Liên hệ") ? "Nhận báo giá ngay" : "ĐẶT NGAY"}
+          <span>🏠</span> ĐẶT GIAO &amp; VỆ SINH BẾP
         </button>
-        <Link
-          href={`/${p.slug}`}
-          className="block text-center text-xs font-bold text-[#E02424] hover:underline py-1"
-        >
-          Xem thông số & chi tiết bình →
+        <Link href={`/${p.slug}`} className="block text-center text-xs font-bold text-[#DC2626] hover:underline py-1">
+          Xem thông số an toàn bình →
         </Link>
       </div>
     </div>
   );
 }
 
-function PricingSection({ tabs, onSelectProduct }: { tabs: TabItem[], onSelectProduct: (catIdx: number, prodIdx: number) => void }) {
+function PricingSection({
+  tabs,
+  onSelectProduct,
+}: {
+  tabs: TabItem[];
+  onSelectProduct: (catIdx: number, prodIdx: number) => void;
+}) {
   const [activeTab, setActiveTab] = useState(0);
-
   const products = tabs[activeTab]?.products || tabs[0].products;
 
   const handleSelectFromTable = (productSlug: string) => {
@@ -793,86 +987,44 @@ function PricingSection({ tabs, onSelectProduct }: { tabs: TabItem[], onSelectPr
         return;
       }
     }
-    const el = document.getElementById("order-form");
-    if (el) el.scrollIntoView({ behavior: "smooth" });
+    onSelectProduct(0, 0);
   };
 
   return (
-    <section id="bang-gia" className="bg-[#F9FAFB] py-16 md:py-20 border-t border-gray-200">
+    <section id="bang-gia" className="bg-[#F8FAFC] py-16 md:py-20 border-t border-slate-200">
       <div className="max-w-[1440px] mx-auto px-4 md:px-8 lg:px-20">
-        {/* Section Header Bảng Giá Gas Hôm Nay (Ảnh 1) */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 pb-4 border-b border-gray-200 gap-4">
-          <div>
-            <div className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-[#F97316] mb-1.5">
-              <span>—</span> BẢNG GIÁ GAS HÔM NAY <span>—</span>
-            </div>
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-[#111928] tracking-tight">
-              Giá tốt – Rõ ràng – Giao tận nhà
-            </h2>
-          </div>
-          <a
-            href="#bang-gia"
-            className="text-xs md:text-sm font-bold text-[#E02424] hover:text-[#B91C1C] flex items-center gap-1 self-start md:self-end"
-          >
-            Xem tất cả bảng giá <span>→</span>
-          </a>
-        </div>
+        <GasPriceTable brandName="Gas Nhà Mình" onSelectProduct={handleSelectFromTable} showDetailLink={true} />
 
-        {/* Component Bảng Giá Gas Tương Tác */}
-        <GasPriceTable
-          brandName="Gas Nhà Mình"
-          onSelectProduct={handleSelectFromTable}
-          showDetailLink={true}
-        />
-
-        {/* Danh Mục Thẻ Sản Phẩm Chi Tiết */}
-        <div className="mt-14 pt-12 border-t border-gray-200">
+        <div className="mt-14 pt-12 border-t border-slate-200">
           <div className="text-center mb-8">
-            <span className="text-xs font-bold uppercase tracking-widest text-[#E02424] mb-2 block">Hình ảnh thực tế</span>
-            <h3 className="text-2xl md:text-3xl font-black text-[#111928]">Danh Mục Bình Gas Chi Tiết</h3>
+            <span className="text-xs font-bold uppercase tracking-widest text-[#DC2626] mb-2 block">
+              Tuyển chọn an toàn cho gian bếp
+            </span>
+            <h3 className="text-2xl md:text-3xl font-black text-slate-900">
+              Các Dòng Bình Chính Hãng Gia Đình Tin Dùng Nhất
+            </h3>
           </div>
 
-          {/* Tabs */}
           <div className="flex flex-wrap gap-2 justify-center mb-8">
             {tabs.map((tab, i) => (
-              <button key={tab.label} onClick={() => setActiveTab(i)}
-                className={`px-5 py-2.5 rounded-full font-bold text-sm border-2 transition-all cursor-pointer ${activeTab === i ? "bg-[#E02424] border-[#E02424] text-white shadow-md" : "bg-white border-[#E5E7EB] text-[#111928] hover:border-[#E02424] hover:text-[#E02424]"}`}>
+              <button
+                key={tab.label}
+                onClick={() => setActiveTab(i)}
+                className={`px-5 py-2.5 rounded-full font-bold text-sm border-2 transition-all cursor-pointer ${
+                  activeTab === i
+                    ? "bg-[#DC2626] border-[#DC2626] text-white shadow-sm"
+                    : "bg-white border-slate-200 text-slate-800 hover:border-[#DC2626]"
+                }`}
+              >
                 {tab.label}
               </button>
             ))}
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {products.map((p, i) => (
               <ProductCard key={p.id} p={p} onSelect={() => onSelectProduct(activeTab, i)} />
             ))}
-          </div>
-        </div>
-
-        {/* 4-Item Trust bar below Pricing (Ảnh 1) */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mt-14 pt-10 border-t border-gray-200">
-          <div className="flex flex-col items-center text-center p-4 bg-white rounded-2xl border border-gray-200/80 shadow-2xs">
-            <span className="text-3xl mb-2">🛵</span>
-            <p className="font-bold text-sm text-[#111928]">Giao hàng siêu tốc</p>
-            <p className="text-xs text-[#6B7280] mt-1">Chỉ từ 15 phút nội thành</p>
-          </div>
-
-          <div className="flex flex-col items-center text-center p-4 bg-white rounded-2xl border border-gray-200/80 shadow-2xs">
-            <span className="text-3xl mb-2">🛡️</span>
-            <p className="font-bold text-sm text-[#111928]">Bình đủ ký, an toàn</p>
-            <p className="text-xs text-[#6B7280] mt-1">Nguyên tem, kiểm định rõ ràng</p>
-          </div>
-
-          <div className="flex flex-col items-center text-center p-4 bg-white rounded-2xl border border-gray-200/80 shadow-2xs">
-            <span className="text-3xl mb-2">🤝</span>
-            <p className="font-bold text-sm text-[#111928]">Đổi bình cũ – mới tận nhà</p>
-            <p className="text-xs text-[#6B7280] mt-1">Nhanh gọn, không phát sinh</p>
-          </div>
-
-          <div className="flex flex-col items-center text-center p-4 bg-white rounded-2xl border border-gray-200/80 shadow-2xs">
-            <span className="text-3xl mb-2">💳</span>
-            <p className="font-bold text-sm text-[#111928]">Nhiều hình thức thanh toán</p>
-            <p className="text-xs text-[#6B7280] mt-1">Tiền mặt, chuyển khoản, ví điện tử</p>
           </div>
         </div>
       </div>
@@ -882,31 +1034,52 @@ function PricingSection({ tabs, onSelectProduct }: { tabs: TabItem[], onSelectPr
 
 function ProcessSection() {
   const steps = [
-    { num: "01", icon: "📋", title: "Tiếp nhận & Điều phối", desc: "Nhận đơn online/hotline, định vị kho gas gần nhà bạn nhất để xuất đơn." },
-    { num: "02", icon: "🚚", title: "Giao hỏa tốc 15 phút", desc: "Giao nhanh bằng xe chuyên dụng, bình gas luôn được chằng buộc an toàn." },
-    { num: "03", icon: "🔧", title: "Lắp đặt & Kiểm tra tem", desc: "Kiểm tra nguyên tem niêm phong màng co chính hãng, lắp đặt van dây đúng tiêu chuẩn PCCC." },
-    { num: "04", icon: "✅", title: "Kiểm tra rò rỉ & Bàn giao", desc: "Dùng máy kiểm tra rò rỉ tia khí, dán tem bảo hành và ghi phiếu giao nhận." },
+    {
+      num: "01",
+      icon: "🏢",
+      title: "Đăng ký hầm chung cư / Vào nhà lễ phép",
+      desc: "Kỹ thuật viên mặc đồng phục, tự làm thủ tục sảnh bảo vệ và dùng xe đẩy êm ái lên tận căn hộ trong 15 phút.",
+    },
+    {
+      num: "02",
+      icon: "⚖️",
+      title: "Cân móc điện tử 50kg đối chứng",
+      desc: "Kiểm tra màng co QR, hạn đăng kiểm trên quai bình và móc cân điện tử đủ [Vỏ + 12kg ruột] ngay trước mặt gia đình.",
+    },
+    {
+      num: "03",
+      icon: "📟",
+      title: "Đo máy dò rò rỉ & Thay gioăng 0đ",
+      desc: "Dùng máy dò khí gas chuyên dụng kiểm tra kỹ cổ van điều áp và đường ống dẫn gas chống chuột.",
+    },
+    {
+      num: "04",
+      icon: "✨",
+      title: "Vệ sinh họng bếp & Chỉnh lửa xanh",
+      desc: "Làm sạch mâm chia lửa, bật thử hai bếp cháy xanh đều không đen đáy nồi rồi mới dán tem bảo hành và nhận tiền.",
+    },
   ];
 
   return (
-    <section className="py-16 md:py-20 bg-white">
+    <section className="py-16 md:py-20 bg-white border-t border-slate-200">
       <div className="max-w-[1440px] mx-auto px-4 md:px-8 lg:px-20">
         <div className="text-center mb-12">
-          <span className="text-xs font-bold uppercase tracking-widest text-[#E02424] mb-2 block">Minh bạch – An toàn – Chuẩn PCCC</span>
-          <h2 className="text-3xl md:text-4xl font-black text-[#111928]">Quy Trình Giao & Lắp Đặt An Toàn Tại Nhà</h2>
+          <span className="text-xs font-bold uppercase tracking-widest text-[#DC2626] mb-2 block">
+            Tỉ mỉ từng chi tiết – An tâm cả nhà
+          </span>
+          <h2 className="text-3xl md:text-4xl font-black text-slate-900">
+            Quy Trình 4 Bước Chăm Sóc Gian Bếp Chuẩn PCCC
+          </h2>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {steps.map((s, i) => (
-            <div key={s.num} className="relative">
-              {i < steps.length - 1 && (
-                <div className="hidden lg:block absolute top-8 left-[calc(50%+40px)] right-[-calc(50%-40px)] h-0.5 bg-[#E5E7EB] z-0" style={{ width: "calc(100% - 80px)", left: "calc(50% + 40px)" }}></div>
-              )}
-              <div className="relative z-10 flex flex-col items-center text-center">
-                <div className="w-16 h-16 rounded-2xl bg-[#fff5f5] border-2 border-[#E02424] flex items-center justify-center text-3xl mb-4 shadow-sm">{s.icon}</div>
-                <span className="text-xs font-black text-[#E02424] tracking-widest mb-1">BƯỚC {s.num}</span>
-                <h3 className="font-black text-[#111928] mb-2 text-base">{s.title}</h3>
-                <p className="text-[#6B7280] text-sm leading-relaxed">{s.desc}</p>
+          {steps.map((s) => (
+            <div key={s.num} className="bg-slate-50 rounded-2xl p-6 border border-slate-200 flex flex-col items-center text-center">
+              <div className="w-14 h-14 rounded-2xl bg-red-100 text-[#DC2626] flex items-center justify-center text-2xl mb-4">
+                {s.icon}
               </div>
+              <span className="text-xs font-black text-[#DC2626] tracking-widest mb-1">BƯỚC {s.num}</span>
+              <h3 className="font-black text-slate-900 mb-2 text-base">{s.title}</h3>
+              <p className="text-slate-600 text-sm leading-relaxed">{s.desc}</p>
             </div>
           ))}
         </div>
@@ -915,36 +1088,40 @@ function ProcessSection() {
   );
 }
 
-function ReviewCarousel({ reviews }: { reviews: { name: string; location: string; avatar: string; stars: number; tag: string; text: string }[] }) {
+function ReviewCarousel({
+  reviews,
+}: {
+  reviews: { name: string; location: string; avatar: string; stars: number; tag: string; text: string }[];
+}) {
   const [current, setCurrent] = useState(0);
   const total = reviews.length;
 
   useEffect(() => {
-    const id = setInterval(() => setCurrent(c => (c + 1) % total), 4000);
+    const id = setInterval(() => setCurrent((c) => (c + 1) % total), 4500);
     return () => clearInterval(id);
   }, [total]);
 
-  // Show 3 visible on desktop, 1 on mobile
-  const visible = 3;
-
   return (
     <div className="relative">
-      {/* Desktop: show 3 at a time */}
       <div className="hidden md:grid grid-cols-3 gap-5">
         {[0, 1, 2].map((offset) => {
           const r = reviews[(current + offset) % total];
           return (
-            <div key={offset} className="bg-white border border-[#E5E7EB] rounded-xl p-6 shadow-sm flex flex-col transition-all duration-500">
+            <div key={offset} className="bg-white border border-slate-200 rounded-2xl p-6 shadow-xs flex flex-col">
               <div className="flex items-center justify-between mb-4">
-                <div className="flex text-[#FF5722] text-lg">{"★".repeat(r.stars)}</div>
-                <span className="text-[10px] font-bold uppercase tracking-wider bg-[#FFF3CD] text-[#92400E] px-2 py-1 rounded-full">{r.tag}</span>
+                <div className="flex text-amber-500 text-lg">{"★".repeat(r.stars)}</div>
+                <span className="text-[10px] font-bold uppercase tracking-wider bg-red-50 text-[#DC2626] px-2.5 py-1 rounded-full">
+                  {r.tag}
+                </span>
               </div>
-              <p className="text-[#111928] text-sm leading-relaxed mb-5 flex-1">"{r.text}"</p>
-              <div className="flex items-center gap-3 pt-4 border-t border-[#F3F4F6]">
-                <div className="w-10 h-10 rounded-full bg-[#FFE4E1] flex items-center justify-center font-black text-[#E02424] text-base flex-shrink-0">{r.avatar}</div>
+              <p className="text-slate-800 text-sm leading-relaxed mb-5 flex-1">&ldquo;{r.text}&rdquo;</p>
+              <div className="flex items-center gap-3 pt-4 border-t border-slate-100">
+                <div className="w-10 h-10 rounded-full bg-red-100 flex items-center justify-center font-black text-[#DC2626] text-base flex-shrink-0">
+                  {r.avatar}
+                </div>
                 <div>
-                  <div className="font-bold text-[#111928] text-sm">{r.name}</div>
-                  <div className="text-[#6B7280] text-xs">{r.location}</div>
+                  <div className="font-bold text-slate-900 text-sm">{r.name}</div>
+                  <div className="text-slate-500 text-xs">{r.location}</div>
                 </div>
               </div>
             </div>
@@ -952,22 +1129,25 @@ function ReviewCarousel({ reviews }: { reviews: { name: string; location: string
         })}
       </div>
 
-      {/* Mobile: show 1 at a time */}
       <div className="md:hidden">
         {(() => {
           const r = reviews[current];
           return (
-            <div className="bg-white border border-[#E5E7EB] rounded-xl p-6 shadow-sm">
+            <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-xs">
               <div className="flex items-center justify-between mb-4">
-                <div className="flex text-[#FF5722] text-lg">{"★".repeat(r.stars)}</div>
-                <span className="text-[10px] font-bold uppercase tracking-wider bg-[#FFF3CD] text-[#92400E] px-2 py-1 rounded-full">{r.tag}</span>
+                <div className="flex text-amber-500 text-lg">{"★".repeat(r.stars)}</div>
+                <span className="text-[10px] font-bold uppercase tracking-wider bg-red-50 text-[#DC2626] px-2.5 py-1 rounded-full">
+                  {r.tag}
+                </span>
               </div>
-              <p className="text-[#111928] text-sm leading-relaxed mb-5">"{r.text}"</p>
-              <div className="flex items-center gap-3 pt-4 border-t border-[#F3F4F6]">
-                <div className="w-10 h-10 rounded-full bg-[#FFE4E1] flex items-center justify-center font-black text-[#E02424] text-base flex-shrink-0">{r.avatar}</div>
+              <p className="text-slate-800 text-sm leading-relaxed mb-5">&ldquo;{r.text}&rdquo;</p>
+              <div className="flex items-center gap-3 pt-4 border-t border-slate-100">
+                <div className="w-10 h-10 rounded-full bg-red-100 flex items-center justify-center font-black text-[#DC2626] text-base flex-shrink-0">
+                  {r.avatar}
+                </div>
                 <div>
-                  <div className="font-bold text-[#111928] text-sm">{r.name}</div>
-                  <div className="text-[#6B7280] text-xs">{r.location}</div>
+                  <div className="font-bold text-slate-900 text-sm">{r.name}</div>
+                  <div className="text-slate-500 text-xs">{r.location}</div>
                 </div>
               </div>
             </div>
@@ -975,86 +1155,73 @@ function ReviewCarousel({ reviews }: { reviews: { name: string; location: string
         })()}
       </div>
 
-      {/* Dots */}
       <div className="flex justify-center gap-2 mt-6">
         {reviews.map((_, i) => (
-          <button key={i} onClick={() => setCurrent(i)}
-            className={`w-2 h-2 rounded-full transition-all ${i === current ? "bg-[#E02424] w-5" : "bg-[#E5E7EB]"}`} />
+          <button
+            key={i}
+            onClick={() => setCurrent(i)}
+            className={`h-2 rounded-full transition-all cursor-pointer ${i === current ? "bg-[#DC2626] w-6" : "bg-slate-300 w-2"}`}
+          />
         ))}
       </div>
-
-      {/* Prev / Next */}
-      <button onClick={() => setCurrent(c => (c - 1 + total) % total)}
-        className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 w-9 h-9 rounded-full bg-white border border-[#E5E7EB] shadow flex items-center justify-center text-[#111928] hover:border-[#E02424] hover:text-[#E02424] transition-colors hidden md:flex">
-        ‹
-      </button>
-      <button onClick={() => setCurrent(c => (c + 1) % total)}
-        className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 w-9 h-9 rounded-full bg-white border border-[#E5E7EB] shadow flex items-center justify-center text-[#111928] hover:border-[#E02424] hover:text-[#E02424] transition-colors hidden md:flex">
-        ›
-      </button>
     </div>
   );
 }
 
 function TrustSection() {
-  const badges = [
-    {
-      icon: "🏷️",
-      title: "Nguyên Tem Niêm Phong & Đủ 12kg Ruột",
-      desc: "Bình gas được chiết nạp tự động chuẩn xác đủ 12kg ruột tại nhà máy, nguyên màng co chống giả và dập nổi trọng lượng vỏ rõ ràng trên quai xách.",
-    },
-    {
-      icon: "🛡️",
-      title: "100% Bình Chính Hãng & Đạt Chuẩn PCCC",
-      desc: "Vỏ bình còn hạn kiểm định an toàn, nguyên vẹn tem chống giả, màng co niêm phong từ các thương hiệu uy tín.",
-    },
-    {
-      icon: "🔍",
-      title: "Kiểm Tra Rò Rỉ & Bảo Dưỡng Bếp Miễn Phí",
-      desc: "Kỹ thuật viên kiểm tra độ kín van dây bằng thiết bị chuyên dụng, hỗ trợ chỉnh lửa xanh và vệ sinh cụm đầu đốt.",
-    },
-    {
-      icon: "🔄",
-      title: "1 Đổi 1 Nhanh Chóng",
-      desc: "Đổi ngay bình mới hoàn toàn miễn phí nếu phát hiện lỗi van, xì gas hoặc lửa đỏ do chất lượng khí gas.",
-    },
-  ];
-
   const reviews = [
-    { name: "Chị Lan Phương", location: "Chung cư Sunrise City, Quận 7", avatar: "L", stars: 5, tag: "Hộ gia đình", text: "Giao rất nhanh, bình còn nguyên tem niêm phong và màng co của hãng, nhân viên kiểm tra van dây tỉ mỉ rồi mới lắp. Rất yên tâm!" },
-    { name: "Bác Thanh Bình", location: "Đường Phan Xích Long, Phú Nhuận", avatar: "B", stars: 5, tag: "Nhà phố gia đình", text: "Thợ giao gas có kiểm tra lại dây dẫn gas cũ của nhà mình bị rạn nứt và tư vấn thay kịp thời, tác phong rất cẩn thận và lịch sự." },
-    { name: "Chị Mai Hương", location: "Chung cư Vinhomes Central Park, Bình Thạnh", avatar: "M", stars: 5, tag: "Căn hộ chung cư", text: "Đặt lúc tối muộn khi đang nấu cơm dở vẫn giao rất nhanh. Bình có tem niêm phong đầy đủ, lửa xanh đều không đen đáy nồi." },
-    { name: "Anh Hoàng Nam", location: "KDC Him Lam, Chánh Hưng, Quận 8", avatar: "H", stars: 5, tag: "Hộ gia đình", text: "Nhà mình gần Trạm Chánh Hưng, gọi tầm 15 phút là thợ tới. Cân bình đối chứng chuẩn 12kg ruột, dịch vụ tận tâm." },
-    { name: "Chị Thu Thảo", location: "Căn hộ The Sun Avenue, Quận 2", avatar: "T", stars: 5, tag: "Căn hộ chung cư", text: "Lần đầu đặt thử, thợ đến đúng hẹn. Thử bọt xà phòng kiểm tra rò rỉ van gas trước khi bàn giao, chuyên nghiệp hơn hẳn đại lý cũ." },
-    { name: "Chị Ngọc Ánh", location: "Đường Lũy Bán Bích, Tân Phú", avatar: "A", stars: 5, tag: "Hộ gia đình", text: "Thợ bên trạm Phú Thọ Hòa nhiệt tình, hỗ trợ khiêng bình lên tận bếp lầu 2 không nề hà. Đổi bình V-Gas xám chính hãng xài rất êm." },
-    { name: "Cô Mỹ Hạnh", location: "Đường Nguyễn Oanh, Gò Vấp", avatar: "H", stars: 5, tag: "Nhà phố gia đình", text: "Được người quen giới thiệu, gọi hotline có bạn trực máy dạ thưa rất nhã nhặn. Giao bình mới sạch sẽ, hướng dẫn khóa van an toàn." },
+    {
+      name: "Chị Lan Phương",
+      location: "Chung cư Sunrise City, Quận 7",
+      avatar: "L",
+      stars: 5,
+      tag: "Căn hộ chung cư",
+      text: "Thợ tự đăng ký sảnh bảo vệ mang bình lên tận căn hộ, móc cân điện tử đủ ký rồi dùng máy dò kiểm tra van dây rất kỹ mới về.",
+    },
+    {
+      name: "Bác Thanh Bình",
+      location: "Đường Phan Xích Long, Phú Nhuận",
+      avatar: "B",
+      stars: 5,
+      tag: "Người lớn tuổi",
+      text: "Nhà chỉ có hai ông bà già, cháu giao gas ăn nói lễ phép, tháo họng bếp ra vệ sinh sạch muội đen giúp lửa cháy xanh hẳn lên.",
+    },
+    {
+      name: "Chị Mai Hương",
+      location: "Chung cư Vinhomes Central Park, Bình Thạnh",
+      avatar: "M",
+      stars: 5,
+      tag: "Đổi vỏ khác hãng 0đ",
+      text: "Bếp cũ đang dùng vỏ hãng khác đổi ngang sang V-Gas 530k không mất tiền cọc vỏ, rẻ hơn đại lý cũ gần 70 ngàn mà dịch vụ chu đáo hơn nhiều.",
+    },
+    {
+      name: "Anh Hoàng Nam",
+      location: "KDC Him Lam, Chánh Hưng, Quận 8",
+      avatar: "H",
+      stars: 5,
+      tag: "Hộ gia đình",
+      text: "Để lại SĐT 30 giây là tổng đài gọi xác nhận, tầm 12 phút thợ đã gõ cửa. Cân bình đối chứng chuẩn 12kg ruột, có dán nam châm nhắc lịch.",
+    },
+    {
+      name: "Cô Mỹ Hạnh",
+      location: "Đường Nguyễn Oanh, Gò Vấp",
+      avatar: "H",
+      stars: 5,
+      tag: "Nhà phố gia đình",
+      text: "Ưng nhất là cam kết bật thử lửa xanh mới trả tiền. Bình mới sạch sẽ, hạn kiểm định vỏ còn xa nên nấu nướng cho cháu nhỏ rất yên tâm.",
+    },
   ];
 
   return (
-    <section id="cam-ket" className="py-16 md:py-20 bg-[#F9FAFB]">
+    <section id="cam-ket" className="py-16 md:py-20 bg-[#F8FAFC] border-t border-slate-200">
       <div className="max-w-[1440px] mx-auto px-4 md:px-8 lg:px-20">
-        {/* Section header */}
-        <div className="text-center mb-12">
-          <span className="text-xs font-bold uppercase tracking-widest text-[#E02424] mb-2 block">Tại sao chọn chúng tôi</span>
-          <h2 className="text-3xl md:text-4xl font-black text-[#111928] mb-3">Cam Kết Chất Lượng & Dịch Vụ An Toàn</h2>
-          <p className="text-[#6B7280] text-base max-w-xl mx-auto">Mang lại sự an tâm tuyệt đối cho gian bếp gia đình và cơ sở kinh doanh của bạn.</p>
-        </div>
-
-        {/* 4 trust badges */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-16">
-          {badges.map((b) => (
-            <div key={b.title} className="bg-white border border-[#E5E7EB] rounded-xl p-5 hover:shadow-md hover:border-[#E02424]/30 transition-all group">
-              <div className="text-3xl mb-4">{b.icon}</div>
-              <h3 className="font-black text-[#111928] text-sm md:text-base mb-2 leading-snug group-hover:text-[#E02424] transition-colors">{b.title}</h3>
-              <p className="text-[#6B7280] text-xs md:text-sm leading-relaxed">{b.desc}</p>
-            </div>
-          ))}
-        </div>
-
-        {/* Reviews carousel */}
-        <div className="text-center mb-8">
-          <span className="text-xs font-bold uppercase tracking-widest text-[#E02424] mb-2 block">Đánh giá thực tế</span>
-          <h3 className="text-2xl md:text-3xl font-black text-[#111928]">Khách Hàng Nói Gì?</h3>
+        <div className="text-center mb-10">
+          <span className="text-xs font-bold uppercase tracking-widest text-[#DC2626] mb-2 block">
+            Phản hồi từ các gia đình &amp; chung cư
+          </span>
+          <h2 className="text-2xl md:text-4xl font-black text-slate-900">
+            Sự An Tâm Của Người Nội Trợ Là Thước Đo Số 1
+          </h2>
         </div>
         <ReviewCarousel reviews={reviews} />
       </div>
@@ -1062,198 +1229,126 @@ function TrustSection() {
   );
 }
 
-function CoverageMapCard({ brand = "gasnhaminh" }: { brand?: "gasdayroi" | "gasnhaminh" }) {
-  const isGDR = brand === "gasdayroi";
-  const primaryColor = isGDR ? "#0284C7" : "#E02424";
-  const accentColor = isGDR ? "#38BDF8" : "#F87171";
-  const ringColor = isGDR ? "rgba(14, 165, 233, 0.22)" : "rgba(239, 68, 68, 0.22)";
-  const hubColor = isGDR ? "#0284C7" : "#DC2626";
+function CoverageMapCard() {
+  const primaryHubs = [
+    { name: "CN Quận 8", x: 210, y: 245 },
+    { name: "CN Tân Phú", x: 145, y: 150 },
+    { name: "CN Quận 6", x: 145, y: 215 },
+    { name: "CN Bà Điểm", x: 110, y: 100 },
+    { name: "CN Tân Hiệp", x: 75, y: 45 },
+  ];
 
-  const hubs = [
-    { name: "Trạm Chánh Hưng (Q.8)", x: 210, y: 245, labelX: 210, labelY: 268, align: "middle" },
-    { name: "Trạm Phú Thọ Hòa (Tân Phú)", x: 150, y: 150, labelX: 150, labelY: 137, align: "middle" },
-    { name: "Trạm Cư Xá Bình Phú (Q.6)", x: 145, y: 215, labelX: 135, labelY: 235, align: "end" },
-    { name: "Trạm Bà Điểm (Hóc Môn 1)", x: 110, y: 100, labelX: 110, labelY: 87, align: "middle" },
-    { name: "Trạm Tân Hiệp (Hóc Môn 2)", x: 75, y: 45, labelX: 75, labelY: 33, align: "middle" },
+  const partnerNodes = [
+    { name: "Trạm Gò Vấp", x: 245, y: 82 },
+    { name: "Trạm Bình Thạnh", x: 305, y: 122 },
+    { name: "Trạm Thủ Đức", x: 390, y: 138 },
+    { name: "Trạm Quận 7", x: 305, y: 255 },
+    { name: "Trạm Phú Nhuận/Q.3", x: 255, y: 175 },
+    { name: "Trạm Quận 12", x: 190, y: 78 },
   ];
 
   return (
-    <div className="bg-[#0B1528] rounded-3xl border border-slate-700/60 shadow-2xl p-4 sm:p-6 text-white flex flex-col justify-between overflow-hidden relative select-none">
-      {/* Background glow effects */}
-      <div className="absolute -top-20 -right-20 w-64 h-64 bg-red-500/10 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute -bottom-20 -left-20 w-64 h-64 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
-
-      {/* Header */}
+    <div className="bg-[#0B1528] rounded-3xl border border-slate-700/60 shadow-xl p-4 sm:p-6 text-white flex flex-col justify-between overflow-hidden relative select-none">
       <div className="flex items-center justify-between mb-2 z-10">
         <div>
           <div className="flex items-center gap-2">
-            <span className="relative flex h-2.5 w-2.5">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+            <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span className="text-[11px] font-bold uppercase tracking-wider text-emerald-400">
+              Xuất bình từ trạm cách nhà bạn &lt; 2km
             </span>
-            <span className="text-[11px] font-bold uppercase tracking-wider text-emerald-400">Điều phối vệ tinh trực chiến 24/7</span>
           </div>
-          <h3 className="text-base sm:text-lg font-black text-white mt-1">Bản Đồ Phủ Sóng & Trạm Giao Hỏa Tốc</h3>
+          <h3 className="text-base sm:text-lg font-black text-white mt-1">
+            5 Chi Nhánh + 30+ Đại Lý Liên Kết Phủ Khắp Chung Cư TP.HCM
+          </h3>
         </div>
-        <span className="hidden sm:inline-flex items-center gap-1 text-[11px] font-black bg-white/10 text-white px-2.5 py-1 rounded-lg border border-white/10 backdrop-blur-sm">
-          ⚡ 15–20P
+        <span className="hidden sm:inline-flex items-center gap-1 text-[11px] font-black bg-white/10 text-white px-2.5 py-1 rounded-lg border border-white/10">
+          ⚡ 15 Phút
         </span>
       </div>
 
-      {/* SVG Canvas Map */}
-      <div className="relative w-full aspect-[500/320] bg-slate-950/70 rounded-2xl border border-slate-800 overflow-hidden my-2">
-        <svg viewBox="0 0 500 320" className="w-full h-full">
+      <div className="relative w-full aspect-[500/310] bg-slate-950/80 rounded-2xl border border-slate-800 overflow-hidden my-2">
+        <svg viewBox="0 0 500 310" className="w-full h-full">
           <defs>
-            <pattern id="map-grid-gnh" width="20" height="20" patternUnits="userSpaceOnUse">
+            <pattern id="map-grid-gnm" width="20" height="20" patternUnits="userSpaceOnUse">
               <circle cx="2" cy="2" r="1" fill="#334155" opacity="0.35" />
             </pattern>
-            <linearGradient id="riverGrad-gnh" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#DC2626" stopOpacity="0.25" />
-              <stop offset="100%" stopColor="#EA580C" stopOpacity="0.1" />
-            </linearGradient>
           </defs>
-
-          {/* Background Grid */}
-          <rect width="100%" height="100%" fill="url(#map-grid-gnh)" />
-
-          {/* Sông Sài Gòn */}
+          <rect width="100%" height="100%" fill="url(#map-grid-gnm)" />
           <path
-            d="M 360 0 C 330 40, 360 90, 320 140 C 290 180, 320 220, 290 270 C 270 300, 290 320, 300 320"
+            d="M 360 0 C 330 40, 360 90, 320 140 C 290 180, 320 220, 290 270 C 270 300, 290 310, 300 310"
             fill="none"
-            stroke="url(#riverGrad-gnh)"
-            strokeWidth="14"
-            strokeLinecap="round"
-          />
-          {/* Kênh Tàu Hủ / Bến Nghé */}
-          <path
-            d="M 120 215 C 180 210, 230 205, 295 185"
-            fill="none"
-            stroke="url(#riverGrad-gnh)"
-            strokeWidth="8"
+            stroke="#DC2626"
+            strokeOpacity="0.22"
+            strokeWidth="12"
             strokeLinecap="round"
           />
 
-          {/* River Label */}
-          <text x="330" y="70" fill="#64748B" fontSize="9" fontWeight="600" letterSpacing="1" transform="rotate(35 330,70)">SÔNG SÀI GÒN</text>
-
-          {/* District Labels */}
-          <g fill="#475569" fontSize="9.5" fontWeight="700">
-            <text x="250" y="80">GÒ VẤP</text>
-            <text x="310" y="115">BÌNH THẠNH</text>
-            <text x="390" y="140">TP. THỦ ĐỨC</text>
-            <text x="255" y="170">Q.1 / Q.3</text>
-            <text x="210" y="190">QUẬN 10</text>
-            <text x="210" y="220">QUẬN 5</text>
-            <text x="80" y="205">BÌNH TÂN</text>
-            <text x="300" y="255">QUẬN 7</text>
-            <text x="120" y="290">BÌNH CHÁNH</text>
-            <text x="280" y="300">NHÀ BÈ</text>
-            <text x="200" y="80">QUẬN 12</text>
-          </g>
-
-          {/* Dispatch Flow Lines */}
-          <g stroke={accentColor} strokeWidth="1.5" strokeDasharray="3,3" opacity="0.6">
-            <line x1="150" y1="150" x2="210" y2="190" />
-            <line x1="150" y1="150" x2="190" y2="135" />
-            <line x1="210" y1="245" x2="300" y2="255" />
-            <line x1="210" y1="245" x2="210" y2="220" />
-            <line x1="210" y1="245" x2="255" y2="170" />
-            <line x1="145" y1="215" x2="80" y2="205" />
-            <line x1="110" y1="100" x2="200" y2="80" />
-            <line x1="110" y1="100" x2="250" y2="80" />
-            <line x1="75" y1="45" x2="110" y2="100" />
-            <line x1="110" y1="100" x2="150" y2="150" />
-            <line x1="150" y1="150" x2="145" y2="215" />
+          <g stroke="#F87171" strokeWidth="1.2" strokeDasharray="3,3" opacity="0.45">
+            <line x1="145" y1="150" x2="255" y2="175" />
+            <line x1="255" y1="175" x2="305" y2="122" />
+            <line x1="305" y1="122" x2="390" y2="138" />
+            <line x1="210" y1="245" x2="305" y2="255" />
+            <line x1="110" y1="100" x2="190" y2="78" />
+            <line x1="190" y1="78" x2="245" y2="82" />
+            <line x1="245" y1="82" x2="305" y2="122" />
+            <line x1="145" y1="150" x2="145" y2="215" />
             <line x1="145" y1="215" x2="210" y2="245" />
+            <line x1="75" y1="45" x2="110" y2="100" />
           </g>
 
-          {/* Coverage Radii (15-20 min circles) */}
-          {hubs.map((h, i) => (
-            <g key={i}>
-              <circle cx={h.x} cy={h.y} r="38" fill={ringColor} stroke={accentColor} strokeWidth="1" strokeDasharray="2,2" opacity="0.4" />
-              <circle cx={h.x} cy={h.y} r="20" fill={ringColor} opacity="0.3" />
-            </g>
-          ))}
-
-          {/* 5 Main Hub Pins */}
-          {hubs.map((h, i) => (
-            <g key={i}>
-              <circle cx={h.x} cy={h.y} r="8" fill={hubColor} opacity="0.4" className="animate-ping" style={{ transformOrigin: `${h.x}px ${h.y}px` }} />
-              <circle cx={h.x} cy={h.y} r="5" fill="#FFFFFF" stroke={hubColor} strokeWidth="2.5" />
-              <rect
-                x={h.align === "middle" ? h.labelX - 48 : h.align === "end" ? h.labelX - 96 : h.labelX}
-                y={h.labelY - 9}
-                width="96"
-                height="15"
-                rx="4"
-                fill="#0F172A"
-                fillOpacity="0.9"
-                stroke="#334155"
-                strokeWidth="0.8"
-              />
-              <text
-                x={h.labelX}
-                y={h.labelY + 2}
-                textAnchor={h.align as any}
-                fill="#F8FAFC"
-                fontSize="8"
-                fontWeight="800"
-              >
-                📍 {h.name.split(" ")[1] || h.name}
+          {partnerNodes.map((n, idx) => (
+            <g key={idx}>
+              <circle cx={n.x} cy={n.y} r="24" fill="rgba(16,185,129,0.14)" />
+              <circle cx={n.x} cy={n.y} r="4.5" fill="#10B981" stroke="#FFFFFF" strokeWidth="1.5" />
+              <text x={n.x} y={n.y - 9} textAnchor="middle" fill="#A7F3D0" fontSize="8.5" fontWeight="700">
+                {n.name}
               </text>
             </g>
           ))}
 
-          {/* Delivery In Transit Badge */}
-          <g transform="translate(195, 135)">
-            <rect width="84" height="20" rx="10" fill={primaryColor} opacity="0.95" />
-            <text x="42" y="13" textAnchor="middle" fill="#FFFFFF" fontSize="8.5" fontWeight="900">
-              🛵 Đang giao 15P
-            </text>
-          </g>
+          {primaryHubs.map((h, i) => (
+            <g key={i}>
+              <circle cx={h.x} cy={h.y} r="30" fill="rgba(239,68,68,0.18)" />
+              <circle cx={h.x} cy={h.y} r="5.5" fill="#FFFFFF" stroke="#DC2626" strokeWidth="2.5" />
+              <text x={h.x} y={h.y + 15} textAnchor="middle" fill="#F8FAFC" fontSize="8.5" fontWeight="800">
+                📍 {h.name}
+              </text>
+            </g>
+          ))}
         </svg>
 
-        {/* Map Legend Overlay */}
-        <div className="absolute bottom-2 left-2 right-2 flex items-center justify-between text-[9px] sm:text-[10px] bg-slate-900/90 backdrop-blur-md px-3 py-1.5 rounded-xl border border-slate-700/60 text-slate-300">
-          <div className="flex items-center gap-1.5">
-            <span className="w-2 h-2 rounded-full" style={{ backgroundColor: hubColor }}></span>
-            <span>Trạm kho trực chiến</span>
-          </div>
-          <div className="flex items-center gap-1.5">
-            <span className="w-3 border-t-2 border-dashed" style={{ borderColor: accentColor }}></span>
-            <span>Tuyến giao hỏa tốc 15P</span>
-          </div>
-          <div className="flex items-center gap-1 text-emerald-400 font-bold">
-            <span>✔ Phủ 24 Q.Huyện</span>
-          </div>
+        <div className="absolute bottom-2 left-2 right-2 flex flex-wrap items-center justify-between gap-2 text-[10px] bg-slate-900/90 px-3 py-1.5 rounded-xl border border-slate-700/60 text-slate-300">
+          <span className="flex items-center gap-1.5">
+            <span className="w-2 h-2 rounded-full bg-[#DC2626]"></span> 5 Chi nhánh trung tâm
+          </span>
+          <span className="flex items-center gap-1.5">
+            <span className="w-2 h-2 rounded-full bg-emerald-400"></span> 30+ Đại lý chuẩn PCCC liên kết
+          </span>
         </div>
       </div>
 
-      {/* 3 SLA Metrics */}
       <div className="grid grid-cols-3 gap-2 my-2 text-center">
-        <div className="bg-slate-800/60 border border-slate-700/50 rounded-xl p-2">
-          <div className="text-base sm:text-lg font-black text-amber-400">15–20P</div>
-          <div className="text-[10px] text-slate-400 font-medium">Tốc độ giao trung bình</div>
+        <div className="bg-slate-800/70 border border-slate-700/50 rounded-xl p-2">
+          <div className="text-sm sm:text-base font-black text-amber-400">&lt; 2km</div>
+          <div className="text-[10px] text-slate-400">Kho cách nhà bạn</div>
         </div>
-        <div className="bg-slate-800/60 border border-slate-700/50 rounded-xl p-2">
-          <div className="text-base sm:text-lg font-black text-emerald-400">5 Trạm kho</div>
-          <div className="text-[10px] text-slate-400 font-medium">Bố trí khắp TP.HCM</div>
+        <div className="bg-slate-800/70 border border-slate-700/50 rounded-xl p-2">
+          <div className="text-sm sm:text-base font-black text-emerald-400">35+ Điểm</div>
+          <div className="text-[10px] text-slate-400">Chi nhánh &amp; liên kết</div>
         </div>
-        <div className="bg-slate-800/60 border border-slate-700/50 rounded-xl p-2">
-          <div className="text-base sm:text-lg font-black text-red-400">Chuẩn PCCC</div>
-          <div className="text-[10px] text-slate-400 font-medium">Đo rò rỉ an toàn 100%</div>
+        <div className="bg-slate-800/70 border border-slate-700/50 rounded-xl p-2">
+          <div className="text-sm sm:text-base font-black text-red-400">Máy Dò Gas</div>
+          <div className="text-[10px] text-slate-400">Kiểm định 100% đơn</div>
         </div>
       </div>
 
-      {/* Action CTA */}
       <a
         href={HOTLINE_TEL}
         onClick={() => pushGtmEvent("click_call", { phone: HOTLINE })}
-        className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl text-white font-black text-xs sm:text-sm tracking-wide shadow-lg transition-transform active:scale-95 cursor-pointer mt-1"
-        style={{ backgroundColor: primaryColor }}
+        className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-[#DC2626] hover:bg-[#B91C1C] text-white font-black text-xs sm:text-sm tracking-wide shadow-md mt-1"
       >
         <PhoneIcon size={16} />
-        <span>GỌI ĐIỀU PHỐI TRẠM GẦN NHẤT: {HOTLINE}</span>
+        <span>GỌI TRẠM CHĂM SÓC BẾP GẦN NHẤT: {HOTLINE}</span>
       </a>
     </div>
   );
@@ -1261,34 +1356,50 @@ function CoverageMapCard({ brand = "gasnhaminh" }: { brand?: "gasdayroi" | "gasn
 
 function ServiceAreaSection() {
   return (
-    <section id="khu-vuc" className="py-16 md:py-20 bg-white">
+    <section id="khu-vuc" className="py-16 md:py-20 bg-white border-t border-slate-200">
       <div className="max-w-[1440px] mx-auto px-4 md:px-8 lg:px-20">
-        <div className="text-center mb-12">
-          <span className="text-xs font-bold uppercase tracking-widest text-[#E02424] mb-2 block">Phủ sóng toàn thành phố</span>
-          <h2 className="text-3xl md:text-4xl font-black text-[#111928]">Mạng Lưới Giao Gas Phủ Sóng TP.HCM</h2>
+        <div className="text-center max-w-3xl mx-auto mb-12">
+          <span className="text-xs font-bold uppercase tracking-widest text-[#DC2626] mb-2 block">
+            Mạng lưới liên kết sát từng khu dân cư
+          </span>
+          <h2 className="text-3xl md:text-4xl font-black text-slate-900 mb-3">
+            Điều Phối Hơn 30 Cửa Hàng Đại Lý Chuẩn PCCC Khắp 22 Quận Huyện &amp; TP. Thủ Đức
+          </h2>
+          <p className="text-sm md:text-base text-slate-600">
+            Dù gia đình bạn ở khu căn hộ Quận 7, Bình Thạnh, Thảo Điền – Thủ Đức, Phú Nhuận hay Gò Vấp, bình gas luôn được xuất từ điểm liên kết <strong>cách nhà dưới 2km</strong> để giao kịp bữa cơm trong 15 phút.
+          </p>
         </div>
         <div className="grid md:grid-cols-2 gap-8 items-stretch">
           <div className="flex flex-col justify-between">
             <div>
-              <p className="text-[#6B7280] mb-5 text-sm">Giao nhanh trong <strong className="text-[#E02424]">15–20 phút</strong> tại các khu vực (bấm để xem chi tiết trạm giao):</p>
+              <p className="text-slate-600 mb-4 text-sm font-semibold">
+                Chọn khu vực của gia đình bạn để xem trạm phụ trách:
+              </p>
               <div className="flex flex-wrap gap-2">
                 {DISTRICTS_DATA.map((d) => (
                   <Link
                     key={d.slug}
                     href={`/giao-gas/${d.slug}`}
-                    title={`Giao gas, gọi gas, đặt gas ${d.name} siêu tốc ${d.slaMinutes} phút`}
-                    className="flex items-center gap-1.5 bg-[#F9FAFB] border border-[#E5E7EB] hover:border-[#E02424] hover:bg-red-50/60 hover:text-[#E02424] transition-all rounded-lg px-3 py-2 text-sm font-semibold text-[#111928]"
+                    title={`Đổi gas gia đình ${d.name} giao ${d.slaMinutes} phút`}
+                    className="flex items-center gap-1.5 bg-slate-50 border border-slate-200 hover:border-[#DC2626] hover:bg-red-50 hover:text-[#DC2626] transition-all rounded-lg px-3 py-2 text-xs sm:text-sm font-semibold text-slate-800"
                   >
-                    <span className="w-2 h-2 rounded-full bg-[#0E9F6E] inline-block"></span>Giao gas {d.name}
+                    <span className="w-2 h-2 rounded-full bg-emerald-500 inline-block"></span>
+                    Giao gas {d.name}
                   </Link>
                 ))}
               </div>
             </div>
-            <div className="mt-6 p-4 bg-[#FFF3CD] rounded-xl border border-[#FCD34D]">
-              <p className="text-sm text-[#92400E] font-semibold">📍 Không thấy khu vực của bạn? Liên hệ hotline <a href={HOTLINE_TEL} className="text-[#E02424] underline font-bold">{HOTLINE}</a> – chúng tôi hỗ trợ thêm nhiều khu vực!</p>
+            <div className="mt-6 p-4 bg-red-50/70 rounded-2xl border border-red-200">
+              <p className="text-xs sm:text-sm text-red-950 font-semibold leading-relaxed">
+                🏢 <strong>Cư dân chung cư cần đăng ký sảnh/thang hàng?</strong> Chỉ cần gửi vị trí qua{" "}
+                <a href={ZALO_URL} target="_blank" rel="noopener noreferrer" className="text-[#DC2626] underline font-black">
+                  Zalo {HOTLINE}
+                </a>{" "}
+                — kỹ thuật viên khu vực đã quen quy trình ban quản lý từng tòa nhà!
+              </p>
             </div>
           </div>
-          <CoverageMapCard brand="gasnhaminh" />
+          <CoverageMapCard />
         </div>
       </div>
     </section>
@@ -1298,190 +1409,128 @@ function ServiceAreaSection() {
 const STORES_LIST = [
   {
     id: 1,
-    branch: "Cửa hàng Quận 8",
-    name: "Chi Nhánh Gas Nhà Mình – Phạm Thế Hiển Q.8",
+    branch: "Chi nhánh Quận 8",
+    name: "Trạm Chăm Sóc Bếp Phạm Thế Hiển – Q.8",
     address: "1009 Phạm Thế Hiển, Phường Chánh Hưng, Quận 8, TP.HCM",
-    coverage: "Quận 8, Quận 5, Quận 7, Quận 4, Khu dân cư Trung Sơn – Phạm Hùng",
-    sla: "10 - 15 phút",
-    badge: "Trạm chăm sóc bếp Quận 8",
+    coverage: "Phục vụ Quận 8, Quận 7 (Him Lam, Sunrise), Quận 5, Quận 4, Trung Sơn",
     districtUrl: "/giao-gas/quan-8",
-    districtLabel: "Xem dịch vụ đổi gas Quận 8 →",
-    hotline: HOTLINE,
-    hotlineTel: HOTLINE_TEL,
   },
   {
     id: 2,
-    branch: "Cửa hàng Tân Phú",
-    name: "Chi Nhánh Gas Nhà Mình – Phú Thọ Hòa Tân Phú",
+    branch: "Chi nhánh Tân Phú",
+    name: "Trạm Chăm Sóc Bếp Phú Thọ Hòa – Tân Phú",
     address: "36 Nguyễn Văn Huyên, Phường Phú Thọ Hòa, Quận Tân Phú, TP.HCM",
-    coverage: "Quận Tân Phú, Tân Bình, Quận 11, Quận 10, Bình Tân",
-    sla: "10 - 15 phút",
-    badge: "Trạm chăm sóc bếp Tân Phú",
+    coverage: "Phục vụ Celadon Tân Phú, Tân Bình, Quận 11, Quận 10, Bình Tân",
     districtUrl: "/giao-gas/tan-phu",
-    districtLabel: "Xem dịch vụ đổi gas Tân Phú →",
-    hotline: HOTLINE,
-    hotlineTel: HOTLINE_TEL,
   },
   {
     id: 3,
-    branch: "Cửa hàng Bà Điểm & Quận 12",
-    name: "Chi Nhánh Gas Nhà Mình – Bà Điểm & Quận 12",
-    address: "64A Nguyễn Thị Hai, Xã Bà Điểm, Huyện Hóc Môn, TP.HCM",
-    coverage: "Quận 12 (Phan Văn Hớn, Nguyễn Ảnh Thủ, Tân Thới Nhất, Hiệp Thành), Bà Điểm Hóc Môn",
-    sla: "10 - 20 phút",
-    badge: "Trạm phục vụ Quận 12 & Tây Bắc",
-    districtUrl: "/giao-gas/quan-12",
-    districtLabel: "Xem dịch vụ đổi gas Quận 12 →",
-    hotline: HOTLINE,
-    hotlineTel: HOTLINE_TEL,
+    branch: "Chi nhánh Quận 6",
+    name: "Trạm Chăm Sóc Bếp Cư Xá Bình Phú – Q.6",
+    address: "14R Đường 32B Cư Xá Bình Phú, Phường 10, Quận 6, TP.HCM",
+    coverage: "Phục vụ Quận 6, Khu Tên Lửa – Bình Tân, Quận 5, Quận 11",
+    districtUrl: "/giao-gas/quan-6",
   },
   {
     id: 4,
-    branch: "Cửa hàng Tân Hiệp – Hóc Môn",
-    name: "Chi Nhánh Gas Nhà Mình – Tân Hiệp Hóc Môn",
-    address: "111/7H Ấp Thới Tây 2, Tân Hiệp 18, Xã Tân Hiệp, Huyện Hóc Môn, TP.HCM",
-    coverage: "Tân Hiệp, Thị trấn Hóc Môn, Đông Thạnh, Thới Tam Thôn, Củ Chi giáp ranh",
-    sla: "15 - 20 phút",
-    badge: "Trạm chăm sóc bếp Hóc Môn",
-    districtUrl: "/giao-gas/hoc-mon",
-    districtLabel: "Xem dịch vụ đổi gas Hóc Môn →",
-    hotline: HOTLINE,
-    hotlineTel: HOTLINE_TEL,
+    branch: "Chi nhánh Quận 12 & Bà Điểm",
+    name: "Trạm Chăm Sóc Bếp Bà Điểm – Hóc Môn & Q.12",
+    address: "64A Nguyễn Thị Hai, Xã Bà Điểm, Huyện Hóc Môn, TP.HCM",
+    coverage: "Phục vụ Quận 12, Hiệp Thành, Tân Thới Nhất, Bà Điểm Hóc Môn",
+    districtUrl: "/giao-gas/quan-12",
   },
   {
     id: 5,
-    branch: "Cửa hàng Quận 6 & Bình Tân",
-    name: "Chi Nhánh Gas Nhà Mình – Cư Xá Bình Phú Q.6",
-    address: "14R Đường 32B Cư Xá Bình Phú, Phường 10, Quận 6, TP.HCM",
-    coverage: "Quận 6, Bình Tân (Khu Tên Lửa, An Lạc, Hương Lộ 2), Quận 5, Quận 11",
-    sla: "10 - 15 phút",
-    badge: "Trạm chăm sóc bếp Bình Phú",
-    districtUrl: "/giao-gas/quan-6",
-    districtLabel: "Xem dịch vụ đổi gas Quận 6 →",
-    hotline: HOTLINE,
-    hotlineTel: HOTLINE_TEL,
+    branch: "Chi nhánh Tân Hiệp",
+    name: "Trạm Chăm Sóc Bếp Tân Hiệp – Hóc Môn",
+    address: "111/7H Ấp Thới Tây 2, Tân Hiệp 18, Xã Tân Hiệp, Huyện Hóc Môn",
+    coverage: "Phục vụ Thị trấn Hóc Môn, Đông Thạnh, Thới Tam Thôn",
+    districtUrl: "/giao-gas/hoc-mon",
   },
 ];
 
 function StoresSection({ onOrderClick }: { onOrderClick: () => void }) {
   return (
-    <section id="he-thong-cua-hang" className="py-16 md:py-24 bg-white border-t border-[#E5E7EB]">
+    <section id="he-thong-cua-hang" className="py-16 md:py-20 bg-[#F8FAFC] border-t border-slate-200">
       <div className="max-w-[1440px] mx-auto px-4 md:px-8 lg:px-20">
-        <div className="text-center max-w-3xl mx-auto mb-12 md:mb-16">
-          <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-[#FEE2E2] text-[#E02424] mb-3">
-            <span className="w-2 h-2 rounded-full bg-[#E02424] animate-pulse"></span>
-            Địa chỉ cửa hàng thật – An tâm tuyệt đối
+        <div className="text-center max-w-3xl mx-auto mb-12">
+          <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-red-100 text-[#DC2626] mb-3">
+            5 Chi nhánh chính hãng + 30+ Đại lý PCCC liên kết
           </span>
-          <h2 className="text-2xl md:text-4xl font-black text-[#111928] leading-tight mb-4">
-            5 Chi Nhánh Gas Nhà Mình Phục Vụ Tận Gian Bếp Gia Đình
+          <h2 className="text-2xl md:text-4xl font-black text-slate-900 leading-tight mb-3">
+            Hệ Thống Cửa Hàng Thật &amp; Trạm Liên Kết Sát Khu Căn Hộ Của Bạn
           </h2>
-          <p className="text-[#6B7280] text-sm md:text-base leading-relaxed">
-            Hệ thống 5 cửa hàng chính hãng tại Quận 8, Tân Phú, Quận 6 và Hóc Môn – Quận 12 giúp rút ngắn thời gian giao bình gas xuống chỉ còn 10–15 phút, kèm dịch vụ vệ sinh họng bếp và thử kín van dây miễn phí.
+          <p className="text-slate-600 text-sm md:text-base leading-relaxed">
+            Kết hợp 5 chi nhánh trực thuộc với hơn 30 đại lý chuẩn PCCC tại{" "}
+            <strong>Bình Thạnh, Phú Nhuận, Gò Vấp, Quận 7, TP. Thủ Đức, Quận 1, Quận 3</strong> — tất cả đều tuân thủ quy chuẩn mang cân điện tử &amp; máy dò khí gas của Gas Nhà Mình.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           {STORES_LIST.map((store) => (
             <div
               key={store.id}
-              className="bg-[#F9FAFB] hover:bg-white rounded-2xl p-6 border border-[#E5E7EB] hover:border-[#E02424] shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group"
+              className="bg-white rounded-2xl p-6 border border-slate-200 hover:border-[#DC2626] shadow-2xs transition-all flex flex-col justify-between"
             >
               <div>
-                <div className="flex items-center justify-between mb-4">
+                <div className="flex items-center justify-between mb-3">
                   <Link
                     href={store.districtUrl}
-                    className="inline-block px-3 py-1 bg-white group-hover:bg-[#FEE2E2] text-[#E02424] border border-[#FECACA] rounded-full text-xs font-bold tracking-wide transition-colors"
+                    className="px-3 py-1 bg-red-50 text-[#DC2626] border border-red-200 rounded-full text-xs font-bold"
                   >
                     {store.branch}
                   </Link>
-                  <div className="flex items-center gap-1.5 text-[11px] font-semibold text-[#057A55] bg-[#DEF7EC] px-2.5 py-0.5 rounded-full">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#31C48D] animate-ping"></span>
-                    <span>Sẵn sàng giao</span>
-                  </div>
+                  <span className="text-[11px] font-semibold text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded-full">
+                    ● Sẵn sàng giao
+                  </span>
                 </div>
-
-                <h3 className="text-lg font-bold text-[#111928] group-hover:text-[#E02424] transition-colors mb-3">
-                  <Link href={store.districtUrl}>{store.name}</Link>
-                </h3>
-
-                <div className="space-y-3 text-xs md:text-sm text-[#4B5563] mb-4">
-                  <div className="flex items-start gap-2.5">
-                    <span className="text-base flex-shrink-0 mt-0.5">📍</span>
-                    <span className="leading-snug">
-                      <strong className="text-[#111928]">Địa chỉ:</strong> {store.address}
-                    </span>
-                  </div>
-                  <div className="flex items-start gap-2.5">
-                    <span className="text-base flex-shrink-0 mt-0.5">🚚</span>
-                    <span className="leading-snug">
-                      <strong className="text-[#111928]">Phục vụ nhanh:</strong> {store.coverage}
-                    </span>
-                  </div>
-                  <div className="flex items-center gap-2.5">
-                    <span className="text-base flex-shrink-0">⚡</span>
-                    <span>
-                      <strong className="text-[#111928]">Thời gian giao:</strong>{" "}
-                      <span className="text-[#E02424] font-bold">{store.sla}</span>
-                    </span>
-                  </div>
-                </div>
-                <div className="mb-4">
-                  <Link
-                    href={store.districtUrl}
-                    className="text-xs font-extrabold text-[#E02424] hover:underline inline-flex items-center gap-1"
-                  >
-                    {store.districtLabel}
+                <h3 className="text-base font-black text-slate-900 mb-2">
+                  <Link href={store.districtUrl} className="hover:text-[#DC2626]">
+                    {store.name}
                   </Link>
-                </div>
+                </h3>
+                <p className="text-xs text-slate-600 mb-2">📍 {store.address}</p>
+                <p className="text-xs text-slate-600 mb-4">🏠 {store.coverage}</p>
               </div>
-
-              <div className="pt-4 border-t border-[#E5E7EB] flex items-center gap-2">
+              <div className="pt-3 border-t border-slate-100 flex items-center gap-2">
                 <a
-                  href={store.hotlineTel}
-                  className="flex-1 py-2.5 px-3 bg-[#E02424] hover:bg-[#B91C1C] text-white text-xs font-bold rounded-xl text-center shadow-sm transition-colors flex items-center justify-center gap-1.5"
+                  href={HOTLINE_TEL}
+                  onClick={() => pushGtmEvent("click_call", { phone: HOTLINE })}
+                  className="flex-1 py-2.5 px-3 bg-[#DC2626] hover:bg-[#B91C1C] text-white text-xs font-bold rounded-xl text-center"
                 >
-                  <PhoneIcon size={14} /> Giao Từ Trạm Này
+                  📞 Gọi Trạm Này
                 </a>
                 <button
                   type="button"
                   onClick={onOrderClick}
-                  className="py-2.5 px-3 bg-white hover:bg-[#F3F4F6] text-[#111928] border border-[#D1D5DB] text-xs font-bold rounded-xl transition-colors whitespace-nowrap"
+                  className="py-2.5 px-3 bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-bold rounded-xl cursor-pointer"
                 >
-                  Đặt Giao Tận Bếp
+                  Đặt 1 Chạm
                 </button>
               </div>
             </div>
           ))}
 
-          {/* Card cam kết chất lượng */}
-          <div className="bg-gradient-to-br from-[#991B1B] via-[#B91C1C] to-[#E02424] text-white rounded-2xl p-6 shadow-md flex flex-col justify-between md:col-span-2 lg:col-span-1">
+          <div className="bg-gradient-to-br from-[#991B1B] via-[#B91C1C] to-[#DC2626] text-white rounded-2xl p-6 shadow-md flex flex-col justify-between">
             <div>
-              <div className="w-10 h-10 rounded-xl bg-white/10 backdrop-blur-sm flex items-center justify-center text-xl mb-4">
-                🛡️
-              </div>
-              <h3 className="text-lg font-bold mb-3">Cam Kết Pháp Lý & An Toàn</h3>
-              <p className="text-white/80 text-xs leading-relaxed mb-4">
-                Tất cả 5 cửa hàng và trạm chiết nạp liên kết đều đáp ứng 100% tiêu chuẩn phòng cháy chữa cháy (PCCC) và giấy phép kinh doanh khí dầu mỏ hóa lỏng (LPG) theo quy định Nhà nước.
+              <span className="inline-block text-[11px] font-black uppercase tracking-wider bg-white/15 px-3 py-1 rounded-full mb-3">
+                Phủ sóng khu căn hộ &lt; 2km
+              </span>
+              <h3 className="text-lg font-black mb-2">
+                +30 Trạm Liên Kết Chung Cư Khu Đông – Nam – Trung Tâm
+              </h3>
+              <p className="text-white/90 text-xs leading-relaxed mb-3">
+                Phục vụ nhanh 15 phút tại <strong>Vinhomes Bình Thạnh, Thảo Điền – Thủ Đức, Phú Mỹ Hưng Q.7, Cityland Gò Vấp, Phú Nhuận, Q.1 – Q.3</strong>.
               </p>
-              <ul className="space-y-2 text-xs text-white/90">
-                <li className="flex items-center gap-2">
-                  <span className="text-emerald-300 font-bold">✓</span>
-                  <span>Bình gas chính hãng nguyên tem chống giả</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <span className="text-emerald-300 font-bold">✓</span>
-                  <span>Chiết nạp tự động đủ 12kg ruột</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <span className="text-emerald-300 font-bold">✓</span>
-                  <span>Kỹ thuật viên thử rò rỉ khí gas miễn phí</span>
-                </li>
+              <ul className="space-y-1.5 text-xs text-white/95">
+                <li>✓ Khóa cứng giá gia đình 530.000đ</li>
+                <li>✓ Cân móc điện tử 50kg &amp; Máy dò rò rỉ</li>
+                <li>✓ Miễn phí vệ sinh họng bếp lửa xanh</li>
               </ul>
             </div>
-            <div className="pt-6 border-t border-white/20 mt-4">
-              <div className="text-[11px] text-white/70">Tổng đài điều phối hỏa tốc:</div>
-              <a href={HOTLINE_TEL} className="text-xl font-black text-white hover:underline flex items-center gap-2 mt-0.5">
-                <PhoneIcon size={18} /> {HOTLINE}
+            <div className="pt-4 border-t border-white/20 mt-4">
+              <a href={HOTLINE_TEL} className="text-lg font-black text-white hover:underline flex items-center gap-2">
+                <PhoneIcon size={18} /> Tổng đài: {HOTLINE}
               </a>
             </div>
           </div>
@@ -1491,62 +1540,62 @@ function StoresSection({ onOrderClick }: { onOrderClick: () => void }) {
   );
 }
 
-function FaqSection() {
-  const faqs = [
-    {
-      q: "Thời gian giao gas tại TP.HCM mất bao lâu?",
-      a: "Nhờ mạng lưới trạm phân phối rộng khắp các quận huyện, thời gian giao gas trung bình từ 15–20 phút kể từ lúc tiếp nhận đơn hàng hoặc cuộc gọi hotline."
-    },
-    {
-      q: "Gas Nhà Mình cung cấp những loại bình gas nào?",
-      a: "Chúng tôi cung cấp đầy đủ bình gas chính hãng 100%: V-Gas (xám, đỏ, vàng, PE, Shell), Petrolimex (van đứng, van chụp shell), Tuấn Khang 12kg và bình gas bò 45kg chuyên dụng cho quán ăn, nhà hàng."
-    },
-    {
-      q: "Tôi có được cân đối chứng kiểm tra trọng lượng bình gas không? Làm sao biết bình đủ 12kg ruột?",
-      a: "Bình gas 12kg gia đình đã được chiết nạp tự động chuẩn xác đủ 12kg ruột tại nhà máy của hãng và niêm phong màng co nhiệt chống giả. Trọng lượng vỏ bình được dập nổi rõ ràng trên quai xách (ví dụ: vỏ 13.5kg + 12kg nước gas = 25.5kg). Để đảm bảo giao hỏa tốc 15 phút, nhân viên không mang theo cân cồng kềnh mà sẽ cùng quý khách kiểm tra nguyên vẹn tem màng co, hạn kiểm định vỏ bình và thử rò rỉ khí gas an toàn. Nếu gia đình có sẵn cân tại nhà, quý khách hoàn toàn có thể kiểm tra đối chứng trước khi nhận."
-    },
-    {
-      q: "Quy trình kiểm tra an toàn khi đổi bình gas như thế nào?",
-      a: "Mọi bình gas phân phối qua Gas Nhà Mình đều là hàng chính hãng từ nhà sản xuất uy tín, có tem kiểm định an toàn PCCC và nguyên màng co niêm phong. Khi giao gas, kỹ thuật viên sẽ hỗ trợ kiểm tra độ kín của van dây, kiểm tra rò rỉ khí gas bằng máy dò/dung dịch chuyên dụng và vệ sinh bếp miễn phí trước khi bàn giao."
-    }
-  ];
+const FAQS_LIST = [
+  {
+    q: "Thợ giao tới có mang cân kiểm tra đủ 12kg ruột ngay tại bếp không?",
+    a: "Có 100%! Nhà dân thường không có sẵn cân lớn nên kỹ thuật viên Gas Nhà Mình luôn mang theo cân móc điện tử cầm tay 50kg để cân đối chứng trực tiếp tại bếp: Tổng số cân = [Trọng lượng vỏ dập nổi trên quai bình] + [Đủ 12kg nước gas]. Gia đình kiểm tra đủ ký, bật thử bếp lửa xanh đều mới thanh toán.",
+  },
+  {
+    q: "Bếp nhà tôi đang dùng vỏ Saigon Petro / Petrolimex đổi sang V-Gas 530.000đ có tốn cọc vỏ không?",
+    a: "Hoàn toàn KHÔNG tốn tiền cọc vỏ! Gas Nhà Mình hỗ trợ đổi ngang miễn phí 0đ giữa tất cả các thương hiệu vỏ bình 12kg chính hãng còn hạn kiểm định PCCC. Gia đình chỉ thanh toán đúng 530.000đ tiền ruột gas.",
+  },
+  {
+    q: "Nhà tôi ở căn hộ chung cư tầng cao hoặc chỉ có ông bà lớn tuổi ở nhà thì giao thế nào?",
+    a: "Đội ngũ kỹ thuật viên Gas Nhà Mình mặc đồng phục lịch sự, quen thuộc quy trình đăng ký thẻ sảnh bảo vệ và có xe đẩy vào hầm thang hàng chung cư (hoàn toàn miễn phí vận chuyển lên tầng). Khi nhà có ông bà lớn tuổi, thợ hỗ trợ tháo lắp nhẹ nhàng, đo máy dò khí gas, vệ sinh họng bếp và hướng dẫn khóa van an toàn.",
+  },
+  {
+    q: "Ở Bình Thạnh, Gò Vấp, Quận 7 hay TP. Thủ Đức gọi bao lâu có mặt? Sau khi lắp nếu bếp lửa yếu gọi ai?",
+    a: "Ngoài 5 chi nhánh chính, tổng đài điều phối hơn 30 đại lý liên kết chuẩn PCCC khắp 22 quận huyện & TP. Thủ Đức (xuất bình cách nhà bạn dưới 2km) nên chỉ 15–20 phút là có mặt. Hệ thống lưu bảo hành theo SĐT gia đình qua 1 đầu mối duy nhất 0888 113 831 — bất cứ khi nào cần chỉnh lửa hay kiểm tra mùi gas, gọi là kỹ thuật tới hỗ trợ miễn phí trong 15 phút.",
+  },
+];
 
+function FaqSection() {
   return (
-    <section id="faq" className="py-16 md:py-20 bg-[#F9FAFB]">
+    <section id="faq" className="py-16 md:py-20 bg-white border-t border-slate-200">
       <div className="max-w-[1000px] mx-auto px-4 md:px-8">
         <div className="text-center mb-12">
-          <span className="text-xs font-bold uppercase tracking-widest text-[#E02424] mb-2 block">Hỏi đáp thường gặp</span>
-          <h2 className="text-3xl md:text-4xl font-black text-[#111928]">Câu Hỏi Về Dịch Vụ Giao Gas & Đổi Gas</h2>
+          <span className="text-xs font-bold uppercase tracking-widest text-[#DC2626] mb-2 block">
+            Giải đáp thắc mắc của người nội trợ
+          </span>
+          <h2 className="text-3xl md:text-4xl font-black text-slate-900">
+            Câu Hỏi Thường Gặp Khi Đổi Gas Gia Đình
+          </h2>
         </div>
         <div className="space-y-4">
-          {faqs.map((faq, idx) => (
-            <div key={idx} className="bg-white rounded-2xl p-6 border border-[#E5E7EB] shadow-sm hover:border-[#E02424] transition-all">
-              <h3 className="text-lg font-bold text-[#111928] mb-2 flex items-start gap-3">
-                <span className="w-6 h-6 rounded-full bg-[#FEE2E2] text-[#E02424] text-sm flex items-center justify-center flex-shrink-0 mt-0.5">?</span>
+          {FAQS_LIST.map((faq, idx) => (
+            <div key={idx} className="bg-slate-50 rounded-2xl p-6 border border-slate-200">
+              <h3 className="text-base md:text-lg font-black text-slate-900 mb-2 flex items-start gap-3">
+                <span className="w-6 h-6 rounded-full bg-red-100 text-[#DC2626] text-xs font-black flex items-center justify-center flex-shrink-0 mt-0.5">
+                  ?
+                </span>
                 {faq.q}
               </h3>
-              <p className="text-[#6B7280] text-sm md:text-base leading-relaxed pl-9">
-                {faq.a}
-              </p>
+              <p className="text-slate-600 text-sm md:text-base leading-relaxed pl-9">{faq.a}</p>
             </div>
           ))}
         </div>
 
-        {/* Khối Cẩm Nang Gian Bếp An Toàn & Mẹo Sửa Bếp Gas (Internal Linking Cluster) */}
-        <div className="mt-12 bg-white rounded-3xl p-6 md:p-8 border border-[#E5E7EB] shadow-sm">
+        <div className="mt-12 bg-slate-50 rounded-3xl p-6 md:p-8 border border-slate-200">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6">
             <div>
-              <span className="text-xs font-extrabold uppercase tracking-wider text-[#E02424]">
+              <span className="text-xs font-extrabold uppercase tracking-wider text-[#DC2626]">
                 Mẹo hay cho người nội trợ
               </span>
-              <h3 className="text-xl md:text-2xl font-black text-[#111928] mt-0.5">
-                Cẩm Nang Chăm Sóc Gian Bếp & Sử Dụng Gas An Toàn
+              <h3 className="text-xl md:text-2xl font-black text-slate-900 mt-0.5">
+                Cẩm Nang Chăm Sóc Gian Bếp &amp; Sử Dụng Gas An Toàn
               </h3>
             </div>
-            <Link
-              href="/cam-nang"
-              className="text-xs md:text-sm font-extrabold text-[#E02424] hover:underline shrink-0"
-            >
+            <Link href="/cam-nang" className="text-xs md:text-sm font-extrabold text-[#DC2626] hover:underline shrink-0">
               Xem toàn bộ cẩm nang →
             </Link>
           </div>
@@ -1555,17 +1604,17 @@ function FaqSection() {
               <Link
                 key={g.slug}
                 href={`/cam-nang/${g.slug}`}
-                className="p-4 rounded-2xl bg-[#F9FAFB] hover:bg-[#FEF2F2] border border-[#E5E7EB] hover:border-[#E02424] transition-all flex flex-col justify-between group"
+                className="p-4 rounded-2xl bg-white hover:bg-red-50/50 border border-slate-200 hover:border-[#DC2626] transition-all flex flex-col justify-between group"
               >
                 <div>
-                  <span className="text-[11px] font-bold text-[#E02424]">
+                  <span className="text-[11px] font-bold text-[#DC2626]">
                     {g.heroIcon} {g.categoryLabel}
                   </span>
-                  <h4 className="text-sm font-bold text-[#111928] group-hover:text-[#E02424] transition-colors mt-1.5 mb-2 leading-snug">
+                  <h4 className="text-sm font-bold text-slate-900 group-hover:text-[#DC2626] transition-colors mt-1.5 mb-2 leading-snug">
                     {g.title}
                   </h4>
                 </div>
-                <span className="text-xs font-semibold text-[#E02424]">Đọc chi tiết →</span>
+                <span className="text-xs font-semibold text-[#DC2626]">Xem hướng dẫn →</span>
               </Link>
             ))}
           </div>
@@ -1577,111 +1626,91 @@ function FaqSection() {
 
 function Footer() {
   return (
-    <footer className="bg-[#0D1117] text-white py-12 pb-20 md:pb-12">
+    <footer className="bg-[#0D1117] text-white py-12 pb-24 md:pb-12">
       <div className="max-w-[1440px] mx-auto px-4 md:px-8 lg:px-20">
         <div className="grid md:grid-cols-3 gap-8 mb-10">
           <div>
             <div className="mb-4">
-              <img src="/logo.png" alt="Gas Nhà Mình - Hết Gas Gọi Mình" className="h-14 md:h-16 w-auto object-contain bg-white rounded-xl p-2 shadow-sm" />
+              <img src="/logo.png" alt="Gas Nhà Mình" className="h-14 w-auto object-contain bg-white rounded-xl p-2" />
             </div>
-            <p className="text-white/60 text-sm leading-relaxed mb-4">
-              Kênh đặt gas chính hãng uy tín tại TP.HCM. Giao hỏa tốc 15–20 phút, nguyên tem chống giả, hỗ trợ kiểm tra an toàn tận nơi.
+            <p className="text-slate-400 text-sm leading-relaxed mb-4">
+              Dịch vụ đổi bình gas chính hãng chăm sóc gian bếp hộ gia đình &amp; căn hộ chung cư TP.HCM. Cân điện tử tại bếp, đo rò rỉ bằng máy chuyên dụng, vệ sinh họng bếp miễn phí.
             </p>
-            <div className="space-y-2 text-xs text-white/70">
-              <div>☎️ Hotline: <a href={HOTLINE_TEL} className="text-[#FF5722] font-bold text-sm">{HOTLINE}</a></div>
-              <div>🕐 Hoạt động: 24/7 kể cả Lễ & Tết</div>
-              <div>⚡ Phục vụ: Giao hỏa tốc tất cả các quận huyện TP.HCM</div>
+            <div className="space-y-2 text-xs text-slate-300">
+              <div>
+                ☎️ Tổng đài chăm sóc bếp:{" "}
+                <a href={HOTLINE_TEL} className="text-red-400 font-bold text-sm">
+                  {HOTLINE}
+                </a>
+              </div>
+              <div>🕐 Phục vụ: 06:00 – 22:00 mỗi ngày (Kể cả Lễ &amp; Tết)</div>
+              <div>🏠 Mạng lưới: 5 Chi nhánh + 30+ Trạm liên kết toàn TP.HCM</div>
             </div>
           </div>
 
           <div className="md:col-span-2">
-            <h4 className="font-bold text-white mb-3 text-sm uppercase tracking-wider text-[#FF5722]">Hệ thống 5 Cửa Hàng & Trạm Kho Trực Chiến</h4>
-            <div className="grid sm:grid-cols-2 gap-3 text-xs text-white/70">
+            <h4 className="font-bold mb-3 text-xs uppercase tracking-wider text-red-400">
+              5 Chi Nhánh Chính Hãng &amp; Hơn 30 Trạm Liên Kết Chung Cư
+            </h4>
+            <div className="grid sm:grid-cols-2 gap-3 text-xs text-slate-300">
               <div className="bg-white/5 p-3 rounded-xl border border-white/10">
-                <div className="font-bold text-white mb-1 flex items-center gap-1.5">
-                  <span className="text-[#FF5722]">📍</span> Chi nhánh Quận 8
-                </div>
+                <div className="font-bold text-white mb-0.5">📍 Chi nhánh Quận 8</div>
                 <div>1009 Phạm Thế Hiển, P. Chánh Hưng, Q.8</div>
               </div>
               <div className="bg-white/5 p-3 rounded-xl border border-white/10">
-                <div className="font-bold text-white mb-1 flex items-center gap-1.5">
-                  <span className="text-[#FF5722]">📍</span> Chi nhánh Tân Phú
-                </div>
-                <div>36 Nguyễn Văn Huyên, P. Phú Thọ Hòa, Q. Tân Phú</div>
+                <div className="font-bold text-white mb-0.5">📍 Chi nhánh Tân Phú</div>
+                <div>36 Nguyễn Văn Huyên, P. Phú Thọ Hòa, Tân Phú</div>
               </div>
               <div className="bg-white/5 p-3 rounded-xl border border-white/10">
-                <div className="font-bold text-white mb-1 flex items-center gap-1.5">
-                  <span className="text-[#FF5722]">📍</span> Chi nhánh Bà Điểm
-                </div>
-                <div>64A Nguyễn Thị Hai, Xã Bà Điểm, Hóc Môn</div>
+                <div className="font-bold text-white mb-0.5">📍 Chi nhánh Quận 6</div>
+                <div>14R Đường 32B Cư Xá Bình Phú, P.10, Q.6</div>
               </div>
               <div className="bg-white/5 p-3 rounded-xl border border-white/10">
-                <div className="font-bold text-white mb-1 flex items-center gap-1.5">
-                  <span className="text-[#FF5722]">📍</span> Chi nhánh Tân Hiệp
-                </div>
-                <div>111/7H Ấp Thới Tây 2, Tân Hiệp 18, Hóc Môn</div>
+                <div className="font-bold text-white mb-0.5">📍 Chi nhánh Bà Điểm &amp; Tân Hiệp</div>
+                <div>64A Nguyễn Thị Hai &amp; 111/7H Tân Hiệp 18, Hóc Môn</div>
               </div>
-              <div className="bg-white/5 p-3 rounded-xl border border-white/10 sm:col-span-2">
-                <div className="font-bold text-white mb-1 flex items-center gap-1.5">
-                  <span className="text-[#FF5722]">📍</span> Chi nhánh Quận 6 (Cư Xá Bình Phú)
-                </div>
-                <div>14R Đường 32B Cư Xá Bình Phú, Phường 10, Quận 6</div>
+              <div className="bg-red-950/50 p-3 rounded-xl border border-red-500/30 sm:col-span-2 text-red-200">
+                <strong>🏢 +30 Trạm liên kết khu căn hộ:</strong> Quận 7 (Phú Mỹ Hưng, Sunrise), Bình Thạnh (Vinhomes), TP. Thủ Đức (Masteri, Thảo Điền), Gò Vấp (Cityland), Phú Nhuận, Q.1, Q.3 — Xuất bình dưới 2km!
               </div>
             </div>
           </div>
         </div>
 
-        
-        {/* ─── Liên kết SEO Chân Trang (Footer Quick Links) ────────────────────────── */}
-        <div className="border-t border-white/10 pt-8 pb-8 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 gap-6 text-xs text-white/70">
+        <div className="border-t border-white/10 pt-8 pb-8 grid grid-cols-2 sm:grid-cols-3 gap-6 text-xs text-slate-400">
           <div>
-            <h4 className="font-bold text-xs uppercase tracking-wider mb-3 text-[#0EA5E9]">
-              Tra cứu & Sản phẩm chính hãng
-            </h4>
+            <h4 className="font-bold uppercase tracking-wider mb-3 text-red-400">Bảng giá gia đình</h4>
             <ul className="space-y-2">
-              <li><Link href="/bang-gia" className="hover:text-white transition-colors">🔥 Bảng giá gas hôm nay 2026</Link></li>
-              <li><Link href="/gas-v-gas-xam-12kg" className="hover:text-white transition-colors">Bình Gas V-Gas xám 12kg</Link></li>
-              <li><Link href="/gas-petrolimex-dung-12kg" className="hover:text-white transition-colors">Bình Gas Petrolimex 12kg</Link></li>
-              <li><Link href="/gas-tuan-khang-vang-12kg" className="hover:text-white transition-colors">Bình Gas Tuấn Khang 12kg</Link></li>
-              <li><Link href="/gas-bo-45kg" className="hover:text-white transition-colors">Bình gas bò công nghiệp 45kg</Link></li>
+              <li><Link href="/bang-gia" className="hover:text-white">🔥 Bảng giá gas hôm nay (530K)</Link></li>
+              <li><Link href="/gas-v-gas-xam-12kg" className="hover:text-white">V-Gas 12kg Van Phổ Thông — 530.000đ</Link></li>
+              <li><Link href="/gas-v-gas-shell-12kg" className="hover:text-white">V-Gas 12kg Van Chụp Tự Ngắt — 545.000đ</Link></li>
+              <li><Link href="/gas-v-gas-pe-12kg" className="hover:text-white">V-Gas Bọc Nhựa PE Êm Sàn Chung Cư</Link></li>
+              <li><Link href="/gas-petrolimex-dung-12kg" className="hover:text-white">Gas Petrolimex 12kg — 595.000đ</Link></li>
             </ul>
           </div>
           <div>
-            <h4 className="font-bold text-xs uppercase tracking-wider mb-3 text-[#0EA5E9]">
-              Cẩm nang an toàn & PCCC
-            </h4>
+            <h4 className="font-bold uppercase tracking-wider mb-3 text-red-400">An toàn bếp gia đình</h4>
             <ul className="space-y-2">
-              <li><Link href="/cam-nang" className="hover:text-white transition-colors">📚 Thư viện cẩm nang an toàn gas</Link></li>
-              <li><Link href="/cam-nang/cach-kiem-tra-binh-gas-chinh-hang-du-ky" className="hover:text-white transition-colors">5 Cách kiểm tra bình gas đủ ký</Link></li>
-              <li><Link href="/cam-nang/cach-xu-ly-khi-ngui-thay-mui-gas-ro-ri" className="hover:text-white transition-colors">Cách xử lý mùi gas rò rỉ khẩn cấp</Link></li>
-              <li><Link href="/cam-nang/han-kiem-dinh-binh-gas-cach-xem-han-su-dung-vo-binh" className="hover:text-white transition-colors">Cách xem hạn kiểm định vỏ bình</Link></li>
-              <li><Link href="/cam-nang/co-nen-khoa-binh-gas-sau-khi-nau-khong-quy-trinh-tat-bep-an-toan" className="hover:text-white transition-colors">Quy trình tắt bếp chuẩn an toàn</Link></li>
-              <li><Link href="/cam-nang/huong-dan-thay-van-day-gas-an-toan-tai-nha-va-khi-nao-can-thay" className="hover:text-white transition-colors">Bao lâu nên thay dây van gas gia đình</Link></li>
-              <li><Link href="/cam-nang/nguyen-nhan-bep-gas-bi-no-bup-khi-bat-tat-va-cach-sua" className="hover:text-white transition-colors">Sửa lỗi bếp gas nổ bụp khi nấu</Link></li>
+              <li><Link href="/cam-nang" className="hover:text-white">📚 Cẩm nang chăm sóc gian bếp</Link></li>
+              <li><Link href="/cam-nang/cach-kiem-tra-binh-gas-chinh-hang-du-ky" className="hover:text-white">5 Cách kiểm tra bình gas đủ ký</Link></li>
+              <li><Link href="/cam-nang/co-nen-khoa-binh-gas-sau-khi-nau-khong-quy-trinh-tat-bep-an-toan" className="hover:text-white">Quy trình khóa van an toàn cho người già</Link></li>
+              <li><Link href="/cam-nang/nguyen-nhan-bep-gas-lua-do-den-day-noi" className="hover:text-white">Cách khắc phục bếp lửa đỏ đen nồi</Link></li>
             </ul>
           </div>
           <div className="col-span-2 sm:col-span-1">
-            <h4 className="font-bold text-xs uppercase tracking-wider mb-3 text-[#0EA5E9]">
-              Trạm giao gas 15P tiêu biểu
-            </h4>
+            <h4 className="font-bold uppercase tracking-wider mb-3 text-red-400">Khu vực phục vụ nhanh</h4>
             <ul className="space-y-2">
-              <li><Link href="/giao-gas/quan-8" className="hover:text-white transition-colors">⚡ Giao gas hỏa tốc Quận 8</Link></li>
-              <li><Link href="/giao-gas/tan-phu" className="hover:text-white transition-colors">⚡ Giao gas hỏa tốc Tân Phú</Link></li>
-              <li><Link href="/giao-gas/quan-6" className="hover:text-white transition-colors">⚡ Giao gas hỏa tốc Quận 6</Link></li>
-              <li><Link href="/giao-gas/hoc-mon" className="hover:text-white transition-colors">⚡ Giao gas hỏa tốc Hóc Môn</Link></li>
-              <li><Link href="/giao-gas/binh-tan" className="hover:text-white transition-colors">⚡ Giao gas hỏa tốc Bình Tân</Link></li>
-              <li><Link href="/giao-gas/quan-12" className="hover:text-white transition-colors">⚡ Đổi gas Quận 12 uy tín (15P)</Link></li>
+              <li><Link href="/giao-gas/quan-7" className="hover:text-white">🏠 Đổi gas căn hộ Quận 7</Link></li>
+              <li><Link href="/giao-gas/binh-thanh" className="hover:text-white">🏠 Đổi gas chung cư Bình Thạnh</Link></li>
+              <li><Link href="/giao-gas/thu-duc" className="hover:text-white">🏠 Đổi gas TP. Thủ Đức (Q.2, Q.9)</Link></li>
+              <li><Link href="/giao-gas/go-vap" className="hover:text-white">🏠 Đổi gas gia đình Gò Vấp</Link></li>
+              <li><Link href="/giao-gas/tan-phu" className="hover:text-white">🏠 Đổi gas Quận 8 &amp; Tân Phú</Link></li>
             </ul>
           </div>
         </div>
 
-        <div className="border-t border-white/10 pt-6 flex flex-col md:flex-row items-center justify-between gap-3 text-xs text-white/50">
-          <div>
-            © {new Date().getFullYear()} GAS NHÀ MÌNH. Hệ thống phân phối & giao gas chính hãng tận nhà tại TP. Hồ Chí Minh.
-          </div>
-          <div className="text-[11px] text-white/40 text-center md:text-right">
-            Đủ điều kiện kinh doanh LPG & An toàn PCCC theo Nghị định 87/2018/NĐ-CP • Bảo hiểm trách nhiệm sản phẩm
-          </div>
+        <div className="border-t border-white/10 pt-6 flex flex-col md:flex-row items-center justify-between gap-3 text-xs text-slate-500">
+          <div>© {new Date().getFullYear()} GAS NHÀ MÌNH — Hết gas, gọi Nhà Mình. Chăm sóc gian bếp gia đình TP.HCM.</div>
+          <div>Đạt chuẩn kinh doanh LPG &amp; PCCC theo Nghị định 87/2018/NĐ-CP</div>
         </div>
       </div>
     </footer>
@@ -1690,20 +1719,34 @@ function Footer() {
 
 function SuccessModal({ onClose }: { onClose: () => void }) {
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm" onClick={onClose}>
-      <div className="bg-white rounded-3xl p-8 max-w-sm w-full text-center shadow-2xl" onClick={e => e.stopPropagation()}>
-        <div className="w-20 h-20 bg-[#D1FAE5] rounded-full flex items-center justify-center mx-auto mb-5 animate-bounce">
-          <svg width="36" height="28" viewBox="0 0 36 28" fill="none"><path d="M3 14L13 24L33 3" stroke="#0E9F6E" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round"/></svg>
+    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-950/60 backdrop-blur-xs" onClick={onClose}>
+      <div className="bg-white rounded-3xl p-7 max-w-sm w-full text-center shadow-2xl" onClick={(e) => e.stopPropagation()}>
+        <div className="w-16 h-16 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-4">
+          <svg width="32" height="24" viewBox="0 0 36 28" fill="none">
+            <path d="M3 14L13 24L33 3" stroke="#059669" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
         </div>
-        <h3 className="text-2xl font-black text-[#111928] mb-3">ĐẶT HÀNG THÀNH CÔNG!</h3>
-        <p className="text-[#6B7280] text-sm leading-relaxed mb-6">
-          Cửa hàng gần nhất đang chuẩn bị bình gas và xuất kho. Nhân viên sẽ liên hệ bạn trong vòng <strong className="text-[#111928]">1–2 phút</strong>.
+        <h3 className="text-xl font-black text-slate-900 mb-2">ĐÃ NHẬN SĐT GIA ĐÌNH!</h3>
+        <p className="text-slate-600 text-sm leading-relaxed mb-5">
+          Nhân viên chăm sóc bếp đang gọi lại trong <strong className="text-slate-900">30 giây</strong> để xác nhận địa chỉ và điều thợ mang cân điện tử + máy dò khí gas tới phục vụ gia đình.
         </p>
-        <a href={HOTLINE_TEL}
-          className="flex items-center justify-center gap-2 w-full py-3 border-2 border-[#E02424] text-[#E02424] font-bold rounded-xl mb-3 hover:bg-[#E02424] hover:text-white transition-all text-sm">
-          <PhoneIcon size={16} /> Cần gấp? Bấm gọi Hotline ngay
+        <a
+          href={ZALO_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center justify-center gap-2 w-full py-3 bg-red-50 border border-red-200 text-[#DC2626] font-bold rounded-xl mb-2.5 text-sm"
+        >
+          📍 Gửi luôn Vị Trí qua Zalo cho tiện
         </a>
-        <button onClick={onClose} className="text-sm text-[#6B7280] hover:text-[#111928] transition-colors">Đóng</button>
+        <a
+          href={HOTLINE_TEL}
+          className="flex items-center justify-center gap-2 w-full py-3 bg-[#DC2626] text-white font-bold rounded-xl mb-3 text-sm"
+        >
+          <PhoneIcon size={16} /> Cần gấp? Bấm gọi {HOTLINE}
+        </a>
+        <button onClick={onClose} className="text-xs font-semibold text-slate-500 hover:text-slate-800 cursor-pointer">
+          Đóng cửa sổ
+        </button>
       </div>
     </div>
   );
@@ -1712,101 +1755,73 @@ function SuccessModal({ onClose }: { onClose: () => void }) {
 function PhoneIcon({ size = 20 }: { size?: number }) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.99 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.9 1.22h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 8.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.99 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.9 1.22h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 8.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
     </svg>
   );
 }
 
 function FloatingContactButtons() {
   return (
-    <div className="hidden md:flex fixed bottom-8 right-6 z-40 flex-col gap-2.5 items-end">
+    <div className="hidden md:flex fixed bottom-6 right-6 z-40 flex-col gap-2.5 items-end">
       <a
         href={ZALO_URL}
         target="_blank"
         rel="noopener noreferrer"
-        onClick={() => pushGtmEvent("click_zalo", { phone: HOTLINE })}
-        className="flex items-center gap-2 bg-[#0EA5E9] hover:bg-[#0284C7] text-white font-bold px-3.5 py-2.5 rounded-full shadow-lg hover:shadow-xl transition-all transform hover:scale-105"
-        title="Chat Zalo tư vấn giao gas nhanh"
+        onClick={() => pushGtmEvent("click_zalo", { phone: HOTLINE, notes: "Khách bấm Gửi Định Vị Zalo nút nổi" })}
+        className="flex items-center gap-2 bg-[#DC2626] hover:bg-[#B91C1C] text-white font-bold px-4 py-3 rounded-full shadow-lg"
       >
-        <span className="text-lg leading-none">💬</span>
-        <span className="text-xs md:text-sm tracking-wide">Nhắn Zalo</span>
+        <span>📍</span>
+        <span className="text-xs md:text-sm">Gửi Định Vị Zalo (Khỏi gõ địa chỉ)</span>
       </a>
     </div>
   );
 }
 
 const homeJsonLd = {
-  '@context': 'https://schema.org',
-  '@graph': [
+  "@context": "https://schema.org",
+  "@graph": [
     {
-      '@type': 'BreadcrumbList',
-      '@id': 'https://gasnhaminh.com/#breadcrumb',
-      'itemListElement': [
+      "@type": "BreadcrumbList",
+      "@id": "https://gasnhaminh.com/#breadcrumb",
+      itemListElement: [
         {
-          '@type': 'ListItem',
-          'position': 1,
-          'name': 'Trang chủ Gas Nhà Mình',
-          'item': 'https://gasnhaminh.com',
+          "@type": "ListItem",
+          position: 1,
+          name: "Trang chủ Gas Nhà Mình",
+          item: "https://gasnhaminh.com",
         },
       ],
     },
-
     {
-      '@type': 'ItemList',
-      '@id': 'https://gasnhaminh.com/#pricelist',
-      'name': 'Bảng Giá Gas Hôm Nay Mới Nhất 2026 – Gas Nhà Mình',
-      'description': 'Báo giá đổi bình gas 12kg gia đình và gas bò 45kg chính hãng tại TP.HCM',
-      'itemListElement': SEO_PRODUCTS.map((prod, idx) =>
+      "@type": "ItemList",
+      "@id": "https://gasnhaminh.com/#pricelist",
+      name: "Bảng Giá Gas Gia Đình & Chung Cư Hôm Nay – Gas Nhà Mình",
+      description: "Báo giá đổi bình gas 12kg chính hãng (V-Gas 530.000đ, Petrolimex 595.000đ) kèm gói vệ sinh họng bếp và đo rò rỉ bằng máy miễn phí",
+      itemListElement: SEO_PRODUCTS.map((prod, idx) =>
         createProductSchema({
           position: idx + 1,
           name: prod.name,
           description: prod.desc,
-          image: prod.image || 'https://gasnhaminh.com/hero_gasnhaminh.jpg',
+          image: prod.image || "https://gasnhaminh.com/hero_gasnhaminh.jpg",
           sku: prod.slug,
           brand: prod.brand,
           url: `https://gasnhaminh.com/${prod.slug}`,
           price: prod.priceVal,
-          sellerName: 'Gas Nhà Mình',
+          sellerName: "Gas Nhà Mình",
         })
       ),
     },
     {
-      '@type': 'FAQPage',
-      '@id': 'https://gasnhaminh.com/#faq',
-      'mainEntity': [
-        {
-          '@type': 'Question',
-          'name': 'Thời gian giao gas của Gas Nhà Mình mất bao lâu?',
-          'acceptedAnswer': {
-            '@type': 'Answer',
-            'text': 'Thời gian giao gas trung bình từ 15–20 phút tại tất cả các quận huyện TP.HCM nhờ hệ thống trạm kho phân phối trực ban phủ khắp các khu vực.',
-          },
+      "@type": "FAQPage",
+      "@id": "https://gasnhaminh.com/#faq",
+      mainEntity: FAQS_LIST.map((f) => ({
+        "@type": "Question",
+        name: f.q,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: f.a,
         },
-        {
-          '@type': 'Question',
-          'name': 'Gas Nhà Mình cung cấp những loại bình gas nào?',
-          'acceptedAnswer': {
-            '@type': 'Answer',
-            'text': 'Gas Nhà Mình phân phối đầy đủ các dòng bình gas gia đình 12kg (V-Gas xám, đỏ, vàng, PE, Petrolimex van đứng, Petrolimex van chụp shell, Tuấn Khang) và bình gas bò công nghiệp 45kg chuyên dụng cho quán ăn, nhà hàng.',
-          },
-        },
-        {
-          '@type': 'Question',
-          'name': 'Tôi có được cân đối chứng kiểm tra trọng lượng bình gas không? Làm sao biết bình đủ 12kg ruột?',
-          'acceptedAnswer': {
-            '@type': 'Answer',
-            'text': 'Bình gas 12kg gia đình đã được chiết nạp tự động chuẩn xác đủ 12kg ruột tại nhà máy của hãng và niêm phong màng co nhiệt chống giả. Trọng lượng vỏ bình được dập nổi rõ ràng trên quai xách (ví dụ: vỏ 13.5kg + 12kg nước gas = 25.5kg). Để đảm bảo giao hỏa tốc 15 phút, nhân viên không mang theo cân cồng kềnh mà sẽ cùng quý khách kiểm tra nguyên vẹn tem màng co, hạn kiểm định vỏ bình và thử rò rỉ khí gas an toàn. Nếu gia đình có sẵn cân tại nhà, quý khách hoàn toàn có thể kiểm tra đối chứng trước khi nhận.',
-          },
-        },
-        {
-          '@type': 'Question',
-          'name': 'Quy trình kiểm tra an toàn khi đổi bình gas như thế nào?',
-          'acceptedAnswer': {
-            '@type': 'Answer',
-            'text': 'Mọi bình gas phân phối qua Gas Nhà Mình đều là hàng chính hãng từ nhà sản xuất uy tín, có tem kiểm định an toàn PCCC và nguyên màng co niêm phong. Khi giao gas, kỹ thuật viên sẽ hỗ trợ kiểm tra độ kín của van dây, kiểm tra rò rỉ khí gas bằng máy dò/dung dịch chuyên dụng và vệ sinh bếp miễn phí trước khi bàn giao.',
-          },
-        },
-      ],
+      })),
     },
   ],
 };
@@ -1823,9 +1838,14 @@ export default function App() {
       el.scrollIntoView({ behavior: "smooth" });
       const phoneInput = el.querySelector("input[type='tel']") as HTMLInputElement | null;
       if (phoneInput) {
-        setTimeout(() => phoneInput.focus(), 450);
+        setTimeout(() => phoneInput.focus(), 350);
       }
     }
+  }
+
+  function scrollToPricing() {
+    const el = document.getElementById("bang-gia");
+    if (el) el.scrollIntoView({ behavior: "smooth" });
   }
 
   function handleProductSelect(catIdx: number, prodIdx: number) {
@@ -1836,33 +1856,29 @@ export default function App() {
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(homeJsonLd) }}
-      />
-      <div className="min-h-screen bg-white text-[#111928]">
-      <Header />
-      <HeroSection onOrderClick={scrollToForm} />
-      <PricingSection tabs={tabs} onSelectProduct={handleProductSelect} />
-      <OrderSection 
-        tabs={tabs} 
-        activeCategory={activeCategory} 
-        setActiveCategory={setActiveCategory} 
-        selectedProduct={selectedProduct} 
-        setSelectedProduct={setSelectedProduct} 
-        onOrderSuccess={() => setShowSuccess(true)} 
-      />
-      <ProcessSection />
-      <TrustSection />
-      <ServiceAreaSection />
-      <StoresSection onOrderClick={scrollToForm} />
-      <FaqSection />
-      <Footer />
-      <MobileStickyBar onOrderClick={scrollToForm} />
-      <FloatingContactButtons />
-      {showSuccess && <SuccessModal onClose={() => setShowSuccess(false)} />}
-    </div>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(homeJsonLd) }} />
+      <div className="min-h-screen bg-white text-slate-900">
+        <Header />
+        <HeroSection onOrderSuccess={() => setShowSuccess(true)} onScrollToPricing={scrollToPricing} />
+        <PricingSection tabs={tabs} onSelectProduct={handleProductSelect} />
+        <OrderSection
+          tabs={tabs}
+          activeCategory={activeCategory}
+          setActiveCategory={setActiveCategory}
+          selectedProduct={selectedProduct}
+          setSelectedProduct={setSelectedProduct}
+          onOrderSuccess={() => setShowSuccess(true)}
+        />
+        <ProcessSection />
+        <TrustSection />
+        <ServiceAreaSection />
+        <StoresSection onOrderClick={scrollToForm} />
+        <FaqSection />
+        <Footer />
+        <MobileStickyBar onOrderClick={scrollToForm} />
+        <FloatingContactButtons />
+        {showSuccess && <SuccessModal onClose={() => setShowSuccess(false)} />}
+      </div>
     </>
   );
 }
-

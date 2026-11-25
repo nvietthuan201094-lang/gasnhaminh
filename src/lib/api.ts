@@ -21,6 +21,7 @@ export async function getProductBySlug(slug: string): Promise<Product | null> {
     'gas-bo-45kg': 'gas-bo-45-kg',
   };
 
+  const seoProd = SEO_PRODUCTS.find((p) => p.slug === slug || p.id === slug);
   const targetSlug = SLUG_ALIASES[slug] || slug;
 
   try {
@@ -28,13 +29,33 @@ export async function getProductBySlug(slug: string): Promise<Product | null> {
     if (!res.ok && targetSlug !== slug) {
       res = await fetch(`${API_BASE_URL}/api/v1/products/${slug}`, { next: { revalidate: 60 } });
     }
-    if (!res.ok) return null;
-    const json = await res.json();
-    return json.status === 'success' ? json.data : null;
+    if (res.ok) {
+      const json = await res.json();
+      if (json.status === 'success' && json.data) {
+        return {
+          ...json.data,
+          name: seoProd?.name || json.data.name,
+          price: seoProd ? seoProd.priceVal : json.data.price,
+          description: seoProd?.desc || json.data.description,
+          imageUrl: json.data.imageUrl || seoProd?.image,
+        };
+      }
+    }
   } catch (error) {
     console.error('Failed to fetch product:', error);
-    return null;
   }
+
+  if (seoProd) {
+    return {
+      id: seoProd.id,
+      name: seoProd.name,
+      slug: seoProd.slug,
+      price: seoProd.priceVal,
+      description: seoProd.desc,
+      imageUrl: seoProd.image,
+    };
+  }
+  return null;
 }
 
 function getTrackingData(): Record<string, string> {
@@ -170,9 +191,9 @@ export async function createOrder(payload: OrderPayload): Promise<OrderResponse>
 
   try {
     const orderData = {
-      customer_name: payload.customerName || 'Khách hàng Landing Page',
+      customer_name: (payload.customerName && payload.customerName.trim()) || 'Khách đặt nhanh 1 chạm',
       customer_phone: payload.customerPhone,
-      address: payload.customerAddress,
+      address: (payload.customerAddress && payload.customerAddress.trim()) || 'Xác nhận địa chỉ qua SĐT trong 30 giây',
       district_code: payload.districtCode || '',
       notes: payload.note || '',
       source_domain: typeof window !== 'undefined' ? window.location.hostname : 'gasnhaminh.com',
@@ -314,70 +335,11 @@ export async function trackInteractionApi(
 }
 
 /**
- * Lấy động bảng giá gas từ Backend CRM Gas Nhà Mình (theo Bảng giá thương hiệu).
- * Tự động đồng bộ giá bán lẻ, tiền cọc vỏ bình và fallback về giá mặc định nếu sản phẩm không nằm trong bảng giá.
+ * Trả về bảng giá niêm yết chuẩn đã khóa cứng trên Web (V-Gas 530.000đ, Petrolimex 595.000đ–605.000đ),
+ * đảm bảo không bị giá cũ trên CRM ghi đè sau khi tải trang.
  */
 export async function fetchDynamicGasPrices(): Promise<SeoProductItem[]> {
-  try {
-    const [productsRes, crmPricelistRes] = await Promise.all([
-      fetch(`${API_BASE_URL}/api/v1/products`, { next: { revalidate: 60 } }).then((r) => r.json()).catch(() => null),
-      fetch(`${API_BASE_URL}/api/v1/crm/products?pricelist_id=2`, { next: { revalidate: 60 } }).then((r) => r.json()).catch(() => null),
-    ]);
-
-    const apiProducts: any[] = productsRes?.data || [];
-    const crmProducts: any[] = crmPricelistRes?.data || [];
-
-    // Map giá đã tính toán từ Bảng giá thương hiệu (Pricelist ID 2 trên CRM Gas Nhà Mình)
-    const priceMap = new Map<number, { price: number; lst_price: number }>();
-    crmProducts.forEach((cp) => {
-      if (cp.id) priceMap.set(cp.id, { price: cp.price, lst_price: cp.lst_price });
-    });
-
-    // Map tiền thế chân cọc vỏ bình
-    const depositMap = new Map<number, number>();
-    apiProducts.forEach((p) => {
-      if (p.id) depositMap.set(p.id, p.deposit_price || 0);
-    });
-
-    const ID_BY_SLUG: Record<string, number> = {
-      'gas-v-gas-xam-12kg': 168,
-      'gas-v-gas-do-12kg': 172,
-      'gas-v-gas-vang-12kg': 174,
-      'gas-v-gas-xanh-den-12kg': 173,
-      'gas-v-gas-pe-12kg': 178,
-      'gas-v-gas-shell-12kg': 177,
-      'gas-petrolimex-dung-12kg': 175,
-      'gas-petrolimex-shell-12kg': 176,
-      'gas-tuan-khang-vang-12kg': 169,
-      'gas-tuan-khang-xanh-12kg': 171,
-      'gas-bo-45kg': 170,
-    };
-
-    const formatVND = (num: number) =>
-      new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(num).replace('₫', 'đ');
-
-    return SEO_PRODUCTS.map((prod) => {
-      const crmProductId = ID_BY_SLUG[prod.slug];
-      if (crmProductId && priceMap.has(crmProductId)) {
-        const crmItem = priceMap.get(crmProductId)!;
-        const exchangeVal = crmItem.price > 0 ? crmItem.price : crmItem.lst_price;
-        const depositVal = depositMap.get(crmProductId) || (prod.category === 'cong-nghiep' ? 1000000 : 250000);
-        const newVal = exchangeVal + depositVal;
-
-        return {
-          ...prod,
-          priceVal: exchangeVal,
-          price: formatVND(exchangeVal),
-          newPriceVal: newVal,
-          newPrice: formatVND(newVal),
-        };
-      }
-      return prod;
-    });
-  } catch (error) {
-    console.error('Lỗi khi lấy bảng giá động từ BE:', error);
-    return SEO_PRODUCTS;
-  }
+  return SEO_PRODUCTS;
 }
 
 

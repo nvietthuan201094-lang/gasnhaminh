@@ -1,8 +1,9 @@
 'use client';
 
-import React, { useState } from 'react';
-import { createOrder } from '@/lib/api';
+import React, { useState, useEffect } from 'react';
+import { createOrder, trackInteractionApi } from '@/lib/api';
 import { trackGoogleAdsPurchase } from '@/lib/tracking';
+import { HOTLINE_DISPLAY, HOTLINE_TEL, ZALO_URL } from '@/lib/districts';
 import { Product } from '@/types/order';
 
 interface CheckoutFormProps {
@@ -14,14 +15,26 @@ export const CheckoutForm: React.FC<CheckoutFormProps> = ({ product, quantity })
   const [isLoading, setIsLoading] = useState(false);
   const [successMessage, setSuccessMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const [showOptionalDetails, setShowOptionalDetails] = useState(false);
 
   const [formData, setFormData] = useState({
-    customerName: '',
     customerPhone: '',
+    customerName: '',
     customerAddress: '',
     note: '',
-    referralCode: ''
   });
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      try {
+        const savedPhone = localStorage.getItem('gas_customer_phone') || '';
+        const savedName = localStorage.getItem('gas_customer_name') || '';
+        if (savedPhone || savedName) {
+          setFormData((prev) => ({ ...prev, customerPhone: savedPhone, customerName: savedName }));
+        }
+      } catch (_) {}
+    }
+  }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -30,22 +43,32 @@ export const CheckoutForm: React.FC<CheckoutFormProps> = ({ product, quantity })
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    const digits = formData.customerPhone.replace(/\D/g, '');
+    if (digits.length < 9 || digits.length > 11) {
+      setErrorMessage('Vui lòng nhập số điện thoại hợp lệ (9–11 số) để Gas Nhà Mình gọi xác nhận trong 30 giây.');
+      return;
+    }
+
     setIsLoading(true);
     setSuccessMessage('');
     setErrorMessage('');
 
     try {
       const response = await createOrder({
-        ...formData,
+        customerPhone: formData.customerPhone.trim(),
+        customerName: formData.customerName.trim() || 'Gia đình đặt nhanh 1 chạm',
+        customerAddress: formData.customerAddress.trim() || 'Xác nhận địa chỉ căn hộ/nhà phố qua SĐT trong 30 giây',
+        note: formData.note.trim() || 'Đặt nhanh 1 chạm (Kèm gói cân điện tử & vệ sinh họng bếp 0đ)',
         productId: product.id,
         slug: product.slug,
         quantity,
       });
 
       if (response.success) {
-        setSuccessMessage(`Đặt hàng thành công! Mã đơn: ${response.orderId}`);
+        setSuccessMessage(
+          `Đã tiếp nhận! Mã đơn: ${response.orderName || response.orderId}. Nhân viên chăm sóc bếp đang gọi lại cho gia đình trong 30 giây!`
+        );
 
-        // Fire Google Ads Conversion & GA4 Ecommerce strictly after backend confirmation
         trackGoogleAdsPurchase({
           transactionId: response.orderId || String(Date.now()),
           value: (product.price || 0) * quantity,
@@ -60,125 +83,144 @@ export const CheckoutForm: React.FC<CheckoutFormProps> = ({ product, quantity })
           ],
         });
 
-        setFormData({ customerName: '', customerPhone: '', customerAddress: '', note: '', referralCode: '' });
+        setFormData((prev) => ({ ...prev, customerAddress: '', note: '' }));
       } else {
-        setErrorMessage(response.message || 'Có lỗi xảy ra khi đặt hàng.');
+        setErrorMessage(response.message || 'Có lỗi xảy ra khi đặt hàng. Vui lòng bấm gọi 0888 113 831.');
       }
-    } catch (error) {
-      setErrorMessage('Không thể kết nối đến máy chủ. Vui lòng thử lại sau.');
+    } catch {
+      setErrorMessage('Không thể kết nối máy chủ. Vui lòng bấm gọi 0888 113 831 để giao ngay 15 phút.');
     } finally {
       setIsLoading(false);
     }
   };
 
   return (
-    <div className="p-6 border rounded-xl shadow-sm bg-white">
-      <h3 className="text-xl font-bold mb-6 pb-2 border-b">Thông tin giao hàng</h3>
-      
+    <div className="p-6 border-2 border-red-200 rounded-2xl shadow-md bg-white">
+      <div className="flex items-center justify-between gap-2 mb-3 pb-3 border-b border-slate-100">
+        <h3 className="text-lg sm:text-xl font-black text-slate-900">Đặt 1 Chạm — Gọi Xác Nhận Trong 30 Giây</h3>
+        <span className="text-[11px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200 px-2.5 py-1 rounded-full whitespace-nowrap">
+          🛡️ Chuẩn PCCC
+        </span>
+      </div>
+
+      <div className="mb-4 p-3 rounded-xl bg-emerald-50 border border-emerald-200 text-xs text-emerald-950 leading-relaxed">
+        <strong>🔄 Đang dùng vỏ Saigon Petro, Petrolimex, Gia Đình...?</strong> Đổi ngang miễn phí <strong>0đ</strong> — Không thu cọc vỏ! Tặng kèm vệ sinh họng bếp &amp; đo máy dò khí gas.
+      </div>
+
       {successMessage && (
-        <div className="mb-6 p-4 bg-green-50 border border-green-200 text-green-800 rounded-lg shadow-sm">
-          <p className="font-medium">{successMessage}</p>
-        </div>
-      )}
-      
-      {errorMessage && (
-        <div className="mb-6 p-4 bg-red-50 border border-red-200 text-red-800 rounded-lg shadow-sm">
-          <p className="font-medium">{errorMessage}</p>
+        <div className="mb-5 p-4 bg-emerald-50 border border-emerald-300 text-emerald-900 rounded-xl">
+          <p className="font-bold text-sm">{successMessage}</p>
         </div>
       )}
 
-      <form onSubmit={handleSubmit} className="space-y-5">
-        <div>
-          <label className="block text-sm font-semibold text-gray-700 mb-1.5">Họ và tên *</label>
-          <input 
-            type="text" 
-            name="customerName"
-            required 
-            value={formData.customerName}
-            onChange={handleChange}
-            className="w-full border border-gray-300 p-3 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all outline-none" 
-            placeholder="Nhập họ và tên"
-          />
+      {errorMessage && (
+        <div className="mb-5 p-3.5 bg-red-50 border border-red-200 text-red-800 rounded-xl">
+          <p className="font-semibold text-xs sm:text-sm">{errorMessage}</p>
         </div>
-        
+      )}
+
+      <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <label className="block text-sm font-semibold text-gray-700 mb-1.5">Số điện thoại *</label>
-          <input 
-            type="tel" 
+          <label className="block text-sm font-bold text-slate-800 mb-1.5">
+            Chỉ cần nhập Số Điện Thoại gia đình nhận gas *
+          </label>
+          <input
+            type="tel"
             name="customerPhone"
-            required 
+            inputMode="tel"
+            required
             value={formData.customerPhone}
             onChange={handleChange}
-            className="w-full border border-gray-300 p-3 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all outline-none" 
-            placeholder="Nhập số điện thoại liên hệ"
+            className="w-full border-2 border-red-300 focus:border-[#DC2626] p-3.5 rounded-xl text-base font-bold text-slate-900 outline-none transition-colors"
+            placeholder="Nhập SĐT nhận gas (VD: 0909 123 456)"
           />
         </div>
-        
-        <div>
-          <label className="block text-sm font-semibold text-gray-700 mb-1.5">Địa chỉ giao hàng *</label>
-          <input 
-            type="text" 
-            name="customerAddress"
-            required 
-            value={formData.customerAddress}
-            onChange={handleChange}
-            className="w-full border border-gray-300 p-3 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all outline-none" 
-            placeholder="Số nhà, đường, phường/xã, quận/huyện..."
-          />
-        </div>
-        
-        <div>
-          <label className="block text-sm font-semibold text-gray-700 mb-1.5">Ghi chú (Tùy chọn)</label>
-          <textarea 
-            name="note"
-            value={formData.note}
-            onChange={handleChange}
-            className="w-full border border-gray-300 p-3 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all outline-none resize-none" 
-            rows={3}
-            placeholder="Yêu cầu thêm về giờ giao, vị trí..."
-          />
-        </div>
-        
-        <div>
-          <label className="block text-sm font-semibold text-gray-700 mb-1.5">Mã người giới thiệu (Tùy chọn)</label>
-          <input 
-            type="text" 
-            name="referralCode"
-            value={formData.referralCode}
-            onChange={handleChange}
-            className="w-full border border-gray-300 p-3 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all outline-none" 
-            placeholder="Nhập mã giới thiệu (nếu có)"
-          />
-        </div>
-        
-        <div className="pt-6 mt-6 border-t border-gray-100">
-          <div className="flex justify-between items-center font-bold text-xl mb-6">
-            <span className="text-gray-800">Tổng thanh toán:</span>
-            <span className="text-red-600 text-2xl">
-              {new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(product.price * quantity)}
+
+        <button
+          type="button"
+          onClick={() => setShowOptionalDetails((v) => !v)}
+          className="text-xs font-bold text-[#DC2626] hover:underline cursor-pointer"
+        >
+          {showOptionalDetails
+            ? '− Ẩn bớt thông tin phụ'
+            : '+ Nhập sẵn tên chung cư / địa chỉ / dặn dò cho thợ (Không bắt buộc)'}
+        </button>
+
+        {showOptionalDetails && (
+          <div className="space-y-3 pt-1 border-t border-slate-100">
+            <input
+              type="text"
+              name="customerName"
+              value={formData.customerName}
+              onChange={handleChange}
+              className="w-full border border-slate-300 p-3 rounded-xl text-sm outline-none focus:border-[#DC2626]"
+              placeholder="Tên người nhận (Tùy chọn)"
+            />
+            <input
+              type="text"
+              name="customerAddress"
+              value={formData.customerAddress}
+              onChange={handleChange}
+              className="w-full border border-slate-300 p-3 rounded-xl text-sm outline-none focus:border-[#DC2626]"
+              placeholder="Tên chung cư / Số nhà, đường, phường (Tùy chọn)"
+            />
+            <input
+              type="text"
+              name="note"
+              value={formData.note}
+              onChange={handleChange}
+              className="w-full border border-slate-300 p-3 rounded-xl text-sm outline-none focus:border-[#DC2626]"
+              placeholder="Dặn thợ (VD: Vào hầm sảnh B, nhà có ông bà lớn tuổi...)"
+            />
+          </div>
+        )}
+
+        <div className="pt-3 border-t border-slate-100">
+          <div className="flex justify-between items-center font-bold mb-4">
+            <span className="text-sm text-slate-600">Giá đổi ruột trọn gói:</span>
+            <span className="text-[#DC2626] text-2xl font-black">
+              {new Intl.NumberFormat('vi-VN').format(product.price * quantity)}đ
             </span>
           </div>
-          
-          <button 
-            type="submit" 
+
+          <button
+            type="submit"
             disabled={isLoading}
-            className={`w-full font-bold py-4 rounded-xl text-lg transition-all shadow-md
-              ${isLoading 
-                ? 'bg-gray-400 cursor-not-allowed text-white' 
-                : 'bg-blue-600 hover:bg-blue-700 text-white hover:shadow-lg transform hover:-translate-y-0.5'
-              }
-            `}
+            className="w-full font-black py-4 rounded-xl text-base uppercase tracking-wide transition-all shadow-lg bg-[#DC2626] hover:bg-[#B91C1C] text-white disabled:opacity-60 cursor-pointer"
           >
-            {isLoading ? (
-              <span className="flex items-center justify-center">
-                <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                </svg>
-                Đang xử lý...
-              </span>
-            ) : 'Xác nhận đặt hàng'}
+            {isLoading ? 'Đang kết nối chi nhánh gần nhất...' : '⚡ GỌI LẠI TRONG 30 GIÂY — GIAO TẬN BẾP'}
           </button>
+
+          <div className="grid grid-cols-2 gap-2.5 mt-3">
+            <a
+              href={ZALO_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() =>
+                trackInteractionApi('click_zalo', {
+                  phone: HOTLINE_DISPLAY,
+                  customerPhone: formData.customerPhone,
+                  notes: `Khách bấm Gửi Định Vị Zalo từ trang ${product.name}`,
+                })
+              }
+              className="flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-xl bg-red-50 hover:bg-red-100 border border-red-200 text-[#DC2626] font-bold text-xs text-center"
+            >
+              📍 Gửi Định Vị Zalo
+            </a>
+            <a
+              href={HOTLINE_TEL}
+              onClick={() =>
+                trackInteractionApi('click_call', {
+                  phone: HOTLINE_DISPLAY,
+                  customerPhone: formData.customerPhone,
+                  notes: `Khách bấm Gọi thẳng từ trang ${product.name}`,
+                })
+              }
+              className="flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-xs text-center"
+            >
+              📞 Gọi {HOTLINE_DISPLAY}
+            </a>
+          </div>
         </div>
       </form>
     </div>

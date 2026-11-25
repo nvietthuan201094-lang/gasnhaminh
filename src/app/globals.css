@@ -2,16 +2,16 @@
 @import 'tailwindcss';
 
 @theme inline {
-  --color-primary: #E02424;
+  --color-primary: #DC2626;
   --color-primary-dark: #B91C1C;
-  --color-cta: #FF5722;
-  --color-cta-dark: #E65100;
-  --color-success: #0E9F6E;
+  --color-cta: #EA580C;
+  --color-cta-dark: #C2410C;
+  --color-success: #059669;
   --color-background: #FFFFFF;
-  --color-surface: #F9FAFB;
+  --color-surface: #F8FAFC;
   --color-text: #111928;
-  --color-muted: #6B7280;
-  --color-border: #E5E7EB;
+  --color-muted: #475569;
+  --color-border: #E2E8F0;
   --font-sans: 'Inter', sans-serif;
 }
 
@@ -22,3 +22,29 @@
 *::-webkit-scrollbar { display: none; }
 
 html { scroll-behavior: smooth; }
+
+h1, h2, h3, h4 {
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+button, a[role="button"] {
+  transition-timing-function: cubic-bezier(0.23, 1, 0.32, 1);
+  transition-duration: 160ms;
+}
+
+button:active:not(:disabled), a:active {
+  transform: scale(0.97);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

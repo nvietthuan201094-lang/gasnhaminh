@@ -42,10 +42,10 @@ export default async function BangGiaPage() {
   const districts = getAllDistricts();
   const products = await fetchDynamicGasPrices();
 
-  const pVGasXam = products.find(p => p.slug === 'gas-v-gas-xam-12kg')?.price || '540.000đ';
-  const pPetrolimex = products.find(p => p.slug === 'gas-petrolimex-dung-12kg')?.price || '550.000đ';
-  const pVGasMau = products.find(p => p.slug === 'gas-v-gas-do-12kg')?.price || '560.000đ';
-  const pTuanKhang = products.find(p => p.slug === 'gas-tuan-khang-vang-12kg')?.price || '560.000đ';
+  const pVGasXam = products.find(p => p.slug === 'gas-v-gas-xam-12kg')?.price || '530.000đ';
+  const pPetrolimex = products.find(p => p.slug === 'gas-petrolimex-dung-12kg')?.price || '595.000đ';
+  const pVGasMau = products.find(p => p.slug === 'gas-v-gas-shell-12kg')?.price || '545.000đ';
+  const pTuanKhang = products.find(p => p.slug === 'gas-tuan-khang-vang-12kg')?.price || '555.000đ';
 
   const currentDateStr = new Intl.DateTimeFormat('vi-VN', {
     day: '2-digit',
@@ -126,7 +126,7 @@ export default async function BangGiaPage() {
             name: 'Thời gian giao gas tại TP.HCM là bao lâu?',
             acceptedAnswer: {
               '@type': 'Answer',
-              text: 'Với mạng lưới 5 trạm kho gas vật lý trực ban trải đều khắp TP.HCM, thời gian giao gas trung bình từ 15 đến 20 phút kể từ lúc tiếp nhận cuộc gọi hoặc đơn đặt trực tuyến.',
+              text: 'Nhờ 5 chi nhánh chính hãng kết hợp hơn 30 cửa hàng đại lý liên kết khắp 22 quận huyện & TP. Thủ Đức (xuất bình dưới 2km), thời gian giao bình gas và kiểm tra an toàn bếp tại nhà chỉ từ 15 đến 20 phút.',
             },
           },
         ],
