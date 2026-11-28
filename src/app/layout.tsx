@@ -90,7 +90,7 @@ async function getDomainConfig() {
   try {
     const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://gasnhaminh.com";
     const domain = siteUrl.replace(/^https?:\/\//, "").split("/")[0].split(":")[0] || "gasnhaminh.com";
-    const API_URL = process.env.NEXT_PUBLIC_API_URL || "https://crm.posplus.vn";
+    const API_URL = process.env.NEXT_PUBLIC_API_URL || "https://crm.gasnhaminh.com";
     const res = await fetch(`${API_URL}/api/v1/domain_configs?domain=${domain}`, { next: { revalidate: 300 } });
     if (res.ok) {
       const json = await res.json();
@@ -124,8 +124,8 @@ export default async function RootLayout({
         {/* ─── Resource Hints & Preconnect ───────────────────────────────── */}
         <link rel="preconnect" href="https://www.googletagmanager.com" />
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
-        <link rel="preconnect" href="https://crm.posplus.vn" />
-        <link rel="dns-prefetch" href="https://crm.posplus.vn" />
+        <link rel="preconnect" href="https://crm.gasnhaminh.com" />
+        <link rel="dns-prefetch" href="https://crm.gasnhaminh.com" />
         <meta name="theme-color" content="#E02424" />
 
         {/* ─── Local SEO & Geo Meta Tags (TP.HCM) ───────────────────────── */}

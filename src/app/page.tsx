@@ -248,7 +248,7 @@ function buildTabsFromSeoProducts(list = SEO_PRODUCTS): TabItem[] {
       exchangePrice: p.price,
       originalPrice: p.originalPrice,
       newPrice: p.newPrice || null,
-      img: p.image || `https://crm.posplus.vn/api/v1/public_image/product.template/${ID_BY_SLUG[p.slug] || 168}/image_1024`,
+      img: p.image || `https://crm.gasnhaminh.com/api/v1/public_image/product.template/${ID_BY_SLUG[p.slug] || 168}/image_1024`,
     }));
 
   const congNghiep = list
@@ -263,7 +263,7 @@ function buildTabsFromSeoProducts(list = SEO_PRODUCTS): TabItem[] {
       exchangePrice: p.price,
       originalPrice: p.originalPrice,
       newPrice: p.newPrice || null,
-      img: p.image || `https://crm.posplus.vn/api/v1/public_image/product.template/${ID_BY_SLUG[p.slug] || 170}/image_1024`,
+      img: p.image || `https://crm.gasnhaminh.com/api/v1/public_image/product.template/${ID_BY_SLUG[p.slug] || 170}/image_1024`,
     }));
 
   return [

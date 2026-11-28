@@ -1,7 +1,7 @@
 import { OrderPayload, OrderResponse, Product } from '@/types/order';
 import { SEO_PRODUCTS, SeoProductItem } from '@/lib/districts';
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://crm.posplus.vn';
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://crm.gasnhaminh.com';
 
 export async function fetchProducts(domain: string = ''): Promise<any[]> {
   try {
